@@ -1,0 +1,4 @@
+pip3.4 install Sqlalchemy==0.9.4
+pip3.4 install flask==0.10.1
+sudo xcodebuild -license
+pip3.4 install psycopg2==2.5.2
