@@ -1,7 +1,7 @@
 foneem
 ======
 
-Server for the foneem project
+Server for the phoneme project
 
 
 
