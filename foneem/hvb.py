@@ -114,14 +114,15 @@ def upload_wav_to_s3(conf, key):
     print("ACL update for object ", str(key), " = ", response.http_response.status)
     return response.http_response.status
 
-@app.route('/upload-audio', methods=['POST'])
-def upload():
+@app.route('/upload/<filename>', methods=['POST'])
+def upload(filename):
     if 'username' in session:
         import random
         conf = parse_config()        
         _file = request.files['test.wav']
-        filename = session['username']+str(random.randint(0, 1048576))+'test.wav'
+        #filename = session['username']+str(random.randint(0, 1048576))+'test.wav'
         #XXX - this was rushed for a demo. no need to save the file then reread it back in
+        filename = session['username']+filename
         _file.save(filename)
         upload_wav_to_s3(conf, filename)
         return  'OK'
