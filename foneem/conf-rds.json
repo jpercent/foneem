@@ -1,17 +1,5 @@
 {
-    "db" : {
-        "host" : "foneemdb.cufsiqvdwvei.us-east-1.rds.amazonaws.com",
-        "name" : "foneem",
-        "user" : "jpercent",
-        "port" : 5432,
-        "addr" : "rupalpatel"
-    },
-    
-    "admin" : {
-        "name" : "admin",
-        "passwd" : "secret"
-    },
-    
+
     "csv" : "/Users/jamespercent/foneem/foneem/sql/sentences_VocaliD.csv",
     "drop" : "sql/drop_ddl.sql",
     "create": "sql/create_ddl.sql",

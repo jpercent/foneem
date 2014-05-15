@@ -78,43 +78,62 @@ window.onkeydown = function(e){
             view.setInt16(index, interleaved[i] * (0x7FFF * volume), true);
             index += 2;
         }
-        
+        console.log("view stuff byteLenght = ",view.byteLength);
+		
         // our final binary blob
         var blob = new Blob ( [ view ], { type : 'audio/wav' } );
+		
+		console.log("BLOG STUFF size = ", blob.size, "Blob type  ", blob.type);
+		
+		function upload(blob) {
+			var xhr=new XMLHttpRequest();
+			xhr.onload=function(e) {
+				if(this.readyState === 4) {
+				    console.log("Server returned: ",e.target.responseText);
+				}
+			};
+			var fd=new FormData();
+			fd.append("test.wav",blob);
+			xhr.open("POST","upload-audio",true);
+			xhr.send(fd);
+		}
+		upload(blob);
+		/*
         function uploadAudio( blob ) {
-			var reader = new FileReader();
+			var reader = new FileReader();		
 			reader.onload = function(event){
-				var fd = {};
-				fd["fname"] = "test.wav";
-				fd["data"] = event.target.result;
+				var formData = new FormData();
+				formData.append('audio', blob, 'test.wav');
 				$.ajax({
-					  type: 'POST',
-					  url: 'upload.php',
-					  data: fd,
-					  dataType: 'text'
+					type: 'POST',
+					url: 'upload-audio',
+					data: formData,
+					rocessData: false,
+					contentType: false
 				}).done(function(data) {
 					console.log(data);
 				});
 			};
 			reader.readAsDataURL(blob);
 		}
-		uploadAudio(blob);
+		uploadAudio(blob);*/
 		
-		/*
+
+		
         // let's save it locally
         outputElement.innerHTML = 'Handing off the file now...';
         var url = (window.URL || window.webkitURL).createObjectURL(blob);
         var link = window.document.createElement('a');
         link.href = url;
-        link.download = 'output.wav';
+        link.download = 'jpercent-output.wav';
         var click = document.createEvent("Event");
         click.initEvent("click", true, true);
         link.dispatchEvent(click);
-        */
+        
     }
 }
 
-    function interleave(leftChannel, rightChannel){
+function interleave(leftChannel, rightChannel){
 	var length = leftChannel.length + rightChannel.length;
 	var result = new Float32Array(length);
 

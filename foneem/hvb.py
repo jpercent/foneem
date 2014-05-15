@@ -153,6 +153,6 @@ def logout():
     return redirect(url_for('index'))
 
 # set the secret key.  keep this really secret:
-app.secret_key = 
+app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 
