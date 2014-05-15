@@ -2,3 +2,9 @@ pip3.4 install Sqlalchemy==0.9.4
 pip3.4 install flask==0.10.1
 sudo xcodebuild -license
 pip3.4 install psycopg2==2.5.2
+
+install psycopg2 for python2.7
+  839  export CFLAGS=-Qunused-arguments
+  840  export CPPFLAGS=-Qunused-arguments
+  841  sudo -E /usr/local/bin/pip install psycopg2
+
