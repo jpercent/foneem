@@ -122,7 +122,7 @@ def upload(filename):
         _file = request.files['test.wav']
         #filename = session['username']+str(random.randint(0, 1048576))+'test.wav'
         #XXX - this was rushed for a demo. no need to save the file then reread it back in
-        filename = session['username']+filename
+        filename = session['username']+'-'+filename
         _file.save(filename)
         upload_wav_to_s3(conf, filename)
         return  'OK'
