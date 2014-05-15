@@ -67,17 +67,18 @@ html>
             </div>
         </div>
        
-        <script src="static/js/jquery-1.10.2.min.js"></script>
+        <script src="static/js/jquery-2.1.1.min.js"></script>
         
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script> 
-        <script src="static/js/speakClient.js"></script>        
-        <script src="static/js/hvb_init.js"></script>    
+        <script src="static/js/hvb.js"></script>    
+
+
 
         {% for key, value in next_hvb.items() %}
               <p hidden class="hvb_next">{{key}},{{value}}</p>
         {% endfor %}
-        <!-- script src="static/js/bootstrap.min.js"></script -->
-        <!-- script src="static/js/audio.js"></script -->
+
+        <!-- script src="static/js/speakClient.js"></script-->        
         <!-- div id="audio">
          <button onclick="speak('hello world')">Talk</button>
          </div -->	
