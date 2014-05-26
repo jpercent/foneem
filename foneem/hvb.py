@@ -132,8 +132,24 @@ def upload(filename):
 @app.route('/')
 def index():
     if 'username' in session:
-        return 'Logged in as %s' % escape(session['username'])
-    return 'You are not logged in'
+        return 'Logged in as %s <a href="logout">Sign out</a>' % escape(session['username'])
+    return redirect(url_for('login'))
+
+@app.route('/register', methods=['GET'])
+def register():
+    return render_template('register.html')
+
+@app.route('/registration_post', methods=['POST'])
+def registration_post():
+    print("registration post, request form = ", request.form)
+    print("registration post, session = ", session)
+    print("connecting database ... ")
+    conf = parse_config()
+    conn, cursor = connect_db(conf['db'])
+    cursor.execute('''insert into users (email, firstname, lastname, dob, gender, stateprovince, country, password) values (%(email)s, %(firstname)s, %(lastname)s, %(dob)s, %(gender)s, %(stateprovince)s, %(country)s, %(password)s);''',
+                   request.form)
+    close(conn, cursor)
+    return redirect(url_for('login'))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -149,7 +165,6 @@ def login():
 
 @app.route('/logout')
 def logout():
-    # remove the username from the session if it's there
     session.pop('username', None)
     return redirect(url_for('index'))
 
