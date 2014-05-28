@@ -353,7 +353,7 @@
         </label>
         . I was born on 
         <label>
-          <input type="text" name="dob" value="" placeholder="MM/YYYY" />
+          <input type="text" name="dob" value="" placeholder="MM/DD/YYYY" />
         </label>
         .
       </p>
@@ -421,15 +421,14 @@
             </div>
             <div class="modal-body row">
 	            <div class="login account col-md-6"><center>
-	            	<h3><strong>Login to Your Account</strong></h3>
-	            	<i class="fa fa-facebook-square fa-4x"></i> <i class="fa fa-twitter-square fa-4x"></i> <i class="fa fa-google-plus-square fa-4x"></i> <i class="fa fa-linkedin-square fa-4x fa-last"></i>
+	            	<h3 id="hvb_login_modal_header"><strong>Login to Your Account</strong></h3>
 	            	<div class="loginform-container">
-						<form action="process_form.php" class="loginform" method="post" novalidate="">
+						<form id="hvb_login_modal" action="login_post" class="loginform" method="post" novalidate="">
 							<div id="login-email-container" class="login-field">
-								<input type="email" name="email" placeholder="Your email address" id="login-email" required="required">
+								<input type="email" name="email" placeholder="Your email address" id="hvb_login_modal_email" required="required">
 							</div>
 							<div id="login-password-container" class="login-field">
-								<input type="password" name="password" placeholder="Your password" id="login-password" required="required">
+								<input type="password" name="password" placeholder="Your password" id="hvb_login_modal_password" required="required">
 							</div>
 							<div id="form-submit" class="login-field clearfix submit">
 								<input type="submit" value="Login">
@@ -440,7 +439,7 @@
 	            <div class="create account col-md-6"><center>
 	            	<h3><strong>Create An Account</strong></h3>
 	            	<p>Donate your voice today.</p>
-	            	<a href="register.html" class="btn btn-signup">Sign Up</a>
+	            	<a href="register" class="btn btn-signup">Sign Up</a>
 	            </center></div>
             </div>
     </div>
@@ -455,8 +454,10 @@
     <script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
     
     <!-- Custom JavaScript Files -->
+    <script src="static/js/hvb_login.js"></script>	
     <script src="static/js/easing-scrolling.js"></script>
     <script src="static/js/jquery.responsiveVideo.js"></script>
+
     
     <script>
     $( 'body' ).responsiveVideo();

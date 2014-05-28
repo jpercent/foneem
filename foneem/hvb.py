@@ -24,7 +24,7 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 from functools import wraps
-from flask import request, Response, render_template, url_for, session, escape, redirect 
+from flask import request, Response, render_template, url_for, session, escape, redirect, abort
 from foneem import app
 from foneem import S3
 import json
@@ -39,50 +39,12 @@ import sys
 import os
 import traceback
 import subprocess
-
-# XXX - this config needs to go through main
-def parse_conf(conf):
-    with open(conf, 'rt') as file_descriptor:
-        json_string = file_descriptor.read()
-        config = json.loads(json_string)
-    return config
-
-def parse_options(default_path):
-    usage = "usage: %prog [options]"
-    conf_help = 'path to the configuration; if not set conf.json is used'
-    try:
-        parser = OptionParser(version="%prog 1.0", usage=usage)
-        default_conf = os.path.join(default_path, 'conf.json')
-        parser.add_option('-c', '--conf', type=str, dest='conf', default=default_conf, metavar='CONF', help=conf_help)
-        (options, args) = parser.parse_args()
-        return options, args
-    except Exception as e:
-        print('parse_options: FATAL failed to parse program arguments')
-        exc_type, exc_value, exc_traceback = sys.exc_info()
-        traceback.print_exception(exc_type, exc_value, exc_traceback, file=sys.stderr)
-        raise e
-
-def parse_config():
-    default_path = os.path.dirname( os.path.realpath( __file__ ) )
-    options, args = parse_options(default_path)
-    conf = parse_conf(options.conf)
-    return conf
-
-def connect_db(conf):
-        conn = psycopg2.connect(**{'host': conf['host'], 'dbname' : conf['name'], 'user': conf['user'], 'port': conf['port'],
-                                         'password' : conf['addr']})
-        cursor = conn.cursor()        
-        return conn, cursor
-
-def close(conn, cursor):
-    conn.commit()
-    cursor.close()
-    conn.close()
+from db import *
 
 @app.route('/record')
 def record():
     try:
-        if not ('username' in session):
+        if not ('email' in session):
             return redirect('/', code=302)
         
         conf = parse_config()
@@ -116,13 +78,13 @@ def upload_wav_to_s3(conf, key):
 
 @app.route('/upload/<filename>', methods=['POST'])
 def upload(filename):
-    if 'username' in session:
+    if 'email' in session:
         import random
         conf = parse_config()        
         _file = request.files['test.wav']
-        #filename = session['username']+str(random.randint(0, 1048576))+'test.wav'
+        #filename = session['email']+str(random.randint(0, 1048576))+'test.wav'
         #XXX - this was rushed for a demo. no need to save the file then reread it back in
-        filename = session['username']+'-'+filename
+        filename = session['email']+'-'+filename
         _file.save(filename)
         upload_wav_to_s3(conf, filename)
         return  'OK'
@@ -131,8 +93,8 @@ def upload(filename):
 
 @app.route('/')
 def index():
-    if 'username' in session:
-        return 'Logged in as %s <a href="logout">Sign out</a>' % escape(session['username'])
+    if 'email' in session:
+        return 'Logged in as %s <a href="logout">Sign out</a>' % escape(session['email'])
     return redirect(url_for('login'))
 
 @app.route('/register', methods=['GET'])
@@ -146,26 +108,56 @@ def registration_post():
     print("connecting database ... ")
     conf = parse_config()
     conn, cursor = connect_db(conf['db'])
-    cursor.execute('''insert into users (email, firstname, lastname, dob, gender, stateprovince, country, password) values (%(email)s, %(firstname)s, %(lastname)s, %(dob)s, %(gender)s, %(stateprovince)s, %(country)s, %(password)s);''',
-                   request.form)
+    request.form['password']
+    form_data = request.form.to_dict()
+    print form_data
+    
+    import datetime
+
+    import hashlib, uuid
+    salt = uuid.uuid4().hex
+    print("SALT = ", salt)
+    print("password ->", form_data['password'])
+    form_data['password'] = hashlib.sha512(str(form_data['password']) + str(salt)).hexdigest()
+    form_data['compendium'] = salt
+    cursor.execute('''insert into users (email, firstname, lastname, dob, gender, stateprovince, country, password, compendium) values (%(email)s, %(firstname)s, %(lastname)s, %(dob)s, %(gender)s, %(stateprovince)s, %(country)s, %(password)s, %(compendium)s);''', form_data)
     close(conn, cursor)
     return redirect(url_for('login'))
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login_post', methods=['POST'])
+def login_post():
+    conf = parse_config()
+    conn, cursor = connect_db(conf['db'])
+    email = request.form['email']
+    password = request.form['password']
+    cursor.execute('''select email, password, compendium from users where email = %s; ''', [email])
+    user = cursor.fetchall()
+    
+    if len(user) == 0:
+        print("hvb.login: ERROR: email not known")
+        return render_template('login.html')
+        
+    elif len(user) > 1:
+        print("hvb.login: ERROR: email associated with multiple accounts")
+        
+    password = user[0][1]
+    compendium = user[0][2]
+    import hashlib
+    salted_password = hashlib.sha512(request.form['password'] + compendium).hexdigest()
+    if password != salted_password:
+        print("hvb.login: ERROR: password equality test failed")
+        render_template('login.html')
+        
+    session['email'] = email
+    return redirect(url_for('index'))
+
+@app.route('/login')
 def login():
-    if request.method == 'POST':
-        session['username'] = request.form['username']
-        return redirect(url_for('index'))
-    return '''
-        <form action="" method="post">
-            <p><input type=text name=username>
-            <p><input type=submit value=Login>
-        </form>
-    '''
+    return render_template('login.html')
 
 @app.route('/logout')
 def logout():
-    session.pop('username', None)
+    session.pop('email', None)
     return redirect(url_for('index'))
 
 # set the secret key.  keep this really secret:
