@@ -1,4 +1,3 @@
-
 # Copyright (c) James Percent. All rights reserved.
 # Redistribution and use in source and binary forms, with or without modification,
 # are permitted provided that the following conditions are met:
@@ -39,6 +38,9 @@ import sys
 import os
 import traceback
 import subprocess
+import datetime
+import hashlib
+import uuid
 from db import *
 
 @app.route('/record')
@@ -103,21 +105,11 @@ def register():
 
 @app.route('/registration_post', methods=['POST'])
 def registration_post():
-    print("registration post, request form = ", request.form)
-    print("registration post, session = ", session)
-    print("connecting database ... ")
     conf = parse_config()
     conn, cursor = connect_db(conf['db'])
     request.form['password']
     form_data = request.form.to_dict()
-    print form_data
-    
-    import datetime
-
-    import hashlib, uuid
     salt = uuid.uuid4().hex
-    print("SALT = ", salt)
-    print("password ->", form_data['password'])
     form_data['password'] = hashlib.sha512(str(form_data['password']) + str(salt)).hexdigest()
     form_data['compendium'] = salt
     cursor.execute('''insert into users (email, firstname, lastname, dob, gender, stateprovince, country, password, compendium) values (%(email)s, %(firstname)s, %(lastname)s, %(dob)s, %(gender)s, %(stateprovince)s, %(country)s, %(password)s, %(compendium)s);''', form_data)
@@ -142,7 +134,6 @@ def login_post():
         
     password = user[0][1]
     compendium = user[0][2]
-    import hashlib
     salted_password = hashlib.sha512(request.form['password'] + compendium).hexdigest()
     if password != salted_password:
         print("hvb.login: ERROR: password equality test failed")
