@@ -68,10 +68,17 @@ create table if not exists sentence_ordering(
 
 create table if not exists users(
     id serial primary key,
-    "name" varchar(80),
-    email text,
+    email text not null unique,
+    firstname varchar(80),
+    lastname varchar(80),
+    dob date,
+    gender varchar(10),
+    stateprovince varchar(128),
+    country varchar(128),
+    password text,
+    compendium text,
     creation_time timestamp default current_timestamp
-);    
+);
 
 create table if not exists address (
    id serial primary key,
