@@ -103,6 +103,10 @@ def index():
 def register():
     return render_template('register.html')
 
+@app.route('/pitch-demo', methods=['GET'])
+def pitch_demo():
+    return render_template('ui.html')
+
 @app.route('/registration_post', methods=['POST'])
 def registration_post():
     conf = parse_config()
