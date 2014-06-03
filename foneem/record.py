@@ -26,9 +26,16 @@ from flask import request, render_template, session, redirect
 from foneem import app, S3
 import xml.etree.ElementTree as ET
 
+@app.route('/calibrate')
+def calibrate():
+    return render_template('calibrate.html')
 
 @app.route('/record')
 def record():
+    return render_template('record.html')
+
+@app.route('/record-prototype')
+def record_prototype():
     try:
         if not ('email' in session):
             return redirect('/', code=302)

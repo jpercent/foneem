@@ -24,12 +24,4 @@ _testmain.go
 
 foneem/conf.json
 
-foneem/__init__.pyc
-
-foneem/db.pyc
-
-foneem/hvb.pyc
-
-foneem/S3.pyc
-
-foneem/conf.json
+*.pyc
