@@ -1,8 +1,6 @@
 var hvbSentenceManager = {};
 
 (function(exports) {
-    
-	
 	var keyValueArray = [];
 	var kVACursor = 0;
 	
@@ -88,7 +86,6 @@ var recorder = {};
         recorder.connect(context.destination); 
     };   
 
-	
     var leftchannel = [];
     var rightchannel = [];
     var recorder = null;
@@ -163,44 +160,6 @@ var recorder = {};
         // our final binary blob
         var blob = new Blob ( [ view ], { type : 'audio/wav' } );
 		currentBlob = blob;
-//		sessionStorage.setItem("currentBlob", blob);
-		/*
-		console.log("BLOG STUFF size = ", blob.size, "Blob type  ", blob.type);
-		
-		function upload(blob) {
-			var xhr=new XMLHttpRequest();
-			xhr.onload=function(e) {
-				if(this.readyState === 4) {
-				    console.log("Server returned: ",e.target.responseText);
-				}
-			};
-			var fd=new FormData();
-			fd.append("test.wav",blob);
-			xhr.open("POST","upload-audio",true);
-			xhr.send(fd);
-		}
-		upload(blob);
-		*/
-		/*
-        function uploadAudio( blob ) {
-			var reader = new FileReader();		
-			reader.onload = function(event){
-				var formData = new FormData();
-				formData.append('audio', blob, 'test.wav');
-				$.ajax({
-					type: 'POST',
-					url: 'upload-audio',
-					data: formData,
-					rocessData: false,
-					contentType: false
-				}).done(function(data) {
-					console.log(data);
-				});
-			};
-			reader.readAsDataURL(blob);
-		}
-		uploadAudio(blob);*/
-		
         // let's save it locally
         var url = (window.URL || window.webkitURL).createObjectURL(blob);
 	    var li = window.document.createElement('li');
@@ -287,13 +246,7 @@ var recorder = {};
 
 var hvbButtonManager = {};
 (function(exports) {
-    exports.bindClickEvents = function() {
-/*        <!-- id="hvb_play">Play</button
-        <button type="button" class="btn btn-default" id="hvb_record">Record</button>
-        <button type="button" class="btn btn-default" id="hvb_stop">Stop</button>
-        <button type="button" class="btn btn-default" id="hvb_playback">Playback</button>
-        <button type="button" class="btn btn-default" id="hvb_submit" -- >
-  */      
+    exports.bindClickEvents = function() {     
         $('#hvb_play').click(function(e) {
             var sentence = hvbSentenceManager.getSentence();
             console.log("the sentence = ", sentence)
@@ -323,6 +276,7 @@ var hvbButtonManager = {};
 }(hvbButtonManager));
 
 $( document ).ready(function() {
+	alert("Binding functions");
     hvbSentenceManager.disableSentenceTextArea();
     hvbSentenceManager.createSentenceCursor();
     hvbSentenceManager.setNextSentence();
