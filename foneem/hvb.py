@@ -42,6 +42,27 @@ import datetime
 import hashlib
 import uuid
 from db import *
+from itsdangerous import TimestampSigner
+import smtplib
+from email.mime.text import MIMEText
+
+def send_mail(subject, body, from_email, to_email):
+    msg = MIMEText(body)
+    msg['Subject'] = subject
+    msg['From'] = from_email
+    msg['To'] = to_email
+
+    s = smtplib.SMTP('localhost')
+    s.sendmail(me, recipient, msg.as_string())
+    s.quit()
+
+def reset_password(username, user_email):
+    s = TimestampSigner(app.secret_key)
+    string = s.sign(username)    
+    send_mail('HumanVoiceBankInitiative: Password Reset', 'admin@hvb.net', user_email)
+#    searchword = request.args.get('token', '')
+#    s.unsign(string, max_age=5)
+
 
 @app.route('/record')
 def record():
@@ -92,6 +113,38 @@ def upload(filename):
         return  'OK'
     else:
         return redirect("/", code=302)
+
+
+#On 10/12/11 15:57, Matthew Karas wrote:
+#> I'm just looking for a standard safe way to reset passwords.
+#
+#I use `itsdangerous` library for this kind of things.
+#
+#http://packages.python.org/itsdangerous/
+#
+#A token formed by the user name and an expiry time is signed with a
+#secret and a salt (specific for the password reset operation). This
+#token is sent to the user, in the form of an URL:
+#
+#http://localhost/profile/<username>/preset?token=<token>
+#
+#In the preset view I verify the token (given that the token encodes the
+#username, you can even leave it out of the URL).
+#
+#This way you do not have to store anything server side or in the
+#session, making it a very lean solution.
+#
+#Cheers,
+#-- 
+#Daniele
+
+@app.route('/preset/<username>')
+def preset():
+    searchword = request.args.get('token', '')
+    s = TimestampSigner('secret-key')
+    string = s.sign('foo')
+    s.unsign(string, max_age=5)
+
 
 @app.route('/')
 def index():
