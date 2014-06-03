@@ -126,6 +126,18 @@
       "initialSize" : 4107,
       "fileType" : 8192
     },
+    "\/stylesheets\/sass\/vendor\/bootstrap\/_dropdowns.scss" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/stylesheets\/sass\/vendor\/bootstrap\/_dropdowns.scss",
+      "outputStyle" : 3,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/stylesheets\/_dropdowns.css",
+      "fileType" : 4,
+      "debugStyle" : 0
+    },
     "\/js\/bootstrap\/affix.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -145,18 +157,6 @@
       "inputAbbreviatedPath" : "\/stylesheets\/sections\/animations.css",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
-    },
-    "\/stylesheets\/sass\/vendor\/bootstrap\/_dropdowns.scss" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/stylesheets\/sass\/vendor\/bootstrap\/_dropdowns.scss",
-      "outputStyle" : 3,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/stylesheets\/_dropdowns.css",
-      "fileType" : 4,
-      "debugStyle" : 0
     },
     "\/js\/bootstrap.js" : {
       "ignoreWasSetByUser" : 0,
@@ -180,6 +180,15 @@
       "initialSize" : 1226,
       "fileType" : 8192
     },
+    "\/calibrate.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/calibrate.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
     "\/stylesheets\/sass\/vendor\/bootstrap\/_theme.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -191,15 +200,6 @@
       "outputAbbreviatedPath" : "\/stylesheets\/_theme.css",
       "fileType" : 4,
       "debugStyle" : 0
-    },
-    "\/calibrate.html" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/calibrate.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
     },
     "\/stylesheets\/sass\/vendor\/bootstrap\/_grid.scss" : {
       "ignoreWasSetByUser" : 0,
@@ -353,17 +353,6 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/images\/room-bg.jpg" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/images\/room-bg.jpg",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/images\/room-bg.jpg",
-      "initialSize" : 341625,
-      "fileType" : 4096
-    },
     "\/js\/bootstrap\/scrollspy.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -385,6 +374,17 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/js\/bootstrap\/alert-ck.js",
       "fileType" : 64
+    },
+    "\/images\/room-bg.jpg" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/images\/room-bg.jpg",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/images\/room-bg.jpg",
+      "initialSize" : 341625,
+      "fileType" : 4096
     },
     "\/js\/unslider.min.js" : {
       "ignoreWasSetByUser" : 0,
