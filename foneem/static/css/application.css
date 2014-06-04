@@ -3461,45 +3461,55 @@ html.recording-studio section#recording-studio {
   html.recording-studio section#recording-studio .hvb_record {
     width: 100px;
     height: 87.5px;
-    background-color: red;
+    background-color: #d95c48;
     position: absolute;
     bottom: 97.5px;
     left: 50%;
     margin-left: -480px;
     z-index: 2; }
+    html.recording-studio section#recording-studio .hvb_record:hover {
+      background-color: #e28272; }
   html.recording-studio section#recording-studio .hvb_stop {
     width: 100px;
     height: 87.5px;
-    background-color: brown;
+    background-color: #c95542;
     position: absolute;
     bottom: 97.5px;
     left: 50%;
     margin-left: -480px;
     z-index: -1; }
+    html.recording-studio section#recording-studio .hvb_stop:hover {
+      background-color: #d4796a; }
   html.recording-studio section#recording-studio #hvb_playsentence {
     width: 100px;
     height: 87.5px;
-    background-color: green;
+    background-color: #4baa4e;
     position: absolute;
     bottom: 10px;
     left: 50%;
     margin-left: -480px; }
+    html.recording-studio section#recording-studio #hvb_playsentence:hover {
+      background-color: #6bbd6d; }
   html.recording-studio section#recording-studio #hvb_nextsentence {
     width: 100px;
     height: 87.5px;
-    background-color: brown;
+    background-color: #2a2c39;
     position: absolute;
     bottom: 10px;
     right: 50%;
     margin-right: -480px; }
+    html.recording-studio section#recording-studio #hvb_nextsentence:hover {
+      background-color: #404356; }
   html.recording-studio section#recording-studio #hvb_settings {
     width: 100px;
     height: 87.5px;
-    background-color: grey;
+    background-color: #526fa6;
     position: absolute;
     bottom: 97.5px;
     right: 50%;
     margin-right: -480px; }
+    html.recording-studio section#recording-studio #hvb_settings:hover {
+      background-color: #728ab9; }
 
 html.calibrate.recording-studio .calibrate {
   width: 100px;

@@ -229,49 +229,64 @@ section#recording-studio {
 	.hvb_record {
 		width: 100px;
 		height: 87.5px;
-		background-color: red;
+		background-color: $red-damask;
 		position: absolute;
 		bottom: 97.5px;
 		left: 50%;
 		margin-left:-480px;
 		z-index: 2;
+		&:hover {
+			background-color: lighten( $red-damask, 10% );
+		}
 	}
 	.hvb_stop {
 		width: 100px;
 		height: 87.5px;
-		background-color: brown;
+		background-color: $red-damask-dark;
 		position: absolute;
 		bottom: 97.5px;
 		left: 50%;
 		margin-left:-480px;
 		z-index: -1;
+		&:hover {
+			background-color: lighten( $red-damask-dark, 10% );
+		}
 	}
 	#hvb_playsentence {
 		width: 100px;
 		height: 87.5px;
-		background-color: green;
+		background-color: $green;
 		position: absolute;
 		bottom: 10px;
 		left: 50%;
 		margin-left:-480px;
+		&:hover {
+			background-color: lighten( $green, 10% );
+		}
 	}
 	#hvb_nextsentence {
 		width: 100px;
 		height: 87.5px;
-		background-color: brown;
+		background-color: $dark-blue;
 		position: absolute;
 		bottom: 10px;
 		right: 50%;
 		margin-right:-480px;
+		&:hover {
+			background-color: lighten( $dark-blue, 10% );
+		}
 	}
 	#hvb_settings {
 		width: 100px;
 		height: 87.5px;
-		background-color: grey;
+		background-color: $facebook-blue;
 		position: absolute;
 		bottom: 97.5px;
 		right: 50%;
 		margin-right:-480px;
+		&:hover {
+			background-color: lighten( $facebook-blue, 10% );
+		}
 	}
 }
 
