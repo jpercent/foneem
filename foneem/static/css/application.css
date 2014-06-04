@@ -2519,6 +2519,11 @@ body {
   color: #222222;
   background-color: white; }
 
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
 html {
   width: 100%;
   height: 100%; }
@@ -3242,12 +3247,68 @@ select::-ms-expand {
 input[type="submit"].mad-libs-submit {
   width: 280px; }
 
+#volume-1 {
+  background-color: #6b0000;
+  top: 0px; }
+
+#volume-2 {
+  background-color: #560000;
+  top: 25px; }
+
+#volume-3 {
+  background-color: #034100;
+  top: 50px; }
+
+#volume-4 {
+  background-color: #087902;
+  top: 75px; }
+
+#volume-5 {
+  background-color: #034100;
+  top: 100px; }
+
+#volume-6 {
+  background-color: #560000;
+  top: 125px; }
+
+#volume-7 {
+  background-color: #6b0000;
+  top: 150px; }
+
+#pitch-1 {
+  background-color: #6b0000;
+  top: 0px; }
+
+#pitch-2 {
+  background-color: #560000;
+  top: 25px; }
+
+#pitch-3 {
+  background-color: #034100;
+  top: 50px; }
+
+#pitch-4 {
+  background-color: #087902;
+  top: 75px; }
+
+#pitch-5 {
+  background-color: #034100;
+  top: 100px; }
+
+#pitch-6 {
+  background-color: #560000;
+  top: 125px; }
+
+#pitch-7 {
+  background-color: #6b0000;
+  top: 150px; }
+
 html.recording-studio .container {
   padding: 0; }
 html.recording-studio nav .container {
   padding-right: 15px;
   padding-left: 15px; }
-html.recording-studio section#record {
+html.recording-studio section#recording-studio {
   display: table;
   width: 100%;
   height: 100%;
@@ -3255,44 +3316,190 @@ html.recording-studio section#record {
   text-align: center;
   color: white;
   background: url("../images/room-bg.jpg") no-repeat fixed top center; }
-  html.recording-studio section#record .back-wall {
+  html.recording-studio section#recording-studio .back-wall {
     position: absolute;
     width: 960px;
     height: 510px;
     top: 74px;
     left: 50%;
     margin-left: -480px; }
-    html.recording-studio section#record .back-wall .wall-cell-container {
+    html.recording-studio section#recording-studio .back-wall .wall-cell-container {
       border: 1px solid #000;
       width: 64px;
       height: 64px;
-      float: left;
-      /*div#r1s7 {
-      		border-color: rgba(254,115,73,0.5) rgba(254,90,57,0.5) rgba(254,82,52,0.5) rgba(254,110,69,0.5);
-      		border-style: solid;
-      		border-width: 31px;
-      		width: 0;
-      		height: 0;
-      		box-shadow: 0px 0px 8px rgba(254,115,73,1) inset, 0px 0px 8px rgba(254,115,73,1);
-      		-webkit-box-shadow: 0px 0px 8px rgba(254,115,73,1) inset, 0px 0px 8px rgba(254,115,73,1);
-      		-moz-box-shadow: 0px 0px 8px rgba(254,115,73,1) inset, 0px 0px 8px rgba(254,115,73,1);
-      }
-      div#r1s8 {
-      		border-color: rgba(254,115,73,1) rgba(254,90,57,1) rgba(254,82,52,1) rgba(254,110,69,1);
-      		border-style: solid;
-      		border-width: 31px;
-      		width: 0;
-      		height: 0;
-      		box-shadow: 0px 0px 8px rgba(254,115,73,1) inset, 0px 0px 8px rgba(254,115,73,1);
-      		-webkit-box-shadow: 0px 0px 8px rgba(254,115,73,1) inset, 0px 0px 8px rgba(254,115,73,1);
-      		-moz-box-shadow: 0px 0px 8px rgba(254,115,73,1) inset, 0px 0px 8px rgba(254,115,73,1);
-      }*/ }
-      html.recording-studio section#record .back-wall .wall-cell-container .wall-cell {
+      float: left; }
+      html.recording-studio section#recording-studio .back-wall .wall-cell-container .wall-cell {
         border-color: #2b3036 #22252a #1f2326 #282d32;
         border-style: solid;
         border-width: 31px;
         width: 0;
         height: 0; }
+      html.recording-studio section#recording-studio .back-wall .wall-cell-container .opacity-0 {
+        opacity: 0; }
+      html.recording-studio section#recording-studio .back-wall .wall-cell-container .opacity-25 {
+        opacity: 0.25; }
+      html.recording-studio section#recording-studio .back-wall .wall-cell-container .opacity-50 {
+        opacity: 0.5; }
+      html.recording-studio section#recording-studio .back-wall .wall-cell-container .opacity-75 {
+        opacity: 0.75; }
+      html.recording-studio section#recording-studio .back-wall .wall-cell-container .opacity-100 {
+        opacity: 1; }
+      html.recording-studio section#recording-studio .back-wall .wall-cell-container .red {
+        border-color: #fe7349 #fe5a39 #fe5234 #fe6e45;
+        border-style: solid;
+        border-width: 31px;
+        width: 0;
+        height: 0;
+        box-shadow: 0px 0px 8px #fe7349 inset, 0px 0px 8px #fe7349;
+        -webkit-box-shadow: 0px 0px 8px #fe7349 inset, 0px 0px 8px #fe7349;
+        -moz-box-shadow: 0px 0px 8px #fe7349 inset, 0px 0px 8px #fe7349;
+        z-index: 2; }
+      html.recording-studio section#recording-studio .back-wall .wall-cell-container .pink {
+        border-color: #f18ff2 #ef74d7 #e36bc4 #ef8cef;
+        border-style: solid;
+        border-width: 31px;
+        width: 0;
+        height: 0;
+        box-shadow: 0px 0px 8px #f18ff2 inset, 0px 0px 8px #f18ff2;
+        -webkit-box-shadow: 0px 0px 8px #f18ff2 inset, 0px 0px 8px #f18ff2;
+        -moz-box-shadow: 0px 0px 8px #f18ff2 inset, 0px 0px 8px #f18ff2;
+        z-index: 2; }
+      html.recording-studio section#recording-studio .back-wall .wall-cell-container .purple {
+        border-color: #5161a5 #404e85 #3c4879 #4e5ea1;
+        border-style: solid;
+        border-width: 31px;
+        width: 0;
+        height: 0;
+        box-shadow: 0px 0px 8px #5161a5 inset, 0px 0px 8px #5161a5;
+        -webkit-box-shadow: 0px 0px 8px #5161a5 inset, 0px 0px 8px #5161a5;
+        -moz-box-shadow: 0px 0px 8px #5161a5 inset, 0px 0px 8px #5161a5;
+        z-index: 2; }
+      html.recording-studio section#recording-studio .back-wall .wall-cell-container .yellowgreen {
+        border-color: #e1fc73 #d7ff37 #cef143 #dbfc59;
+        border-style: solid;
+        border-width: 31px;
+        width: 0;
+        height: 0;
+        box-shadow: 0px 0px 8px #e1fc73 inset, 0px 0px 8px #e1fc73;
+        -webkit-box-shadow: 0px 0px 8px #e1fc73 inset, 0px 0px 8px #e1fc73;
+        -moz-box-shadow: 0px 0px 8px #e1fc73 inset, 0px 0px 8px #e1fc73;
+        z-index: 2; }
+      html.recording-studio section#recording-studio .back-wall .wall-cell-container .yellow {
+        border-color: #fefe2c #f8f825 #f2f230 #f7f736;
+        border-style: solid;
+        border-width: 31px;
+        width: 0;
+        height: 0;
+        box-shadow: 0px 0px 8px #fefe2c inset, 0px 0px 8px #fefe2c;
+        -webkit-box-shadow: 0px 0px 8px #fefe2c inset, 0px 0px 8px #fefe2c;
+        -moz-box-shadow: 0px 0px 8px #fefe2c inset, 0px 0px 8px #fefe2c;
+        z-index: 2; }
+      html.recording-studio section#recording-studio .back-wall .wall-cell-container .green {
+        border-color: #2dfe60 #26f658 #37f064 #3ff86c;
+        border-style: solid;
+        border-width: 31px;
+        width: 0;
+        height: 0;
+        box-shadow: 0px 0px 8px #2dfe60 inset, 0px 0px 8px #2dfe60;
+        -webkit-box-shadow: 0px 0px 8px #2dfe60 inset, 0px 0px 8px #2dfe60;
+        -moz-box-shadow: 0px 0px 8px #2dfe60 inset, 0px 0px 8px #2dfe60;
+        z-index: 2; }
+      html.recording-studio section#recording-studio .back-wall .wall-cell-container .lightblue {
+        border-color: #20f0f0 #1ff9f9 #21fefe #28f8f8;
+        border-style: solid;
+        border-width: 31px;
+        width: 0;
+        height: 0;
+        box-shadow: 0px 0px 8px #20f0f0 inset, 0px 0px 8px #20f0f0;
+        -webkit-box-shadow: 0px 0px 8px #20f0f0 inset, 0px 0px 8px #20f0f0;
+        -moz-box-shadow: 0px 0px 8px #20f0f0 inset, 0px 0px 8px #20f0f0;
+        z-index: 2; }
+      html.recording-studio section#recording-studio .back-wall .wall-cell-container .blue {
+        border-color: #2b9ceb #2091e0 #2c89cb #3d9de0;
+        border-style: solid;
+        border-width: 31px;
+        width: 0;
+        height: 0;
+        box-shadow: 0px 0px 8px #2b9ceb inset, 0px 0px 8px #2b9ceb;
+        -webkit-box-shadow: 0px 0px 8px #2b9ceb inset, 0px 0px 8px #2b9ceb;
+        -moz-box-shadow: 0px 0px 8px #2b9ceb inset, 0px 0px 8px #2b9ceb;
+        z-index: 2; }
+  html.recording-studio section#recording-studio .sentence {
+    width: 560px;
+    height: 175px;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    margin-left: -280px;
+    background-color: #f2fdff; }
+  html.recording-studio section#recording-studio .volume {
+    width: 100px;
+    height: 175px;
+    background-color: #333;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    margin-left: -380px; }
+    html.recording-studio section#recording-studio .volume #volume-1, html.recording-studio section#recording-studio .volume #volume-2, html.recording-studio section#recording-studio .volume #volume-3, html.recording-studio section#recording-studio .volume #volume-4, html.recording-studio section#recording-studio .volume #volume-5, html.recording-studio section#recording-studio .volume #volume-6, html.recording-studio section#recording-studio .volume #volume-7 {
+      position: absolute;
+      width: 80px;
+      height: 25px;
+      left: 10px; }
+  html.recording-studio section#recording-studio .pitch {
+    width: 100px;
+    height: 175px;
+    background-color: #333;
+    position: absolute;
+    bottom: 10px;
+    right: 50%;
+    margin-right: -380px; }
+    html.recording-studio section#recording-studio .pitch #pitch-1, html.recording-studio section#recording-studio .pitch #pitch-2, html.recording-studio section#recording-studio .pitch #pitch-3, html.recording-studio section#recording-studio .pitch #pitch-4, html.recording-studio section#recording-studio .pitch #pitch-5, html.recording-studio section#recording-studio .pitch #pitch-6, html.recording-studio section#recording-studio .pitch #pitch-7 {
+      position: absolute;
+      width: 80px;
+      height: 25px;
+      left: 10px; }
+  html.recording-studio section#recording-studio .record {
+    width: 100px;
+    height: 87.5px;
+    background-color: red;
+    position: absolute;
+    bottom: 97.5px;
+    left: 50%;
+    margin-left: -480px;
+    z-index: 2; }
+  html.recording-studio section#recording-studio .stop {
+    width: 100px;
+    height: 87.5px;
+    background-color: brown;
+    position: absolute;
+    bottom: 97.5px;
+    left: 50%;
+    margin-left: -480px;
+    z-index: -1; }
+  html.recording-studio section#recording-studio #play-sentence {
+    width: 100px;
+    height: 87.5px;
+    background-color: green;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    margin-left: -480px; }
+  html.recording-studio section#recording-studio #next-sentence {
+    width: 100px;
+    height: 87.5px;
+    background-color: brown;
+    position: absolute;
+    bottom: 10px;
+    right: 50%;
+    margin-right: -480px; }
+  html.recording-studio section#recording-studio #settings {
+    width: 100px;
+    height: 87.5px;
+    background-color: grey;
+    position: absolute;
+    bottom: 97.5px;
+    right: 50%;
+    margin-right: -480px; }
 
 html.calibrate.recording-studio .calibrate {
   width: 100px;
@@ -3308,27 +3515,6 @@ html.calibrate.recording-studio .calibrate {
     margin-left: -40px;
     width: 80px;
     height: 25px; }
-  html.calibrate.recording-studio .calibrate #volume-1 {
-    background-color: #6b0000;
-    top: 10px; }
-  html.calibrate.recording-studio .calibrate #volume-2 {
-    background-color: #560000;
-    top: 35px; }
-  html.calibrate.recording-studio .calibrate #volume-3 {
-    background-color: #034100;
-    top: 60px; }
-  html.calibrate.recording-studio .calibrate #volume-4 {
-    background-color: #087902;
-    top: 85px; }
-  html.calibrate.recording-studio .calibrate #volume-5 {
-    background-color: #034100;
-    top: 110px; }
-  html.calibrate.recording-studio .calibrate #volume-6 {
-    background-color: #560000;
-    top: 135px; }
-  html.calibrate.recording-studio .calibrate #volume-7 {
-    background-color: #6b0000;
-    top: 160px; }
 html.calibrate.recording-studio .btn-calibrate {
   position: absolute;
   top: 380px;
