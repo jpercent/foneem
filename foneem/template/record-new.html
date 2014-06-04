@@ -2,19 +2,19 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js recording-studio calibrate"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js recording-studio"> <!--<![endif]-->
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>The Human Voicebank - Calibration Screen</title>
+    <title>The Human Voicebank - Virtual Recording Studio</title>
     <meta name="description" content="The Human Voicebank is an initiative dedicated to exploring the frontiers of human voice.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:image" content="http://www.northeastern.edu/humanvoicebank/images/rupal-ted.png"/>
 
     <!-- Bootstrap CSS -->
-    <link href="static/css/application.css" rel="stylesheet" type="text/css">
-    <link href="static/css/sections/animations.css" rel="stylesheet" type="text/css">
+    <link href="stylesheets/application.css" rel="stylesheet" type="text/css">
+    <link href="stylesheets/sections/animations.css" rel="stylesheet" type="text/css">
     
     <!-- Mailchimp CSS -->
     <link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
@@ -46,7 +46,7 @@
                     <i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand" href="./">
-                <img src="static/images/hvb-icon.svg" width="40px" height="40px">
+                <img src="./images/hvb-icon.svg" width="40px" height="40px">
                 </a>
             </div>
 
@@ -455,7 +455,7 @@
                 </div>
             </div>
         </div>
-        <div class="calibrate volume">
+        <div class="volume">
             <div id="volume-1"></div>
             <div id="volume-2"></div>
             <div id="volume-3"></div>
@@ -464,7 +464,15 @@
             <div id="volume-6"></div>
             <div id="volume-7"></div>
         </div>
-        <a href="#" class="btn btn-default btn-record btn-calibrate"><i class="fa fa-microphone fa-fw"></i> <span>Calibrate Mic</span></a>
+        <div class="pitch">
+            <div id="pitch-1"></div>
+            <div id="pitch-2"></div>
+            <div id="pitch-3"></div>
+            <div id="pitch-4"></div>
+            <div id="pitch-5"></div>
+            <div id="pitch-6"></div>
+            <div id="pitch-7"></div>
+        </div>
     </section>
 
     <!-- Core JavaScript Files -->
@@ -475,7 +483,12 @@
     <script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
     
     <!-- Custom JavaScript Files -->
-    <script src="static/js/easing-scrolling.js"></script>
+    <script src="js/easing-scrolling.js"></script>
+    <script src="js/jquery.responsiveVideo.js"></script>
+    
+    <script>
+    $( 'body' ).responsiveVideo();
+    </script>
     <script>
   $(function() {
     $( ".modal" ).draggable();

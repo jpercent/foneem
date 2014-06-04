@@ -3293,11 +3293,44 @@ html.recording-studio section#record {
         border-width: 31px;
         width: 0;
         height: 0; }
-html.recording-studio .calibrate {
-  width: 80px;
-  height: 175px;
+
+html.calibrate.recording-studio .calibrate {
+  width: 100px;
+  height: 195px;
   background-color: #000;
   position: absolute;
   top: 160px;
   left: 50%;
-  margin-left: -40px; }
+  margin-left: -50px; }
+  html.calibrate.recording-studio .calibrate #volume-1, html.calibrate.recording-studio .calibrate #volume-2, html.calibrate.recording-studio .calibrate #volume-3, html.calibrate.recording-studio .calibrate #volume-4, html.calibrate.recording-studio .calibrate #volume-5, html.calibrate.recording-studio .calibrate #volume-6, html.calibrate.recording-studio .calibrate #volume-7 {
+    position: absolute;
+    left: 50%;
+    margin-left: -40px;
+    width: 80px;
+    height: 25px; }
+  html.calibrate.recording-studio .calibrate #volume-1 {
+    background-color: #6b0000;
+    top: 10px; }
+  html.calibrate.recording-studio .calibrate #volume-2 {
+    background-color: #560000;
+    top: 35px; }
+  html.calibrate.recording-studio .calibrate #volume-3 {
+    background-color: #034100;
+    top: 60px; }
+  html.calibrate.recording-studio .calibrate #volume-4 {
+    background-color: #087902;
+    top: 85px; }
+  html.calibrate.recording-studio .calibrate #volume-5 {
+    background-color: #034100;
+    top: 110px; }
+  html.calibrate.recording-studio .calibrate #volume-6 {
+    background-color: #560000;
+    top: 135px; }
+  html.calibrate.recording-studio .calibrate #volume-7 {
+    background-color: #6b0000;
+    top: 160px; }
+html.calibrate.recording-studio .btn-calibrate {
+  position: absolute;
+  top: 380px;
+  left: 50%;
+  margin-left: -98px; }

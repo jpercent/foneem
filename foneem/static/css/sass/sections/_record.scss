@@ -58,17 +58,59 @@ section#record {
 	}
 }
 
-// * Calibration * //
-
-.calibrate {
-	width: 80px;
-	height: 175px;
-	background-color: #000;
-	position: absolute;
-	top: 160px;
-	left: 50%;
-	margin-left: -40px;
-
 }
 
+html.calibrate.recording-studio {
+	// * Calibration * //
+
+	.calibrate {
+		width: 100px;
+		height: 195px;
+		background-color: #000;
+		position: absolute;
+		top: 160px;
+		left: 50%;
+		margin-left: -50px;
+		#volume-1, #volume-2, #volume-3, #volume-4, #volume-5, #volume-6, #volume-7 {
+			position: absolute;
+			left: 50%;
+			margin-left: -40px;
+			width: 80px;
+			height: 25px;
+		}
+		#volume-1 {
+			background-color: #6b0000;
+			top: 10px;
+		}
+		#volume-2 {
+			background-color: #560000;
+			top: 35px;
+		}
+		#volume-3 {
+			background-color: #034100;
+			top: 60px;
+		}
+		#volume-4 {
+			background-color: #087902;
+			top: 85px;
+		}
+		#volume-5 {
+			background-color: #034100;
+			top: 110px;
+		}
+		#volume-6 {
+			background-color: #560000;
+			top: 135px;
+		}
+		#volume-7 {
+			background-color: #6b0000;
+			top: 160px;
+		}
+	}
+	.btn-calibrate {
+		position: absolute;
+		top: 380px;
+		left: 50%;
+		margin-left: -98px;
+	}
 }
