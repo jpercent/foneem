@@ -220,18 +220,6 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/mike\/stylesheets\/sass\/vendor\/bootstrap\/_thumbnails.scss" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/mike\/stylesheets\/sass\/vendor\/bootstrap\/_thumbnails.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/static\/css\/_thumbnails.css",
-      "fileType" : 4,
-      "debugStyle" : 0
-    },
     "\/static\/css\/sass\/vendor\/bootstrap\/_jumbotron.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -241,6 +229,18 @@
       "outputStyle" : 0,
       "shouldRunBless" : 0,
       "outputAbbreviatedPath" : "\/static\/css\/_jumbotron.css",
+      "fileType" : 4,
+      "debugStyle" : 0
+    },
+    "\/mike\/stylesheets\/sass\/vendor\/bootstrap\/_thumbnails.scss" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/mike\/stylesheets\/sass\/vendor\/bootstrap\/_thumbnails.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/static\/css\/_thumbnails.css",
       "fileType" : 4,
       "debugStyle" : 0
     },
@@ -392,15 +392,15 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
     },
-    "\/mike\/stylesheets\/sass\/application.scss" : {
+    "\/mike\/stylesheets\/sass\/vendor\/bootstrap\/_mixins.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
-      "hidden" : 1,
+      "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/mike\/stylesheets\/sass\/application.scss",
+      "inputAbbreviatedPath" : "\/mike\/stylesheets\/sass\/vendor\/bootstrap\/_mixins.scss",
       "outputStyle" : 0,
       "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/static\/css\/application.css",
+      "outputAbbreviatedPath" : "\/static\/css\/_mixins.css",
       "fileType" : 4,
       "debugStyle" : 0
     },
@@ -416,15 +416,15 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/mike\/stylesheets\/sass\/vendor\/bootstrap\/_mixins.scss" : {
+    "\/mike\/stylesheets\/sass\/application.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
-      "hidden" : 0,
+      "hidden" : 1,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/mike\/stylesheets\/sass\/vendor\/bootstrap\/_mixins.scss",
+      "inputAbbreviatedPath" : "\/mike\/stylesheets\/sass\/application.scss",
       "outputStyle" : 0,
       "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/static\/css\/_mixins.css",
+      "outputAbbreviatedPath" : "\/static\/css\/application.css",
       "fileType" : 4,
       "debugStyle" : 0
     },
@@ -875,15 +875,15 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/static\/css\/sass\/vendor\/bootstrap\/_theme.scss" : {
+    "\/static\/css\/sass\/vendor\/bootstrap\/_scaffolding.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/css\/sass\/vendor\/bootstrap\/_theme.scss",
+      "inputAbbreviatedPath" : "\/static\/css\/sass\/vendor\/bootstrap\/_scaffolding.scss",
       "outputStyle" : 0,
       "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/static\/css\/_theme.css",
+      "outputAbbreviatedPath" : "\/static\/css\/_scaffolding.css",
       "fileType" : 4,
       "debugStyle" : 0
     },
@@ -896,15 +896,15 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/static\/css\/sass\/vendor\/bootstrap\/_scaffolding.scss" : {
+    "\/static\/css\/sass\/vendor\/bootstrap\/_theme.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/css\/sass\/vendor\/bootstrap\/_scaffolding.scss",
+      "inputAbbreviatedPath" : "\/static\/css\/sass\/vendor\/bootstrap\/_theme.scss",
       "outputStyle" : 0,
       "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/static\/css\/_scaffolding.css",
+      "outputAbbreviatedPath" : "\/static\/css\/_theme.css",
       "fileType" : 4,
       "debugStyle" : 0
     },
@@ -1331,6 +1331,15 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
+    "\/mike\/stylesheets\/libraries\/_variables.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 1,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/mike\/stylesheets\/libraries\/_variables.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
+    },
     "\/mike\/js\/easing-scrolling.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -1353,15 +1362,6 @@
       "outputAbbreviatedPath" : "\/static\/css\/_alerts.css",
       "fileType" : 4,
       "debugStyle" : 0
-    },
-    "\/mike\/stylesheets\/libraries\/_variables.css" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 1,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/mike\/stylesheets\/libraries\/_variables.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
     },
     "\/mike\/stylesheets\/sass\/vendor\/bootstrap\/_scaffolding.scss" : {
       "ignoreWasSetByUser" : 0,
@@ -1670,17 +1670,6 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/static\/images\/press-npr.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/images\/press-npr.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/static\/images\/press-npr.png",
-      "initialSize" : 3589,
-      "fileType" : 8192
-    },
     "\/mike\/stylesheets\/sass\/vendor\/bootstrap\/_theme.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -1692,6 +1681,17 @@
       "outputAbbreviatedPath" : "\/static\/css\/_theme.css",
       "fileType" : 4,
       "debugStyle" : 0
+    },
+    "\/static\/images\/press-npr.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/images\/press-npr.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/static\/images\/press-npr.png",
+      "initialSize" : 3589,
+      "fileType" : 8192
     },
     "\/static\/js\/jquery-2.1.1.min.js" : {
       "ignoreWasSetByUser" : 0,
@@ -1813,16 +1813,14 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/mike\/images\/downloads-bg.jpg" : {
+    "\/static\/css\/application.css" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
-      "hidden" : 1,
+      "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/mike\/images\/downloads-bg.jpg",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/mike\/images\/downloads-bg.jpg",
-      "initialSize" : 110981,
-      "fileType" : 4096
+      "inputAbbreviatedPath" : "\/static\/css\/application.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
     },
     "\/mike\/stylesheets\/sass\/libraries\/_variables.scss" : {
       "ignoreWasSetByUser" : 0,
@@ -1868,14 +1866,16 @@
       "outputAbbreviatedPath" : "\/static\/js\/speakWorker-ck.js",
       "fileType" : 64
     },
-    "\/static\/css\/application.css" : {
+    "\/mike\/images\/downloads-bg.jpg" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
-      "hidden" : 0,
+      "hidden" : 1,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/css\/application.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
+      "inputAbbreviatedPath" : "\/mike\/images\/downloads-bg.jpg",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/mike\/images\/downloads-bg.jpg",
+      "initialSize" : 110981,
+      "fileType" : 4096
     },
     "\/static\/css\/sections\/record-lo-fi.css" : {
       "ignoreWasSetByUser" : 0,
@@ -1941,16 +1941,17 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/static\/js\/easing-scrolling.js" : {
+    "\/static\/css\/sass\/vendor\/bootstrap\/_progress-bars.scss" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
+      "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/js\/easing-scrolling.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/static\/js\/easing-scrolling-ck.js",
-      "fileType" : 64
+      "inputAbbreviatedPath" : "\/static\/css\/sass\/vendor\/bootstrap\/_progress-bars.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/static\/css\/_progress-bars.css",
+      "fileType" : 4,
+      "debugStyle" : 0
     },
     "\/static\/css\/sass\/vendor\/bootstrap\/_navbar.scss" : {
       "ignoreWasSetByUser" : 0,
@@ -1975,6 +1976,17 @@
       "outputAbbreviatedPath" : "\/mike\/js\/bootstrap-require-ck.js",
       "fileType" : 64
     },
+    "\/static\/js\/easing-scrolling.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/js\/easing-scrolling.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/static\/js\/easing-scrolling-ck.js",
+      "fileType" : 64
+    },
     "\/mike\/images\/press-huffington.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -1985,18 +1997,6 @@
       "outputAbbreviatedPath" : "\/mike\/images\/press-huffington.png",
       "initialSize" : 18550,
       "fileType" : 8192
-    },
-    "\/static\/css\/sass\/vendor\/bootstrap\/_progress-bars.scss" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/css\/sass\/vendor\/bootstrap\/_progress-bars.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/static\/css\/_progress-bars.css",
-      "fileType" : 4,
-      "debugStyle" : 0
     },
     "\/static\/css\/sass\/vendor\/bootstrap\/_modals.scss" : {
       "ignoreWasSetByUser" : 0,
@@ -2031,17 +2031,16 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/static\/css\/sass\/vendor\/bootstrap\/_close.scss" : {
+    "\/mike\/images\/press-fastco.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
-      "hidden" : 0,
+      "hidden" : 1,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/css\/sass\/vendor\/bootstrap\/_close.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/static\/css\/_close.css",
-      "fileType" : 4,
-      "debugStyle" : 0
+      "inputAbbreviatedPath" : "\/mike\/images\/press-fastco.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/mike\/images\/press-fastco.png",
+      "initialSize" : 28986,
+      "fileType" : 8192
     },
     "\/mike\/images\/room-bg.jpg" : {
       "ignoreWasSetByUser" : 0,
@@ -2054,16 +2053,14 @@
       "initialSize" : 341625,
       "fileType" : 4096
     },
-    "\/mike\/images\/press-fastco.png" : {
+    "\/static\/css\/sections\/animations.css" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 1,
+      "ignore" : 0,
+      "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/mike\/images\/press-fastco.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/mike\/images\/press-fastco.png",
-      "initialSize" : 28986,
-      "fileType" : 8192
+      "inputAbbreviatedPath" : "\/static\/css\/sections\/animations.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
     },
     "\/static\/css\/bootstrap-theme.min.css" : {
       "ignoreWasSetByUser" : 0,
@@ -2074,14 +2071,17 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
     },
-    "\/static\/css\/sections\/animations.css" : {
+    "\/static\/css\/sass\/vendor\/bootstrap\/_close.scss" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
+      "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/css\/sections\/animations.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
+      "inputAbbreviatedPath" : "\/static\/css\/sass\/vendor\/bootstrap\/_close.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/static\/css\/_close.css",
+      "fileType" : 4,
+      "debugStyle" : 0
     },
     "\/static\/css\/sass\/vendor\/bootstrap\/_normalize.scss" : {
       "ignoreWasSetByUser" : 0,

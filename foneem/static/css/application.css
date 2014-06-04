@@ -3424,7 +3424,7 @@ html.recording-studio section#recording-studio {
         -webkit-box-shadow: 0px 0px 8px #2b9ceb inset, 0px 0px 8px #2b9ceb;
         -moz-box-shadow: 0px 0px 8px #2b9ceb inset, 0px 0px 8px #2b9ceb;
         z-index: 2; }
-  html.recording-studio section#recording-studio .sentence {
+  html.recording-studio section#recording-studio .hvb_sentence {
     width: 560px;
     height: 175px;
     position: absolute;
@@ -3432,7 +3432,7 @@ html.recording-studio section#recording-studio {
     left: 50%;
     margin-left: -280px;
     background-color: #f2fdff; }
-  html.recording-studio section#recording-studio .volume {
+  html.recording-studio section#recording-studio .hvb_volume {
     width: 100px;
     height: 175px;
     background-color: #333;
@@ -3440,12 +3440,12 @@ html.recording-studio section#recording-studio {
     bottom: 10px;
     left: 50%;
     margin-left: -380px; }
-    html.recording-studio section#recording-studio .volume #volume-1, html.recording-studio section#recording-studio .volume #volume-2, html.recording-studio section#recording-studio .volume #volume-3, html.recording-studio section#recording-studio .volume #volume-4, html.recording-studio section#recording-studio .volume #volume-5, html.recording-studio section#recording-studio .volume #volume-6, html.recording-studio section#recording-studio .volume #volume-7 {
+    html.recording-studio section#recording-studio .hvb_volume #hvb_volume1, html.recording-studio section#recording-studio .hvb_volume #hvb_volume2, html.recording-studio section#recording-studio .hvb_volume #hvb_volume3, html.recording-studio section#recording-studio .hvb_volume #hvb_volume4, html.recording-studio section#recording-studio .hvb_volume #hvb_volume5, html.recording-studio section#recording-studio .hvb_volume #hvb_volume6, html.recording-studio section#recording-studio .hvb_volume #hvb_volume7 {
       position: absolute;
       width: 80px;
       height: 25px;
       left: 10px; }
-  html.recording-studio section#recording-studio .pitch {
+  html.recording-studio section#recording-studio .hvb_pitch {
     width: 100px;
     height: 175px;
     background-color: #333;
@@ -3453,12 +3453,12 @@ html.recording-studio section#recording-studio {
     bottom: 10px;
     right: 50%;
     margin-right: -380px; }
-    html.recording-studio section#recording-studio .pitch #pitch-1, html.recording-studio section#recording-studio .pitch #pitch-2, html.recording-studio section#recording-studio .pitch #pitch-3, html.recording-studio section#recording-studio .pitch #pitch-4, html.recording-studio section#recording-studio .pitch #pitch-5, html.recording-studio section#recording-studio .pitch #pitch-6, html.recording-studio section#recording-studio .pitch #pitch-7 {
+    html.recording-studio section#recording-studio .hvb_pitch #hvb_pitch1, html.recording-studio section#recording-studio .hvb_pitch #hvb_pitch2, html.recording-studio section#recording-studio .hvb_pitch #hvb_pitch3, html.recording-studio section#recording-studio .hvb_pitch #hvb_pitch4, html.recording-studio section#recording-studio .hvb_pitch #hvb_pitch5, html.recording-studio section#recording-studio .hvb_pitch #hvb_pitch6, html.recording-studio section#recording-studio .hvb_pitch #hvb_pitch7 {
       position: absolute;
       width: 80px;
       height: 25px;
       left: 10px; }
-  html.recording-studio section#recording-studio .record {
+  html.recording-studio section#recording-studio .hvb_record {
     width: 100px;
     height: 87.5px;
     background-color: red;
@@ -3467,7 +3467,7 @@ html.recording-studio section#recording-studio {
     left: 50%;
     margin-left: -480px;
     z-index: 2; }
-  html.recording-studio section#recording-studio .stop {
+  html.recording-studio section#recording-studio .hvb_stop {
     width: 100px;
     height: 87.5px;
     background-color: brown;
@@ -3476,7 +3476,7 @@ html.recording-studio section#recording-studio {
     left: 50%;
     margin-left: -480px;
     z-index: -1; }
-  html.recording-studio section#recording-studio #play-sentence {
+  html.recording-studio section#recording-studio #hvb_playsentence {
     width: 100px;
     height: 87.5px;
     background-color: green;
@@ -3484,7 +3484,7 @@ html.recording-studio section#recording-studio {
     bottom: 10px;
     left: 50%;
     margin-left: -480px; }
-  html.recording-studio section#recording-studio #next-sentence {
+  html.recording-studio section#recording-studio #hvb_nextsentence {
     width: 100px;
     height: 87.5px;
     background-color: brown;
@@ -3492,7 +3492,7 @@ html.recording-studio section#recording-studio {
     bottom: 10px;
     right: 50%;
     margin-right: -480px; }
-  html.recording-studio section#recording-studio #settings {
+  html.recording-studio section#recording-studio #hvb_settings {
     width: 100px;
     height: 87.5px;
     background-color: grey;

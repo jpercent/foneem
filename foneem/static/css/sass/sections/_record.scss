@@ -187,7 +187,7 @@ section#recording-studio {
 			}
 		}
 	}
-	.sentence {
+	.hvb_sentence {
 		width: 560px;
 		height: 175px;
 		position: absolute;
@@ -196,7 +196,7 @@ section#recording-studio {
 		margin-left: -280px;
 		background-color: #f2fdff;
 	}
-	.volume {
+	.hvb_volume {
 		width: 100px;
 		height: 175px;
 		background-color: #333;
@@ -204,14 +204,14 @@ section#recording-studio {
 		bottom: 10px;
 		left: 50%;
 		margin-left:-380px;
-		#volume-1, #volume-2, #volume-3, #volume-4, #volume-5, #volume-6, #volume-7 {
+		#hvb_volume1, #hvb_volume2, #hvb_volume3, #hvb_volume4, #hvb_volume5, #hvb_volume6, #hvb_volume7 {
 			position: absolute;
 			width: 80px;
 			height: 25px;
 			left: 10px;
 		}
 	}
-	.pitch {
+	.hvb_pitch {
 		width: 100px;
 		height: 175px;
 		background-color: #333;
@@ -219,14 +219,14 @@ section#recording-studio {
 		bottom: 10px;
 		right: 50%;
 		margin-right:-380px;
-		#pitch-1, #pitch-2, #pitch-3, #pitch-4, #pitch-5, #pitch-6, #pitch-7 {
+		#hvb_pitch1, #hvb_pitch2, #hvb_pitch3, #hvb_pitch4, #hvb_pitch5, #hvb_pitch6, #hvb_pitch7 {
 			position: absolute;
 			width: 80px;
 			height: 25px;
 			left: 10px;
 		}
 	}
-	.record {
+	.hvb_record {
 		width: 100px;
 		height: 87.5px;
 		background-color: red;
@@ -236,7 +236,7 @@ section#recording-studio {
 		margin-left:-480px;
 		z-index: 2;
 	}
-	.stop {
+	.hvb_stop {
 		width: 100px;
 		height: 87.5px;
 		background-color: brown;
@@ -246,7 +246,7 @@ section#recording-studio {
 		margin-left:-480px;
 		z-index: -1;
 	}
-	#play-sentence {
+	#hvb_playsentence {
 		width: 100px;
 		height: 87.5px;
 		background-color: green;
@@ -255,7 +255,7 @@ section#recording-studio {
 		left: 50%;
 		margin-left:-480px;
 	}
-	#next-sentence {
+	#hvb_nextsentence {
 		width: 100px;
 		height: 87.5px;
 		background-color: brown;
@@ -264,7 +264,7 @@ section#recording-studio {
 		right: 50%;
 		margin-right:-480px;
 	}
-	#settings {
+	#hvb_settings {
 		width: 100px;
 		height: 87.5px;
 		background-color: grey;
