@@ -23,28 +23,29 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 from flask import request, render_template, session, redirect
-from foneem import app, S3
+from foneem import app, S3, parse_config, hvb_connect_db, hvb_close_db
 import xml.etree.ElementTree as ET
 
 @app.route('/calibrate')
 def calibrate():
+    if not ('email' in session):
+        return redirect("/", code=302)
+        
     return render_template('calibrate.html')
 
 @app.route('/record')
 def record():
-    return render_template('record.html')
-
-@app.route('/record-prototype')
-def record_prototype():
     try:
         if not ('email' in session):
-            return redirect('/', code=302)
+           return redirect('/', code=302)
         
         conf = parse_config()
-        conn, cursor = connect_db(conf['db'])
+        conn, cursor = hvb_connect_db(conf['db'])
         cursor.execute("""select id, sentence from sentences;""")
+        print("RECORD - ")
         next_hvb = dict(cursor.fetchmany(size=100))
-        return render_template('audio.html', next_hvb=next_hvb)
+        hvb_close_db(conn, cursor)
+        return render_template('record.html', next_hvb=next_hvb)
     except Exception as e:
         print("Exception = ", dir(e), e, e.__doc__)
 
@@ -70,15 +71,14 @@ def upload_wav_to_s3(conf, key):
 
 @app.route('/upload/<filename>', methods=['POST'])
 def upload(filename):
-    if 'email' in session:
-        import random
-        conf = parse_config()        
-        _file = request.files['test.wav']
-        #filename = session['email']+str(random.randint(0, 1048576))+'test.wav'
-        #XXX - this was rushed for a demo. no need to save the file then reread it back in
-        filename = session['email']+'-'+filename
-        _file.save(filename)
-        upload_wav_to_s3(conf, filename)
-        return  'OK'
-    else:
+    if not ('email' in session):
         return redirect("/", code=302)
+
+    import random
+    conf = parse_config()        
+    _file = request.files['test.wav']
+    #XXX - this was rushed for a demo. no need to save the file then reread it back in
+    filename = session['email']+'-'+filename
+    _file.save(filename)
+    upload_wav_to_s3(conf, filename)
+    return  'OK'
