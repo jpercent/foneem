@@ -33,6 +33,5 @@ var loginChecker = {};
 
 $( document ).ready(function() {
     loginChecker.bindClickEvents();
-    console.log("initialization completed");
 });
 
