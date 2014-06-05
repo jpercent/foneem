@@ -88,8 +88,6 @@ def password_reset():
 
 @app.route('/')
 def index():
-    if 'email' in session:
-        return 'Logged in as %s <a href="logout">Sign out</a>' % escape(session['email'])
     return render_template('index.html')
 
 @app.route('/register', methods=['GET'])
@@ -109,8 +107,9 @@ def registration_post():
     form_data['password'] = hashlib.sha512(str(form_data['password']) + str(salt)).hexdigest()
     form_data['compendium'] = salt
     cursor.execute('''insert into users (email, firstname, lastname, dob, gender, stateprovince, country, password, compendium) values (%(email)s, %(firstname)s, %(lastname)s, %(dob)s, %(gender)s, %(stateprovince)s, %(country)s, %(password)s, %(compendium)s);''', form_data)
-    hvb_close_db(conn, cursor) 
-    return render_template('index.html')
+    hvb_close_db(conn, cursor)
+    session['email'] = form_data['email']
+    return redirect(url_for('record'))
 
 @app.route('/login_post', methods=['POST'])
 def login_post():
@@ -136,14 +135,16 @@ def login_post():
         
     session['email'] = email
     hvb_close_db(conn, cursor)    
-    return redirect(url_for('index'))
-
-#@app.route('/login')
-#def login():
-#    return render_template('login.html')
+    return redirect(url_for('record'))
 
 @app.route('/logout')
 def logout():
     session.pop('email', None)
     return render_template('index.html')
 
+@app.route('/is_teh_user_logged_in')
+def logged_in():
+    if 'email' in session:
+        return '{"status": true}'
+    else:
+        return '{"status": false}'
