@@ -3,10 +3,6 @@ var hvbSentenceManager = {};
 (function(exports) {
 	var keyValueArray = [];
 	var kVACursor = 0;
-	
-    exports.disableSentenceTextArea = function() {
-        $('#sentence').attr("disabled", true);        
-    }
     
     exports.createSentenceCursor = function() {
 //        var count = 0;
@@ -37,11 +33,12 @@ var hvbSentenceManager = {};
   ///      var next_key = sessionStorage.key(cursor);
      //   var next_sentence = sessionStorage.getItem(next_key);
 //        sessionStorage.setItem('hvb_cursor', parseInt(next_key, 10) + 1);
-        $('#sentence').text(nextKeyValue[1]);
+        //$('#hvb_sentence').text(nextKeyValue[1]);
+		$('.hvb_sentence').html(nextKeyValue[1]);
     };
 	
     exports.getSentence = function() {
-        return $('#sentence').text();
+        return $('.hvb_sentence').html();
     };
 	
 }(hvbSentenceManager));
@@ -54,23 +51,23 @@ var recorder = {};
         // creates the audio context
         audioContext = window.AudioContext || window.webkitAudioContext;
         context = new audioContext();
-
+		
         // creates a gain node
         volume = context.createGain();
-
+		
         // creates an audio node from the microphone incoming stream
         audioInput = context.createMediaStreamSource(e);
-
+		
         // connect the stream to the gain node
         audioInput.connect(volume);
-
+		
         /* From the spec: This value controls how frequently the audioprocess event is 
         dispatched and how many sample-frames need to be processed each call. 
         Lower values for buffer size will result in a lower (better) latency. 
         Higher values will be necessary to avoid audio breakup and glitches */
         var bufferSize = 2048;
         recorder = context.createJavaScriptNode(bufferSize, 2, 2);
-
+		
         recorder.onaudioprocess = function(e){
 	        if (!recording) return;
             var left = e.inputBuffer.getChannelData (0);
@@ -80,7 +77,6 @@ var recorder = {};
             rightchannel.push (new Float32Array (right));
             recordingLength += bufferSize;
         };
-
         // we connect the recorder
         volume.connect(recorder);
         recorder.connect(context.destination); 
@@ -161,6 +157,7 @@ var recorder = {};
         var blob = new Blob ( [ view ], { type : 'audio/wav' } );
 		currentBlob = blob;
         // let's save it locally
+		/*
         var url = (window.URL || window.webkitURL).createObjectURL(blob);
 	    var li = window.document.createElement('li');
 		var au = window.document.createElement('audio');
@@ -168,11 +165,12 @@ var recorder = {};
 	    au.controls = true;
 	    au.src = url;
         hf.href = url;
-        hf.download = $('#sentence').text()+'-'+new Date().toISOString() + '.wav';
+        hf.download = $('#hvb_sentence').html()+'-'+new Date().toISOString() + '.wav';
         hf.innerHTML = hf.download;
         li.appendChild(au);
         li.appendChild(hf);
         recordingslist.appendChild(li);
+        */
         /*var link = window.document.createElement('a');
         link.href = url;
         link.download = 'jpercent-output.wav';
@@ -185,7 +183,7 @@ var recorder = {};
 	exports.upload = function(e) {
 		if(currentBlob == null) {
 			console.log("Blob does not exist");
-			return
+			return;
 		}
 		var blob = currentBlob;
 		currentBlob = null;
@@ -200,7 +198,7 @@ var recorder = {};
 			};
 			var fd=new FormData();
 			fd.append("test.wav",blob);
-			filename = $('#sentence').text()+'-'+new Date().toISOString() + '.wav'
+			filename = $('.hvb_sentence').html()+'-'+new Date().toISOString() + '.wav'
 			xhr.open("POST","upload/"+filename,true);
 			xhr.send(fd);
 		}
@@ -210,9 +208,8 @@ var recorder = {};
     exports.interleave = function(leftChannel, rightChannel) {
     	var length = leftChannel.length + rightChannel.length;
     	var result = new Float32Array(length);
-
     	var inputIndex = 0;
-
+		
     	for (var index = 0; index < length; ){
     	    result[index++] = leftChannel[inputIndex];
     	    result[index++] = rightChannel[inputIndex];
@@ -239,48 +236,42 @@ var recorder = {};
         	view.setUint8(offset + i, string.charCodeAt(i));
         }
     };
-
-    
 }(recorder));
 
 
 var hvbButtonManager = {};
 (function(exports) {
     exports.bindClickEvents = function() {     
-        $('#hvb_play').click(function(e) {
+        $('#hvb_playsentence').click(function(e) {
             var sentence = hvbSentenceManager.getSentence();
-            console.log("the sentence = ", sentence)
+//            console.log("the sentence = ", sentence)
             var msg = new SpeechSynthesisUtterance(sentence.trim());
             window.speechSynthesis.speak(msg);
         });
         
-        $('#hvb_record').click(function(e) {
-            console.log("record called ");
-			recorder.startRecording();
+        $('#hvb_recordsentence').click(function(e) {
+			var class_value = $(this).attr('class');
+			if (class_value == 'hvb_record') {
+				$(this).attr('class', 'hvb_stop');
+				$(this).html('Stop');
+				recorder.startRecording();				
+			} else {
+				$(this).attr('class', 'hvb_record');
+				$(this).html('Record');
+				recorder.stopRecording();
+			}
         });
         
-        $('#hvb_stop').click(function(e) {
-            console.log("stop called");
-			recorder.stopRecording();
-			console.log("after stop recording called");
-        });
-        
-        $('#hvb_submit').click(function(e) {
-            console.log("submit called ");
+        $('#hvb_nextsentence').click(function(e) {
 			recorder.upload();
 			hvbSentenceManager.setNextSentence();
         });
-        
-        
     };
 }(hvbButtonManager));
 
 $( document ).ready(function() {
-	alert("Binding functions");
-    hvbSentenceManager.disableSentenceTextArea();
     hvbSentenceManager.createSentenceCursor();
     hvbSentenceManager.setNextSentence();
     hvbButtonManager.bindClickEvents();
-    console.log("initialization completed");
 });
 
