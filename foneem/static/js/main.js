@@ -55,16 +55,11 @@ function doneEncoding( blob ) {
 function toggleRecording( e ) {
     if (e.classList.contains("recording")) {
         // stop recording
-        console.log("stop recording = ", audioRecorder);
-        console.log("stop recording audioRecorder.getBuffers = ", audioRecorder.getBuffers);
-        console.log("stop recording gotBuffers = ", gotBuffers);                        
         audioRecorder.stop();
         e.classList.remove("recording");
         audioRecorder.getBuffers( gotBuffers );
     } else {
         // start recording
-        alert("toggle recording = ", audioRecorder);
-        console.log("toggle recording = ", audioRecorder);
         if (!audioRecorder)
             return;
         e.classList.add("recording");
@@ -141,7 +136,6 @@ function toggleMono() {
 }
 
 function gotStream(stream) {
-    alert("GOT STREAM CALLED ");
     inputPoint = audioContext.createGain();
 
     // Create an AudioNode from the stream.
@@ -156,7 +150,6 @@ function gotStream(stream) {
     inputPoint.connect( analyserNode );
 
     audioRecorder = new Recorder( inputPoint );
-    console.log("audio recorder = ", audioRecorder, " nothing??");
     zeroGain = audioContext.createGain();
     zeroGain.gain.value = 0.0;
     inputPoint.connect( zeroGain );
@@ -165,18 +158,17 @@ function gotStream(stream) {
 }
 
 function initAudio() {
-    alert("INIT AUDIO");
-        if (!navigator.getUserMedia)
-            navigator.getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-        if (!navigator.cancelAnimationFrame)
-            navigator.cancelAnimationFrame = navigator.webkitCancelAnimationFrame || navigator.mozCancelAnimationFrame;
-        if (!navigator.requestAnimationFrame)
-            navigator.requestAnimationFrame = navigator.webkitRequestAnimationFrame || navigator.mozRequestAnimationFrame;
+    if (!navigator.getUserMedia)
+        navigator.getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+    if (!navigator.cancelAnimationFrame)
+        navigator.cancelAnimationFrame = navigator.webkitCancelAnimationFrame || navigator.mozCancelAnimationFrame;
+    if (!navigator.requestAnimationFrame)
+        navigator.requestAnimationFrame = navigator.webkitRequestAnimationFrame || navigator.mozRequestAnimationFrame;
 
     navigator.getUserMedia({audio:true}, gotStream, function(e) {
-            alert('Error getting audio');
-            console.log(e);
-        });
+        alert('Error getting audio');
+        console.log(e);
+    });
 }
 
 window.addEventListener('load', initAudio );
