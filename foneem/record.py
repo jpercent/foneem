@@ -33,6 +33,10 @@ def calibrate():
         
     return render_template('calibrate.html')
 
+@app.route('/record1')
+def record1():
+    return render_template('audio-recorder.html')
+
 @app.route('/record')
 def record():
     try:
