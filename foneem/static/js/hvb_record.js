@@ -44,26 +44,20 @@ var hvbSentenceManager = {};
 
 var recorder = {};
 (function(exports) {
-	exports.init = function(e) {
-        // creates the audio context
+	exports.init = function(media_stream) {
         audioContext = window.AudioContext || window.webkitAudioContext;
         context = new audioContext();
-		
-        // creates a gain node
-        volume = context.createGain();
-		
-        // creates an audio node from the microphone incoming stream
-        audioInput = context.createMediaStreamSource(e);
-		
-        // connect the stream to the gain node
-        audioInput.connect(volume);
+        zeroGain = context.createGain();
+		zeroGain.gain.value = 0.0;
+        audioInput = context.createMediaStreamSource(media_stream);
+        audioInput.connect(zeroGain);
 		
         /* From the spec: This value controls how frequently the audioprocess event is 
         dispatched and how many sample-frames need to be processed each call. 
         Lower values for buffer size will result in a lower (better) latency. 
         Higher values will be necessary to avoid audio breakup and glitches */
         var bufferSize = 2048;
-        recorder = context.createJavaScriptNode(bufferSize, 2, 2);
+        recorder = context.createScriptProcessor(bufferSize, 2, 2);
 		
         recorder.onaudioprocess = function(e){
 	        if (!recording) return;
@@ -75,35 +69,10 @@ var recorder = {};
             recordingLength += bufferSize;
         };
         // we connect the recorder
-        volume.connect(recorder);
+        zeroGain.connect(recorder);
         recorder.connect(context.destination); 
     };   
 
-    var leftchannel = [];
-    var rightchannel = [];
-    var recorder = null;
-    var recording = false;
-    var recordingLength = 0;
-    var volume = null;
-    var audioInput = null;
-    var sampleRate = 44100;
-    var audioContext = null;
-    var context = null;
-    var currentBlob = null;
-	
-    if (!navigator.getUserMedia) {
-        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||
-        navigator.mozGetUserMedia || navigator.msGetUserMedia;
-	}
-	
-    if (navigator.getUserMedia){
-        navigator.getUserMedia({audio:true}, exports.init, function(e) {
-        	alert('Error capturing audio.');
-        });
-    } else {
-        alert('getUserMedia not supported in this browser.');
-    }
-		
     exports.startRecording = function() {      
 	    recording = true;
         // reset the buffers for the new recording
@@ -149,7 +118,7 @@ var recorder = {};
             view.setInt16(index, interleaved[i] * (0x7FFF * volume), true);
             index += 2;
         }
-//        console.log("view stuff byteLenght = ",view.byteLength);
+        console.log("view stuff byteLenght = ",view.byteLength);
 		
         // our final binary blob
         var blob = new Blob ( [ view ], { type : 'audio/wav' } );
@@ -212,6 +181,31 @@ var recorder = {};
         	view.setUint8(offset + i, string.charCodeAt(i));
         }
     };
+	
+	var leftchannel = [];
+    var rightchannel = [];
+    var recorder = null;
+    var recording = false;
+    var recordingLength = 0;
+    var volume = null;
+    var audioInput = null;
+    var sampleRate = 44100;
+    var audioContext = null;
+    var context = null;
+    var currentBlob = null;
+	
+    if (!navigator.getUserMedia) {
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||
+        navigator.mozGetUserMedia || navigator.msGetUserMedia;
+	}
+	
+    if (navigator.getUserMedia){
+        navigator.getUserMedia({audio:true}, exports.init, function(e) {
+        	alert('Error capturing audio.');
+        });
+    } else {
+        alert('getUserMedia not supported in this browser.');
+    }
 }(recorder));
 
 
