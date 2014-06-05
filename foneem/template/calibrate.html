@@ -14,7 +14,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="static/css/application.css" rel="stylesheet" type="text/css">
-    <link href="static/css/sections/animations.css" rel="stylesheet" type="text/css">
+    <link href="static/css/animations.css" rel="stylesheet" type="text/css">
     
     <!-- Mailchimp CSS -->
     <link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
@@ -40,7 +40,7 @@
 }(document, 'script', 'facebook-jssdk'));</script>
 
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-        <div class="container">
+        <div class="container-fluid">
             <div class="navbar-header page-scroll">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
@@ -76,7 +76,7 @@
         <!-- /.container -->
     </nav>
 
-    <section id="record" class="container content-section text-center">
+    <section id="record-studio" class="container content-section text-center">
         <div class="back-wall">
             <div class="wall-row">
                 <div class="wall-cell-container">
@@ -467,6 +467,7 @@
         <a href="#" class="btn btn-default btn-record btn-calibrate"><i class="fa fa-microphone fa-fw"></i> <span>Calibrate Mic</span></a>
     </section>
 
+
     <!-- Core JavaScript Files -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
@@ -475,7 +476,13 @@
     <script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
     
     <!-- Custom JavaScript Files -->
+    <script src="static/js/calibrate.js"></script>
     <script src="static/js/easing-scrolling.js"></script>
+    <script src="static/js/jquery.responsiveVideo.js"></script>
+    
+    <script>
+    $( 'body' ).responsiveVideo();
+    </script>
     <script>
   $(function() {
     $( ".modal" ).draggable();

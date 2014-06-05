@@ -57,7 +57,7 @@
                         <a href="#page-top"></a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#" data-toggle="modal" data-target="#record-modal">Record</a>
+                        <a href="#" id="hvb-record-link" data-toggle="modal" data-target="#record-modal">Record</a>
                     </li>
                     <li class="page-scroll">
                         <a href="#" data-toggle="modal" data-target="#donate-modal">Donate</a>
@@ -88,7 +88,7 @@
 							<img src="static/images/hvb-logo.svg" alt="The Human Voicebank Initiative" id="logo-splash">
 						</h1>
                         <a href="#about" class="btn btn-default btn-learn">Learn More</a>
-                        <a href="#" data-toggle="modal" data-target="#record-modal" class="btn btn-default btn-record"><i class="fa fa-microphone fa-fw"></i> <span>Record</span></a>
+                        <a href="#" id="hvb-record-button" data-toggle="modal" data-target="#record-modal" class="btn btn-default btn-record"><i class="fa fa-microphone fa-fw"></i> <span>Record</span></a>
                     </div>
                 </div>
             </div>
@@ -112,7 +112,7 @@
                 </div>
                 <div class="ways-to-help">
 	                <div class="col-inside">
-	                	<a href="#" data-toggle="modal" data-target="#record-modal" class="record-color"><img src="static/images/record.svg" alt="Record" id="record-image">
+	                	<a href="#" id="record-ways-to-help" data-toggle="modal" data-target="#record-modal" class="record-color"><img src="static/images/record.svg" alt="Record" id="record-image">
 	                	<h3>Record</h3></a>
 	                	<p>Give the gift of voice today. All you need is a microphone and a quiet room.</p>
 	                </div>
@@ -272,6 +272,7 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     <script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
     
+	<script src="static/js/check_login.js"></script>
     <script src="static/js/jquery.responsiveVideo.js"></script>
     
     <script>
