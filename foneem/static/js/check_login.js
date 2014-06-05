@@ -6,9 +6,7 @@ var loginChecker = {};
 			async: false,
 			dataType: 'json',
 			success: function(data) {
-				console.log("data = ", data);
 				if (data.status == true) {
-					alert('true calse');
 					if (e.stopPropagation) {							
 						e.stopPropagation();
 					} else {
@@ -17,7 +15,6 @@ var loginChecker = {};
 					window.location = "record";							
 					return false;
 				} else {
-					alert("false");
 					return true;					
 				}
 			}
