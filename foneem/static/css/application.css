@@ -3431,7 +3431,8 @@ html.recording-studio section#recording-studio {
     bottom: 10px;
     left: 50%;
     margin-left: -280px;
-    background-color: #f2fdff; }
+    background-color: #f2fdff;
+    color: #000000; }
   html.recording-studio section#recording-studio .hvb_volume {
     width: 100px;
     height: 175px;
@@ -3477,7 +3478,7 @@ html.recording-studio section#recording-studio {
     bottom: 97.5px;
     left: 50%;
     margin-left: -480px;
-    z-index: -1; }
+    z-index: 2; }
     html.recording-studio section#recording-studio .hvb_stop:hover {
       background-color: #d4796a; }
   html.recording-studio section#recording-studio #hvb_playsentence {
