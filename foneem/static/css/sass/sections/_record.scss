@@ -119,6 +119,17 @@ section#recording-studio {
 					-moz-box-shadow: 0px 0px 8px #f18ff2 inset, 0px 0px 8px #f18ff2;
 				z-index: 2;
 			}
+			.purplepink {
+				border-color: lighten(#5161a5, 15%) lighten(#404e85, 15%) lighten(#3c4879, 15%) lighten(#4e5ea1, 15%);
+				border-style: solid;
+				border-width: 31px;
+				width: 0;
+				height: 0;
+				box-shadow: 0px 0px 8px lighten(#5161a5, 15%) inset, 0px 0px 8px lighten(#5161a5, 15%);
+					-webkit-box-shadow: 0px 0px 8px lighten(#5161a5, 15%) inset, 0px 0px 8px lighten(#5161a5, 15%);
+					-moz-box-shadow: 0px 0px 8px lighten(#5161a5, 15%) inset, 0px 0px 8px lighten(#5161a5, 15%);
+				z-index: 2;
+			}
 			.purple {
 				border-color: #5161a5 #404e85 #3c4879 #4e5ea1;
 				border-style: solid;
@@ -163,6 +174,17 @@ section#recording-studio {
 					-moz-box-shadow: 0px 0px 8px #2dfe60 inset, 0px 0px 8px #2dfe60;
 					z-index: 2;
 			}
+			.darkblue { 
+				border-color: darken(#2b9ceb, 15%) darken(#2091e0, 15%) darken(#2c89cb, 15%) darken(#3d9de0, 15%);
+				border-style: solid;
+				border-width: 31px;
+				width: 0;
+				height: 0;
+				box-shadow: 0px 0px 8px darken(#2b9ceb, 15%) inset, 0px 0px 8px darken(#2b9ceb, 15%)darken(#2b9ceb, 15%);
+					-webkit-box-shadow: 0px 0px 8px darken(#2b9ceb, 15%) inset, 0px 0px 8px darken(#2b9ceb, 15%);
+					-moz-box-shadow: 0px 0px 8px darken(#2b9ceb, 15%) inset, 0px 0px 8px darken(#2b9ceb, 15%);
+					z-index: 2;
+			}
 			.lightblue {
 				border-color: #20f0f0 #1ff9f9 #21fefe #28f8f8;
 				border-style: solid;
@@ -195,6 +217,9 @@ section#recording-studio {
 		left: 50%;
 		margin-left: -280px;
 		background-color: #f2fdff;
+		color: #000;
+		font-size: 30px;
+		line-height: 175px;
 	}
 	.hvb_volume {
 		width: 100px;
