@@ -259,7 +259,6 @@ section#recording-studio {
 		bottom: 97.5px;
 		left: 50%;
 		margin-left:-480px;
-		z-index: 2;
 		&:hover {
 			background-color: lighten( $red-damask, 10% );
 		}
@@ -272,7 +271,6 @@ section#recording-studio {
 		bottom: 97.5px;
 		left: 50%;
 		margin-left:-480px;
-		z-index: -1;
 		&:hover {
 			background-color: lighten( $red-damask-dark, 10% );
 		}

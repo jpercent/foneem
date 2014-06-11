@@ -3488,8 +3488,7 @@ html.recording-studio section#recording-studio {
     position: absolute;
     bottom: 97.5px;
     left: 50%;
-    margin-left: -480px;
-    z-index: 2; }
+    margin-left: -480px; }
     html.recording-studio section#recording-studio .hvb_record:hover {
       background-color: #e28272; }
   html.recording-studio section#recording-studio .hvb_stop {
@@ -3499,8 +3498,7 @@ html.recording-studio section#recording-studio {
     position: absolute;
     bottom: 97.5px;
     left: 50%;
-    margin-left: -480px;
-    z-index: -1; }
+    margin-left: -480px; }
     html.recording-studio section#recording-studio .hvb_stop:hover {
       background-color: #d4796a; }
   html.recording-studio section#recording-studio #hvb_playsentence {
