@@ -32,59 +32,90 @@ import subprocess
 import datetime
 import hashlib
 import uuid
+from itsdangerous import TimestampSigner
+import smtplib
+from email.mime.text import MIMEText
 
-#
-#from itsdangerous import TimestampSigner
-#import smtplib
-#from email.mime.text import MIMEText
-#
-#def send_mail(subject, body, from_email, to_email):
-#    msg = MIMEText(body)
-#    msg['Subject'] = subject
-#    msg['From'] = from_email
-#    msg['To'] = to_email
-#
-#    s = smtplib.SMTP('localhost')
-#    s.sendmail(me, recipient, msg.as_string())
-#    s.quit()
-#
-#def reset_password(username, user_email):
-#    s = TimestampSigner(app.secret_key)
-#    string = s.sign(username)    
-#    send_mail('HumanVoiceBankInitiative: Password Reset', 'admin@hvb.net', user_email)
-#    searchword = request.args.get('token', '')
-#    s.unsign(string, max_age=5)
-#
-###############################################
-#
-#> I'm just looking for a standard safe way to reset passwords.
-#
-#I use `itsdangerous` library for this kind of things.
-#
-#http://packages.python.org/itsdangerous/
-#
-#A token formed by the user name and an expiry time is signed with a
-#secret and a salt (specific for the password reset operation). This
-#token is sent to the user, in the form of an URL:
-#
-#http://localhost/profile/<username>/preset?token=<token>
-#
-#In the preset view I verify the token (given that the token encodes the
-#username, you can even leave it out of the URL).
-#
-#This way you do not have to store anything server side or in the
-#session, making it a very lean solution.
-#
-#Cheers,
-#-- 
-#Daniele
+def send_mail(subject, body, from_email, to_email):
+    print("subject", subject)
+    print("body", body)
+    print("from", from_email)
+    print("to", to_email)
+    msg = MIMEText(body)
+    msg['Subject'] = subject
+    msg['From'] = from_email
+    msg['To'] = to_email
 
-@app.route('/preset/<username>')
-def password_reset():
-    searchword = request.args.get('token', '')
+    s = smtplib.SMTP('localhost')
+    s.sendmail(to_email, from_email, msg.as_string())
+    s.quit()
+
+def reset_password(userid, user_email):
     s = TimestampSigner(app.secret_key)
-    string = s.sign('foo')
-    s.unsign(string, max_age=5)
+    userid = s.sign(userid)
+    token = s.sign(user_email)
+    body = "Hey, a password reset for this account was requested.  If you wish to continue, then please follow the link below:\n"+\
+           app.hvb_conf['domain']+'/reset/'+userid+'/token/'+token
+    subject = '[HumanVoiceBankInitiative] Password Reset for '+user_email
+    send_mail(subject, body, app.hvb_conf['admin_email'], user_email)
+
+@app.route('/initiate-reset/<email>')
+def initiate_reset(email):
+    conn, cursor = hvb_connect_db(app.hvb_conf['db'])
+    cursor.execute('''select id, email, compendium from users where email = %s; ''', [email])
+    user = cursor.fetchall()
+    if len(user) == 0:
+        print("hvb.initiate_reset: email not known")
+        return abort(400)
+
+    elif len(user) > 1:
+        print("hvb.login: ERROR: email associated with multiple accounts")
+
+    hvb_close_db(conn, cursor)
+
+    id = user[0][0]
+    email = user[0][1]
+    geo = user[0][2]
+    reset_password(id+geo, email)
+    return ''
+
+@app.route('/reset/<userid>/token/<email>')
+def authorize_password_reset(userid, email):
+    s = TimestampSigner(app.secret_key)
+    user_email = s.unsign(email)
+    conn, cursor = hvb_connect_db(app.hvb_conf['db'])
+    cursor.execute('''select id, compendium from users where email = %s; ''', [user_email])
+    user = cursor.fetchall()
+    if len(user) == 0:
+        print("hvb.password_reset: email not known")
+        return abort(400)
+
+    elif len(user) > 1:
+        print("hvb.login: ERROR: email associated with multiple accounts")
+
+    hvb_close_db(conn, cursor)
+
+    id = user[0][0]
+    compendium = user[0][1]
+    session['email'] = user_email
+    if id+compendium == s.unsign(userid):
+        redirect('password-reset.html', email=user_email)
+    else:
+        abort(400)
+
+@app.route('/password_post', methods=['POST'])
+def password_reset():
+    form_data = request.form.to_dict()
+    if not ('email' in session) or session['email'] != form_data['email']:
+        abort(400)
+
+    conn, cursor = hvb_connect_db(app.hvb_conf['db'])
+    salt = uuid.uuid4().hex
+    form_data['password'] = hashlib.sha512(str(form_data['password']) + str(salt)).hexdigest()
+    form_data['compendium'] = salt
+    cursor.execute('''update users set password=%(password)s,compendium=%s(compendium) where email=%(email)''', form_data)
+    hvb_close_db(conn, cursor)
+    return redirect(url_for('record'))
 
 @app.route('/')
 def index():
@@ -100,8 +131,9 @@ def pitch_demo():
 
 @app.route('/registration_post', methods=['POST'])
 def registration_post():
+    # XXX the insert below should fail if the email already exists, but we should note the failure and provide a message
+    #     to the user and redirect them to the login/password reset page.
     conn, cursor = hvb_connect_db(app.hvb_conf['db'])
-    request.form['password']
     form_data = request.form.to_dict()
     salt = uuid.uuid4().hex
     form_data['password'] = hashlib.sha512(str(form_data['password']) + str(salt)).hexdigest()
@@ -118,23 +150,23 @@ def login_post():
     password = request.form['password']
     cursor.execute('''select email, password, compendium from users where email = %s; ''', [email])
     user = cursor.fetchall()
-    
+
     if len(user) == 0:
         print("hvb.login: ERROR: email not known")
-        return render_template('login.html')
-        
+        return abort(400)
+
     elif len(user) > 1:
         print("hvb.login: ERROR: email associated with multiple accounts")
-        
+
     password = user[0][1]
     compendium = user[0][2]
     salted_password = hashlib.sha512(request.form['password'] + compendium).hexdigest()
     if password != salted_password:
         print("hvb.login: ERROR: password equality test failed")
         render_template('login.html')
-        
+
     session['email'] = email
-    hvb_close_db(conn, cursor)    
+    hvb_close_db(conn, cursor)
     return redirect(url_for('record'))
 
 @app.route('/logout')
