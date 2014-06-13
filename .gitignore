@@ -22,6 +22,7 @@ _testmain.go
 *.exe
 *.test
 
+foneem/.sass-cache
 foneem/conf.json
 
 *.pyc
