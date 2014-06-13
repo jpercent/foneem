@@ -76,7 +76,7 @@ def initiate_reset(email):
     id = user[0][0]
     email = user[0][1]
     geo = user[0][2]
-    reset_password(id+geo, email)
+    reset_password(str(id)+geo, email)
     return ''
 
 @app.route('/reset/<userid>/token/<email>')
