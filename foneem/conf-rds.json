@@ -1,7 +1,0 @@
-{
-
-    "csv" : "/Users/jamespercent/foneem/foneem/sql/sentences_VocaliD.csv",
-    "drop" : "sql/drop_ddl.sql",
-    "create": "sql/create_ddl.sql",
-    "vocalid": "sql/vocalid_forms_data.sql"
-}
