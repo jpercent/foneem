@@ -224,11 +224,13 @@ var hvbButtonManager = {};
 			if (class_value == 'hvb_record') {
 				$(this).attr('class', 'hvb_stop');
 				$(this).html('Stop');
-				recorder.startRecording();				
+				recorder.startRecording();
+				toggleRecording(e);				
 			} else {
 				$(this).attr('class', 'hvb_record');
 				$(this).html('Record');
 				recorder.stopRecording();
+				toggleRecording(e);
 			}
         });
         
@@ -239,7 +241,7 @@ var hvbButtonManager = {};
     };
 }(hvbButtonManager));
 
-$( document ).ready(function() {
+$(document).ready(function() {
     hvbSentenceManager.createSentenceCursor();
     hvbSentenceManager.setNextSentence();
     hvbButtonManager.bindClickEvents();
