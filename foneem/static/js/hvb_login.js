@@ -23,33 +23,32 @@ var loginChecker = {};
     };
 
     exports.intitiatePasswordReset = function(email) {
-	var url = '/initiate-reset/'+email;
-	$.ajax({ 
-	    url: url,
-	});			        				
+        var url = '/initiate-reset/'+email;
+        $.ajax({
+            url: url
+        });
     };
 
     exports.bindClickEvents = function() {
         $('#hvb-record-link').click(exports.bindLogin);
-	$('#hvb-record-button').click(exports.bindLogin);
-	$('#hvb-record-ways-to-help').click(exports.bindLogin);
+        $('#hvb-record-button').click(exports.bindLogin);
+        $('#hvb-record-ways-to-help').click(exports.bindLogin);
         $('#hvb-password-reset').click(function(e) {
             e.preventDefault();
-	    var email = $("#hvb_login_modal_email").val();
-	    sessionStorage.setItem('hvb_password_reset', 'true');
-	    exports.intitiatePasswordReset(email);
+            var email = $("#hvb_login_modal_email").val();
+            sessionStorage.setItem('hvb-password-reset', 'true');
+            exports.intitiatePasswordReset(email);
             $('#hvb-login-modal-index').hide();
             $('#hvb-reset-background').show();
         });
 
-	$("#hvb-login-close").click(function(e) {
-	  var password_reset_value = sessionStorage.getItem('hvb_password_reset');
-	  if(password_reset_value === 'true') {
-	      sessionStorage.setItem('hvb_password_reset', 'false');
-	      $('#hvb-login-modal-index').delay(500).fadeToggle(true);
-	  }
-          $('#hvb-reset-background').hide();
-	});
+        $("#hvb-login-close").click(function(e) {
+            if(sessionStorage.getItem('hvb-password-reset') === 'true') {
+                sessionStorage.setItem('hvb-password-reset', 'false');
+                $('#hvb-login-modal-index').delay(500).fadeToggle(true);
+            }
+            $('#hvb-reset-background').hide();
+        });
     };
 
 }(loginChecker));
