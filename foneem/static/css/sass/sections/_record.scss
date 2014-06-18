@@ -1,5 +1,11 @@
 // * Virtual Recording Studio * //
 
+canvas {
+	box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+}
+
 #hvb_volume1 {
 	background-color: #6b0000;
 	top: 0px;
@@ -60,10 +66,31 @@
 
 html.recording-studio {
 
-.container { padding: 0; }
-nav { 
-	.container { padding-right: 15px; padding-left: 15px; } 
+#tutorial-modal {
+	.modal-content { 
+		background-color: transparent;
+		padding-top: 10%;
+		@include box-shadow(none); 
+
+	}
+	.close { 
+		color: #fff;
+		font-size: 80px;
+		float: none;
+		position: absolute;
+		top: 10px;
+		right: 30px;
+		text-shadow: none; 
+		@include opacity(0.75);
+		@include transition(opacity, ease-in-out, 0.3s);
+		&:hover {
+			@include opacity(1);
+		} 
+	}
 }
+
+.container { padding: 0; }
+nav { .container { padding-right: 15px; padding-left: 15px; } }
 
 section#recording-studio {
 	display: table;
@@ -72,18 +99,17 @@ section#recording-studio {
 	padding: 100px 0 0;
 	text-align: center;
 	color: $white;
-	background: url('../images/room-bg.jpg') no-repeat fixed top center;
+	background: url('../images/room-bg-2.jpg') no-repeat fixed top center;
 	.back-wall {
 		position: absolute;
-		width: 960px;
-		height: 510px;
+		width: $dimensionNum*15;
+		height: $dimensionNum*10;
 		top: 74px;
 		left: 50%;
 		margin-left: -480px;
 		.wall-cell-container {
 			border: 1px solid #000;
-			width: 64px;
-			height: 64px;
+			@include dimensions(59.266666667px);
 			float: left;
 			.wall-cell {
 				border-color: #2b3036 #22252a #1f2326 #282d32;
@@ -339,5 +365,55 @@ html.calibrate.recording-studio {
 		top: 380px;
 		left: 50%;
 		margin-left: -98px;
+	}
+}
+
+@media only screen and (min-width: 1224px) {
+	section#recording-studio {
+	}
+}
+
+@media only screen and (min-width: 1824px) {
+	html.recording-studio {
+		section#recording-studio {
+			background: url('../images/room-bg-lg.jpg') no-repeat fixed top center;
+			.back-wall {
+				width: 1024px;
+				height: 682.66666667px;
+				top: 91px;
+				margin-left: -515px;
+				.wall-cell-container {
+					width: 68.266666667px;
+					height: 68.266666667px;
+					.wall-cell, .red, .pink, .purplepink, .purple, 
+					.yellowgreen, .yellow, .green, .darkblue, 
+					.lightblue, .blue { border-width: 34px;}
+				}
+			}
+			.hvb_pitch {
+				bottom: 60px;
+			}
+			.hvb_record {
+				bottom: 147.5px;
+			}
+			.hvb_stop {
+				bottom: 147.5px;
+			}
+			.hvb_volume {
+				bottom: 60px;
+			}
+			.hvb_sentence {
+				bottom: 60px;
+			}
+			#hvb_playsentence {
+				bottom: 60px;
+			}
+			#hvb_nextsentence {
+				bottom: 60px;
+			}
+			#hvb_settings {
+				bottom: 147.5px;
+			}
+		}
 	}
 }

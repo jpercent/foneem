@@ -17,3 +17,26 @@
   font-weight: 700;
   text-transform: uppercase;
 }
+
+@mixin box-shadow($boxShadow) {
+  box-shadow: $boxShadow;
+  -webkit-box-shadow: $boxShadow;
+  -moz-box-shadow: $boxShadow;
+  -o-box-shadow: $boxShadow;
+}
+
+@mixin opacity($opacityNum) {
+  opacity: $opacityNum;
+  filter: alpha(opacity=$opacityNum*10);
+}
+
+@mixin transition($transitionProperty, $transitionType, $transitionLength) {
+  transition: $transitionProperty $transitionType $transitionLength;
+  -moz-transition: $transitionProperty $transitionType $transitionLength;
+  -webkit-transition: $transitionProperty $transitionType $transitionLength;
+}
+
+@mixin dimensions($dimensionNum) {
+  width: $dimensionNum;
+  height: $dimensionNum;
+}

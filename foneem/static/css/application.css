@@ -3247,6 +3247,11 @@ select::-ms-expand {
 input[type="submit"].mad-libs-submit {
   width: 280px; }
 
+canvas {
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important; }
+
 #hvb_volume1 {
   background-color: #6b0000;
   top: 0px; }
@@ -3303,6 +3308,27 @@ input[type="submit"].mad-libs-submit {
   background-color: #6b0000;
   top: 150px; }
 
+html.recording-studio #tutorial-modal .modal-content {
+  background-color: transparent;
+  padding-top: 10%;
+  -webkit-box-shadow: none;
+  box-shadow: none; }
+html.recording-studio #tutorial-modal .close {
+  color: #fff;
+  font-size: 80px;
+  float: none;
+  position: absolute;
+  top: 10px;
+  right: 30px;
+  text-shadow: none;
+  opacity: 0.75;
+  filter: alpha(opacity=75);
+  -moz-transition: opacity, ease-in-out, 0.3s;
+  -webkit-transition: opacity, ease-in-out, 0.3s;
+  transition: opacity, ease-in-out, 0.3s; }
+  html.recording-studio #tutorial-modal .close:hover {
+    opacity: 1;
+    filter: alpha(opacity=100); }
 html.recording-studio .container {
   padding: 0; }
 html.recording-studio nav .container {
@@ -3315,18 +3341,18 @@ html.recording-studio section#recording-studio {
   padding: 100px 0 0;
   text-align: center;
   color: white;
-  background: url("../images/room-bg.jpg") no-repeat fixed top center; }
+  background: url("../images/room-bg-2.jpg") no-repeat fixed top center; }
   html.recording-studio section#recording-studio .back-wall {
     position: absolute;
-    width: 960px;
-    height: 510px;
+    width: 900px;
+    height: 600px;
     top: 74px;
     left: 50%;
     margin-left: -480px; }
     html.recording-studio section#recording-studio .back-wall .wall-cell-container {
       border: 1px solid #000;
-      width: 64px;
-      height: 64px;
+      width: 59.26667px;
+      height: 59.26667px;
       float: left; }
       html.recording-studio section#recording-studio .back-wall .wall-cell-container .wall-cell {
         border-color: #2b3036 #22252a #1f2326 #282d32;
@@ -3551,3 +3577,35 @@ html.calibrate.recording-studio .btn-calibrate {
   top: 380px;
   left: 50%;
   margin-left: -98px; }
+
+@media only screen and (min-width: 1824px) {
+  html.recording-studio section#recording-studio {
+    background: url("../images/room-bg-lg.jpg") no-repeat fixed top center; }
+    html.recording-studio section#recording-studio .back-wall {
+      width: 1024px;
+      height: 682.66666667px;
+      top: 91px;
+      margin-left: -515px; }
+      html.recording-studio section#recording-studio .back-wall .wall-cell-container {
+        width: 68.266666667px;
+        height: 68.266666667px; }
+        html.recording-studio section#recording-studio .back-wall .wall-cell-container .wall-cell, html.recording-studio section#recording-studio .back-wall .wall-cell-container .red, html.recording-studio section#recording-studio .back-wall .wall-cell-container .pink, html.recording-studio section#recording-studio .back-wall .wall-cell-container .purplepink, html.recording-studio section#recording-studio .back-wall .wall-cell-container .purple,
+        html.recording-studio section#recording-studio .back-wall .wall-cell-container .yellowgreen, html.recording-studio section#recording-studio .back-wall .wall-cell-container .yellow, html.recording-studio section#recording-studio .back-wall .wall-cell-container .green, html.recording-studio section#recording-studio .back-wall .wall-cell-container .darkblue,
+        html.recording-studio section#recording-studio .back-wall .wall-cell-container .lightblue, html.recording-studio section#recording-studio .back-wall .wall-cell-container .blue {
+          border-width: 34px; }
+    html.recording-studio section#recording-studio .hvb_pitch {
+      bottom: 60px; }
+    html.recording-studio section#recording-studio .hvb_record {
+      bottom: 147.5px; }
+    html.recording-studio section#recording-studio .hvb_stop {
+      bottom: 147.5px; }
+    html.recording-studio section#recording-studio .hvb_volume {
+      bottom: 60px; }
+    html.recording-studio section#recording-studio .hvb_sentence {
+      bottom: 60px; }
+    html.recording-studio section#recording-studio #hvb_playsentence {
+      bottom: 60px; }
+    html.recording-studio section#recording-studio #hvb_nextsentence {
+      bottom: 60px; }
+    html.recording-studio section#recording-studio #hvb_settings {
+      bottom: 147.5px; } }
