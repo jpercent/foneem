@@ -484,32 +484,25 @@
         </div>
         <button id="hvb_recordsentence" class="hvb_record">Record</button>
         <button id="hvb_playsentence">Play</button>
+
         <div class="hvb_volume">
-            <canvas id="analyser" width="1024" height="500"></canvas>
-            
-            <!-- div id="hvb_volume1"></div>
-            <div id="hvb_volume2"></div>
-            <div id="hvb_volume3"></div>
-            <div id="hvb_volume4"></div>
-            <div id="hvb_volume5"></div>
-            <div id="hvb_volume6"></div>
-            <div id="hvb_volume7"></div -->
+            <canvas id="hvb-analyser" width="1024" height="500"></canvas>
         </div>
+
         <div class="hvb_sentence"></div>
         <div class="hvb_pitch">
-            <canvas id="wavedisplay" width="1024" height="500"></canvas>            
-            <!-- div id="hvb_pitch1"></div>
+            <!-- canvas id="wavedisplay" width="1024" height="500"></canvas -->            
+            <div id="hvb_pitch1"></div>
             <div id="hvb_pitch2"></div>
             <div id="hvb_pitch3"></div>
             <div id="hvb_pitch4"></div>
             <div id="hvb_pitch5"></div>
             <div id="hvb_pitch6"></div>
-            <div id="hvb_pitch7"></div -->
+            <div id="hvb_pitch7"></div>
         </div>
         <button id="hvb_nextsentence">Next</button>
         <button id="hvb_settings">Settings</button>
     </section>
-
         {% for key, value in next_hvb.items() %}
               <p hidden class="hvb_next">{{key}},{{value}}</p>
         {% endfor %}    
@@ -519,7 +512,11 @@
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     <script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
-    <script src="static/js/hvb_record.js"></script>
+
+    <script src="static/js/hvb-sentence.js"></script>
+    <script src="static/js/hvb-record.js"></script>
+    <script src="static/js/hvb-main.js"></script>
+
     <!-- Custom JavaScript Files -->
     <script src="static/js/tp/easing-scrolling.js"></script>
     <script src="static/js/tp/jquery.responsiveVideo.js"></script>
