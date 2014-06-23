@@ -75,18 +75,12 @@
         </div>
         <!-- /.container -->
     </nav>
-        <div class="calibrate volume">
-            <div id="volume-1"></div>
-            <div id="volume-2"></div>
-            <div id="volume-3"></div>
-            <div id="volume-4"></div>
-            <div id="volume-5"></div>
-            <div id="volume-6"></div>
-            <div id="volume-7"></div>
-        </div>
-        <a href="#" class="btn btn-default btn-record btn-calibrate"><i class="fa fa-microphone fa-fw"></i> <span>Calibrate Mic</span></a>
-    </section>
 
+
+    <div class="calibrate volume">
+        <canvas id="hvb-analyser" width="1024" height="500"></canvas>
+        <a href="#" class="btn btn-default btn-record btn-calibrate"><i class="fa fa-microphone fa-fw"></i> <span>Calibrate Mic</span></a>
+    </div>
 
     <!-- Core JavaScript Files -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -99,8 +93,11 @@
     <script src="static/js/calibrate.js"></script>
     <script src="static/js/tp/easing-scrolling.js"></script>
     <script src="static/js/tp/jquery.responsiveVideo.js"></script>
-    
-    <script>
+    <script src="static/js/tp/audioDisplay.js"></script>
+    <script src="static/js/tp/recorder.js"></script>
+	<script src="static/js/tp/main.js"></script>
+
+<script>
     $( 'body' ).responsiveVideo();
     </script>
     <script>
