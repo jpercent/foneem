@@ -22,6 +22,9 @@
 # ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+__author__ = 'jpercent'
+
 from flask import request, render_template, session, redirect
 from foneem import app, S3, parse_config, hvb_connect_db, hvb_close_db
 import xml.etree.ElementTree as ET
@@ -46,7 +49,6 @@ def record():
         conf = parse_config()
         conn, cursor = hvb_connect_db(conf['db'])
         cursor.execute("""select id, sentence from sentences;""")
-        print("RECORD - ")
         next_hvb = dict(cursor.fetchmany(size=100))
         hvb_close_db(conn, cursor)
         return render_template('record.html', next_hvb=next_hvb)
