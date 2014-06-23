@@ -1,4 +1,4 @@
-// Copyright (c) James Percent.
+// Copyright (c) James Percent 2014.
 // All rights reserved.
 // Redistribution and use in source and binary forms, with or without modification,
 // are permitted provided that the following conditions are met:
@@ -178,18 +178,10 @@ var recorder = {};
         }
     };
 
-    if (!navigator.getUserMedia) {
-        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||
-        navigator.mozGetUserMedia || navigator.msGetUserMedia;
-	}
-	
-    if (navigator.getUserMedia){
-        navigator.getUserMedia({audio:true}, exports.init, function(e) {
-        	alert('Error capturing audio.');
-        });
-    } else {
-        alert('getUserMedia not supported in this browser.');
-    }
+    self.init = function(hvb_audio) {
+
+    };
+
 }(recorder));
 
 
