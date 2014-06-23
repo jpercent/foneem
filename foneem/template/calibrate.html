@@ -23,7 +23,22 @@
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:700,900' rel='stylesheet' type='text/css'>
-    
+
+
+    <style>
+        html { overflow: hidden; }
+        canvas {
+            display: inline-block;
+            background: #202020;
+            width: 100%;
+            height: 100%;
+            box-shadow: 0px 0px 10px blue;
+        }
+        @media (orientation: landscape) {
+            body { flex-direction: row;}
+        }
+    </style>
+
     <!-- IE -->
     <!--[if lt IE 9]> <script> document.createElement('video'); </script> <![endif]-->
 </head>
@@ -79,7 +94,7 @@
 
     <div class="calibrate volume">
         <canvas id="hvb-analyser" width="1024" height="500"></canvas>
-        <a href="#" class="btn btn-default btn-record btn-calibrate"><i class="fa fa-microphone fa-fw"></i> <span>Calibrate Mic</span></a>
+        <button id="hvb-calibrate-button" class="btn btn-default btn-record btn-calibrate"><i class="fa fa-microphone fa-fw"></i> <span>Calibrate Mic</span></button>
     </div>
 
     <!-- Core JavaScript Files -->
@@ -90,11 +105,14 @@
     <script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
     
     <!-- Custom JavaScript Files -->
-    <script src="static/js/calibrate.js"></script>
+    <script src="static/js/tp/audioDisplay.js"></script>
+    <script src="static/js/hvb-audio.js"></script>
+    <script src="static/js/hvb-audio-animation.js"></script>
+    <script src="static/js/hvb-calibrate.js"></script>
     <script src="static/js/tp/easing-scrolling.js"></script>
     <script src="static/js/tp/jquery.responsiveVideo.js"></script>
-    <script src="static/js/tp/audioDisplay.js"></script>
-    <script src="static/js/tp/recorder.js"></script>
+
+    <!-- script src="static/js/tp/recorder.js"></script>
 	<script src="static/js/tp/main.js"></script>
 
 <script>
@@ -105,11 +123,11 @@
     $( ".modal" ).draggable();
   });
   </script>
-  <script>
+  <!-- script>
     $('#r1s8').click(function() {
         $(this).addClass("pulse");
     });
-  </script>
+  </scr ipt -->
 
 </body>
 
