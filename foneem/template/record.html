@@ -446,15 +446,15 @@
                 </div>
             </div>
         </div>
-        <button id="hvb_recordsentence" class="hvb_record">Record</button>
-        <button id="hvb_playsentence">Play</button>
+        <button id="hvb-record-sentence" class="hvb_record">Record</button>
+        <button id="hvb-play-sentence">Play</button>
 
-        <div class="hvb_volume">
+        <div class="hvb-volume">
             <canvas id="hvb-analyser" width="1024" height="500"></canvas>
         </div>
 
-        <div class="hvb_sentence"></div>
-        <div class="hvb_pitch">
+        <div class="hvb-sentence"></div>
+        <div class="hvb-pitch">
             <!-- canvas id="wavedisplay" width="1024" height="500"></canvas -->            
             <div id="hvb_pitch1"></div>
             <div id="hvb_pitch2"></div>
@@ -464,11 +464,11 @@
             <div id="hvb_pitch6"></div>
             <div id="hvb_pitch7"></div>
         </div>
-        <button id="hvb_nextsentence">Next</button>
-        <button id="hvb_settings">Settings</button>
+        <button id="hvb-next-sentence">Next</button>
+        <button id="hvb-settings">Settings</button>
     </section>
         {% for key, value in next_hvb.items() %}
-              <p hidden class="hvb_next">{{key}},{{value}}</p>
+              <p hidden class="hvb-next">{{key}},{{value}}</p>
         {% endfor %}    
     <!-- Core JavaScript Files -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
