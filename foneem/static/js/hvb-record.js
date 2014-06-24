@@ -81,7 +81,10 @@ var hvb_recorder = {};
         console.log("view stuff byteLenght = ",view.byteLength);
         // our final binary blob
         var blob = new Blob ( [ view ], { type : 'audio/wav' } );
+        self.soundFileUrl = (window.URL || window.webkitURL).createObjectURL(blob);
+        console.log("sound file url = ", self.soundFileUrl);
 		self.currentBlob = blob;
+
     };
 	
 	self.upload = function(e) {
@@ -165,9 +168,6 @@ var hvb_recorder = {};
             self.rightchannel.push (new Float32Array (right));
             self.recordingLength += bufferSize;
         };
-        // we connect the audioProcessingNode
-        //zeroGain.connect(audioProcessingNode);
-        //self.audioProcessingNode.conne
         hvb_audio.inputPoint.connect(self.audioProcessingNode);
         self.audioProcessingNode.connect(hvb_audio.audioContext.destination);
     };

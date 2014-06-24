@@ -27,7 +27,7 @@
 
 var hvb_calibrate = {};
 (function(self) {
-    
+
     self.calibrateButtonId = 'hvb-calibrate-button';
     self.recordUrl = '/record';
     self.clicked = false;

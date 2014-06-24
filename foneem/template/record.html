@@ -447,13 +447,13 @@
             </div>
         </div>
         <button id="hvb-record-sentence" class="hvb-record">Record</button>
-        <button id="hvb-play-sentence">Play</button>
+        <button id="hvb-play-sentence"></button>
 
         <div class="hvb-volume">
             <canvas id="hvb-analyser" width="1024" height="500"></canvas>
         </div>
 
-        <div class="hvb-sentence"></div>
+        <div id="hvb-sentence-console" class="hvb-sentence"></div>
         <div class="hvb-pitch">
             <!-- canvas id="wavedisplay" width="1024" height="500"></canvas -->            
             <div id="hvb_pitch1"></div>
@@ -467,6 +467,7 @@
         <button id="hvb-next-sentence">Next</button>
         <button id="hvb-settings">Settings</button>
     </section>
+
         {% for key, value in next_hvb.items() %}
               <p hidden class="hvb-next">{{key}},{{value}}</p>
         {% endfor %}    

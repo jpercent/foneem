@@ -31,6 +31,7 @@ var hvb_button_manager = {};
     self.recordButtonId = 'hvb-record-sentence';
     self.nextButtonId = 'hvb-next-sentence';
     self.playButtonId = 'hvb-play-sentence';
+    self.sentenceConsoleId = 'hvb-sentence-console';
 
    self.initCallback = function(hvb_audio) {
        window.hvb_audio_animation.init(hvb_audio.rafID, hvb_audio.analyserNode);
@@ -39,21 +40,42 @@ var hvb_button_manager = {};
            window.hvb_audio_animation.flipAnimationState();
            if(window.hvb_recorder.recording) {
                window.hvb_recorder.stopRecording();
+               self.wirePlaybackButton();
            } else {
+               self.unwirePlaybackButton();
                window.hvb_recorder.startRecording();
+
            }
        };
 
        document.getElementById(self.nextButtonId).onclick = function(e) {
+           self.unwirePlaybackButton();
            window.hvb_recorder.upload();
            window.hvb_sentence_manager.setNextSentence();
        };
 
-       document.getElementById(self.playButtonId).onclick = function(e) {
+       document.getElementById(self.sentenceConsoleId).onclick = function(e) {
            var sentence = window.hvb_sentence_manager.getSentence();
            var msg = new SpeechSynthesisUtterance(sentence.trim());
            window.speechSynthesis.speak(msg);
        };
+    };
+
+    self.wirePlaybackButton = function() {
+        var soundFileUrl = window.hvb_recorder.soundFileUrl;
+        var playbackButton = document.getElementById(self.playButtonId);
+//		var au = window.document.createElement('audio');
+        playbackButton.innerHTML = 'Playback';
+        playbackButton.onclick = function(e) {
+            playbackButton.innerHTML = "Playback <audio src='"+soundFileUrl+"' autoplay></audio>"
+
+        }
+   };
+
+    self.unwirePlaybackButton = function() {
+        var playbackButton = document.getElementById(self.playButtonId);
+        playbackButton.innerHTML = '';
+        playbackButton.onclick = null;
     };
 
    self.init = function() {
