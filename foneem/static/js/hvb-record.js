@@ -25,87 +25,51 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-var recorder = {};
-(function(exports) {
+var hvb_recorder = {};
+(function(self) {
 
-    var leftchannel = [];
-    var rightchannel = [];
-    var recorder = null;
-    var recording = false;
-    var recordingLength = 0;
-    var volume = null;
-    var audioInput = null;
-    var sampleRate = 44100;
-    var audioContext = null;
-    var context = null;
-    var currentBlob = null;
+    self.leftchannel = [];
+    self.rightchannel = [];
+    self.audio_node = null;
+    self.recording = false;
+    self.recordingLength = 0;
+    self.sampleRate = null;
+    self.currentBlob = null;
 
-	exports.init = function(media_stream) {
-        audioContext = window.AudioContext || window.webkitAudioContext;
-        context = new audioContext();
-        zeroGain = context.createGain();
-		zeroGain.gain.value = 0.0;
-        audioInput = context.createMediaStreamSource(media_stream);
-        audioInput.connect(zeroGain);
-		
-        /* From the spec: This value controls how frequently the audioprocess event is 
-        dispatched and how many sample-frames need to be processed each call. 
-        Lower values for buffer size will result in a lower (better) latency. 
-        Higher values will be necessary to avoid audio breakup and glitches */
-        var bufferSize = 2048;
-        recorder = context.createScriptProcessor(bufferSize, 2, 2);
-		
-        recorder.onaudioprocess = function(e){
-	        if (!recording) return;
-            var left = e.inputBuffer.getChannelData (0);
-            var right = e.inputBuffer.getChannelData (1);
-            // we clone the samples
-            leftchannel.push (new Float32Array (left));
-            rightchannel.push (new Float32Array (right));
-            recordingLength += bufferSize;
-        };
-        // we connect the recorder
-        zeroGain.connect(recorder);
-        recorder.connect(context.destination); 
-    };   
-
-    exports.startRecording = function() {      
-	    recording = true;
+    self.startRecording = function() {
+	    self.recording = true;
         // reset the buffers for the new recording
-        leftchannel.length = rightchannel.length = 0;
-        recordingLength = 0;	
+        self.leftchannel.length = self.rightchannel.length = 0;
+        self.recordingLength = 0;
     };
     
-    exports.stopRecording = function() {
-		recording = false;
+    self.stopRecording = function() {
+		self.recording = false;
         // we flat the left and right channels down
-        var leftBuffer = exports.mergeBuffers(leftchannel, recordingLength);
-        var rightBuffer = exports.mergeBuffers(rightchannel, recordingLength);
+        var leftBuffer = self.mergeBuffers(self.leftchannel, self.recordingLength);
+        var rightBuffer = self.mergeBuffers(self.rightchannel, self.recordingLength);
         // we interleave both channels together
-        var interleaved = exports.interleave(leftBuffer, rightBuffer);
-        
+        var interleaved = self.interleave(leftBuffer, rightBuffer);
         // we create our wav file
         var buffer = new ArrayBuffer(44 + interleaved.length * 2);
         var view = new DataView(buffer);
-        
         // RIFF chunk descriptor
-        exports.writeUTFBytes(view, 0, 'RIFF');
+        self.writeUTFBytes(view, 0, 'RIFF');
         view.setUint32(4, 44 + interleaved.length * 2, true);
-        exports.writeUTFBytes(view, 8, 'WAVE');
+        self.writeUTFBytes(view, 8, 'WAVE');
         // FMT sub-chunk
-        exports.writeUTFBytes(view, 12, 'fmt ');
+        self.writeUTFBytes(view, 12, 'fmt ');
         view.setUint32(16, 16, true);
         view.setUint16(20, 1, true);
         // stereo (2 channels)
         view.setUint16(22, 2, true);
-        view.setUint32(24, sampleRate, true);
-        view.setUint32(28, sampleRate * 4, true);
+        view.setUint32(24, self.sampleRate, true);
+        view.setUint32(28, self.sampleRate * 4, true);
         view.setUint16(32, 4, true);
         view.setUint16(34, 16, true);
         // data sub-chunk
-        exports.writeUTFBytes(view, 36, 'data');
+        self.writeUTFBytes(view, 36, 'data');
         view.setUint32(40, interleaved.length * 2, true);
-        
         // write the PCM samples
         var lng = interleaved.length;
         var index = 44;
@@ -115,20 +79,18 @@ var recorder = {};
             index += 2;
         }
         console.log("view stuff byteLenght = ",view.byteLength);
-		
         // our final binary blob
         var blob = new Blob ( [ view ], { type : 'audio/wav' } );
-		currentBlob = blob;
+		self.currentBlob = blob;
     };
 	
-	exports.upload = function(e) {
-		if(currentBlob == null) {
-//			console.log("Blob does not exist");
+	self.upload = function(e) {
+		if(self.currentBlob == null) {
 			return;
 		}
-		var blob = currentBlob;
-		currentBlob = null;
-//		console.log("Blob size = ", blob.size, "Blob type  ", blob.type);
+		var blob = self.currentBlob;
+		self.currentBlob = null;
+		console.log("Blob size = ", blob.size, "Blob type  ", blob.type);
 		
 		function upload(blob) {
 			var xhr=new XMLHttpRequest();
@@ -139,14 +101,14 @@ var recorder = {};
 			};
 			var fd=new FormData();
 			fd.append("test.wav",blob);
-			filename = $('.hvb_sentence').html()+'-'+new Date().toISOString() + '.wav'
+			filename = $('.hvb-sentence').html()+'-'+new Date().toISOString() + '.wav'
 			xhr.open("POST","upload/"+filename,true);
 			xhr.send(fd);
 		}
 		upload(blob);		 
 	};
     
-    exports.interleave = function(leftChannel, rightChannel) {
+    self.interleave = function(leftChannel, rightChannel) {
     	var length = leftChannel.length + rightChannel.length;
     	var result = new Float32Array(length);
     	var inputIndex = 0;
@@ -159,7 +121,7 @@ var recorder = {};
     	return result;
     };
 
-    exports.mergeBuffers = function(channelBuffer, recordingLength) {
+    self.mergeBuffers = function(channelBuffer, recordingLength) {
         var result = new Float32Array(recordingLength);
         var offset = 0;
         var length = channelBuffer.length;
@@ -171,17 +133,45 @@ var recorder = {};
         return result;
     };
 
-    exports.writeUTFBytes = function(view, offset, string) { 
+    self.writeUTFBytes = function(view, offset, string) {
         var lng = string.length;
         for (var i = 0; i < lng; i++){
         	view.setUint8(offset + i, string.charCodeAt(i));
         }
     };
 
-    self.init = function(hvb_audio) {
+	self.init = function(hvb_audio) {
+        /* From the spec: This value controls how frequently the audioprocess event is
+        dispatched and how many sample-frames need to be processed each call.
+        Lower values for buffer size will result in a lower (better) latency.
+        Higher values will be necessary to avoid audio breakup and glitches */
+        var bufferSize = 2048;
+        if(!hvb_audio.audioContext.createScriptProcessor){
+            self.audioProcessingNode = hvb_audio.audioContext.createJavaScriptNode(bufferSize, 2, 2);
+        } else {
+            self.audioProcessingNode = hvb_audio.audioContext.createScriptProcessor(bufferSize, 2, 2);
+        }
+        self.sampleRate = hvb_audio.audioContext.sampleRate;
 
+        self.audioProcessingNode.onaudioprocess = function(e){
+	        if (!self.recording) {
+                return;
+            }
+
+            var left = e.inputBuffer.getChannelData (0);
+            var right = e.inputBuffer.getChannelData (1);
+            // clone samples
+            self.leftchannel.push (new Float32Array (left));
+            self.rightchannel.push (new Float32Array (right));
+            self.recordingLength += bufferSize;
+        };
+        // we connect the audioProcessingNode
+        //zeroGain.connect(audioProcessingNode);
+        //self.audioProcessingNode.conne
+        hvb_audio.inputPoint.connect(self.audioProcessingNode);
+        self.audioProcessingNode.connect(hvb_audio.audioContext.destination);
     };
-
-}(recorder));
+}(hvb_recorder));
+window.hvb_recorder = hvb_recorder;
 
 

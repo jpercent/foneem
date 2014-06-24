@@ -26,47 +26,39 @@
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 var hvb_button_manager = {};
+
 (function(self) {
-    self.recording = false;
+   self.initCallback = function(hvb_audio) {
+       window.hvb_audio_animation.init(hvb_audio.rafID, hvb_audio.analyserNode);
+       window.hvb_recorder.init(hvb_audio);
+       document.getElementById('hvb-record-sentence').onclick = function(e) {
+           window.hvb_audio_animation.flipAnimationState();
+           if(window.hvb_recorder.recording) {
+               window.hvb_recorder.stopRecording();
+           } else {
+               window.hvb_recorder.startRecording();
+           }
+       };
 
-    self.init = function() {
-        window.hvb_sentence_manager.init();
+       document.getElementById('hvb-next-sentence').onclick = function(e) {
+           window.hvb_recorder.upload();
+           window.hvb_sentence_manager.setNextSentence();
+       };
 
-        document.getElementById('hvb-play-sentence').onclick(function(e) {
-            var sentence = hvbSentenceManager.getSentence();
-            var msg = new SpeechSynthesisUtterance(sentence.trim());
-            window.speechSynthesis.speak(msg);
-        });
-
-        document.getElementById('hvb-record-sentence').onclick(function(e) {
-            if(self.recording) {
-				recorder.stopRecording();
-				toggleRecording(e);
-                self.recording = false;
-            } else {
-				$(this).attr('class', 'hvb_stop');
-				$(this).html('Stop');
-				recorder.startRecording();
-				toggleRecording(e);
-                self.recording = true;
-            }
-//			var class_value = $(this).attr('class');
-//			if (class_value == 'hvb_record') {
-
-//			} else {
-//				$(this).attr('class', 'hvb_record');
-//				$(this).html('Record');
-//
-//			}
-        });
-        
-        document.getElementById('hvb-next-sentence').onclick(function(e) {
-			recorder.upload();
-			window.hvb_sentence_manager.setNextSentence();
-        });
+       document.getElementById('hvb-play-sentence').onclick = function(e) {
+           var sentence = window.hvb_sentence_manager.getSentence();
+           var msg = new SpeechSynthesisUtterance(sentence.trim());
+           window.speechSynthesis.speak(msg);
+       };
     };
+
+   self.init = function() {
+       window.hvb_sentence_manager.init();
+       window.hvb_audio.registerCallback(self.initCallback);
+       window.hvb_audio.initAudio();
+   };
 
 }(hvb_button_manager));
 
-window.addEventListener('load', window.hvb_button_manager.init);
+window.addEventListener('load', hvb_button_manager.init);
 

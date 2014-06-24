@@ -32,7 +32,7 @@ var hvb_sentence_manager = {};
 	
     self.createSentenceCursor = function() {
         var count = 0;
-        $(".hvb_next").each(function(i) {
+        $(".hvb-next").each(function(i) {
             var key_value = $(this).text().split(",");
             var key = parseInt(key_value[0].trim(), 10);
             var value = key_value[1].trim();
@@ -40,14 +40,14 @@ var hvb_sentence_manager = {};
             sessionStorage.setItem(key, value);
             count += 1;
         });
-        sessionStorage.setItem('hvb_cursor', 0);
-        sessionStorage.setItem('hvb_cursor_length', count);
-        //console.log("hvb-sentences.createSentenceCursor: cursor length = ", count);
+        sessionStorage.setItem('hvb-cursor', 0);
+        sessionStorage.setItem('hvb-cursor-length', count);
+        console.log("hvb-sentences.createSentenceCursor: cursor length = ", count);
     };
     
     self.setNextSentence = function() {
-        var cursor = sessionStorage.getItem('hvb_cursor');
-        var end = sessionStorage.getItem('hvb_cursor_length');
+        var cursor = sessionStorage.getItem('hvb-cursor');
+        var end = sessionStorage.getItem('hvb-cursor-length');
         console.log("Cursor, end = ", cursor, end);
         if(!(self.kVACursor < self.keyValueArray.length)) {
             throw "42";
@@ -57,12 +57,12 @@ var hvb_sentence_manager = {};
 		console.log("nextKeyValue, self.kVACursor = ", nextKeyValue, self.kVACursor);
         var next_key = sessionStorage.key(cursor);
         var next_sentence = sessionStorage.getItem(next_key);
-        sessionStorage.setItem('hvb_cursor', parseInt(next_key, 10) + 1);
-		$('.hvb_sentence').html(nextKeyValue[1]);
+        sessionStorage.setItem('hvb-cursor', parseInt(next_key, 10) + 1);
+		$('.hvb-sentence').html(nextKeyValue[1]);
     };
 	
     self.getSentence = function() {
-        return $('.hvb_sentence').html();
+        return $('.hvb-sentence').html();
     };
 
     self.init = function() {
