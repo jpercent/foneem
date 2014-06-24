@@ -29,10 +29,14 @@ var hvb_sentence_manager = {};
 (function(self) {
 	self.keyValueArray = [];
 	self.kVACursor = 0;
+    self.nextClass = '.hvb-next';
+    self.sentenceClass = '.hvb-sentence';
+    self.cursorKey = 'hvb-cursor';
+    self.cursorLengthKey = 'hvb-cursor-length'
 	
     self.createSentenceCursor = function() {
         var count = 0;
-        $(".hvb-next").each(function(i) {
+        $(self.nextClass).each(function(i) {
             var key_value = $(this).text().split(",");
             var key = parseInt(key_value[0].trim(), 10);
             var value = key_value[1].trim();
@@ -40,29 +44,27 @@ var hvb_sentence_manager = {};
             sessionStorage.setItem(key, value);
             count += 1;
         });
-        sessionStorage.setItem('hvb-cursor', 0);
-        sessionStorage.setItem('hvb-cursor-length', count);
+        sessionStorage.setItem(self.cursorKey, 0);
+        sessionStorage.setItem(self.cursorLengthKey, count);
         console.log("hvb-sentences.createSentenceCursor: cursor length = ", count);
     };
     
     self.setNextSentence = function() {
-        var cursor = sessionStorage.getItem('hvb-cursor');
-        var end = sessionStorage.getItem('hvb-cursor-length');
-        console.log("Cursor, end = ", cursor, end);
+        var cursor = sessionStorage.getItem(self.cursorKey);
+        var end = sessionStorage.getItem(self.cursorLengthKey);
         if(!(self.kVACursor < self.keyValueArray.length)) {
-            throw "42";
+            throw "hvb-sentence.setNextSentence: FATAL: cursor out of bounds";
         }
 		var nextKeyValue = self.keyValueArray[self.kVACursor];
 		self.kVACursor += 1;
-		console.log("nextKeyValue, self.kVACursor = ", nextKeyValue, self.kVACursor);
         var next_key = sessionStorage.key(cursor);
         var next_sentence = sessionStorage.getItem(next_key);
-        sessionStorage.setItem('hvb-cursor', parseInt(next_key, 10) + 1);
-		$('.hvb-sentence').html(nextKeyValue[1]);
+        sessionStorage.setItem(self.cursorKey, parseInt(next_key, 10) + 1);
+		$(self.sentenceClass).html(nextKeyValue[1]);
     };
 	
     self.getSentence = function() {
-        return $('.hvb-sentence').html();
+        return $(self.sentenceClass).html();
     };
 
     self.init = function() {

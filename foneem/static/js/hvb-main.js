@@ -28,10 +28,14 @@
 var hvb_button_manager = {};
 
 (function(self) {
+    self.recordButtonId = 'hvb-record-sentence';
+    self.nextButtonId = 'hvb-next-sentence';
+    self.playButtonId = 'hvb-play-sentence';
+
    self.initCallback = function(hvb_audio) {
        window.hvb_audio_animation.init(hvb_audio.rafID, hvb_audio.analyserNode);
        window.hvb_recorder.init(hvb_audio);
-       document.getElementById('hvb-record-sentence').onclick = function(e) {
+       document.getElementById(self.recordButtonId).onclick = function(e) {
            window.hvb_audio_animation.flipAnimationState();
            if(window.hvb_recorder.recording) {
                window.hvb_recorder.stopRecording();
@@ -40,12 +44,12 @@ var hvb_button_manager = {};
            }
        };
 
-       document.getElementById('hvb-next-sentence').onclick = function(e) {
+       document.getElementById(self.nextButtonId).onclick = function(e) {
            window.hvb_recorder.upload();
            window.hvb_sentence_manager.setNextSentence();
        };
 
-       document.getElementById('hvb-play-sentence').onclick = function(e) {
+       document.getElementById(self.playButtonId).onclick = function(e) {
            var sentence = window.hvb_sentence_manager.getSentence();
            var msg = new SpeechSynthesisUtterance(sentence.trim());
            window.speechSynthesis.speak(msg);

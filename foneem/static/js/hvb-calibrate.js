@@ -27,11 +27,14 @@
 
 var hvb_calibrate = {};
 (function(self) {
+    
+    self.calibrateButtonId = 'hvb-calibrate-button';
+    self.recordUrl = '/record';
     self.clicked = false;
 
     self.initCallback = function(hvb_audio) {
         hvb_audio_animation.init(hvb_audio.rafID, hvb_audio.analyserNode);
-        document.getElementById('hvb-calibrate-button').onclick = function(event) {
+        document.getElementById(self.calibrateButtonId).onclick = function(event) {
             if(self.clicked) {
                 return;
             }
@@ -42,7 +45,7 @@ var hvb_calibrate = {};
     };
 
     self.recordRedirect = function() {
-        window.location = '/record';
+        window.location = self.recordUrl;
     };
 
     self.init = function() {
