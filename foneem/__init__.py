@@ -1,9 +1,9 @@
-from flask import request, Response, Flask, render_template, url_for
+from flask import Flask
 from optparse import OptionParser
 import psycopg2
-import inspect
 import json
 import os
+import traceback
 
 app = Flask(__name__, template_folder='template')
 
@@ -25,6 +25,7 @@ def parse_options(default_path):
     except Exception as e:
         print('parse_options: FATAL failed to parse program arguments')
         exc_type, exc_value, exc_traceback = sys.exc_info()
+
         traceback.print_exception(exc_type, exc_value, exc_traceback, file=sys.stderr)
         raise e
 
@@ -37,7 +38,7 @@ def parse_config():
 def hvb_connect_db(conf):
         conn = psycopg2.connect(**{'host': conf['host'], 'dbname' : conf['name'], 'user': conf['user'], 'port': conf['port'],
                                          'password' : conf['addr']})
-        cursor = conn.cursor()        
+        cursor = conn.cursor()
         return conn, cursor
 
 def hvb_close_db(conn, cursor):
