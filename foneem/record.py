@@ -54,12 +54,12 @@ def record():
             cursor.execute("""select g.css_id from phonemes as p, sentence_phoneme as sp, grid as g, phoneme_grid as pg where p.id = pg.phoneme_id and g.id = pg.grid_id and sp.sentence_id = %s and sp.phoneme_id = p.id;""", [id])
             phonemes = cursor.fetchall()
 
-            print("Phonemes are ", phonemes)
+            #print("Phonemes are ", phonemes)
             new_value = str(sentence)
             for phoneme in phonemes:
                 #assert len(phoneme) == 1
                 new_value = new_value +':'+str(phoneme[0])
-            print("The new value is ", new_value)
+            #print("The new value is ", new_value)
             next_sentence_block[id] = new_value
 #        next_hvb = dict(cursor.fetchmany(size=100))
         hvb_close_db(conn, cursor)
