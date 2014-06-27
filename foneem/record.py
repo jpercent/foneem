@@ -48,10 +48,22 @@ def record():
         
         conf = parse_config()
         conn, cursor = hvb_connect_db(conf['db'])
-        cursor.execute("""select id, sentence from sentences;""")
-        next_hvb = dict(cursor.fetchmany(size=100))
+        cursor.execute("""select s.id, s.sentence from sentences as s;""")
+        next_sentence_block = dict(cursor.fetchmany(size=100))
+        for id, sentence in next_sentence_block.items():
+            cursor.execute("""select g.css_id from phonemes as p, sentence_phoneme as sp, grid as g, phoneme_grid as pg where p.id = pg.phoneme_id and g.id = pg.grid_id and sp.sentence_id = %s and sp.phoneme_id = p.id;""", [id])
+            phonemes = cursor.fetchall()
+
+            print("Phonemes are ", phonemes)
+            new_value = str(sentence)
+            for phoneme in phonemes:
+                #assert len(phoneme) == 1
+                new_value = new_value +':'+str(phoneme[0])
+            print("The new value is ", new_value)
+            next_sentence_block[id] = new_value
+#        next_hvb = dict(cursor.fetchmany(size=100))
         hvb_close_db(conn, cursor)
-        return render_template('record.html', next_hvb=next_hvb)
+        return render_template('record.html', next_sentence_block=next_sentence_block)
     except Exception as e:
         print("Exception = ", dir(e), e, e.__doc__)
 
