@@ -63,12 +63,70 @@
                 <img src="static/images/hvb-icon.svg" width="40px" height="40px">
                 </a>
             </div>
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#" id="hvb-tutorial-link" data-toggle="modal" data-target="#tutorial-modal"><i class="fa fa-question-circle"></i></a> 
+                    </li>
+                </ul>
+            </div>
         </div>
         <!-- /.container -->
     </nav>
 
     <section id="recording-studio" class="container content-section text-center">
         <div class="back-wall">
+            <div class="wall-row">
+                <div class="wall-cell-container">
+                    <div id="r0s1" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r0s2" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r0s3" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r0s4" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r0s5" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r0s6" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r0s7" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r0s8" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r0s9" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r0s10" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r0s11" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r0s12" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r0s13" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r0s14" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r0s15" class="wall-cell"></div>
+                </div>
+            </div>
             <div class="wall-row">
                 <div class="wall-cell-container">
                     <div id="r1s1" class="wall-cell"></div>
@@ -445,12 +503,67 @@
                     <div id="r8s15" class="wall-cell"></div>
                 </div>
             </div>
+            <div class="wall-row">
+                <div class="wall-cell-container">
+                    <div id="r9s1" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r9s2" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r9s3" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r9s4" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r9s5" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r9s6" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r9s7" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r9s8" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r9s9" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r9s10" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r9s11" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r9s12" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r9s13" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r9s14" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r9s15" class="wall-cell"></div>
+                </div>
+            </div>
         </div>
-        <button id="hvb-record-sentence" class="hvb-record">Record</button>
-        <button id="hvb-play-sentence"></button>
-
-        <div class="hvb-volume">
-            <canvas id="hvb-analyser" width="1024" height="500"></canvas>
+        <button id="hvb-record-sentence" class="hvb-record"><i class="fa fa-circle"></i><br>Record</button>
+        <button id="hvb-play-sentence"><i class="fa fa-play"></i><br>Playback</button>
+        <div class="hvb-volume-wrapper">
+            <div class="hvb-volume">
+                <canvas id="hvb-analyser" width="1024" height="500"></canvas>
+                <!-- div id="hvb_volume1"></div>
+                <div id="hvb_volume2"></div>
+                <div id="hvb_volume3"></div>
+                <div id="hvb_volume4"></div>
+                <div id="hvb_volume5"></div>
+                <div id="hvb_volume6"></div>
+                <div id="hvb_volume7"></div -->
+            </div>
         </div>
 
         <div id="hvb-sentence-console" class="hvb-sentence"></div>
@@ -464,8 +577,8 @@
             <div id="hvb_pitch6"></div>
             <div id="hvb_pitch7"></div>
         </div>
-        <button id="hvb-next-sentence">Next</button>
-        <button id="hvb-settings">Settings</button>
+        <button id="hvb-next-sentence"><i class="fa fa-step-forward"></i><br>Next</button>
+        <button id="hvb-settings"><i class="fa fa-cog"></i><br>Account</button>
     </section>
 
 
