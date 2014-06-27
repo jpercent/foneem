@@ -22,59 +22,90 @@
 # ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-from sqlalchemy import create_engine
-from optparse import OptionParser
-import psycopg2
-import inspect
-import logging.config
-import logging
+from foneem import parse_config, hvb_connect_db, hvb_close_db
 import csv
-import json
-import sys
-import os
+import re
 
 __author__ = 'jpercent'
 
-#def create_engine():
-#    db = database.DatabaseConnection()
-#    engine = db.create_engine()
-#    return db
 
-class DatabaseConnection(object):
-    def __init__(self, host='ec2-54-204-43-139.compute-1.amazonaws.com', name = 'dps7g4lruchrr',
-                user = 'wltunqpopbqexa', port = '5432', addr = None):
-        assert host and name and user and port and (addr or addr == "")
-        super(DatabaseConnection, self).__init__()
-        self.host = host
-        self.dbname = name
-        self.user = user
-        self.port = port
-        self.addr = addr
-        self.engine = None
-        self.cursors = []
-        
-    def connect(self):
-        self.conn = psycopg2.connect(**{'host': self.host, 'dbname' : self.dbname, 'user': self.user, 'port': self.port,
-                                         'password' : self.addr})
-        cursor = self.conn.cursor()        
-        self.cursors.append(cursor) 
-        return self.conn, cursor
-    
-    def close(self):
-        for cursor in self.cursors:
-            cursor.close()            
-        self.conn.close()        
-        
-def parse_phonemes(phonetic):
-    pass
+class SentenceMeta(object):
+    def __init__(self, id, sentence, phonetic):
+        self.id = id
+        self.sentence = sentence
+        self.phonetic = phonetic
+        self.phonemes = set([])
+
+
+def insert_phonemes(phonemes, f):
+    for phoneme, id in phonemes.items():
+        phoneme_insert = 'insert into phonemes(id, symbol) values('+str(id)+",\'"+str(phoneme)+"\');"
+        f.write(phoneme_insert+'\n')
+
+
+
+def insert_sentence_phoneme_join_table(phoneme_map, sentence_meta_list, f):
+    for sentence_meta in sentence_meta_list:
+        for phoneme in list(sentence_meta.phonemes):
+            join_table_insert = 'insert into sentence_phoneme(sentence_id, phoneme_id) values('+\
+                                str(sentence_meta.id)+','+str(phoneme_map[phoneme])+');'
+            f.write(join_table_insert+'\n')
+
+
+#(3234, 'He_saw_Meg_coming.', '0BHXII<c3>{H}SSAO<c4>{H}MMEHGG<c3>{H}HKAHMM<c1>{HL-}IXNX0E<a6>{L%0}')
+# 0BHXII<c3>{H}SSAO<c4>{H}MMEHGG<c3>{H}HKAHMM<c1>{HL-}IXNX0E<a6>{L%0}
+# 0B HX II <c3>{H} SS AO <c4>{H} MM EH GG <c3>{H} HK AH MM <c1>{HL-} IX NX 0E<a6>{L%0}
+# 0B HX II SS AO MM EH GG HK AH MM IX NX 0E
+# HX II SS AO MM EH GG HK AH MM IX NX
+def parse_phonemes(meta, phoneme_set):
+    remove_brackets =  r'{[^}]*}'
+    remove_angle_brackets = r'<[^>]*>'
+    partial_parse = re.sub(remove_brackets, '', meta.phonetic)
+    partial_parse1 = re.sub(remove_angle_brackets, '', partial_parse)
+    assert partial_parse1[0:2] == '0B'
+    partial_parse2 = partial_parse1[2:]
+    assert partial_parse2[(len(partial_parse2)-2):] == '0E'
+    parsed = partial_parse2[:(len(partial_parse2)-2)]
+    assert len(parsed) % 2 == 0
+    i = 0
+    while i < len(parsed):
+        phoneme = parsed[i:i+2]
+        phoneme_set.add(phoneme)
+        meta.phonemes.add(phoneme)
+        i += 2
+
+
+def generate_sentence_metadata(conn, cursor, dml_filepath):
+    #conf = parse_config()
+    #conn, cursor = hvb_connect_db(conf['db'])
+    cursor.execute("""select id, sentence, phonetic from sentences;""")
+    sentence_tuples = cursor.fetchall()
+    sentence_meta_list = []
+    phoneme_set = set([])
+    for id, sentence, phonetic in sentence_tuples:
+        sentence_meta = SentenceMeta(id, sentence, phonetic)
+        parse_phonemes(sentence_meta, phoneme_set)
+        sentence_meta_list.append(sentence_meta)
+
+    phoneme_map = {}
+    id = 0
+    for phoneme in list(phoneme_set):
+        phoneme_map[phoneme] = id
+        id += 1
+
+    f = open(dml_filepath, "w+")
+    insert_phonemes(phoneme_map, f)
+    insert_sentence_phoneme_join_table(phoneme_map, sentence_meta_list, f)
+
 
 def execute_sql(filename, cursor, conn):
     cursor.execute(open(filename, "r").read())
     conn.commit()
 
+
 def create_sentences_table(csv_filename, cursor, conn):
-    with open(csv_filename) as csvfile:
+    id = 0
+    with open(csv_filename, 'rU') as csvfile:
         reader = csv.reader(csvfile)
         first_row = True
         for row in reader:
@@ -83,41 +114,21 @@ def create_sentences_table(csv_filename, cursor, conn):
                 print("schema ", schema)
                 first_row = False
             else:
-                cursor.execute("""insert into sentences(filename, sentence, phonetic, phonemes, flag) values (%s, %s, %s, %s, %s);""",
-                               (row[0], row[1], row[2], "nothing", row[3]))
+                cursor.execute("""insert into sentences(id, filename, sentence, phonetic, phonemes, flag) values (%s, %s, %s, %s, %s, %s);""",
+                               (str(id), row[0], row[1], row[2], "nothing", row[3]))
+                id += 1
         conn.commit()
-                
-                
-def parse_conf(conf):
-    with open(conf, 'rt') as file_descriptor:
-        json_string = file_descriptor.read()
-        config = json.loads(json_string)
-    return config
 
-def parse_options(dafault_path):
-    usage = "usage: %prog [options]"
-    conf_help = 'path to the configuration; if not set conf.json is used'
-    try:
-        parser = OptionParser(version="%prog 1.0", usage=usage)
-        default_conf = os.path.join(default_path, 'conf.json')
-        parser.add_option('-c', '--conf', type=str, dest='conf', default=default_conf, metavar='CONF', help=conf_help)
-        (options, args) = parser.parse_args()
-        return options, args
-    except Exception as e:
-        print(str(self.__class__.__name__)+': FATAL failed to parse program arguments')
-        exc_type, exc_value, exc_traceback = sys.exc_info()
-        traceback.print_exception(exc_type, exc_value, exc_traceback, file=sys.stderr)
-        raise e
 
 if __name__ == '__main__':
-    default_path = os.path.dirname( os.path.realpath( __file__ ) )
-    options, args = parse_options(default_path)
-    conf = parse_conf(options.conf)
+    conf = parse_config()
+    conn, cursor = hvb_connect_db(conf['db'])
     filename = conf['csv']
-    database_connection = DatabaseConnection(**conf['db'])
-    conn, cursor = database_connection.connect()
     execute_sql(conf['drop'], cursor, conn)
     execute_sql(conf['create'], cursor, conn)
     execute_sql(conf['vocalid'], cursor, conn)
     create_sentences_table(filename, cursor, conn)
-    database_connection.close()
+    generate_sentence_metadata(conn, cursor, conf['phoneme_dml'])
+    execute_sql(conf['phoneme_dml'], cursor, conn)
+    hvb_close_db(conn, cursor)
+
