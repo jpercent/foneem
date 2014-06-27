@@ -78,7 +78,7 @@ var hvb_recorder = {};
             view.setInt16(index, interleaved[i] * (0x7FFF * volume), true);
             index += 2;
         }
-        console.log("view stuff byteLenght = ",view.byteLength);
+        console.log("blob length = ",view.byteLength, " sampleRate = ", self.sampleRate);
         // our final binary blob
         var blob = new Blob ( [ view ], { type : 'audio/wav' } );
         self.soundFileUrl = (window.URL || window.webkitURL).createObjectURL(blob);
