@@ -22,11 +22,19 @@
 # ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-from foneem import parse_config, hvb_connect_db, hvb_close_db
-import csv
-import re
 
-__author__ = 'jpercent'
+from foneem import parse_config, hvb_connect_db, hvb_close_db
+
+from optparse import OptionParser
+import psycopg2
+import inspect
+import logging.config
+import logging
+import csv
+import json
+import sys
+import os
+import re
 
 
 class SentenceMeta(object):
@@ -39,7 +47,7 @@ class SentenceMeta(object):
 
 def insert_phonemes(phonemes, f):
     for phoneme, id in phonemes.items():
-        phoneme_insert = 'insert into phonemes(id, symbol) values('+str(id)+",\'"+str(phoneme)+"\');"
+        phoneme_insert = 'insert into phonemes(id, symbol) values('+str(id)+','+str(phoneme)+');'
         f.write(phoneme_insert+'\n')
 
 
@@ -75,11 +83,12 @@ def parse_phonemes(meta, phoneme_set):
         i += 2
 
 
-def generate_sentence_metadata(conn, cursor, dml_filepath):
-    #conf = parse_config()
-    #conn, cursor = hvb_connect_db(conf['db'])
+def load():
+    conf = parse_config()
+    conn, cursor = hvb_connect_db(conf['db'])
     cursor.execute("""select id, sentence, phonetic from sentences;""")
     sentence_tuples = cursor.fetchall()
+    hvb_close_db(conn, cursor)
     sentence_meta_list = []
     phoneme_set = set([])
     for id, sentence, phonetic in sentence_tuples:
@@ -93,43 +102,10 @@ def generate_sentence_metadata(conn, cursor, dml_filepath):
         phoneme_map[phoneme] = id
         id += 1
 
-    f = open(dml_filepath, "w+")
+    f = open("phonemes-dml.sql", "w+")
     insert_phonemes(phoneme_map, f)
     insert_sentence_phoneme_join_table(phoneme_map, sentence_meta_list, f)
 
 
-def execute_sql(filename, cursor, conn):
-    cursor.execute(open(filename, "r").read())
-    conn.commit()
-
-
-def create_sentences_table(csv_filename, cursor, conn):
-    id = 0
-    with open(csv_filename, 'rU') as csvfile:
-        reader = csv.reader(csvfile)
-        first_row = True
-        for row in reader:
-            if first_row:
-                schema = row
-                print("schema ", schema)
-                first_row = False
-            else:
-                cursor.execute("""insert into sentences(id, filename, sentence, phonetic, phonemes, flag) values (%s, %s, %s, %s, %s, %s);""",
-                               (str(id), row[0], row[1], row[2], "nothing", row[3]))
-                id += 1
-        conn.commit()
-
-
 if __name__ == '__main__':
-    conf = parse_config()
-    conn, cursor = hvb_connect_db(conf['db'])
-    filename = conf['csv']
-    execute_sql(conf['drop'], cursor, conn)
-    execute_sql(conf['create'], cursor, conn)
-    execute_sql(conf['vocalid'], cursor, conn)
-    create_sentences_table(filename, cursor, conn)
-    generate_sentence_metadata(conn, cursor, conf['phoneme_dml'])
-    execute_sql(conf['phoneme_dml'], cursor, conn)
-    execute_sql(conf['grid_dml'], cursor, conn)
-    hvb_close_db(conn, cursor)
-
+    load()

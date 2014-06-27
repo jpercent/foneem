@@ -1,36 +1,40 @@
 // * Virtual Recording Studio * //
 
 canvas {
+	background: none !important;
 	box-shadow: none !important;
 	-webkit-box-shadow: none !important;
 	-moz-box-shadow: none !important;
+	border-radius: 50% / 100%;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
 }
 
-#hvb_volume1 {
+#hvb-volume1 {
 	background-color: #6b0000;
 	top: 0px;
 }
-#hvb_volume2 {
+#hvb-volume2 {
 	background-color: #560000;
 	top: 25px;
 }
-#hvb_volume3 {
+#hvb-volume3 {
 	background-color: #034100;
 	top: 50px;
 }
-#hvb_volume4 {
+#hvb-volume4 {
 	background-color: #087902;
 	top: 75px;
 }
-#hvb_volume5 {
+#hvb-volume5 {
 	background-color: #034100;
 	top: 100px;
 }
-#hvb_volume6 {
+#hvb-volume6 {
 	background-color: #560000;
 	top: 125px;
 }
-#hvb_volume7 {
+#hvb-volume7 {
 	background-color: #6b0000;
 	top: 150px;
 }
@@ -65,6 +69,11 @@ canvas {
 }
 
 html.recording-studio {
+	body { background-color: #121315; }
+
+	.navbar > .container-fluid .navbar-brand {
+		margin-left: 0;
+	}
 
 #tutorial-modal {
 	.modal-content { 
@@ -102,14 +111,15 @@ section#recording-studio {
 	background: url('../images/room-bg-2.jpg') no-repeat fixed top center;
 	.back-wall {
 		position: absolute;
-		width: $dimensionNum*15;
-		height: $dimensionNum*10;
+		width: $dimensionNumSmall * 15;
+		height: $dimensionNumSmall * 10;
 		top: 74px;
 		left: 50%;
 		margin-left: -480px;
 		.wall-cell-container {
 			border: 1px solid #000;
-			@include dimensions(59.266666667px);
+			width: $dimensionNumSmall;
+			height: $dimensionNumSmall;
 			float: left;
 			.wall-cell {
 				border-color: #2b3036 #22252a #1f2326 #282d32;
@@ -235,7 +245,7 @@ section#recording-studio {
 			}
 		}
 	}
-	.hvb_sentence {
+	.hvb-sentence {
 		width: 560px;
 		height: 175px;
 		position: absolute;
@@ -246,95 +256,161 @@ section#recording-studio {
 		color: #000;
 		font-size: 30px;
 		line-height: 175px;
+		border-left: 10px solid #c0c0c0;
+		border-top: 10px solid #c0c0c0;
+		border-right: 10px solid #6c6c6c;
+		border-bottom: 10px solid #6c6c6c;
 	}
-	.hvb_volume {
-		width: 100px;
-		height: 175px;
-		background-color: #333;
+
+	.hvb-volume-wrapper {
+		width: 250px;
+		height: 60px;
+		background: #a9a9a9;
+		background: -webkit-gradient(linear, left top, left bottom, from(#dedede), to(#a9a9a9));
+		background: -webkit-linear-gradient(top, #dedede, #a9a9a9);
+		background: -moz-linear-gradient(top, #dedede, #a9a9a9);
+		background: -ms-linear-gradient(top, #dedede, #a9a9a9);
+		background: -o-linear-gradient(top, #dedede, #a9a9a9);
 		position: absolute;
 		bottom: 10px;
 		left: 50%;
-		margin-left:-380px;
-		#hvb_volume1, #hvb_volume2, #hvb_volume3, #hvb_volume4, #hvb_volume5, #hvb_volume6, #hvb_volume7 {
+		margin-left: -125px;
+		border-radius: 50% / 100%;
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+	}
+	.hvb-volume {
+		width: 200px;
+		height: 40px;
+		background-color: #000;
+		position: absolute;
+		bottom: 10px;
+		left: 50%;
+		margin-left: -100px;
+		border-radius: 50% / 100%;
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+		#hvb-volume1, #hvb-volume2, #hvb-volume3, #hvb-volume4, #hvb-volume5, #hvb-volume6, #hvb-volume7 {
 			position: absolute;
 			width: 80px;
 			height: 25px;
 			left: 10px;
 		}
 	}
-	.hvb_pitch {
+	.hvb-pitch {
+		display: none;
 		width: 100px;
 		height: 175px;
-		background-color: #333;
+		background-color: #d7d7d7;
 		position: absolute;
 		bottom: 10px;
 		right: 50%;
 		margin-right:-380px;
-		#hvb_pitch1, #hvb_pitch2, #hvb_pitch3, #hvb_pitch4, #hvb_pitch5, #hvb_pitch6, #hvb_pitch7 {
+		#hvb-pitch1, #hvb-pitch2, #hvb-pitch3, #hvb-pitch4, #hvb-pitch5, #hvb-pitch6, #hvb-pitch7 {
 			position: absolute;
 			width: 80px;
 			height: 25px;
 			left: 10px;
 		}
 	}
-	.hvb_record {
+	.hvb-record, .hvb-stop, #hvb-play-sentence, #hvb-next-sentence, #hvb-settings {
+		color: #444;
+		border: 8px outset buttonface;
+		font-size: 12px;
+		font-family: $header-font;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		line-height: 1.5;
+		background: #a9a9a9;
+		background: -webkit-gradient(linear, left top, left bottom, from(#dedede), to(#a9a9a9));
+		background: -webkit-linear-gradient(top, #dedede, #a9a9a9);
+		background: -moz-linear-gradient(top, #dedede, #a9a9a9);
+		background: -ms-linear-gradient(top, #dedede, #a9a9a9);
+		background: -o-linear-gradient(top, #dedede, #a9a9a9);
+		@include box-shadow(rgba(0,0,0,1) 0 1px 0);
+		@include transition(all, ease, 0.3s);
+		&:hover {
+			background: #8f8f8f;
+			background: -webkit-gradient(linear, left top, left bottom, from(#a9a9a9), to(#8f8f8f));
+			background: -webkit-linear-gradient(top, #a9a9a9, #8f8f8f);
+			background: -moz-linear-gradient(top, #a9a9a9, #8f8f8f);
+			background: -ms-linear-gradient(top, #a9a9a9, #8f8f8f);
+			background: -o-linear-gradient(top, #a9a9a9, #8f8f8f);
+			@include transition(all, ease, 0.3s);
+		}
+		i {
+			font-size: 18px;
+		}
+	}
+
+	.hvb-record {
 		width: 100px;
 		height: 87.5px;
-		background-color: $red-damask;
+		background-color: $grey-button;
 		position: absolute;
 		bottom: 97.5px;
 		left: 50%;
-		margin-left:-480px;
+		margin-left:-380px;
 		&:hover {
-			background-color: lighten( $red-damask, 10% );
+		}
+		i {
+			color: $red-damask;
 		}
 	}
-	.hvb_stop {
+	.hvb-stop {
 		width: 100px;
 		height: 87.5px;
-		background-color: $red-damask-dark;
+		background-color: $grey-button;
 		position: absolute;
 		bottom: 97.5px;
 		left: 50%;
-		margin-left:-480px;
+		margin-left:-380px;
 		&:hover {
-			background-color: lighten( $red-damask-dark, 10% );
+		}
+		i {
+			color: $red-damask;
 		}
 	}
-	#hvb_playsentence {
+	#hvb-play-sentence {
 		width: 100px;
 		height: 87.5px;
-		background-color: $green;
+		background-color: $grey-button;
 		position: absolute;
 		bottom: 10px;
 		left: 50%;
-		margin-left:-480px;
+		margin-left:-380px;
 		&:hover {
-			background-color: lighten( $green, 10% );
+		}
+		i {
+			color: $green;
 		}
 	}
-	#hvb_nextsentence {
+	#hvb-next-sentence {
 		width: 100px;
 		height: 87.5px;
-		background-color: $dark-blue;
+		background-color: $grey-button;
 		position: absolute;
 		bottom: 10px;
 		right: 50%;
-		margin-right:-480px;
+		margin-right:-380px;
 		&:hover {
-			background-color: lighten( $dark-blue, 10% );
+		}
+		i {
+			color: #3c4879;
 		}
 	}
-	#hvb_settings {
+	#hvb-settings {
 		width: 100px;
 		height: 87.5px;
-		background-color: $facebook-blue;
+		background-color: $grey-button;
 		position: absolute;
 		bottom: 97.5px;
 		right: 50%;
-		margin-right:-480px;
+		margin-right:-380px;
 		&:hover {
-			background-color: lighten( $facebook-blue, 10% );
+		}
+		i {
+			color: #818dc1;
 		}
 	}
 }
@@ -368,8 +444,232 @@ html.calibrate.recording-studio {
 	}
 }
 
-@media only screen and (min-width: 1224px) {
-	section#recording-studio {
+@media only screen and (min-width: 960px) {
+	html.recording-studio {
+		section#recording-studio {
+			background: url('../images/room-bg-2.jpg') no-repeat fixed top center;
+			background-size: 1151px;
+			.back-wall {
+				width: $dimensionNum960*15;
+				height: $dimensionNum960*10;
+				top: 42px;
+				margin-left: -234px;
+				.wall-cell-container {
+					width: $dimensionNum960;
+					height: $dimensionNum960;
+					.wall-cell, .red, .pink, .purplepink, .purple, 
+					.yellowgreen, .yellow, .green, .darkblue, 
+					.lightblue, .blue { border-width: ($dimensionNum960/2)+1;}
+				}
+			}
+			.hvb_pitch {
+				bottom: 10px;
+			}
+			.hvb_record {
+				bottom: 97.5px;
+			}
+			.hvb_stop {
+				bottom: 97.5px;
+			}
+			.hvb_volume {
+				bottom: 10px;
+			}
+			.hvb_sentence {
+				bottom: 10px;
+			}
+			#hvb_play-sentence {
+				bottom: 10px;
+			}
+			#hvb_next-sentence {
+				bottom: 10px;
+			}
+			#hvb_settings {
+				bottom: 97.5px;
+			}
+		}
+	}
+}
+
+@media only screen and (min-width: 1152px) {
+	html.recording-studio {
+		section#recording-studio {
+			background: url('../images/room-bg-2.jpg') no-repeat fixed top center;
+			background-size: 1309px;
+			.back-wall {
+				width: $dimensionNum1152*15;
+				height: $dimensionNum1152*10;
+				top: 49.5px;
+				margin-left: -264.5px;
+				.wall-cell-container {
+					width: $dimensionNum1152;
+					height: $dimensionNum1152;
+					.wall-cell, .red, .pink, .purplepink, .purple, 
+					.yellowgreen, .yellow, .green, .darkblue, 
+					.lightblue, .blue { border-width: ($dimensionNum1152/2)+1;}
+				}
+			}
+			.hvb-pitch {
+				bottom: 60px;
+			}
+			.hvb-record {
+				bottom: 147.5px;
+			}
+			.hvb-stop {
+				bottom: 147.5px;
+			}
+			.hvb-volume {
+				bottom: 20px;
+			}
+			.hvb-sentence {
+				bottom: 60px;
+			}
+			#hvb-play-sentence {
+				bottom: 60px;
+			}
+			#hvb-next-sentence {
+				bottom: 60px;
+			}
+			#hvb-settings {
+				bottom: 147.5px;
+			}
+		}
+	}
+}
+
+@media only screen and (min-width: 1310px) {
+	html.recording-studio {
+		section#recording-studio {
+			background: url('../images/room-bg-2.jpg') no-repeat fixed top center;
+			background-size: 1439px;
+			.back-wall {
+				width: $dimensionNumSmall*15;
+				height: $dimensionNumSmall*10;
+				top: 52px;
+				margin-left: -292px;
+				.wall-cell-container {
+					width: $dimensionNumSmall;
+					height: $dimensionNumSmall;
+					.wall-cell, .red, .pink, .purplepink, .purple, 
+					.yellowgreen, .yellow, .green, .darkblue, 
+					.lightblue, .blue { border-width: ($dimensionNumSmall/2)+1;}
+				}
+			}
+			.hvb-pitch {
+				bottom: 60px;
+			}
+			.hvb-record {
+				bottom: 147.5px;
+			}
+			.hvb-stop {
+				bottom: 147.5px;
+			}
+			.hvb-volume {
+				bottom: 20px;
+			}
+			.hvb-sentence {
+				bottom: 60px;
+			}
+			#hvb-play-sentence {
+				bottom: 60px;
+			}
+			#hvb-next-sentence {
+				bottom: 60px;
+			}
+			#hvb-settings {
+				bottom: 147.5px;
+			}
+		}
+	}
+}
+
+@media only screen and (min-width: 1440px) {
+	html.recording-studio {
+		section#recording-studio {
+			background: url('../images/room-bg-2.jpg') no-repeat fixed top center;
+			background-size: 1599px;
+			.back-wall {
+				width: $dimensionNum1440*15;
+				height: $dimensionNum1440*10;
+				top: 60px;
+				margin-left: -322.75px;
+				.wall-cell-container {
+					width: $dimensionNum1440;
+					height: $dimensionNum1440;
+					.wall-cell, .red, .pink, .purplepink, .purple, 
+					.yellowgreen, .yellow, .green, .darkblue, 
+					.lightblue, .blue { border-width: ($dimensionNum1440/2)+1;}
+				}
+			}
+			.hvb-pitch {
+				bottom: 60px;
+			}
+			.hvb-record {
+				bottom: 147.5px;
+			}
+			.hvb-stop {
+				bottom: 147.5px;
+			}
+			.hvb-volume {
+				bottom: 20px;
+			}
+			.hvb-sentence {
+				bottom: 60px;
+			}
+			#hvb-play-sentence {
+				bottom: 60px;
+			}
+			#hvb-next-sentence {
+				bottom: 60px;
+			}
+			#hvb-settings {
+				bottom: 147.5px;
+			}
+		}
+	}
+}
+
+@media only screen and (min-width: 1600px) {
+	html.recording-studio {
+		section#recording-studio {
+			background: url('../images/room-bg-2.jpg') no-repeat fixed top center;
+			.back-wall {
+				width: $dimensionNumLarge*15;
+				height: $dimensionNumLarge*10;
+				top: 64px;
+				margin-left: -371.5px;
+				.wall-cell-container {
+					width: $dimensionNumLarge;
+					height: $dimensionNumLarge;
+					.wall-cell, .red, .pink, .purplepink, .purple, 
+					.yellowgreen, .yellow, .green, .darkblue, 
+					.lightblue, .blue { border-width: ($dimensionNumLarge/2)+1;}
+				}
+			}
+			.hvb-pitch {
+				bottom: 60px;
+			}
+			.hvb-record {
+				bottom: 147.5px;
+			}
+			.hvb-stop {
+				bottom: 147.5px;
+			}
+			.hvb-volume {
+				bottom: 20px;
+			}
+			.hvb-sentence {
+				bottom: 60px;
+			}
+			#hvb-play-sentence {
+				bottom: 60px;
+			}
+			#hvb-next-sentence {
+				bottom: 60px;
+			}
+			#hvb-settings {
+				bottom: 147.5px;
+			}
+		}
 	}
 }
 
@@ -377,41 +677,42 @@ html.calibrate.recording-studio {
 	html.recording-studio {
 		section#recording-studio {
 			background: url('../images/room-bg-lg.jpg') no-repeat fixed top center;
+			background-size: 2100px;
 			.back-wall {
-				width: 1024px;
-				height: 682.66666667px;
-				top: 91px;
-				margin-left: -515px;
+				width: $dimensionNumLarger*15;
+				height: $dimensionNumLarger*10;
+				top: 90px;
+				margin-left: -513.5px;
 				.wall-cell-container {
-					width: 68.266666667px;
-					height: 68.266666667px;
+					width: $dimensionNumLarger;
+					height: $dimensionNumLarger;
 					.wall-cell, .red, .pink, .purplepink, .purple, 
 					.yellowgreen, .yellow, .green, .darkblue, 
-					.lightblue, .blue { border-width: 34px;}
+					.lightblue, .blue { border-width: ($dimensionNumLarger/2)+1;}
 				}
 			}
-			.hvb_pitch {
+			.hvb-pitch {
 				bottom: 60px;
 			}
-			.hvb_record {
+			.hvb-record {
 				bottom: 147.5px;
 			}
-			.hvb_stop {
+			.hvb-stop {
 				bottom: 147.5px;
 			}
-			.hvb_volume {
+			.hvb-volume {
+				bottom: 20px;
+			}
+			.hvb-sentence {
 				bottom: 60px;
 			}
-			.hvb_sentence {
+			#hvb-play-sentence {
 				bottom: 60px;
 			}
-			#hvb_playsentence {
+			#hvb-next-sentence {
 				bottom: 60px;
 			}
-			#hvb_nextsentence {
-				bottom: 60px;
-			}
-			#hvb_settings {
+			#hvb-settings {
 				bottom: 147.5px;
 			}
 		}

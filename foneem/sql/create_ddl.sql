@@ -86,12 +86,23 @@ create table if not exists address (
    address varchar(80),
    state varchar(80),
    postal_code varchar(10),
-   country varchar(80) 
+   country varchar(80)
 );
 
 create table user_sentence(
     user_id int references users(id),
     next_sentence int references sentences(id)
+);
+
+
+create table if not exists grid (
+   id serial primary key,
+   css_id varchar(5)
+);
+
+create table phoneme_grid(
+    phoneme_id int references phonemes(id),
+    grid_id int references grid(id)
 );
 
 commit;                

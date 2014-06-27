@@ -3,26 +3,25 @@ var hvbSentenceManager = {};
 (function(exports) {
 	var keyValueArray = [];
 	var kVACursor = 0;
-    
+	
     exports.createSentenceCursor = function() {
-//        var count = 0;
-		
-        $(".hvb_next").each(function(i) {
+//      var count = 0;
+        $(".hvb-next").each(function(i) {
             var key_value = $(this).text().split(",");
             var key = parseInt(key_value[0].trim(), 10);
             var value = key_value[1].trim();
 			keyValueArray.push([key, value]);
-    //        sessionStorage.setItem(key, value);
-    //        count += 1;
+//          sessionStorage.setItem(key, value);
+//          count += 1;
         });
-  //      sessionStorage.setItem('hvb_cursor', 0);
-//        sessionStorage.setItem('hvb_cursor_length', count);
+//      sessionStorage.setItem('hvb_cursor', 0);
+//      sessionStorage.setItem('hvb_cursor_length', count);
 //		console.log("cursor lenght = ", count);
     };
     
     exports.setNextSentence = function() {
-  //      var cursor = sessionStorage.getItem('hvb_cursor');
-   //     var end = sessionStorage.getItem('hvb_cursor_length');
+//      var cursor = sessionStorage.getItem('hvb_cursor');
+//      var end = sessionStorage.getItem('hvb_cursor_length');
 //		console.log("Cursor, end = ", cursor, end);
         if(!(kVACursor < keyValueArray.length)) {
             throw "42";
@@ -30,43 +29,35 @@ var hvbSentenceManager = {};
 		var nextKeyValue = keyValueArray[kVACursor];
 		kVACursor += 1;
 		console.log("nextKeyValue, kvacursor = ", nextKeyValue, kVACursor);
-  ///      var next_key = sessionStorage.key(cursor);
-     //   var next_sentence = sessionStorage.getItem(next_key);
-//        sessionStorage.setItem('hvb_cursor', parseInt(next_key, 10) + 1);
-        //$('#hvb_sentence').text(nextKeyValue[1]);
-		$('.hvb_sentence').html(nextKeyValue[1]);
+//      var next_key = sessionStorage.key(cursor);
+//      var next_sentence = sessionStorage.getItem(next_key);
+//      sessionStorage.setItem('hvb_cursor', parseInt(next_key, 10) + 1);
+//      $('#hvb-sentence').text(nextKeyValue[1]);
+		$('.hvb-sentence').html(nextKeyValue[1]);
     };
 	
     exports.getSentence = function() {
-        return $('.hvb_sentence').html();
+        return $('.hvb-sentence').html();
     };
-	
 }(hvbSentenceManager));
 
 
 var recorder = {};
 (function(exports) {
-    
-	exports.init = function(e) {
-        // creates the audio context
+	exports.init = function(media_stream) {
         audioContext = window.AudioContext || window.webkitAudioContext;
         context = new audioContext();
-		
-        // creates a gain node
-        volume = context.createGain();
-		
-        // creates an audio node from the microphone incoming stream
-        audioInput = context.createMediaStreamSource(e);
-		
-        // connect the stream to the gain node
-        audioInput.connect(volume);
+        zeroGain = context.createGain();
+		zeroGain.gain.value = 0.0;
+        audioInput = context.createMediaStreamSource(media_stream);
+        audioInput.connect(zeroGain);
 		
         /* From the spec: This value controls how frequently the audioprocess event is 
         dispatched and how many sample-frames need to be processed each call. 
         Lower values for buffer size will result in a lower (better) latency. 
         Higher values will be necessary to avoid audio breakup and glitches */
         var bufferSize = 2048;
-        recorder = context.createJavaScriptNode(bufferSize, 2, 2);
+        recorder = context.createScriptProcessor(bufferSize, 2, 2);
 		
         recorder.onaudioprocess = function(e){
 	        if (!recording) return;
@@ -78,34 +69,10 @@ var recorder = {};
             recordingLength += bufferSize;
         };
         // we connect the recorder
-        volume.connect(recorder);
+        zeroGain.connect(recorder);
         recorder.connect(context.destination); 
     };   
 
-    var leftchannel = [];
-    var rightchannel = [];
-    var recorder = null;
-    var recording = false;
-    var recordingLength = 0;
-    var volume = null;
-    var audioInput = null;
-    var sampleRate = 44100;
-    var audioContext = null;
-    var context = null;
-    var currentBlob = null;
-	
-    if (!navigator.getUserMedia)
-        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||
-        navigator.mozGetUserMedia || navigator.msGetUserMedia;
-
-    if (navigator.getUserMedia){
-        navigator.getUserMedia({audio:true}, exports.init, function(e) {
-        	alert('Error capturing audio.');
-        });
-    } else {
-        alert('getUserMedia not supported in this browser.');
-    }
-		
     exports.startRecording = function() {      
 	    recording = true;
         // reset the buffers for the new recording
@@ -156,38 +123,16 @@ var recorder = {};
         // our final binary blob
         var blob = new Blob ( [ view ], { type : 'audio/wav' } );
 		currentBlob = blob;
-        // let's save it locally
-		/*
-        var url = (window.URL || window.webkitURL).createObjectURL(blob);
-	    var li = window.document.createElement('li');
-		var au = window.document.createElement('audio');
-		var hf = window.document.createElement('a');
-	    au.controls = true;
-	    au.src = url;
-        hf.href = url;
-        hf.download = $('#hvb_sentence').html()+'-'+new Date().toISOString() + '.wav';
-        hf.innerHTML = hf.download;
-        li.appendChild(au);
-        li.appendChild(hf);
-        recordingslist.appendChild(li);
-        */
-        /*var link = window.document.createElement('a');
-        link.href = url;
-        link.download = 'jpercent-output.wav';
-        var click = document.createEvent("Event");
-        click.initEvent("click", true, true);
-        link.dispatchEvent(click);
-        */
     };
 	
 	exports.upload = function(e) {
 		if(currentBlob == null) {
-			console.log("Blob does not exist");
+//			console.log("Blob does not exist");
 			return;
 		}
 		var blob = currentBlob;
 		currentBlob = null;
-		console.log("Blob size = ", blob.size, "Blob type  ", blob.type);
+//		console.log("Blob size = ", blob.size, "Blob type  ", blob.type);
 		
 		function upload(blob) {
 			var xhr=new XMLHttpRequest();
@@ -198,7 +143,7 @@ var recorder = {};
 			};
 			var fd=new FormData();
 			fd.append("test.wav",blob);
-			filename = $('.hvb_sentence').html()+'-'+new Date().toISOString() + '.wav'
+			filename = $('.hvb-sentence').html()+'-'+new Date().toISOString() + '.wav'
 			xhr.open("POST","upload/"+filename,true);
 			xhr.send(fd);
 		}
@@ -236,40 +181,76 @@ var recorder = {};
         	view.setUint8(offset + i, string.charCodeAt(i));
         }
     };
+	
+	var leftchannel = [];
+    var rightchannel = [];
+    var recorder = null;
+    var recording = false;
+    var recordingLength = 0;
+    var volume = null;
+    var audioInput = null;
+    var sampleRate = 44100;
+    var audioContext = null;
+    var context = null;
+    var currentBlob = null;
+	
+    if (!navigator.getUserMedia) {
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||
+        navigator.mozGetUserMedia || navigator.msGetUserMedia;
+	}
+	
+    if (navigator.getUserMedia){
+        navigator.getUserMedia({audio:true}, exports.init, function(e) {
+        	alert('Error capturing audio.');
+        });
+    } else {
+        alert('getUserMedia not supported in this browser.');
+    }
 }(recorder));
 
+var hvbOpacityManager = {};
+(function(exports) {
+    exports.updateOpacity = function() {
+        var img = document.getElementById('rs5s1');
+        img.style.filter       = "alpha(opacity=25);";
+        img.style.MozOpacity   = 0.25;
+        img.style.opacity      = 0.25;
+        img.style.KhtmlOpacity = 0.25;
+    };
+}(hvbOpacityManager));
 
 var hvbButtonManager = {};
 (function(exports) {
     exports.bindClickEvents = function() {     
-        $('#hvb_playsentence').click(function(e) {
+        $('#hvb-play-sentence').click(function(e) {
             var sentence = hvbSentenceManager.getSentence();
-//            console.log("the sentence = ", sentence)
             var msg = new SpeechSynthesisUtterance(sentence.trim());
             window.speechSynthesis.speak(msg);
         });
         
-        $('#hvb_recordsentence').click(function(e) {
+        $('#hvb-record-sentence').click(function(e) {
 			var class_value = $(this).attr('class');
-			if (class_value == 'hvb_record') {
-				$(this).attr('class', 'hvb_stop');
-				$(this).html('Stop');
-				recorder.startRecording();				
+			if (class_value == 'hvb-record') {
+				$(this).attr('class', 'hvb-stop');
+				$(this).html('<i class="fa fa-stop"></i><br>Stop');
+				recorder.startRecording();
+				toggleRecording(e);				
 			} else {
-				$(this).attr('class', 'hvb_record');
-				$(this).html('Record');
+				$(this).attr('class', 'hvb-record');
+				$(this).html('<i class="fa fa-circle"></i><br>Record');
 				recorder.stopRecording();
+				toggleRecording(e);
 			}
         });
         
-        $('#hvb_nextsentence').click(function(e) {
+        $('#hvb-next-sentence').click(function(e) {
 			recorder.upload();
 			hvbSentenceManager.setNextSentence();
         });
     };
 }(hvbButtonManager));
 
-$( document ).ready(function() {
+$(document).ready(function() {
     hvbSentenceManager.createSentenceCursor();
     hvbSentenceManager.setNextSentence();
     hvbButtonManager.bindClickEvents();

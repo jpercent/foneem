@@ -24,56 +24,20 @@
     <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:700,900' rel='stylesheet' type='text/css'>
     
+
 	<style>
 	html { overflow: hidden; }
-	body { 
-		font: 14pt Arial, sans-serif; 
-		background: lightgrey;
-		display: flex;
-		flex-direction: column;
-		height: 100vh;
-		width: 100%;
-		margin: 0 0;
-	}
-	canvas { 
-		display: inline-block; 
-		background: #202020; 
+
+	canvas {
+		display: inline-block;
+		background: #202020;
 		width: 100%;
 		height: 100%;
 		box-shadow: 0px 0px 10px blue;
 	}
-	#controls {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		justify-content: space-around;
-		height: 20%;
-		width: 100%;
-	}
-	#record { height: 15vh; }
-	#record.recording { 
-		background: red;
-		background: -webkit-radial-gradient(center, ellipse cover, #ff0000 0%,lightgrey 75%,lightgrey 100%,#7db9e8 100%); 
-		background: -moz-radial-gradient(center, ellipse cover, #ff0000 0%,lightgrey 75%,lightgrey 100%,#7db9e8 100%); 
-		background: radial-gradient(center, ellipse cover, #ff0000 0%,lightgrey 75%,lightgrey 100%,#7db9e8 100%); 
-	}
-	#save, #save img { height: 10vh; }
-	#save { opacity: 0.25;}
-	#save[download] { opacity: 1;}
-	#viz {
-		height: 80%;
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-around;
-		align-items: center;
-	}
 	@media (orientation: landscape) {
 		body { flex-direction: row;}
-		#controls { flex-direction: column; height: 100%; width: 10%;}
-		#viz { height: 100%; width: 90%;}
 	}
-
 	</style>
 
     
@@ -99,12 +63,70 @@
                 <img src="static/images/hvb-icon.svg" width="40px" height="40px">
                 </a>
             </div>
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#" id="hvb-tutorial-link" data-toggle="modal" data-target="#tutorial-modal"><i class="fa fa-question-circle"></i></a> 
+                    </li>
+                </ul>
+            </div>
         </div>
         <!-- /.container -->
     </nav>
 
     <section id="recording-studio" class="container content-section text-center">
         <div class="back-wall">
+            <div class="wall-row">
+                <div class="wall-cell-container">
+                    <div id="r0s1" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r0s2" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r0s3" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r0s4" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r0s5" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r0s6" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r0s7" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r0s8" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r0s9" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r0s10" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r0s11" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r0s12" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r0s13" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r0s14" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r0s15" class="wall-cell"></div>
+                </div>
+            </div>
             <div class="wall-row">
                 <div class="wall-cell-container">
                     <div id="r1s1" class="wall-cell"></div>
@@ -481,37 +503,87 @@
                     <div id="r8s15" class="wall-cell"></div>
                 </div>
             </div>
+            <div class="wall-row">
+                <div class="wall-cell-container">
+                    <div id="r9s1" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r9s2" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r9s3" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r9s4" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r9s5" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r9s6" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r9s7" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r9s8" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r9s9" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r9s10" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r9s11" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r9s12" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r9s13" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r9s14" class="wall-cell"></div>
+                </div>
+                <div class="wall-cell-container">
+                    <div id="r9s15" class="wall-cell"></div>
+                </div>
+            </div>
         </div>
-        <button id="hvb_recordsentence" class="hvb_record">Record</button>
-        <button id="hvb_playsentence">Play</button>
-        <div class="hvb_volume">
-            <canvas id="analyser" width="1024" height="500"></canvas>
-            
-            <!-- div id="hvb_volume1"></div>
-            <div id="hvb_volume2"></div>
-            <div id="hvb_volume3"></div>
-            <div id="hvb_volume4"></div>
-            <div id="hvb_volume5"></div>
-            <div id="hvb_volume6"></div>
-            <div id="hvb_volume7"></div -->
+        <button id="hvb-record-sentence" class="hvb-record"><i class="fa fa-circle"></i><br>Record</button>
+        <button id="hvb-play-sentence"><i class="fa fa-play"></i><br>Playback</button>
+        <div class="hvb-volume-wrapper">
+            <div class="hvb-volume">
+                <canvas id="hvb-analyser" width="1024" height="500"></canvas>
+                <!-- div id="hvb_volume1"></div>
+                <div id="hvb_volume2"></div>
+                <div id="hvb_volume3"></div>
+                <div id="hvb_volume4"></div>
+                <div id="hvb_volume5"></div>
+                <div id="hvb_volume6"></div>
+                <div id="hvb_volume7"></div -->
+            </div>
         </div>
-        <div class="hvb_sentence"></div>
-        <div class="hvb_pitch">
-            <canvas id="wavedisplay" width="1024" height="500"></canvas>            
-            <!-- div id="hvb_pitch1"></div>
+
+        <div id="hvb-sentence-console" class="hvb-sentence"></div>
+        <div class="hvb-pitch">
+            <!-- canvas id="wavedisplay" width="1024" height="500"></canvas -->            
+            <div id="hvb_pitch1"></div>
             <div id="hvb_pitch2"></div>
             <div id="hvb_pitch3"></div>
             <div id="hvb_pitch4"></div>
             <div id="hvb_pitch5"></div>
             <div id="hvb_pitch6"></div>
-            <div id="hvb_pitch7"></div -->
+            <div id="hvb_pitch7"></div>
         </div>
-        <button id="hvb_nextsentence">Next</button>
-        <button id="hvb_settings">Settings</button>
+        <button id="hvb-next-sentence"><i class="fa fa-step-forward"></i><br>Next</button>
+        <button id="hvb-settings"><i class="fa fa-cog"></i><br>Account</button>
     </section>
 
-        {% for key, value in next_hvb.items() %}
-              <p hidden class="hvb_next">{{key}},{{value}}</p>
+
+        {% for key, value in next_sentence_block.items() %}
+              <p hidden class="hvb-next">{{key}},{{value}}</p>
         {% endfor %}    
     <!-- Core JavaScript Files -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -519,13 +591,19 @@
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     <script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
-    <script src="static/js/hvb_record.js"></script>
+
+    <script src="static/js/tp/audioDisplay.js"></script>
+    <script src="static/js/hvb-sentence.js"></script>
+    <script src="static/js/hvb-audio.js"></script>
+    <script src="static/js/hvb-audio-animation.js"></script>
+    <script src="static/js/hvb-record.js"></script>
+    <script src="static/js/hvb-main.js"></script>
+
     <!-- Custom JavaScript Files -->
     <script src="static/js/tp/easing-scrolling.js"></script>
     <script src="static/js/tp/jquery.responsiveVideo.js"></script>
-    <script src="static/js/tp/audioDisplay.js"></script>
-	<script src="static/js/tp/recorder.js"></script>
-	<script src="static/js/tp/main.js"></script>
+
+
     
     <script>
     $( 'body' ).responsiveVideo();

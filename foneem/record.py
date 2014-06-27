@@ -22,6 +22,9 @@
 # ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+__author__ = 'jpercent'
+
 from flask import request, render_template, session, redirect
 from foneem import app, S3, parse_config, hvb_connect_db, hvb_close_db
 import xml.etree.ElementTree as ET
@@ -45,23 +48,34 @@ def record():
         
         conf = parse_config()
         conn, cursor = hvb_connect_db(conf['db'])
-        cursor.execute("""select id, sentence from sentences;""")
-        print("RECORD - ")
-        next_hvb = dict(cursor.fetchmany(size=100))
+        cursor.execute("""select s.id, s.sentence from sentences as s;""")
+        next_sentence_block = dict(cursor.fetchmany(size=100))
+        for id, sentence in next_sentence_block.items():
+            cursor.execute("""select g.css_id from phonemes as p, sentence_phoneme as sp, grid as g, phoneme_grid as pg where p.id = pg.phoneme_id and g.id = pg.grid_id and sp.sentence_id = %s and sp.phoneme_id = p.id;""", [id])
+            phonemes = cursor.fetchall()
+
+            print("Phonemes are ", phonemes)
+            new_value = str(sentence)
+            for phoneme in phonemes:
+                #assert len(phoneme) == 1
+                new_value = new_value +':'+str(phoneme[0])
+            print("The new value is ", new_value)
+            next_sentence_block[id] = new_value
+#        next_hvb = dict(cursor.fetchmany(size=100))
         hvb_close_db(conn, cursor)
-        return render_template('record.html', next_hvb=next_hvb)
+        return render_template('record.html', next_sentence_block=next_sentence_block)
     except Exception as e:
         print("Exception = ", dir(e), e, e.__doc__)
 
-def upload_wav_to_s3(conf, key):
+def upload_wav_to_s3(conf, sound_file_data, filename):
     access_key_id = str(conf['aws']['access_key_id'])
     secret_key = str(conf['aws']['secret_access_key'])
     conn = S3.AWSAuthConnection(access_key_id, secret_key)
     bucket_name = "human-voice-bank"
-    sound_file = open(key, 'rb').read()
-    response = conn.put(bucket_name, str(key), S3.S3Object(sound_file, {'title': 'title'}), {'Content-Type': 'audio/wav'})
-    response = conn.get_acl(bucket_name, key)
-    print("S3 put resposne for object ", str(key), " = ", response.http_response.status)
+    #sound_file = open(key, 'rb').read()
+    response = conn.put(bucket_name, str(filename), S3.S3Object(sound_file_data, {'title': 'title'}), {'Content-Type': 'audio/wav'})
+    response = conn.get_acl(bucket_name, filename)
+    print("S3 put resposne for object ", str(filename), " = ", response.http_response.status)
     acl_xml = response.object.data
     root = ET.fromstring(acl_xml)    
     make_public = '<Grant><Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group"><URI>http://acs.amazonaws.com/groups/global/AllUsers</URI></Grantee><Permission>READ</Permission></Grant>'
@@ -69,8 +83,8 @@ def upload_wav_to_s3(conf, key):
     access_control = root.find('{http://s3.amazonaws.com/doc/2006-03-01/}AccessControlList')
     access_control.append(grant_public)
     new_acl = ET.tostring(root, encoding='utf8', method='xml')
-    response = conn.put_acl(bucket_name, key, new_acl)
-    print("ACL update for object ", str(key), " = ", response.http_response.status)
+    response = conn.put_acl(bucket_name, filename, new_acl)
+    print("ACL update for object ", str(filename), " = ", response.http_response.status)
     return response.http_response.status
 
 @app.route('/upload/<filename>', methods=['POST'])
@@ -78,11 +92,9 @@ def upload(filename):
     if not ('email' in session):
         return redirect("/", code=302)
 
-    import random
     conf = parse_config()        
     _file = request.files['test.wav']
-    #XXX - this was rushed for a demo. no need to save the file then reread it back in
+    filename = filename.replace(':', '_')
     filename = session['email']+'-'+filename
-    _file.save(filename)
-    upload_wav_to_s3(conf, filename)
+    upload_wav_to_s3(conf, _file.stream.read(), filename)
     return  'OK'

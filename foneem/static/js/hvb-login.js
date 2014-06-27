@@ -55,7 +55,7 @@ var loginChecker = {};
 
 $( document ).ready(function() {
     // W3C spec says sessionStorage should accept booleans, but it is
-    // not supported at this time. The value true gets coersed into
+    // not supported at this time. The value true gets coerced into
     // 'true', so, because true/false is readable, we use
     // 'true'/'false' string literals explicitly. Avoids type
     // coerision today and bugs tomorrow.

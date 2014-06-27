@@ -31,9 +31,10 @@
 }
 
 @mixin transition($transitionProperty, $transitionType, $transitionLength) {
-  transition: $transitionProperty $transitionType $transitionLength;
-  -moz-transition: $transitionProperty $transitionType $transitionLength;
   -webkit-transition: $transitionProperty $transitionType $transitionLength;
+  -moz-transition: $transitionProperty $transitionType $transitionLength;
+  -o-transition: $transitionProperty $transitionType $transitionLength;
+  transition: $transitionProperty $transitionType $transitionLength;
 }
 
 @mixin dimensions($dimensionNum) {

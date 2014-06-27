@@ -42,7 +42,7 @@ function gotBuffers( buffers ) {
 
     drawBuffer( canvas.width, canvas.height, canvas.getContext('2d'), buffers[0] );
 
-    // the ONLY time gotBuffers is called is right after a new recording is completed - 
+    // the ONLY time gotBuffers is called is right after a new recording is completed -
     // so here's where we should set up the download.
     //audioRecorder.exportWAV( doneEncoding );
 }
@@ -83,22 +83,15 @@ function cancelAnalyserUpdates() {
     rafID = null;
 }
 
-function updateAnalysers(time) {
-    if (!analyserContext) {
-        var canvas = document.getElementById("analyser");
-        canvasWidth = canvas.width;
-        canvasHeight = canvas.height;
-        analyserContext = canvas.getContext('2d');
-    }
-
-    // analyzer draw code here
+function drawAnalyserContext(canvasWidth, canvasHeight, analyserContext) {
+    // analyser draw code here
     {
         var SPACING = 3;
         var BAR_WIDTH = 1;
         var numBars = Math.round(canvasWidth / SPACING);
         var freqByteData = new Uint8Array(analyserNode.frequencyBinCount);
 
-        analyserNode.getByteFrequencyData(freqByteData); 
+        analyserNode.getByteFrequencyData(freqByteData);
 
         analyserContext.clearRect(0, 0, canvasWidth, canvasHeight);
         analyserContext.fillStyle = '#F6D565';
@@ -118,8 +111,20 @@ function updateAnalysers(time) {
             analyserContext.fillRect(i * SPACING, canvasHeight, BAR_WIDTH, -magnitude);
         }
     }
-    
     rafID = window.requestAnimationFrame( updateAnalysers );
+}
+
+function updateAnalysers(time) {
+    try {
+        var canvas = document.getElementById("hvb-analyser");
+        var canvasWidth = canvas.width;
+        var canvasHeight = canvas.height;
+        var analyserContext = canvas.getContext('2d');
+        drawAnalyserContext(canvasWidth, canvasHeight, analyserContext);
+    }
+    catch (e) {
+        console.log("updateAnalysers Exception: ", e);
+    }
 }
 
 function toggleMono() {
@@ -147,13 +152,13 @@ function gotStream(stream) {
 
     analyserNode = audioContext.createAnalyser();
     analyserNode.fftSize = 2048;
-    inputPoint.connect( analyserNode );
+    inputPoint.connect(analyserNode);
 
-    audioRecorder = new Recorder( inputPoint );
+    audioRecorder = new Recorder(inputPoint);
     zeroGain = audioContext.createGain();
     zeroGain.gain.value = 0.0;
     inputPoint.connect( zeroGain );
-    zeroGain.connect( audioContext.destination );
+    zeroGain.connect(audioContext.destination);
     updateAnalysers();
 }
 
