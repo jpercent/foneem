@@ -6,9 +6,9 @@ var hvb_opacity = {};
     self.increment = .25;
 
     self.updateOpacity = function(elementId) {
-        self.opacity = self.opacity + self.increment
+        self.opacity = self.opacity + self.increment;
         if (self.opacity > 1.0) {
-            self.opacity = 1.0
+            self.opacity = 1.0;
         }
         var element = document.getElementById(elementId);
         element.style.filter = "alpha(opacity="+self.opacity.toString()+");";
