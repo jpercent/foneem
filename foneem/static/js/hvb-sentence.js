@@ -27,7 +27,8 @@
 
 var hvb_sentence_manager = {};
 (function(self) {
-	self.keyValueArray = [];
+    self.keyValueArray = [];
+	self.sentenceMap = {};
 	self.kVACursor = 0;
     self.nextClass = '.hvb-next';
     self.sentenceClass = '.hvb-sentence';
@@ -39,16 +40,30 @@ var hvb_sentence_manager = {};
         $(self.nextClass).each(function(i) {
             var key_value = $(this).text().split(",");
             var key = parseInt(key_value[0].trim(), 10);
-            var value = key_value[1].trim();
-			self.keyValueArray.push([key, value]);
-            sessionStorage.setItem(key, value);
+            var sentence_phoneme_split = key_value[1].trim().split(":");
+            var sentence = sentence_phoneme_split[0].trim();
+            console.log("Sentence = ", sentence);
+            for (var i = 1; i < sentence_phoneme_split.length; i++) {
+                //console.log("css_id = ", sentence_phoneme_split[i]);
+            }
+
+            obj = new Object();
+            obj.key = key;
+            obj.sentence = sentence;
+            obj.phonemes = sentence_phoneme_split;
+            self.sentenceMap[obj.key.toString()] = obj;
+
+			self.keyValueArray.push([key, sentence]);
+            sessionStorage.setItem(key, sentence);
             count += 1;
         });
         sessionStorage.setItem(self.cursorKey, 0);
         sessionStorage.setItem(self.cursorLengthKey, count);
         console.log("hvb-sentences.createSentenceCursor: cursor length = ", count);
     };
-    
+
+
+
     self.setNextSentence = function() {
         var cursor = sessionStorage.getItem(self.cursorKey);
         var end = sessionStorage.getItem(self.cursorLengthKey);
@@ -71,6 +86,7 @@ var hvb_sentence_manager = {};
         self.createSentenceCursor();
         self.setNextSentence();
     };
+
 }(hvb_sentence_manager));
 
 window.hvb_sentence_manager = hvb_sentence_manager;
