@@ -5,12 +5,21 @@ var hvb_opacity = {};
     self.opacity = 0.0;
     self.increment = .25;
 
-    self.updateOpacity = function(elementId) {
-        self.opacity = self.opacity + self.increment;
+
+    self.updateOpacityByIncrement = function() {
+        self.updateOpacity(self.increment);
+    };
+
+    self.updateOpacity = function(increase) {
+        self.opacity = self.opacity + increase;
         if (self.opacity > 1.0) {
             self.opacity = 1.0;
         }
-        var element = document.getElementById(elementId);
+        self.setOpacity();
+    };
+
+    self.setOpacity = function() {
+        var element = document.getElementById(self.id);
         element.style.filter = "alpha(opacity="+self.opacity.toString()+");";
         element.style.MozOpacity = self.opacity;
         element.style.opacity = self.opacity;
@@ -21,7 +30,7 @@ var hvb_opacity = {};
         self.id = id;
         self.name = name;
         self.increment = increment;
-    }
+    };
 
 }(hvb_opacity));
 window.hvb_opacity = hvb_opacity;
