@@ -35,7 +35,7 @@ hvb_audio_animation = {};
         if(self.animate) {
             var distribution = 3;
             var barWidth = 1;
-            var bars = Math.round(canvasWidth/distribution);
+            var bars = Math.round(canvasWidth);
             var freqByteData = new Uint8Array(self.analyserNode.frequencyBinCount);
 
             self.analyserNode.getByteFrequencyData(freqByteData);
@@ -57,6 +57,7 @@ hvb_audio_animation = {};
                 magnitude = magnitude / multiplier;
                 var magnitude2 = freqByteData[i * multiplier];
                 analyserContext.fillStyle = "hsl( " + Math.round((i*360)/bars) + ", 100%, 50%)";
+                console.log("I = ", i, "distribution = ", distribution, " barwidth = ", barWidth, " -magnatudue= ", -magnitude);
                 analyserContext.fillRect(i * distribution, canvasHeight, barWidth, -magnitude);
             }
         }
