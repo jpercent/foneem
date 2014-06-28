@@ -60,6 +60,8 @@ hvb_audio_animation = {};
                 console.log("I = ", i, "distribution = ", distribution, " barwidth = ", barWidth, " -magnatudue= ", -magnitude);
                 analyserContext.fillRect(i * distribution, canvasHeight, barWidth, -magnitude);
             }
+        } else {
+            analyserContext.clearRect(0, 0, canvasWidth, canvasHeight);
         }
         self.rafID = window.requestAnimationFrame(self.updateAnimation);
     };
