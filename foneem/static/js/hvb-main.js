@@ -65,10 +65,9 @@ var hvb_button_manager = {};
         var soundFileUrl = window.hvb_recorder.soundFileUrl;
         var playbackButton = document.getElementById(self.playButtonId);
 //		var au = window.document.createElement('audio');
-        playbackButton.innerHTML = 'Playback';
+        playbackButton.innerHTML = "<i class='fa fa-play'></i><br>PlaybackPlayback";
         playbackButton.onclick = function(e) {
-            playbackButton.innerHTML = "Playback <audio src='"+soundFileUrl+"' autoplay></audio>"
-
+            playbackButton.innerHTML = "<i class='fa fa-play'></i><br>PlaybackPlayback <audio src='"+soundFileUrl+"' autoplay></audio>";
         }
    };
 
