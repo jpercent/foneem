@@ -3,6 +3,7 @@ from optparse import OptionParser
 import psycopg2
 import json
 import os
+import sys
 import traceback
 
 app = Flask(__name__, template_folder='template')
@@ -46,6 +47,7 @@ def hvb_close_db(conn, cursor):
     cursor.close()
     conn.close()
 
+import foneem.websock
 import foneem.admin    
 import foneem.record
 import foneem.S3
