@@ -25,6 +25,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 from tornado.web import Application, FallbackHandler
+from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
 from tornado.websocket import WebSocketHandler
 import tornado.escape
@@ -37,6 +38,7 @@ import json
 import time
 import threading
 import multiprocessing
+import itsdangerous
 
 __author__ = 'jpercent'
 
@@ -60,12 +62,17 @@ class MultiprocessService(multiprocessing.Process):
 
 
 class TornadoWSHandler(WebSocketHandler):
+    def __init__(self, application, request, **kwargs):
+        super(TornadoWSHandler, self).__init__(application, request, **kwargs)
+
     def open(self):
-        print 'new connection'
+        print ('new connection headers = ', self.request.headers)
         self.write_message(json.dumps(dict(output="Hello World")))
 
     def on_message(self, incoming):
         print 'message received %s' % incoming
+
+
 
         text = json.loads(incoming).get('text', None)
         msg = text if text else 'Sorry could you repeat?'
@@ -75,6 +82,15 @@ class TornadoWSHandler(WebSocketHandler):
 
     def on_close(self):
         print 'connection closed'
+
+
+    def set_app(self, app):
+        self.app = app
+
+    def authenticate_token(self, token):
+        s = itsdangerous.TimestampSigner(self.app.secret_key)
+        user_email = s.unsign(token)
+        return user_email
 
 
 class TornadoWebsocketServer(object):
@@ -87,14 +103,15 @@ class TornadoWebsocketServer(object):
         self.host = host
         self.port = port
         self.ws_route = ws_route
-        self.application_args = [(self.ws_route, self.websock_handler)]
+        self.application_args = [(self.ws_route, self.websock_handler), ]
         if self.wsgi_app:
             self.application_args.append((r'.*', FallbackHandler, dict(fallback=self.wsgi_app)))
 
     def start(self):
         try:
             application = Application(self.application_args)
-            application.listen(self.port)
+            server = HTTPServer(application)
+            server.listen(self.port)
             IOLoop.instance().start()
         except Exception as e:
             import sys
