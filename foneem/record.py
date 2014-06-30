@@ -38,8 +38,8 @@ def calibrate():
 
 @app.route('/test-websock')
 def test_websock():
-    if not ('email' in session):
-        return redirect("/", code=302)
+    #if not ('email' in session):
+    #    return redirect("/", code=302)
 
     return render_template('test_websockets.html')
 
