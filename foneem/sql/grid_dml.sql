@@ -1,4 +1,7 @@
 
+insert into phonemes(id, symbol) values(53,'OO');
+insert into phonemes(id, symbol) values(54,'PH');
+insert into phonemes(id, symbol) values(55,'AW');
 
 insert into grid(id, css_id) values(0, 'r1c4');
 insert into grid(id, css_id) values(1, 'r1c12');
@@ -73,7 +76,7 @@ insert into phoneme_grid(phoneme_id, grid_id) values(46,17);
 insert into phoneme_grid(phoneme_id, grid_id) values(0,17);
 insert into phoneme_grid(phoneme_id, grid_id) values(44,18);
 insert into phoneme_grid(phoneme_id, grid_id) values(36,19);
-insert into phoneme_grid(phoneme_id, grid_id) values(,20);
+insert into phoneme_grid(phoneme_id, grid_id) values(53,20);
 insert into phoneme_grid(phoneme_id, grid_id) values(2,21);
 insert into phoneme_grid(phoneme_id, grid_id) values(23,22);
 insert into phoneme_grid(phoneme_id, grid_id) values(9,22);
@@ -86,14 +89,14 @@ insert into phoneme_grid(phoneme_id, grid_id) values(34,28);
 insert into phoneme_grid(phoneme_id, grid_id) values(10,29);
 insert into phoneme_grid(phoneme_id, grid_id) values(1,30);
 insert into phoneme_grid(phoneme_id, grid_id) values(15,31);
-insert into phoneme_grid(phoneme_id, grid_id) values(,31);
+insert into phoneme_grid(phoneme_id, grid_id) values(54,31);
 insert into phoneme_grid(phoneme_id, grid_id) values(18,32);
 insert into phoneme_grid(phoneme_id, grid_id) values(7,32);
 insert into phoneme_grid(phoneme_id, grid_id) values(30,33);
 insert into phoneme_grid(phoneme_id, grid_id) values(13,34);
-insert into phoneme_grid(phoneme_id, grid_id) values(26,35);
+insert into phoneme_grid(phoneme_id, grid_id) values(55,35);
 insert into phoneme_grid(phoneme_id, grid_id) values(51,36);
-insert into phoneme_grid(phoneme_id, grid_id) values(,37);
+insert into phoneme_grid(phoneme_id, grid_id) values(26,37);
 insert into phoneme_grid(phoneme_id, grid_id) values(47,38);
 insert into phoneme_grid(phoneme_id, grid_id) values(20,39);
 insert into phoneme_grid(phoneme_id, grid_id) values(31,40);
