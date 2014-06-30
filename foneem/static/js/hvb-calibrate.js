@@ -1,4 +1,4 @@
-// Copyright (c) James Percent.
+// Copyright (c) 2014 James Percent.
 // All rights reserved.
 // Redistribution and use in source and binary forms, with or without modification,
 // are permitted provided that the following conditions are met:
@@ -51,6 +51,8 @@ var hvb_calibrate = {};
     self.init = function() {
         window.hvb_audio.registerCallback(self.initCallback);
         window.hvb_audio.initAudio(self.initCallback);
+        window.hvb_sentence_manager.loadSentences();
+        //window.hvb_opacity.setOpacity();
     };
 
 }(hvb_calibrate));
