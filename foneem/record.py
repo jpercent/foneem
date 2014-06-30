@@ -1,4 +1,4 @@
-# Copyright (c) James Percent. All rights reserved.
+# Copyright (c) 2014 James Percent. All rights reserved.
 # Redistribution and use in source and binary forms, with or without modification,
 # are permitted provided that the following conditions are met:
 #
@@ -33,8 +33,15 @@ import xml.etree.ElementTree as ET
 def calibrate():
     if not ('email' in session):
         return redirect("/", code=302)
-        
+
     return render_template('calibrate.html')
+
+@app.route('/test-websock')
+def test_websock():
+    if not ('email' in session):
+        return redirect("/", code=302)
+
+    return render_template('test_websockets.html')
 
 @app.route('/record1')
 def record1():
