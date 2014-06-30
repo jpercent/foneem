@@ -39,6 +39,13 @@ import time
 import threading
 import multiprocessing
 import itsdangerous
+import hashlib
+
+#from flask import request, render_template, session, redirect
+
+from foneem import app, parse_config, hvb_connect_db, hvb_close_db
+from flask.sessions import SecureCookieSessionInterface
+import sessions
 
 __author__ = 'jpercent'
 
@@ -61,12 +68,48 @@ class MultiprocessService(multiprocessing.Process):
         self.exit.set()
 
 
+class FlaskSessionWrapper(SecureCookieSessionInterface):
+    def authenticated(self, cookie_key, cookies):
+        signer_kwargs = dict(
+            key_derivation=self.key_derivation,
+            digest_method=self.digest_method
+        )
+        serializer = itsdangerous.URLSafeTimedSerializer(app.secret_key, salt=self.salt,
+                                      serializer=self.serializer, signer_kwargs=signer_kwargs)
+        session_val = cookies.get(cookie_key)
+        if not session_val:
+            return {}
+        assert session_val.key == cookie_key
+        session_data = serializer.loads(session_val.value)
+        return session_data
+
+
 class TornadoWSHandler(WebSocketHandler):
     def __init__(self, application, request, **kwargs):
         super(TornadoWSHandler, self).__init__(application, request, **kwargs)
 
+    def authenticate(self):
+        ret = {}
+        try:
+            session_wrapper = FlaskSessionWrapper()
+            session_data = session_wrapper.authenticated(app.session_cookie_name, self.request.cookies)
+            if not ('email' in session_data):
+                message = 'TornadoWebsocketServer: FATAL failed to authenticate websocket '
+                print(message)
+                raise Exception(message)
+            else:
+                print("TornadoWebsocketServer: INFO authenticated user identified by ", session_data['email'])
+
+        except Exception as e:
+            import sys
+            import traceback
+            print('TornadoWebsocketServer: FATAL failed to authenticate websocket ')
+            exc_type, exc_value, exc_traceback = sys.exc_info()
+            traceback.print_exception(exc_type, exc_value, exc_traceback, file=sys.stderr)
+            raise e
+
     def open(self):
-        print ('new connection headers = ', self.request.headers)
+        self.authenticate()
         self.write_message(json.dumps(dict(output="Hello World")))
 
     def on_message(self, incoming):
