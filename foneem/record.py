@@ -33,14 +33,12 @@ import xml.etree.ElementTree as ET
 def calibrate():
     if not ('email' in session):
         return redirect("/", code=302)
-
     return render_template('calibrate.html')
 
 @app.route('/test-websock')
 def test_websock():
-    #if not ('email' in session):
-    #    return redirect("/", code=302)
-
+    if not ('email' in session):
+        return redirect("/", code=302)
     return render_template('test_websockets.html')
 
 @app.route('/record1')
@@ -51,26 +49,9 @@ def record1():
 def record():
     try:
         if not ('email' in session):
-           return redirect('/', code=302)
-        
-        conf = parse_config()
-        conn, cursor = hvb_connect_db(conf['db'])
-        cursor.execute("""select s.id, s.sentence from sentences as s;""")
-        next_sentence_block = dict(cursor.fetchmany(size=100))
-        for id, sentence in next_sentence_block.items():
-            cursor.execute("""select g.css_id from phonemes as p, sentence_phoneme as sp, grid as g, phoneme_grid as pg where p.id = pg.phoneme_id and g.id = pg.grid_id and sp.sentence_id = %s and sp.phoneme_id = p.id;""", [id])
-            phonemes = cursor.fetchall()
+            return redirect('/', code=302)
 
-            #print("Phonemes are ", phonemes)
-            new_value = str(sentence)
-            for phoneme in phonemes:
-                #assert len(phoneme) == 1
-                new_value = new_value +':'+str(phoneme[0])
-            #print("The new value is ", new_value)
-            next_sentence_block[id] = new_value
-#        next_hvb = dict(cursor.fetchmany(size=100))
-        hvb_close_db(conn, cursor)
-        return render_template('record.html', next_sentence_block=next_sentence_block)
+        return render_template('record.html')
     except Exception as e:
         print("Exception = ", dir(e), e, e.__doc__)
 
@@ -104,4 +85,5 @@ def upload(filename):
     filename = filename.replace(':', '_')
     filename = session['email']+'-'+filename
     upload_wav_to_s3(conf, _file.stream.read(), filename)
-    return  'OK'
+    return 'OK'
+

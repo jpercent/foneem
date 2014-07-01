@@ -564,10 +564,6 @@
         <button id="hvb-settings"><i class="fa fa-cog"></i><br>Account</button>
     </section>
 
-
-        {% for key, value in next_sentence_block.items() %}
-              <p hidden class="hvb-next">{{key}},{{value}}</p>
-        {% endfor %}    
     <!-- Core JavaScript Files -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
@@ -576,6 +572,7 @@
     <script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
 
     <script src="static/js/tp/audioDisplay.js"></script>
+    <script src="static/js/hvb-websock.js"></script>
     <script src="static/js/hvb-sentence.js"></script>
     <script src="static/js/hvb-audio.js"></script>
     <script src="static/js/hvb-audio-animation.js"></script>
@@ -586,8 +583,6 @@
     <script src="static/js/tp/easing-scrolling.js"></script>
     <script src="static/js/tp/jquery.responsiveVideo.js"></script>
 
-
-    
     <script>
     $( 'body' ).responsiveVideo();
     </script>
