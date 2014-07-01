@@ -91,7 +91,7 @@ create table if not exists address (
 
 create table user_sentence(
     user_id int references users(id),
-    next_sentence int references sentences(id)
+    sentence_id int references sentences(id)
 );
 
 
