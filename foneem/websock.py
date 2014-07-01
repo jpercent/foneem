@@ -45,7 +45,6 @@ import hashlib
 
 from foneem import app, parse_config, hvb_connect_db, hvb_close_db
 from flask.sessions import SecureCookieSessionInterface
-import sessions
 
 __author__ = 'jpercent'
 
