@@ -27,64 +27,67 @@
 
 var hvb_sentence_manager = {};
 (function(self) {
-    self.keyValueArray = [];
-	self.sentenceMap = {};
-	self.kVACursor = 0;
     self.nextClass = '.hvb-next';
     self.sentenceClass = '.hvb-sentence';
     self.cursorKey = 'hvb-cursor';
     self.cursorLengthKey = 'hvb-cursor-length'
-	
-    self.createSentenceCursor = function() {
-        var count = 0;
-        $(self.nextClass).each(function(i) {
-            var key_value = $(this).text().split(",");
-            var key = parseInt(key_value[0].trim(), 10);
-            var sentence_phoneme_split = key_value[1].trim().split(":");
-            var sentence = sentence_phoneme_split[0].trim();
-            console.log("Sentence = ", sentence);
-            for (var i = 1; i < sentence_phoneme_split.length; i++) {
-                //console.log("css_id = ", sentence_phoneme_split[i]);
-            }
+    self.next_sentence_message = JSON.stringify({'code': 'next-sentence', 'count': 25});
 
-            obj = new Object();
-            obj.key = key;
-            obj.sentence = sentence;
-            obj.phonemes = sentence_phoneme_split;
-            self.sentenceMap[obj.key.toString()] = obj;
-
-			self.keyValueArray.push([key, sentence]);
-            sessionStorage.setItem(key, sentence);
-            count += 1;
-        });
-        sessionStorage.setItem(self.cursorKey, 0);
-        sessionStorage.setItem(self.cursorLengthKey, count);
-        console.log("hvb-sentences.createSentenceCursor: cursor length = ", count);
+    self.request = function() {
+        self.websock.send(self.next_sentence_message);
     };
 
+    self.parseSentence = function(sentence) {
+        var sentence_phoneme_split = sentence.sentence.trim().split(":");
+        var sentence = sentence_phoneme_split[0].trim();
+        console.log("Sentence = ", sentence);
+//        for (var i = 1; i < sentence_phoneme_split.length; i++) {
+//            console.log("css_id = ", sentence_phoneme_split[i]);
+//        }
+        return sentence;
+    };
 
 
     self.setNextSentence = function() {
-        var cursor = sessionStorage.getItem(self.cursorKey);
-        var end = sessionStorage.getItem(self.cursorLengthKey);
-        if(!(self.kVACursor < self.keyValueArray.length)) {
-            throw "hvb-sentence.setNextSentence: FATAL: cursor out of bounds";
+        var sentence = self.parseSentence(self.sentences[self.iter]);
+		$(self.sentenceClass).html(sentence);
+        if(self.iter > self.sentences.length) {
+            self.request();
         }
-		var nextKeyValue = self.keyValueArray[self.kVACursor];
-		self.kVACursor += 1;
-        var next_key = sessionStorage.key(cursor);
-        var next_sentence = sessionStorage.getItem(next_key);
-        sessionStorage.setItem(self.cursorKey, parseInt(next_key, 10) + 1);
-		$(self.sentenceClass).html(nextKeyValue[1]);
+        self.iter ++;
     };
-	
-    self.getSentence = function() {
-        return $(self.sentenceClass).html();
+
+    self.updateSentencesCompleted = function() {
+        var message = {'code': 'sentence-update', 'id': self.sentences[(self.iter-1)]['id']};
+//        console.log("Message = ", message);
+      self.websock.send(JSON.stringify(message))
+    };
+
+    self.nextSentence = function(nextSentenceMessage) {
+        self.sentences = nextSentenceMessage['sentences'];
+/*        for(var i = 0; i < self.sentences.length; i++) {
+            var id = self.sentences[i]['id'];
+            var sentence = self.sentences[i]['sentence'];
+            //console.log("Id = ", id, "Sentence = ", sentence);
+        }
+*/
+        self.iter = 0;
+        self.setNextSentence();
     };
 
     self.init = function() {
-        self.createSentenceCursor();
-        self.setNextSentence();
+        self.websock = window.hvb_websock;
+        self.websock.init(self.initCallback);
+    };
+
+    self.initCallback = function() {
+        try {
+            self.websock.registerHandler('next-sentence', self.nextSentence);
+            self.request();
+        } catch (e ) {
+            console.log("Failed to initialize websockets... ");
+            alert("Failed to initialize websockets; try upgrading to Chrome version > 35.0.1916.153.");
+        }
     };
 
 }(hvb_sentence_manager));

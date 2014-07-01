@@ -69,41 +69,49 @@ class MultiprocessService(multiprocessing.Process):
 
 
 class FlaskSessionWrapper(SecureCookieSessionInterface):
-    def authenticated(self, cookie_key, cookies):
+    def authenticate(self, cookie_key, cookies):
         signer_kwargs = dict(
             key_derivation=self.key_derivation,
             digest_method=self.digest_method
         )
         serializer = itsdangerous.URLSafeTimedSerializer(app.secret_key, salt=self.salt,
                                       serializer=self.serializer, signer_kwargs=signer_kwargs)
-        session_val = cookies.get(cookie_key)
-        if not session_val:
+        morsel_val = cookies.get(cookie_key)
+        if not morsel_val:
             return {}
-        assert session_val.key == cookie_key
-        session_data = serializer.loads(session_val.value)
+        assert morsel_val.key == cookie_key
+        session_data = serializer.loads(morsel_val.value)
         return session_data
 
 
-class TornadoWSHandler(WebSocketHandler):
+class TornadoWebsocketHandler(WebSocketHandler):
     def __init__(self, application, request, **kwargs):
-        super(TornadoWSHandler, self).__init__(application, request, **kwargs)
+        self.dispatch_table = {}
+        if 'hvb_handlers' in kwargs:
+            handlers = kwargs['hvb_handlers']
+            for code, handler in handlers.items():
+                self.dispatch_table[code] = handler
+
+            kwargs.pop('hvb_handlers')
+        super(TornadoWebsocketHandler, self).__init__(application, request, **kwargs)
 
     def authenticate(self):
         ret = {}
         try:
             session_wrapper = FlaskSessionWrapper()
-            session_data = session_wrapper.authenticated(app.session_cookie_name, self.request.cookies)
+            session_data = session_wrapper.authenticate(app.session_cookie_name, self.request.cookies)
             if not ('email' in session_data):
-                message = 'TornadoWebsocketServer: FATAL failed to authenticate websocket '
+                message = 'TornadoWebsocketHandler: FATAL failed to authenticate websocket '
                 print(message)
                 raise Exception(message)
             else:
-                print("TornadoWebsocketServer: INFO authenticated user identified by ", session_data['email'])
+                self.email = session_data['email']
+                print("TornadoWebsocketHandler: INFO authenticated user identified by ", session_data['email'])
 
         except Exception as e:
             import sys
             import traceback
-            print('TornadoWebsocketServer: FATAL failed to authenticate websocket ')
+            print('TornadoWebsocketHandler: FATAL failed to authenticate websocket ')
             exc_type, exc_value, exc_traceback = sys.exc_info()
             traceback.print_exception(exc_type, exc_value, exc_traceback, file=sys.stderr)
             raise e
@@ -114,21 +122,84 @@ class TornadoWSHandler(WebSocketHandler):
 
     def on_message(self, incoming):
         print 'message received %s' % incoming
-        text = json.loads(incoming).get('text', None)
-        msg = text if text else 'Sorry could you repeat?'
-        response = json.dumps(dict(output='Parrot: {0}'.format(msg)))
-        self.write_message(response)
+        message = json.loads(incoming)
+        message['email'] =  self.email
+        response = None
+
+        try:
+            response = self.dispatch(message)
+        except Exception as e:
+            import sys
+            import traceback
+            print('TornadoWebsocketHandler: WARNING dispatch method failed ')
+            exc_type, exc_value, exc_traceback = sys.exc_info()
+            traceback.print_exception(exc_type, exc_value, exc_traceback, file=sys.stderr)
+
+        if response:
+            json_response = json.dumps(response)
+            self.write_message(json_response)
+
+    def dispatch(self, message):
+        code_value = None
+        if 'code' in message:
+            code_value = message['code']
+
+        response = None
+        if code_value in self.dispatch_table:
+            response = self.dispatch_table[code_value](message)
+        return response
 
     def on_close(self):
+        pass
         print 'connection closed'
 
-    def set_app(self, app):
-        self.app = app
 
-    def authenticate_token(self, token):
-        s = itsdangerous.TimestampSigner(self.app.secret_key)
-        user_email = s.unsign(token)
-        return user_email
+def get_next_sentence(message):
+    print("Get next sentence", message, message['email'])
+    email = message['email']
+    if 'count' in message:
+        count = int(message['count'])
+        if count > 100:
+            count = 100
+    else:
+        count = 25
+
+    conf = parse_config()
+    conn, cursor = hvb_connect_db(conf['db'])
+
+    cursor.execute("""select s.id, s.sentence from sentences as s where s.id NOT IN(select s.id from users u, sentences s, user_sentence us  where  s.id = us.sentence_id and u.id = us.user_id and u.email = %s);""", [email]);
+    next_sentence_block = dict(cursor.fetchmany(count));
+    sentences = []
+    for id, sentence in next_sentence_block.items():
+        cursor.execute("""select g.css_id from phonemes as p, sentence_phoneme as sp, grid as g, phoneme_grid as pg where p.id = pg.phoneme_id and g.id = pg.grid_id and sp.sentence_id = %s and sp.phoneme_id = p.id;""",
+            [id])
+        phonemes = cursor.fetchall()
+
+        # print("Phonemes are ", phonemes)
+        new_value = str(sentence)
+        for phoneme in phonemes:
+            #assert len(phoneme) == 1
+            new_value = new_value + ':' + str(phoneme[0])
+        #print("The new value is ", new_value)
+        next_sentence_block[id] = new_value
+        sentences.append({'id': id, 'sentence': new_value})
+
+    next_block = {}
+    next_block['sentences'] = sentences
+    next_block['code'] = 'next-sentence'
+    #print("next sentence block = ", next_block)
+    hvb_close_db(conn, cursor)
+    return next_block
+
+
+def update_sentences_completed(message):
+    email = message['email']
+    sentence_id = message['id']
+    conf = parse_config()
+    conn, cursor = hvb_connect_db(conf['db'])
+    cursor.execute("""insert into user_sentence (user_id, sentence_id) values((select u.id from users u where u.email = %s), %s);""", [email, sentence_id]);
+    print("updated id = ", sentence_id, " email = ", email)
+    hvb_close_db(conn, cursor)
 
 
 class TornadoWebsocketServer(object):
@@ -136,12 +207,14 @@ class TornadoWebsocketServer(object):
         self.wsgi_app = wsgi_app
         self.websock_handler = websock_handler
         if not websock_handler:
-            self.websock_handler = TornadoWSHandler
+            self.websock_handler = TornadoWebsocketHandler
 
         self.host = host
         self.port = port
         self.ws_route = ws_route
-        self.application_args = [(self.ws_route, self.websock_handler), ]
+        hvb_handlers = {"next-sentence": get_next_sentence, "sentence-update": update_sentences_completed }
+
+        self.application_args = [(self.ws_route, self.websock_handler, dict(hvb_handlers=hvb_handlers))]
         if self.wsgi_app:
             self.application_args.append((r'.*', FallbackHandler, dict(fallback=self.wsgi_app)))
 

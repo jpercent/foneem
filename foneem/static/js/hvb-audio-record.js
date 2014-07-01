@@ -107,8 +107,11 @@ var hvb_recorder = {};
 			filename = $('.hvb-sentence').html()+'-'+new Date().toISOString() + '.wav'
 			xhr.open("POST","upload/"+filename,true);
 			xhr.send(fd);
+            var headers = xhr.getAllResponseHeaders();
+            console.log("headers = ", headers, " blob length = ", blob.size);
+            return blob.size;
 		}
-		upload(blob);		 
+		return upload(blob);
 	};
     
     self.interleave = function(leftChannel, rightChannel) {

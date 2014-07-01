@@ -57,7 +57,7 @@ hvb_audio_animation = {};
                 magnitude = magnitude / multiplier;
                 var magnitude2 = freqByteData[i * multiplier];
                 analyserContext.fillStyle = "hsl( " + Math.round((i*360)/bars) + ", 100%, 50%)";
-                console.log("I = ", i, "distribution = ", distribution, " barwidth = ", barWidth, " -magnatudue= ", -magnitude);
+                //console.log("I = ", i, "distribution = ", distribution, " barwidth = ", barWidth, " -magnatudue= ", -magnitude);
                 analyserContext.fillRect(i * distribution, canvasHeight, barWidth, -magnitude);
             }
         } else {
@@ -82,6 +82,7 @@ hvb_audio_animation = {};
         if(self.animate) {
             self.animate = false;
         } else {
+            console.log("animate.. ");
             self.animate = true;
         }
     };

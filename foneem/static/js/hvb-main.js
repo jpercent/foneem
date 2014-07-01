@@ -50,7 +50,10 @@ var hvb_button_manager = {};
 
        document.getElementById(self.nextButtonId).onclick = function(e) {
            self.unwirePlaybackButton();
-           window.hvb_recorder.upload();
+           var upload_size = window.hvb_recorder.upload();
+           if(upload_size > 1024) {
+               window.hvb_sentence_manager.updateSentencesCompleted();
+           }
            window.hvb_sentence_manager.setNextSentence();
        };
 
@@ -64,7 +67,6 @@ var hvb_button_manager = {};
     self.wirePlaybackButton = function() {
         var soundFileUrl = window.hvb_recorder.soundFileUrl;
         var playbackButton = document.getElementById(self.playButtonId);
-//		var au = window.document.createElement('audio');
         playbackButton.innerHTML = "<i class='fa fa-play'></i><br>PlaybackPlayback";
         playbackButton.onclick = function(e) {
             playbackButton.innerHTML = "<i class='fa fa-play'></i><br>PlaybackPlayback <audio src='"+soundFileUrl+"' autoplay></audio>";
