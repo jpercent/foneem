@@ -128,7 +128,7 @@ if __name__ == '__main__':
     execute_sql(conf['create'], cursor, conn)
     execute_sql(conf['vocalid'], cursor, conn)
     create_sentences_table(filename, cursor, conn)
-    generate_sentence_metadata(conn, cursor, conf['phoneme_dml'])
+    #generate_sentence_metadata(conn, cursor, conf['phoneme_dml'])
     execute_sql(conf['phoneme_dml'], cursor, conn)
     execute_sql(conf['grid_dml'], cursor, conn)
     hvb_close_db(conn, cursor)
