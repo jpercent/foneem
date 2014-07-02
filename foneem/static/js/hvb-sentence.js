@@ -47,7 +47,6 @@ var hvb_sentence_manager = {};
         return sentence;
     };
 
-
     self.setNextSentence = function() {
         var sentence = self.parseSentence(self.sentences[self.iter]);
 		$(self.sentenceClass).html(sentence);
@@ -59,25 +58,18 @@ var hvb_sentence_manager = {};
 
     self.updateSentencesCompleted = function() {
         var message = {'code': 'sentence-update', 'id': self.sentences[(self.iter-1)]['id']};
-//        console.log("Message = ", message);
-      self.websock.send(JSON.stringify(message))
+        self.websock.send(JSON.stringify(message))
     };
 
     self.nextSentence = function(nextSentenceMessage) {
         self.sentences = nextSentenceMessage['sentences'];
-/*        for(var i = 0; i < self.sentences.length; i++) {
-            var id = self.sentences[i]['id'];
-            var sentence = self.sentences[i]['sentence'];
-            //console.log("Id = ", id, "Sentence = ", sentence);
-        }
-*/
         self.iter = 0;
         self.setNextSentence();
     };
 
     self.init = function() {
         self.websock = window.hvb_websock;
-        self.websock.init(self.initCallback);
+        self.websock.regiserCallback(self.initCallback());
     };
 
     self.initCallback = function() {
@@ -89,7 +81,6 @@ var hvb_sentence_manager = {};
             alert("Failed to initialize websockets; try upgrading to Chrome version > 35.0.1916.153.");
         }
     };
-
 }(hvb_sentence_manager));
 
 window.hvb_sentence_manager = hvb_sentence_manager;
