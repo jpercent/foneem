@@ -89,7 +89,7 @@ create table if not exists address (
    country varchar(80)
 );
 
-create table user_sentence(
+create table if not exists user_sentence(
     user_id int references users(id),
     sentence_id int references sentences(id)
 );
@@ -100,9 +100,17 @@ create table if not exists grid (
    css_id varchar(5)
 );
 
-create table phoneme_grid(
+create table if not exists phoneme_grid(
     phoneme_id int references phonemes(id),
     grid_id int references grid(id)
+);
+
+create table if not exists user_grid_opacity(
+    user_id int references users(id),
+    grid_id int references grid(id),
+    opacity real,
+    increments int,
+    instances int
 );
 
 commit;                

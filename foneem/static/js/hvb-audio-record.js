@@ -27,7 +27,6 @@
 
 var hvb_recorder = {};
 (function(self) {
-
     self.leftchannel = [];
     self.rightchannel = [];
     self.audio_node = null;

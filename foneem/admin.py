@@ -136,8 +136,9 @@ def registration_post():
     form_data['password'] = hashlib.sha512(str(form_data['password']) + str(salt)).hexdigest()
     form_data['compendium'] = salt
     cursor.execute('''insert into users (email, firstname, lastname, dob, gender, stateprovince, country, password, compendium) values (%(email)s, %(firstname)s, %(lastname)s, %(dob)s, %(gender)s, %(stateprovince)s, %(country)s, %(password)s, %(compendium)s);''', form_data)
-    hvb_close_db(conn, cursor)
     session['email'] = form_data['email']
+    cursor.execute('''insert into user_grid_opacity(user_id, grid_id, opacity, increments, instances) select u.id, g.id, 0, 0, (select count(*) from phoneme_grid pg, sentence_phoneme sp where pg.grid_id = g.id and pg.phoneme_id = sp.phoneme_id) from users u, grid g where u.email = %s;''', [session['email']])
+    hvb_close_db(conn, cursor)
     return redirect(url_for('record'))
 
 @app.route('/login_post', methods=['POST'])

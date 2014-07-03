@@ -1,31 +1,40 @@
 var hvb_websock = {};
 (function(self) {
-
     self.handlers = {};
+    self.callbacks = [];
 
     self.registerHandler = function(code, handler) {
         self.handlers[code] = handler;
     };
 
+    self.registerCallback = function(callback) {
+        console.log("regisetrer callback = ", callback);
+        self.callbacks.push(callback);
+    };
+
     self.send = function(message) {
-        self.ws.send(message);
+        try {
+            self.ws.send(message);
+        } catch(e) {
+            console.log("hvb_websock.send: ERROR: Exception ", e);
+            throw e;
+        }
     };
 
     self.onopen = function(event) {
-        self.callback();
-        console.log("Opened.. ");
+        for (var i = 0; i < self.callbacks.length; i++) {
+            console.log("callback i = ", i, self.callbacks[i])
+            self.callbacks[i]();
+        }
     };
 
     self.onerror = function(event) {
-        alert("Error websocket setup");
+        console.log("hvb_websock.onerror ERROR: websocket error event = ", e);
     };
 
     self.onmessage = function(msg) {
-        //console.log("receive: msg = ", msg);
-        // XXX - this shit needs to be rewritten already
         var message = JSON.parse(msg.data);
         if (message) {
-            console.log("Code");
             if (typeof(message.code) !== 'undefined') {
                 var code = message['code'];
                 if (typeof(self.handlers[code]) !== 'undefined') {
@@ -37,22 +46,23 @@ var hvb_websock = {};
         } else {
             console.log("hvb_websock: no code in message ");
         }
-        //console.log("hvb_receive: message = ", message);
     };
-//                setTimeout(self.tryInitComplete, 500);
 
     self.onclose = function() {
-        self.ws.onclose = function () {};
-        self.ws.close();
+        try {
+            self.ws.onclose = function () {
+            };
+            self.ws.close();
+        } catch(e) {
+            console.log("hvb_websock.onclose: ERROR exception raised while tyring to close the websock ", e);
+        }
     };
 
-    self.init = function(callback) {
+    self.init = function() {
         if (!window.WebSocket) {
             alert("Websockets are not supported; this website will not work for you. Try upgrading to Chrome version > 35.0.1916.153");
             throw Exception("Websockets are not supported ");
         }
-
-        self.callback = callback;
 
         try {
             self.ws = new WebSocket("ws://" + document.domain + ":5000/websocket");
@@ -70,6 +80,5 @@ var hvb_websock = {};
             throw e;
         }
     };
-
 }(hvb_websock));
 window.hvb_websock = hvb_websock;
