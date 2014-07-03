@@ -8,7 +8,7 @@ var hvb_websock = {};
     };
 
     self.registerCallback = function(callback) {
-        console.log("regisetrer callback = ", callback);
+//        console.log("regisetrer callback = ", callback);
         self.callbacks.push(callback);
     };
 
@@ -23,7 +23,7 @@ var hvb_websock = {};
 
     self.onopen = function(event) {
         for (var i = 0; i < self.callbacks.length; i++) {
-            console.log("callback i = ", i, self.callbacks[i])
+//            console.log("callback i = ", i, self.callbacks[i])
             self.callbacks[i]();
         }
     };
@@ -65,7 +65,7 @@ var hvb_websock = {};
         }
 
         try {
-            self.ws = new WebSocket("ws://" + document.domain + ":5000/websocket");
+            self.ws = new WebSocket("ws://" + document.domain + ":80/websocket");
             self.ws.onopen = self.onopen;
             self.ws.onmessage = self.onmessage;
             var onbeforeunload = window.onbeforeunload;
