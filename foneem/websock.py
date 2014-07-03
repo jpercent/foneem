@@ -120,7 +120,7 @@ class TornadoWebsocketHandler(WebSocketHandler):
         self.write_message(json.dumps(dict(output="Hello World")))
 
     def on_message(self, incoming):
-        print 'message received %s' % incoming
+#        print 'message received %s' % incoming
         message = json.loads(incoming)
         message['email'] =  self.email
         response = None
@@ -154,7 +154,7 @@ class TornadoWebsocketHandler(WebSocketHandler):
 
 
 def get_next_sentence(message):
-    print("Get next sentence", message, message['email'])
+    #print("Get next sentence", message, message['email'])
     email = message['email']
     if 'count' in message:
         count = int(message['count'])
@@ -165,7 +165,7 @@ def get_next_sentence(message):
 
     conf = parse_config()
     conn, cursor = hvb_connect_db(conf['db'])
-
+    # xxx - put all sql into a config file
     cursor.execute("""select s.id, s.sentence from sentences as s where s.id NOT IN(select s.id from users u, sentences s, user_sentence us  where  s.id = us.sentence_id and u.id = us.user_id and u.email = %s);""", [email]);
     next_sentence_block = dict(cursor.fetchmany(count));
     sentences = []
@@ -173,22 +173,42 @@ def get_next_sentence(message):
         cursor.execute("""select g.css_id from phonemes as p, sentence_phoneme as sp, grid as g, phoneme_grid as pg where p.id = pg.phoneme_id and g.id = pg.grid_id and sp.sentence_id = %s and sp.phoneme_id = p.id;""",
             [id])
         phonemes = cursor.fetchall()
-
-        # print("Phonemes are ", phonemes)
         new_value = str(sentence)
         for phoneme in phonemes:
-            #assert len(phoneme) == 1
             new_value = new_value + ':' + str(phoneme[0])
-        #print("The new value is ", new_value)
+
         next_sentence_block[id] = new_value
         sentences.append({'id': id, 'sentence': new_value})
 
-    next_block = {}
-    next_block['sentences'] = sentences
-    next_block['code'] = 'next-sentence'
-    #print("next sentence block = ", next_block)
+    next_block = {'code': 'next-sentence', 'sentences': sentences}
     hvb_close_db(conn, cursor)
     return next_block
+
+#opacity-update
+def update_opacity(message):
+    email = message['email']
+    css_id = message['css_id']
+    opacity = message['opacity']
+    conf = parse_config()
+    conn, cursor = hvb_connect_db(conf['db'])
+    cursor.execute("""update user_grid_opacity ugo SET increments = increments + 1, opacity = %s from users u, grid g where u.email = %s and ugo.user_id = u.id and ugo.grid_id = g.id and g.css_id = %s;""", [opacity, email, css_id])
+    hvb_close_db(conn, cursor)
+
+
+def get_opacity(message):
+    email = message['email']
+    conf = parse_config()
+    conn, cursor = hvb_connect_db(conf['db'])
+    cursor.execute("""select g.css_id, ugo.opacity, ugo.increments, ugo.instances from users u, grid g, user_grid_opacity ugo where u.email = %s and u.id = ugo.user_id and g.id = ugo.grid_id;""", [email]);
+    raw_data = cursor.fetchall()
+    opacity_array = []
+    for datum in raw_data:
+        opacity_array.append({'id': datum[0], 'opacity': datum[1], 'increments': datum[2], 'instances': datum[3]})
+
+#    print("Opacity = ", opacity_array)
+    opacity = {"code": "set-opacity", 'opacity-array': opacity_array}
+    hvb_close_db(conn, cursor)
+    return opacity
 
 
 def update_sentences_completed(message):
@@ -197,7 +217,7 @@ def update_sentences_completed(message):
     conf = parse_config()
     conn, cursor = hvb_connect_db(conf['db'])
     cursor.execute("""insert into user_sentence (user_id, sentence_id) values((select u.id from users u where u.email = %s), %s);""", [email, sentence_id]);
-    print("updated id = ", sentence_id, " email = ", email)
+#    print("updated id = ", sentence_id, " email = ", email)
     hvb_close_db(conn, cursor)
 
 
@@ -211,7 +231,8 @@ class TornadoWebsocketServer(object):
         self.host = host
         self.port = port
         self.ws_route = ws_route
-        hvb_handlers = {"next-sentence": get_next_sentence, "sentence-update": update_sentences_completed }
+        hvb_handlers = {"next-sentence": get_next_sentence, "sentence-update": update_sentences_completed,
+                        "opacity-update": update_opacity, "get-opacity": get_opacity}
 
         self.application_args = [(self.ws_route, self.websock_handler, dict(hvb_handlers=hvb_handlers))]
         if self.wsgi_app:

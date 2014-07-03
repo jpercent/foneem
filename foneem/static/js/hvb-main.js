@@ -80,7 +80,7 @@ var hvb_button_manager = {};
     };
 
    self.init = function() {
-       window.hvb_sentence_manager.init();
+       window.hvb_sentence_manager.init(window.hvb_websock, window.hvb_opacity);
        window.hvb_websock.init();
        window.hvb_audio.registerCallback(self.initCallback);
        window.hvb_audio.initAudio();
