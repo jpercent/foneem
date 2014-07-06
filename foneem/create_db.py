@@ -114,6 +114,7 @@ def create_sentences_table(csv_filename, cursor, conn):
                 print("schema ", schema)
                 first_row = False
             else:
+                row[1] = row[1].replace('_', ' ')
                 cursor.execute("""insert into sentences(id, filename, sentence, phonetic, phonemes, flag) values (%s, %s, %s, %s, %s, %s);""",
                                (str(id), row[0], row[1], row[2], "nothing", row[3]))
                 id += 1
