@@ -103,7 +103,7 @@ var hvb_recorder = {};
 			};
 			var fd=new FormData();
 			fd.append("test.wav",blob);
-			filename = $('.hvb-sentence').html()+'-'+new Date().toISOString() + '.wav'
+			filename = $('.hvbsentence-text').html()+'-'+new Date().toISOString() + '.wav'
 			xhr.open("POST","upload/"+filename,true);
 			xhr.send(fd);
             var headers = xhr.getAllResponseHeaders();

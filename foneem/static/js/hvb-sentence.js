@@ -31,10 +31,13 @@ var hvb_sentence_manager = {};
     self.sentenceClass = '.hvb-sentence';
     self.cursorKey = 'hvb-cursor';
     self.cursorLengthKey = 'hvb-cursor-length'
-    self.next_sentence_message = JSON.stringify({'code': 'next-sentence', 'count': 25});
+    self.next_sentence_message = JSON.stringify({'code': 'next-sentence', 'count': 100});
     self.current = '';
+    self.requestIncomplete=false;
+    self.reloadCallback = null;
 
     self.makeSentenceRequest = function() {
+        console.log("requesting more sentences ");
         self.websock.send(self.next_sentence_message);
     };
 
@@ -50,13 +53,19 @@ var hvb_sentence_manager = {};
         return sentence;
     };
 
-    self.setNextSentence = function() {
-        var sentence = self.parseSentence(self.sentences[self.iter]);
-		$(self.sentenceClass).html(sentence);
-        if(self.iter > self.sentences.length) {
+    self.setNextSentence = function(reloadCallback) {
+        if(self.iter == self.sentences.length) {
+            self.reloadCallback = reloadCallback;
             self.makeSentenceRequest();
+            $(self.sentenceClass).html('<p class="hvbsentence-text">....</p>');
+            return true;
         }
-        self.iter ++;
+
+        var sentence = self.parseSentence(self.sentences[self.iter]);
+        $(self.sentenceClass).html('<p class="hvbsentence-text">' + sentence + '</p>');
+        console.log("set next sentence ", self.iter, self.sentences[self.iter], self.sentences.length);
+        self.iter++;
+        return false;
     };
 
     self.updateSentencesCompleted = function() {
@@ -72,6 +81,10 @@ var hvb_sentence_manager = {};
         self.sentences = nextSentenceMessage['sentences'];
         self.iter = 0;
         self.setNextSentence();
+        if(self.reloadCallback !== null) {
+            self.reloadCallback();
+            self.reloadCallback = null;
+        }
     };
 
     self.initCallback = function() {

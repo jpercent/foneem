@@ -32,6 +32,7 @@ var hvb_button_manager = {};
     self.nextButtonId = 'hvb-next-sentence';
     self.playButtonId = 'hvb-play-sentence';
     self.sentenceConsoleId = 'hvb-sentence-console';
+    self.sentenceReload = false;
 
    self.initCallback = function(hvb_audio) {
        window.hvb_audio_animation.init(hvb_audio.rafID, hvb_audio.analyserNode);
@@ -48,14 +49,8 @@ var hvb_button_manager = {};
            }
        };
 
-       document.getElementById(self.nextButtonId).onclick = function(e) {
-           self.unwirePlaybackButton();
-           var upload_size = window.hvb_recorder.upload();
-           if(upload_size > 1024) {
-               window.hvb_sentence_manager.updateSentencesCompleted();
-           }
-           window.hvb_sentence_manager.setNextSentence();
-       };
+
+       document.getElementById(self.nextButtonId).onclick = self.handleNextClick;
 
        document.getElementById(self.sentenceConsoleId).onclick = function(e) {
            var sentence = window.hvb_sentence_manager.getSentence();
@@ -64,7 +59,28 @@ var hvb_button_manager = {};
        };
     };
 
-    self.wirePlaybackButton = function() {
+   self.handleNextClick = function(e) {
+       if(self.sentenceReload === true) {
+           console.log("next disabled while next sentences are loading.. ");
+           return;
+       }
+
+       self.unwirePlaybackButton();
+       var upload_size = window.hvb_recorder.upload();
+       if(upload_size > 1024) {
+           console.log("updating sentences completed ..");
+           window.hvb_sentence_manager.updateSentencesCompleted();
+       }
+
+       self.sentenceReload = window.hvb_sentence_manager.setNextSentence(self.clearReload);
+   };
+
+   self.clearReload = function() {
+       console.log("clear reload called.. ");
+       self.sentenceReload = false;
+   };
+
+   self.wirePlaybackButton = function() {
         var soundFileUrl = window.hvb_recorder.soundFileUrl;
         var playbackButton = document.getElementById(self.playButtonId);
         playbackButton.innerHTML = "<i class='fa fa-play'></i><br>PlaybackPlayback";
