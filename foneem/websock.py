@@ -140,6 +140,7 @@ class TornadoWebsocketHandler(WebSocketHandler):
 
     def dispatch(self, message):
         code_value = None
+#        print("message = ", message)
         if 'code' in message:
             code_value = message['code']
 
@@ -165,8 +166,7 @@ def get_next_sentence(message):
 
     conf = parse_config()
     conn, cursor = hvb_connect_db(conf['db'])
-    # xxx - put all sql into a config file
-    cursor.execute("""select s.id, s.sentence from sentences as s where s.id NOT IN(select s.id from users u, sentences s, user_sentence us  where  s.id = us.sentence_id and u.id = us.user_id and u.email = %s);""", [email]);
+    cursor.execute("""select s.id, s.sentence from sentences as s where s.id NOT IN(select s.id from users u, sentences s, user_sentence us  where  s.id = us.sentence_id and u.id = us.user_id and u.email = %s) order by s.display_order limit %s;""", [email, count]);
     next_sentence_block = dict(cursor.fetchmany(count));
     sentences = []
     for id, sentence in next_sentence_block.items():
@@ -212,6 +212,7 @@ def get_opacity(message):
 
 
 def update_sentences_completed(message):
+#    print("Update sentences completed called message = ", message)
     email = message['email']
     sentence_id = message['id']
     conf = parse_config()
