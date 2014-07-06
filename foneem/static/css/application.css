@@ -3223,6 +3223,14 @@ p.mad-libs {
   -moz-border-radius: 0px;
   color: #d95c48; }
 
+.hvbwordwrap {
+   white-space: pre-wrap;      /* CSS3 */
+   white-space: -moz-pre-wrap; /* Firefox */
+   white-space: -pre-wrap;     /* Opera <7 */
+   white-space: -o-pre-wrap;   /* Opera 7 */
+   word-wrap: break-word;      /* IE */
+}
+
 select::-ms-expand {
   display: none; }
 
@@ -3243,6 +3251,20 @@ select::-ms-expand {
 
 .agreement-button {
   text-align: right; }
+
+.hvbsentence-text {
+    white-space: pre-wrap; /* CSS3 */
+    white-space: -moz-pre-wrap; /* Firefox */
+    white-space: -pre-wrap; /* Opera <7 */
+    white-space: -o-pre-wrap; /* Opera 7 */
+    width: 500px;
+    height: 100px;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    margin-left: -280px;
+    font-size: 30px;
+}
 
 input[type="submit"].mad-libs-submit {
   width: 280px; }
@@ -3479,6 +3501,11 @@ html.recording-studio section#recording-studio {
         -moz-box-shadow: 0px 0px 8px #2b9ceb inset, 0px 0px 8px #2b9ceb;
         z-index: 2; }
   html.recording-studio section#recording-studio .hvb-sentence {
+    white-space: pre-wrap;      /* CSS3 */
+    white-space: -moz-pre-wrap; /* Firefox */
+    white-space: -pre-wrap;     /* Opera <7 */
+    white-space: -o-pre-wrap;   /* Opera 7 */
+    word-wrap: break-word;      /* IE */
     width: 560px;
     height: 175px;
     position: absolute;
