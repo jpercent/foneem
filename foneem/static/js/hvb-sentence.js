@@ -30,10 +30,11 @@ var hvb_sentence_manager = {};
     self.nextClass = '.hvb-next';
     self.sentenceClass = '.hvb-sentence';
     self.cursorKey = 'hvb-cursor';
-    self.cursorLengthKey = 'hvb-cursor-length'
-    self.next_sentence_message = JSON.stringify({'code': 'next-sentence', 'count': 100});
+    self.cursorLengthKey = 'hvb-cursor-length';
+    self.count = 2;
+    self.next_sentence_message = JSON.stringify({'code': 'next-sentence', 'count': self.count});
     self.current = '';
-    self.requestIncomplete=false;
+    self.requestIncomplete = false;
     self.reloadCallback = null;
 
     self.makeSentenceRequest = function() {
@@ -63,17 +64,27 @@ var hvb_sentence_manager = {};
 
         var sentence = self.parseSentence(self.sentences[self.iter]);
         $(self.sentenceClass).html('<p class="hvbsentence-text">' + sentence + '</p>');
-        console.log("set next sentence ", self.iter, self.sentences[self.iter], self.sentences.length);
+        //console.log("set next sentence ", self.iter, self.sentences[self.iter], self.sentences.length);
         self.iter++;
         return false;
     };
 
-    self.updateSentencesCompleted = function() {
+    self.updateSentencesCompletedAndSetNextSentence = function(reloadCallback) {
+        var ret = false;
         var message = {'code': 'sentence-update', 'id': self.sentences[(self.iter-1)]['id']};
-        self.websock.send(JSON.stringify(message))
-        console.log("Current sentence = ", self.current);
+        if(self.iter == self.sentences.length) {
+            self.reloadCallback = reloadCallback;
+            var message = {'code': 'sentence-update-and-get', 'id': self.sentences[(self.iter-1)]['id'], 'count': self.count};
+            $(self.sentenceClass).html('<p class="hvbsentence-text">....</p>');
+            ret = true;
+        }
+
         for(var i = 1; i < self.current.length; i++) {
             self.opacity.updateOpacityByIncrement(self.current[i].trim());
+        }
+        self.websock.send(JSON.stringify(message));
+        if(ret === false) {
+            self.setNextSentence(reloadCallback);
         }
     };
 

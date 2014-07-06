@@ -68,15 +68,13 @@ var hvb_button_manager = {};
        self.unwirePlaybackButton();
        var upload_size = window.hvb_recorder.upload();
        if(upload_size > 1024) {
-           console.log("updating sentences completed ..");
-           window.hvb_sentence_manager.updateSentencesCompleted();
+           self.sentenceReload = window.hvb_sentence_manager.updateSentencesCompletedAndSetNextSentence(self.clearReload);
+       } else {
+           self.sentenceReload = window.hvb_sentence_manager.setNextSentence(self.clearReload);
        }
-
-       self.sentenceReload = window.hvb_sentence_manager.setNextSentence(self.clearReload);
    };
 
    self.clearReload = function() {
-       console.log("clear reload called.. ");
        self.sentenceReload = false;
    };
 

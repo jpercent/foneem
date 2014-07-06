@@ -153,19 +153,7 @@ class TornadoWebsocketHandler(WebSocketHandler):
         pass
         print 'connection closed'
 
-
-def get_next_sentence(message):
-    #print("Get next sentence", message, message['email'])
-    email = message['email']
-    if 'count' in message:
-        count = int(message['count'])
-        if count > 100:
-            count = 100
-    else:
-        count = 25
-
-    conf = parse_config()
-    conn, cursor = hvb_connect_db(conf['db'])
+def get_next_block(cursor, email, count):
     cursor.execute("""select s.id, s.sentence from sentences as s where s.id NOT IN(select s.id from users u, sentences s, user_sentence us  where  s.id = us.sentence_id and u.id = us.user_id and u.email = %s) order by s.display_order limit %s;""", [email, count]);
     next_sentence_block = dict(cursor.fetchmany(count));
     sentences = []
@@ -181,10 +169,25 @@ def get_next_sentence(message):
         sentences.append({'id': id, 'sentence': new_value})
 
     next_block = {'code': 'next-sentence', 'sentences': sentences}
+    return next_block
+
+def get_next_sentence(message):
+    #print("Get next sentence", message, message['email'])
+    email = message['email']
+    if 'count' in message:
+        count = int(message['count'])
+        if count > 100:
+            count = 100
+    else:
+        count = 25
+
+    conf = parse_config()
+    conn, cursor = hvb_connect_db(conf['db'])
+    next_block = get_next_block(cursor, email, count)
     hvb_close_db(conn, cursor)
     return next_block
 
-#opacity-update
+
 def update_opacity(message):
     email = message['email']
     css_id = message['css_id']
@@ -211,13 +214,30 @@ def get_opacity(message):
     return opacity
 
 
+def update_sentences_completed_and_get_next_sentence(message):
+    email = message['email']
+    sentence_id = message['id']
+    count = message['count']
+    conf = parse_config()
+    conn, cursor = hvb_connect_db(conf['db'])
+    make_sentence_update(cursor, email, sentence_id)
+#    print("Update sentence id = ", sentence_id)
+    next_block = get_next_block(cursor, email, count)
+#    print("Next block = ", next_block)
+    hvb_close_db(conn, cursor)
+    return next_block
+
+
+def make_sentence_update(cursor, email, sentence_id):
+    cursor.execute("""insert into user_sentence (user_id, sentence_id) values((select u.id from users u where u.email = %s), %s);""", [email, sentence_id])
+
+
 def update_sentences_completed(message):
-#    print("Update sentences completed called message = ", message)
     email = message['email']
     sentence_id = message['id']
     conf = parse_config()
     conn, cursor = hvb_connect_db(conf['db'])
-    cursor.execute("""insert into user_sentence (user_id, sentence_id) values((select u.id from users u where u.email = %s), %s);""", [email, sentence_id]);
+    make_sentence_update(cursor, email, sentence_id)
 #    print("updated id = ", sentence_id, " email = ", email)
     hvb_close_db(conn, cursor)
 
@@ -233,6 +253,7 @@ class TornadoWebsocketServer(object):
         self.port = port
         self.ws_route = ws_route
         hvb_handlers = {"next-sentence": get_next_sentence, "sentence-update": update_sentences_completed,
+                        "sentence-update-and-get": update_sentences_completed_and_get_next_sentence,
                         "opacity-update": update_opacity, "get-opacity": get_opacity}
 
         self.application_args = [(self.ws_route, self.websock_handler, dict(hvb_handlers=hvb_handlers))]
