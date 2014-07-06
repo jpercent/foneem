@@ -37,13 +37,16 @@ var hvb_button_manager = {};
    self.initCallback = function(hvb_audio) {
        window.hvb_audio_animation.init(hvb_audio.rafID, hvb_audio.analyserNode);
        window.hvb_recorder.init(hvb_audio);
-       document.getElementById(self.recordButtonId).onclick = function(e) {
+       var recordElement = document.getElementById(self.recordButtonId);
+       recordElement.onclick = function(e) {
            window.hvb_audio_animation.flipAnimationState();
            if(window.hvb_recorder.recording) {
                window.hvb_recorder.stopRecording();
+      	       recordElement.innerHTML = "<i class=\"fa fa-circle\"></i><br>Record</button>";
                self.wirePlaybackButton();
            } else {
                self.unwirePlaybackButton();
+	       recordElement.innerHTML = "<i class=\"fa fa-square\"></i><br>Stop</button>";
                window.hvb_recorder.startRecording();
 
            }
@@ -81,9 +84,9 @@ var hvb_button_manager = {};
    self.wirePlaybackButton = function() {
         var soundFileUrl = window.hvb_recorder.soundFileUrl;
         var playbackButton = document.getElementById(self.playButtonId);
-        playbackButton.innerHTML = "<i class='fa fa-play'></i><br>PlaybackPlayback";
+        playbackButton.innerHTML = "<i class='fa fa-play'></i><br>Playback";
         playbackButton.onclick = function(e) {
-            playbackButton.innerHTML = "<i class='fa fa-play'></i><br>PlaybackPlayback <audio src='"+soundFileUrl+"' autoplay></audio>";
+            playbackButton.innerHTML = "<i class='fa fa-play'></i><br>Playback <audio src='"+soundFileUrl+"' autoplay></audio>";
         }
    };
 

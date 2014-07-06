@@ -16,7 +16,7 @@ var hvb_opacity = {};
 
     self.updateOpacityByIncrement = function(id) {
         var not_found = true;
-        console.log("update opacity by id = ", id);
+//        console.log("update opacity by id = ", id);
         for(var i = 0; i < self.table.length; i++) {
             if(self.table[i]['id'] === id) {
                 var increments = self.table[i]['increments'];
@@ -42,7 +42,7 @@ var hvb_opacity = {};
 
 
     self.setOpacity = function(id, opacity) {
-        console.log('set opacity id = ', id, " opacity = ", opacity);
+//        console.log('set opacity id = ', id, " opacity = ", opacity);
         var element = document.getElementById(id);
         if(!element) {
             console.log("Opacity element undefined id,opacity = "+id.toString() +","+ opacity.toString());
@@ -81,7 +81,6 @@ var hvb_opacity = {};
     };
 
     self.initCallback = function() {
-        console.log("hvb_opacity init callback");
         try {
             self.websock.registerHandler('set-opacity', self.receiveOpacity);
             self.requestOpacity();

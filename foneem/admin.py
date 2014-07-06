@@ -33,15 +33,15 @@ from itsdangerous import TimestampSigner
 import smtplib
 from email.mime.text import MIMEText
 
-def send_mail(subject, body, from_email, to_email):
+def send_mail(subject, body, to_email, from_email):
     print("subject", subject)
     print("body", body)
     print("from", from_email)
     print("to", to_email)
     msg = MIMEText(body)
     msg['Subject'] = subject
-    msg['From'] = from_email
-    msg['To'] = to_email
+    msg['From'] = to_email
+    msg['To'] = from_email
 
     s = smtplib.SMTP('localhost')
     s.sendmail(to_email, from_email, msg.as_string())
@@ -95,14 +95,15 @@ def authorize_password_reset(userid, email):
     id = user[0][0]
     compendium = user[0][1]
     session['email'] = user_email
-    if id+compendium == s.unsign(userid):
-        redirect('password-reset.html', email=user_email)
+    if str(id)+str(compendium) == str(s.unsign(userid)):
+        return render_template('password-reset.html', email=user_email)
     else:
         abort(400)
 
 @app.route('/password_post', methods=['POST'])
 def password_reset():
     form_data = request.form.to_dict()
+    print("form data = ", form_data)
     if not ('email' in session) or session['email'] != form_data['email']:
         abort(400)
 
@@ -110,13 +111,13 @@ def password_reset():
     salt = uuid.uuid4().hex
     form_data['password'] = hashlib.sha512(str(form_data['password']) + str(salt)).hexdigest()
     form_data['compendium'] = salt
-    cursor.execute('''update users set password=%(password)s,compendium=%s(compendium) where email=%(email)''', form_data)
+    cursor.execute('''update users set password=%(password)s,compendium=%(compendium)s where email=%(email)s''', form_data)
     hvb_close_db(conn, cursor)
-    return redirect(url_for('record'))
+    return render_template('record.html')
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', error=None)
 
 @app.route('/register', methods=['GET'])
 def register():
@@ -161,10 +162,13 @@ def login_post():
     salted_password = hashlib.sha512(request.form['password'] + compendium).hexdigest()
     if password != salted_password:
         print("hvb.login: ERROR: password equality test failed")
-        render_template('login.html')
+        session['email'] = None 
+        error = "Invalid credentials"
+        return render_template('login.html')
 
     session['email'] = email
     hvb_close_db(conn, cursor)
+#    flash("You were successfully logged in")
     return redirect(url_for('record'))
 
 @app.route('/logout')
