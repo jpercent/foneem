@@ -43,6 +43,7 @@ CREATE TABLE IF NOT EXISTS form_data (
 
 create table if not exists sentences(
     id serial primary key,
+    display_order int,
     filename varchar(80),
     sentence text,
     phonetic text,

@@ -115,8 +115,8 @@ def create_sentences_table(csv_filename, cursor, conn):
                 first_row = False
             else:
                 row[1] = row[1].replace('_', ' ')
-                cursor.execute("""insert into sentences(id, filename, sentence, phonetic, phonemes, flag) values (%s, %s, %s, %s, %s, %s);""",
-                               (str(id), row[0], row[1], row[2], "nothing", row[3]))
+                cursor.execute("""insert into sentences(id, display_order, filename, sentence, phonetic, phonemes, flag) values (%s, %s, %s, %s, %s, %s, %s);""",
+                               (str(id), str(id), row[0], row[1], row[2], "nothing", row[3]))
                 id += 1
         conn.commit()
 
