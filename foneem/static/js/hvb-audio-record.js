@@ -42,8 +42,13 @@ var hvb_recorder = {};
         self.recordingLength = 0;
     };
     
-    self.stopRecording = function() {
+    self.stopRecording = function(upload) {
 		self.recording = false;
+        if(upload === false) {
+            self.currentBlob = null;
+            return;
+        }
+
         // we flat the left and right channels down
         var leftBuffer = self.mergeBuffers(self.leftchannel, self.recordingLength);
         var rightBuffer = self.mergeBuffers(self.rightchannel, self.recordingLength);
@@ -88,7 +93,7 @@ var hvb_recorder = {};
 	
 	self.upload = function(e) {
 		if(self.currentBlob == null) {
-			return;
+			return 0;
 		}
 		var blob = self.currentBlob;
 		self.currentBlob = null;

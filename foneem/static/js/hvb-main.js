@@ -33,33 +33,44 @@ var hvb_button_manager = {};
     self.playButtonId = 'hvb-play-sentence';
     self.sentenceConsoleId = 'hvb-sentence-console';
     self.sentenceReload = false;
+//    self.time = new Date();
+    self.upload = true;
 
-   self.initCallback = function(hvb_audio) {
-       window.hvb_audio_animation.init(hvb_audio.rafID, hvb_audio.analyserNode);
-       window.hvb_recorder.init(hvb_audio);
-       var recordElement = document.getElementById(self.recordButtonId);
-       recordElement.onclick = function(e) {
-           window.hvb_audio_animation.flipAnimationState();
-           if(window.hvb_recorder.recording) {
-               window.hvb_recorder.stopRecording();
-      	       recordElement.innerHTML = "<i class=\"fa fa-circle\"></i><br>Record</button>";
-               self.wirePlaybackButton();
-           } else {
-               self.unwirePlaybackButton();
-	       recordElement.innerHTML = "<i class=\"fa fa-square\"></i><br>Stop</button>";
-               window.hvb_recorder.startRecording();
+   self.handleSentenceConsoleClick = function(e) {
+       var sentence = window.hvb_sentence_manager.getSentence();
+       var msg = new SpeechSynthesisUtterance(sentence.trim());
+       window.speechSynthesis.speak(msg);
+   };
 
-           }
-       };
+   self.handleRecordClick = function(e) {
+       window.hvb_audio_animation.flipAnimationState();
+       if(window.hvb_recorder.recording) {
+           self.stopRecording(e);
+       } else {
+           self.startRecording(e);
+       }
+   };
 
+   self.stopRecording = function(e) {
+       window.hvb_recorder.stopRecording(self.upload);
+       document.getElementById(self.recordButtonId).innerHTML = "<i class=\"fa fa-circle\"></i><br>Record</button>";
+       self.wirePlaybackButton();
+       window.clearTimeout(self.currentTimeoutId);
+   };
 
-       document.getElementById(self.nextButtonId).onclick = self.handleNextClick;
+   self.startRecording = function(e) {
+//       self.recordingTime = self.time.getTime();
+       self.unwirePlaybackButton();
+       document.getElementById(self.recordButtonId).innerHTML = "<i class=\"fa fa-square\"></i><br>Stop</button>";
+       window.hvb_recorder.startRecording();
+       self.currentTimeoutId = window.setTimeout(self.forceStop, 15000);
+   };
 
-       document.getElementById(self.sentenceConsoleId).onclick = function(e) {
-           var sentence = window.hvb_sentence_manager.getSentence();
-           var msg = new SpeechSynthesisUtterance(sentence.trim());
-           window.speechSynthesis.speak(msg);
-       };
+    self.forceStop = function() {
+        self.upload = false;
+        self.stopRecording(self.upload);
+        alert("This recording took longer than 15 seconds. The recording was stopped and the data was discarded. Please re-record.")
+        self.upload = true;
     };
 
    self.handleNextClick = function(e) {
@@ -94,6 +105,14 @@ var hvb_button_manager = {};
         var playbackButton = document.getElementById(self.playButtonId);
         playbackButton.innerHTML = '';
         playbackButton.onclick = null;
+    };
+
+   self.initCallback = function(hvb_audio) {
+       window.hvb_audio_animation.init(hvb_audio.rafID, hvb_audio.analyserNode);
+       window.hvb_recorder.init(hvb_audio);
+       document.getElementById(self.recordButtonId).onclick = self.handleRecordClick;
+       document.getElementById(self.nextButtonId).onclick = self.handleNextClick;
+       document.getElementById(self.sentenceConsoleId).onclick = self.handleSentenceConsoleClick;
     };
 
    self.init = function() {
