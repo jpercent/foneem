@@ -27,36 +27,53 @@
 
 var hvb_calibrate = {};
 (function(self) {
-
-    self.calibrateButtonId = 'hvb-calibrate-button';
     self.recordUrl = '/record';
     self.clicked = false;
-
-    self.initCallback = function(hvb_audio) {
-        hvb_audio_animation.init(hvb_audio.rafID, hvb_audio.analyserNode);
-        document.getElementById(self.calibrateButtonId).onclick = function(event) {
-            if(self.clicked) {
-                return;
-            }
-
-            window.hvb_audio_animation.flipAnimationState();
-            window.setInterval(self.recordRedirect, 6000);
-        };
-    };
+    self.sessionId = null;
 
     self.recordRedirect = function() {
         window.location = self.recordUrl;
     };
 
-    self.init = function() {
-        window.hvb_audio.registerCallback(self.initCallback);
-        window.hvb_audio.initAudio(self.initCallback);
-        window.hvb_sentence_manager.loadSentences();
-        //window.hvb_opacity.setOpacity();
+    self.calibrated = function() {
+       window.hvb_audio_animation.nodeId = "hvb-calibrate-analyser";
+       window.hvb_audio_animation.animate = true;
+       var overlay = document.getElementById("overlay");
+       overlay.style.visibility = (overlay.style.visibility == "visible") ? "hidden" : "visible";
+       var noise = self.recorder.computeAverageNoise();
+       self.createSession(noise);
+
+    };
+
+    self.createSession = function(noise) {
+        var message = JSON.stringify({'code': 'session', 'loudness': noise});
+//        console.log("creating session.. message = ", message);
+        self.websock.send(message);
+    };
+
+    self.newSession = function(message) {
+        self.sessionId = message['session_id'];
+        self.callback(self.sessionId);
+    };
+
+    self.init = function(callback, recorder, animator, websock) {
+        websock.registerHandler('session', self.newSession);
+
+        animator.nodeId = "hvb-calibrate-analyser";
+        animator.animate = true;
+        var overlay = document.getElementById("overlay");
+        overlay.style.visibility = (overlay.style.visibility == "visible") ? "hidden" : "visible";
+        recorder.startRecording();
+        setTimeout(self.calibrated, 500);
+
+        self.callback = callback;
+        self.recorder = recorder;
+        self.animator = animator;
+        self.websock = websock;
     };
 
 }(hvb_calibrate));
+window.hvb_calibrate = hvb_calibrate;
 
-window.addEventListener('load', hvb_calibrate.init);
 
 
