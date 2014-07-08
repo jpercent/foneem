@@ -54,6 +54,7 @@ var hvb_recorder = {};
         var rightBuffer = self.mergeBuffers(self.rightchannel, self.recordingLength);
         // we interleave both channels together
         var interleaved = self.interleave(leftBuffer, rightBuffer);
+        var rms = self.getRms(interleaved);
         // we create our wav file
         var buffer = new ArrayBuffer(44 + interleaved.length * 2);
         var view = new DataView(buffer);
@@ -83,15 +84,35 @@ var hvb_recorder = {};
             index += 2;
         }
         console.log("blob length = ",view.byteLength, " sampleRate = ", self.sampleRate);
-        // our final binary blob
-        var blob = new Blob([ view ], { type : 'audio/wav' });
-        self.soundFileUrl = (window.URL || window.webkitURL).createObjectURL(blob);
-        console.log("sound file url = ", self.soundFileUrl);
-		self.currentBlob = blob;
-
+		self.currentBlob = new Blob([ view ], { type : 'audio/wav' });
+        return [rms, interleaved];
     };
-	
-	self.upload = function(e) {
+
+    self.computeAverageNoise = function() {
+		self.recording = false;
+
+        var leftBuffer = self.mergeBuffers(self.leftchannel, self.recordingLength);
+        var rightBuffer = self.mergeBuffers(self.rightchannel, self.recordingLength);
+        var interleaved = self.interleave(leftBuffer, rightBuffer);
+        console.log("sample values = ", interleaved.length);
+        return self.getRms(interleaved);
+    };
+
+    self.getRms = function(interleaved) {
+        var total = 0;
+        for(var i = 0; i < interleaved.length; i++) {
+            total += (interleaved[i] * interleaved[i]);
+        }
+        var average = total/interleaved.length;
+
+        var rms = Math.sqrt((total/interleaved.length));
+        var decibel = Math.abs((Math.log(rms) / Math.log(10)));
+
+        console.log("average = ", average, " total = ", total, "rms = ", rms, "db = ", decibel);
+        return rms;
+    };
+
+	self.upload = function(filename) {
 		if(self.currentBlob == null) {
 			return 0;
 		}
@@ -108,7 +129,6 @@ var hvb_recorder = {};
 			};
 			var fd=new FormData();
 			fd.append("test.wav",blob);
-			filename = $('.hvbsentence-text').html()+'-'+new Date().toISOString() + '.wav'
 			xhr.open("POST","upload/"+filename,true);
 			xhr.send(fd);
             var headers = xhr.getAllResponseHeaders();
@@ -117,7 +137,7 @@ var hvb_recorder = {};
 		}
 		return upload(blob);
 	};
-    
+
     self.interleave = function(leftChannel, rightChannel) {
     	var length = leftChannel.length + rightChannel.length;
     	var result = new Float32Array(length);
@@ -168,8 +188,8 @@ var hvb_recorder = {};
                 return;
             }
 
-            var left = e.inputBuffer.getChannelData (0);
-            var right = e.inputBuffer.getChannelData (1);
+            var left = e.inputBuffer.getChannelData(0);
+            var right = e.inputBuffer.getChannelData(1);
             // clone samples
             self.leftchannel.push (new Float32Array (left));
             self.rightchannel.push (new Float32Array (right));
