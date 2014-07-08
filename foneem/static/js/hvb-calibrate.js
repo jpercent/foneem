@@ -27,27 +27,15 @@
 
 var hvb_calibrate = {};
 (function(self) {
-    self.recordUrl = '/record';
-    self.clicked = false;
     self.sessionId = null;
 
-    self.recordRedirect = function() {
-        window.location = self.recordUrl;
-    };
-
     self.calibrated = function() {
-       window.hvb_audio_animation.nodeId = "hvb-calibrate-analyser";
-       window.hvb_audio_animation.animate = true;
-       var overlay = document.getElementById("overlay");
-       overlay.style.visibility = (overlay.style.visibility == "visible") ? "hidden" : "visible";
-       var noise = self.recorder.computeAverageNoise();
-       self.createSession(noise);
-
-    };
-
-    self.createSession = function(noise) {
+        self.animator.nodeId = "hvb-analyser";
+        self.animator.animate = false;
+        var overlay = document.getElementById("overlay");
+        overlay.style.visibility = (overlay.style.visibility == "visible") ? "hidden" : "visible";
+        var noise = self.recorder.computeAverageNoise();
         var message = JSON.stringify({'code': 'session', 'loudness': noise});
-//        console.log("creating session.. message = ", message);
         self.websock.send(message);
     };
 
