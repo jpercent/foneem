@@ -36,12 +36,10 @@ import tornado.websocket
 
 import json
 import time
+import struct
 import threading
 import multiprocessing
 import itsdangerous
-import hashlib
-
-#from flask import request, render_template, session, redirect
 
 from foneem import app, parse_config, hvb_connect_db, hvb_close_db, S3, record
 from flask.sessions import SecureCookieSessionInterface
@@ -130,7 +128,7 @@ class TornadoWebsocketHandler(WebSocketHandler):
         except Exception as e:
             import sys
             import traceback
-            print('TornadoWebsocketHandler: WARNING dispatch method failed ')
+            print('TornadoWebsocketHandler: WARNING dispatch method failed: incoming message = %s ' % incoming)
             exc_type, exc_value, exc_traceback = sys.exc_info()
             traceback.print_exception(exc_type, exc_value, exc_traceback, file=sys.stderr)
 
@@ -152,6 +150,7 @@ class TornadoWebsocketHandler(WebSocketHandler):
     def on_close(self):
         pass
         print 'connection closed'
+
 
 def get_next_block(cursor, email, count):
     cursor.execute("""select s.id, s.sentence from sentences as s where s.id NOT IN(select s.id from users u, sentences s, user_sentence_session us  where  s.id = us.sentence_id and u.id = us.user_id and u.email = %s) order by s.display_order limit %s;""", [email, count]);
@@ -177,17 +176,14 @@ def get_next_session(message):
     loudness = message['loudness']
     conf = parse_config()
     conn, cursor = hvb_connect_db(conf['db'])
-
     cursor.execute("""insert into sessions(base_loudness) values(%s);""", [loudness])
     cursor.execute("""select LASTVAL();""")
-    session_id = cursor.fetchall()[0]
-    print("Sessionid =", session_id)
+    session_id = cursor.fetchall()[0][0]
     hvb_close_db(conn, cursor)
     return {"code": "session", "session_id": session_id}
 
 
 def get_next_sentence(message):
-    #print("Get next sentence", message, message['email'])
     email = message['email']
     if 'count' in message:
         count = int(message['count'])
@@ -223,7 +219,6 @@ def get_opacity(message):
     for datum in raw_data:
         opacity_array.append({'id': datum[0], 'opacity': datum[1], 'increments': datum[2], 'instances': datum[3]})
 
-#    print("Opacity = ", opacity_array)
     opacity = {"code": "set-opacity", 'opacity-array': opacity_array}
     hvb_close_db(conn, cursor)
     return opacity
@@ -240,9 +235,7 @@ def update_sentences_completed_and_get_next_sentence(message):
     conf = parse_config()
     conn, cursor = hvb_connect_db(conf['db'])
     make_sentence_update(cursor, email, sentence_id, session_id, loudness, uri)
-#    print("Update sentence id = ", sentence_id)
     next_block = get_next_block(cursor, email, count)
-#    print("Next block = ", next_block)
     hvb_close_db(conn, cursor)
     return next_block
 
@@ -260,7 +253,6 @@ def update_sentences_completed(message):
     conf = parse_config()
     conn, cursor = hvb_connect_db(conf['db'])
     make_sentence_update(cursor, email, sentence_id, session_id, loudness, uri)
-    print("updated id = ", sentence_id, " email = ", email, " session, loudness, uri = ", session_id, loudness, uri)
     hvb_close_db(conn, cursor)
 
 
@@ -271,103 +263,42 @@ def upload_audio(message):
     data = message['data']
     length = int(message['length'])
 
-    print ("length = ", length)
     pcm_data = []
-    print("data of zero = ", data[u'0'])
+
     for i in range(0, length):
         pcm_data.append(float(data[str(i)]))
-        if i < 100:
-            print("i = ", i, 'data = ', data[str(i)], "pcm_data = ", pcm_data[i])
 
-
-#    print("Pcm data = ", pcm_data[0])
     sample_rate = message['sample_rate']
-
     data = float32_wav_file(pcm_data, sample_rate)
-    print("Upload message filename = ", filename, "rms = ", rms)
-    f = open("ws-"+filename, 'wb+')
-    f.write(data)
-    f.flush()
-    f.close()
+
+#    f = open("ws-"+filename, 'wb+')
+#    f.write(data)
+#    f.flush()
+#    f.close()
 
     record.upload_wav_to_s3(parse_config(), data, filename)
 
-        # // we create our wav file
-        # var buffer = new ArrayBuffer(44 + interleaved.length * 2);
-        # var view = new DataView(buffer);
-        # // RIFF chunk descriptor
-        # self.writeUTFBytes(view, 0, 'RIFF');
-        # view.setUint32(4, 44 + interleaved.length * 2, true);
-        # self.writeUTFBytes(view, 8, 'WAVE');
-        # // FMT sub-chunk
-        # self.writeUTFBytes(view, 12, 'fmt ');
-        # view.setUint32(16, 16, true);
-        # view.setUint16(20, 1, true);
-        # // stereo (2 channels)
-        # view.setUint16(22, 2, true);
-        # view.setUint32(24, self.sampleRate, true);
-        # view.setUint32(28, self.sampleRate * 4, true);
-        # view.setUint16(32, 4, true);
-        # view.setUint16(34, 16, true);
-        # // data sub-chunk
-        # self.writeUTFBytes(view, 36, 'data');
-        # view.setUint32(40, interleaved.length * 2, true);
-        # // write the PCM samples
-        # var lng = interleaved.length;
-        # var index = 44;
-        # var volume = 1;
-        # for (var i = 0; i < lng; i++){
-        #     view.setInt16(index, interleaved[i] * (0x7FFF * volume), true);
-        #     index += 2;
-        # }
-
-import struct
 
 def float32_wav_file(sample_array, sample_rate):
-  byte_count = (len(sample_array)) * 2  # 32-bit floats
-  wav_file = ""
-  # write the header
-  wav_file += struct.pack('<ccccIccccccccIHHIIHH',
-    'R', 'I', 'F', 'F',
-    byte_count + 0x2c,  # header size
-    'W', 'A', 'V', 'E', 'f', 'm', 't', ' ',
-    0x10,  # size of 'fmt ' header
-    1,  # format 3 = floating-point PCM
-    2,  # channels
-    sample_rate,  # samples / second
-    sample_rate * 4,  # bytes / second
-    4,  # block alignment
-    16)  # bits / sample
-  wav_file += struct.pack('<ccccI',
-    'd', 'a', 't', 'a', byte_count)
-  for sample in sample_array:
-    wav_file += struct.pack("<h", sample * 0x7fff)
-  return wav_file
+    byte_count = (len(sample_array)) * 2  # 32-bit floats
+    wav_file = ""
+    # write the header
+    wav_file += struct.pack('<ccccIccccccccIHHIIHH',
+     'R', 'I', 'F', 'F',
+     byte_count + 0x2c,  # header size
+     'W', 'A', 'V', 'E', 'f', 'm', 't', ' ',
+     0x10,  # size of 'fmt ' header
+     1,  # format 3 = floating-point PCM
+     2,  # channels
+     sample_rate,  # samples / second
+     sample_rate * 4,  # bytes / second
+     4,  # block alignment
+     16)  # bits / sample
+    wav_file += struct.pack('<ccccI', 'd', 'a', 't', 'a', byte_count)
+    for sample in sample_array:
+        wav_file += struct.pack("<h", sample * 0x7fff)
 
-def float3_wav_file(sample_array, sample_rate):
-  byte_count = (len(sample_array)) * 2  # 32-bit floats
-  wav_file = ""
-  # write the header
-  wav_file += struct.pack('<ccccIccccccccIHHIIHH',
-    'R', 'I', 'F', 'F',
-    byte_count + 0x2c - 8,  # header size
-    'W', 'A', 'V', 'E', 'f', 'm', 't', ' ',
-    0x10,  # size of 'fmt ' header
-    1,  # format 1
-    2,  # channels
-    sample_rate,  # samples / second
-    sample_rate * 4,  # bytes / second
-    4,  # block alignment
-    16)  # bits / sample
-  wav_file += struct.pack('<ccccI',
-    'd', 'a', 't', 'a', byte_count)
-  for sample in sample_array:
-    #print("sample = ", sample, " type sampel = ", type(sample), " float sample = ", float(sample))
-    wav_file += struct.pack("<f", sample)
-  return wav_file
-
-
-
+    return wav_file
 
 
 class TornadoWebsocketServer(object):
