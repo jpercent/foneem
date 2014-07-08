@@ -3247,12 +3247,20 @@ select::-ms-expand {
 input[type="submit"].mad-libs-submit {
   width: 280px; }
 
-canvas {
+.hvb-volume-canvas {
   background: none !important;
   box-shadow: none !important;
   -webkit-box-shadow: none !important;
   -moz-box-shadow: none !important;
   border-radius: 50% / 100%;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0; }
+
+.hvb-calibration-canvas {
+  background: none !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
   border-top-left-radius: 0;
   border-top-right-radius: 0; }
 
@@ -3508,6 +3516,22 @@ html.recording-studio section#recording-studio {
       font-size: 12px;
       font-weight: bold;
       color: #fff; }
+  html.recording-studio section#recording-studio .hvbsentence-text {
+    white-space: pre-wrap;
+    /* CSS3 */
+    white-space: -moz-pre-wrap;
+    /* Firefox */
+    white-space: -pre-wrap;
+    /* Opera <7 */
+    white-space: -o-pre-wrap;
+    /* Opera 7 */
+    width: 500px;
+    height: 100px;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    margin-left: -280px;
+    font-size: 30px; }
   html.recording-studio section#recording-studio .hvb-volume-wrapper {
     width: 250px;
     height: 40px;

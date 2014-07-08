@@ -1,6 +1,6 @@
 // * Virtual Recording Studio * //
 
-canvas {
+.hvb-volume-canvas {
 	background: none !important;
 	box-shadow: none !important;
 	-webkit-box-shadow: none !important;
@@ -8,6 +8,15 @@ canvas {
 	border-radius: 50% / 100%;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
+}
+
+.hvb-calibration-canvas {
+	background: none !important;
+	box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0; 
 }
 
 #hvb-volume1 {
@@ -277,6 +286,19 @@ section#recording-studio {
 			font-weight: bold;
 			color: #fff;
 		}
+	}
+	.hvbsentence-text {
+		white-space: pre-wrap; /* CSS3 */
+		white-space: -moz-pre-wrap; /* Firefox */
+		white-space: -pre-wrap; /* Opera <7 */
+		white-space: -o-pre-wrap; /* Opera 7 */
+		width: 500px;
+		height: 100px;
+		position: absolute;
+		bottom: 10px;
+		left: 50%;
+		margin-left: -280px;
+		font-size: 30px;
 	}
 
 	.hvb-volume-wrapper {
