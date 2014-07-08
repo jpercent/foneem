@@ -52,14 +52,6 @@ var hvb_audio = {};
         self.analyserNode.fftSize = 2048;
         self.inputPoint.connect(self.analyserNode);
 
-        /*var bufferSize = 2048;
-        if(!self.audioContext.createScriptProcessor){
-            self.recorder = self.audioContext.createJavaScriptNode(bufferSize, 2, 2);
-        } else {
-            self.recorder = self.audioContext.createScriptProcessor(bufferSize, 2, 2);
-        }*/
-
-
         self.zeroGain = self.audioContext.createGain();
         self.zeroGain.gain.value = 0.0;
         self.inputPoint.connect(self.zeroGain);
