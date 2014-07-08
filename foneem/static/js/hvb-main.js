@@ -87,7 +87,7 @@ var hvb_main = {};
            var message = JSON.stringify({'code': 'upload-audio', 'filename': filename, 'rms': self.data[0], 'data': self.data[1], 'sample_rate': window.hvb_recorder.sampleRate, 'length': self.data[1].length});
            window.hvb_websock.send(message);
            // https://s3.amazonaws.com/human-voice-bank/j1@empty-set.net-Good_morning.-2014-07-03T04_24_12.055Z.wav
-           self.sentenceReload = window.hvb_sentence_manager.updateSentencesCompletedAndSetNextSentence(self.clearReload, self.sessionId, self.rms, 'https://s3.amazonaws.com/human-voice-bank/'+filename);
+           self.sentenceReload = window.hvb_sentence_manager.updateSentencesCompletedAndSetNextSentence(self.clearReload, self.sessionId, self.data[0], 'https://s3.amazonaws.com/human-voice-bank/'+filename);
        } else {
            self.sentenceReload = window.hvb_sentence_manager.setNextSentence(self.clearReload);
        }
