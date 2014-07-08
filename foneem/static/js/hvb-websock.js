@@ -2,6 +2,7 @@ var hvb_websock = {};
 (function(self) {
     self.handlers = {};
     self.callbacks = [];
+    self.reconnectUrl = null;
 
     self.registerHandler = function(code, handler) {
         self.handlers[code] = handler;
@@ -53,12 +54,15 @@ var hvb_websock = {};
             self.ws.onclose = function () {
             };
             self.ws.close();
+            window.location = self.reconnectUrl;
         } catch(e) {
             console.log("hvb_websock.onclose: ERROR exception raised while tyring to close the websock ", e);
         }
     };
 
-    self.init = function() {
+    self.init = function(reconnectUrl) {
+        self.reconnectUrl = reconnectUrl;
+
         if (!window.WebSocket) {
             alert("Websockets are not supported; this website will not work for you. Try upgrading to Chrome version > 35.0.1916.153");
             throw Exception("Websockets are not supported ");
