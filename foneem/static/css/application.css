@@ -3261,7 +3261,7 @@ select::-ms-expand {
 input[type="submit"].mad-libs-submit {
   width: 280px; }
 
-canvas {
+.hvb-volume-canvas {
   background: none !important;
   box-shadow: none !important;
   -webkit-box-shadow: none !important;
@@ -3270,61 +3270,14 @@ canvas {
   border-top-left-radius: 0;
   border-top-right-radius: 0; }
 
-#hvb-volume1 {
-  background-color: #6b0000;
-  top: 0px; }
+.hvb-calibration-canvas {
+  background: none !important;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0; }
 
-#hvb-volume2 {
-  background-color: #560000;
-  top: 25px; }
-
-#hvb-volume3 {
-  background-color: #034100;
-  top: 50px; }
-
-#hvb-volume4 {
-  background-color: #087902;
-  top: 75px; }
-
-#hvb-volume5 {
-  background-color: #034100;
-  top: 100px; }
-
-#hvb-volume6 {
-  background-color: #560000;
-  top: 125px; }
-
-#hvb-volume7 {
-  background-color: #6b0000;
-  top: 150px; }
-
-#hvb_pitch1 {
-  background-color: #6b0000;
-  top: 0px; }
-
-#hvb_pitch2 {
-  background-color: #560000;
-  top: 25px; }
-
-#hvb_pitch3 {
-  background-color: #034100;
-  top: 50px; }
-
-#hvb_pitch4 {
-  background-color: #087902;
-  top: 75px; }
-
-#hvb_pitch5 {
-  background-color: #034100;
-  top: 100px; }
-
-#hvb_pitch6 {
-  background-color: #560000;
-  top: 125px; }
-
-#hvb_pitch7 {
-  background-color: #6b0000;
-  top: 150px; }
 
 html.recording-studio body {
   background-color: #121315; }
@@ -3548,11 +3501,7 @@ html.recording-studio section#recording-studio {
     bottom: 10px;
     right: 50%;
     margin-right: -380px; }
-    html.recording-studio section#recording-studio .hvb-pitch #hvb-pitch1, html.recording-studio section#recording-studio .hvb-pitch #hvb-pitch2, html.recording-studio section#recording-studio .hvb-pitch #hvb-pitch3, html.recording-studio section#recording-studio .hvb-pitch #hvb-pitch4, html.recording-studio section#recording-studio .hvb-pitch #hvb-pitch5, html.recording-studio section#recording-studio .hvb-pitch #hvb-pitch6, html.recording-studio section#recording-studio .hvb-pitch #hvb-pitch7 {
-      position: absolute;
-      width: 80px;
-      height: 25px;
-      left: 10px; }
+
   html.recording-studio section#recording-studio .hvb-record, html.recording-studio section#recording-studio .hvb-stop, html.recording-studio section#recording-studio #hvb-play-sentence, html.recording-studio section#recording-studio #hvb-next-sentence, html.recording-studio section#recording-studio #hvb-settings {
     color: #444;
     border: 8px outset buttonface;
