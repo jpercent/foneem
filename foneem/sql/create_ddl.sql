@@ -30,7 +30,7 @@ create table if not exists phonemes(
    symbol char(2)
 );
 
-create table if not exists session_info(
+create table if not exists sessions(
    id serial primary key,
    base_loudness number,
    creation_time timestamp default current_timestamp
@@ -49,7 +49,7 @@ create table if not exists sentence_phoneme(
 create table if not exists user_sentence_session(
     user_id int references users(id),
     sentence_id int references sentences(id)
-    session_noise_id int references session(id),
+    session_id int references sessions(id),
     average_noise number,
     uri text,
     creation_time timestamp default current_timestamp
