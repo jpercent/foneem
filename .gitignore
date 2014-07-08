@@ -26,3 +26,15 @@ foneem/.sass-cache
 foneem/conf.json
 
 *.pyc
+
+foneem/static/js/hvb-audio-animation-ck.js
+
+foneem/static/js/hvb-audio-record-ck.js
+
+foneem/static/js/hvb-main-ck.js
+
+foneem/static/js/hvb-calibrate-ck.js
+
+foneem/static/js/hvb-opacity-ck.js
+
+foneem/static/js/hvb-sentence-ck.js
