@@ -32,9 +32,9 @@ create table if not exists phonemes(
 
 create table if not exists sessions(
    id serial primary key,
-   base_loudness number,
+   base_loudness real,
    creation_time timestamp default current_timestamp
-)
+);
 
 create table if not exists grid (
    id serial primary key,
@@ -48,9 +48,9 @@ create table if not exists sentence_phoneme(
 
 create table if not exists user_sentence_session(
     user_id int references users(id),
-    sentence_id int references sentences(id)
+    sentence_id int references sentences(id),
     session_id int references sessions(id),
-    average_noise number,
+    loudness real,
     uri text,
     creation_time timestamp default current_timestamp
 );
