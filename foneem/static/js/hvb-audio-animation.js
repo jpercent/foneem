@@ -68,7 +68,7 @@ hvb_audio_animation = {};
 
     self.updateAnimation = function(time) {
         try {
-            var canvas = document.getElementById("hvb-analyser");
+            var canvas = document.getElementById(self.nodeId);
             var canvasWidth = canvas.width;
             var canvasHeight = canvas.height;
             var analyserContext = canvas.getContext('2d');
@@ -93,9 +93,16 @@ hvb_audio_animation = {};
     };
 
 
-    self.init = function(rafID, analyserNode) {
+    self.init = function(rafID, analyserNode, nodeId) {
         self.rafID = rafID;
         self.analyserNode = analyserNode;
+
+        if(!nodeId){
+            self.nodeId = 'hvb-analyser';
+        } else {
+            self.nodeId = nodeId;
+        }
+
         if (!navigator.cancelAnimationFrame) {
             navigator.cancelAnimationFrame = navigator.webkitCancelAnimationFrame || navigator.mozCancelAnimationFrame;
         }
