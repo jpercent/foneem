@@ -25,7 +25,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-var hvb_button_manager = {};
+var hvb_main = {};
 
 (function(self) {
     self.recordButtonId = 'hvb-record-sentence';
@@ -52,7 +52,7 @@ var hvb_button_manager = {};
    };
 
    self.stopRecording = function(e) {
-       window.hvb_recorder.stopRecording(self.upload);
+       self.data = window.hvb_recorder.stopRecording(self.upload);
        document.getElementById(self.recordButtonId).innerHTML = "<i class=\"fa fa-circle\"></i><br>Record</button>";
        self.wirePlaybackButton();
        window.clearTimeout(self.currentTimeoutId);
@@ -80,9 +80,14 @@ var hvb_button_manager = {};
        }
 
        self.unwirePlaybackButton();
-       var upload_size = window.hvb_recorder.upload();
-       if(upload_size > 1024) {
-           self.sentenceReload = window.hvb_sentence_manager.updateSentencesCompletedAndSetNextSentence(self.clearReload);
+       filename = $('.hvbsentence-text').html()+'-'+new Date().toISOString() + '.wav'
+       //var upload_size = window.hvb_recorder.upload(filename);
+       if(self.data[1].length > 1024) {
+           // xxx - this should be refactored
+           var message = JSON.stringify({'code': 'upload-audio', 'filename': filename, 'rms': self.data[0], 'data': self.data[1], 'sample_rate': window.hvb_recorder.sampleRate, 'length': self.data[1].length});
+           window.hvb_websock.send(message);
+           // https://s3.amazonaws.com/human-voice-bank/j1@empty-set.net-Good_morning.-2014-07-03T04_24_12.055Z.wav
+           self.sentenceReload = window.hvb_sentence_manager.updateSentencesCompletedAndSetNextSentence(self.clearReload, self.sessionId, self.rms, 'https://s3.amazonaws.com/human-voice-bank/'+filename);
        } else {
            self.sentenceReload = window.hvb_sentence_manager.setNextSentence(self.clearReload);
        }
@@ -107,12 +112,20 @@ var hvb_button_manager = {};
         playbackButton.onclick = null;
     };
 
-   self.initCallback = function(hvb_audio) {
-       window.hvb_audio_animation.init(hvb_audio.rafID, hvb_audio.analyserNode);
-       window.hvb_recorder.init(hvb_audio);
+   self.afterCalibration = function(sessionId) {
+       console.log("after calibration");
+       window.hvb_sentence_manager.sessionId = sessionId;
+       self.sessionId = sessionId;
+
        document.getElementById(self.recordButtonId).onclick = self.handleRecordClick;
        document.getElementById(self.nextButtonId).onclick = self.handleNextClick;
        document.getElementById(self.sentenceConsoleId).onclick = self.handleSentenceConsoleClick;
+   };
+
+   self.initCallback = function(hvb_audio) {
+       window.hvb_audio_animation.init(hvb_audio.rafID, hvb_audio.analyserNode);
+       window.hvb_recorder.init(hvb_audio);
+       window.hvb_calibrate.init(self.afterCalibration, window.hvb_recorder, window.hvb_audio_animation, window.hvb_websock);
     };
 
    self.init = function() {
@@ -122,7 +135,7 @@ var hvb_button_manager = {};
        window.hvb_audio.initAudio();
    };
 
-}(hvb_button_manager));
+}(hvb_main));
 
-window.addEventListener('load', hvb_button_manager.init);
+window.addEventListener('load', hvb_main.init);
 
