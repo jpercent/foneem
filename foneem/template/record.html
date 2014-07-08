@@ -26,6 +26,29 @@
     
 
 	<style>
+
+#overlay {
+     visibility: hidden;
+     position: absolute;
+     left: 0px;
+     top: 0px;
+     width:100%;
+     height:100%;
+     text-align:center;
+     z-index: 1000;
+}
+
+    #overlay div {
+     width:300px;
+     height: 400px;
+     margin: 100px auto;
+     background-color: #000000;
+     border:1px solid #ffffff;
+     padding:15px;
+     text-align:center;
+    }
+
+
 	html { overflow: hidden; }
 
 	canvas {
@@ -77,6 +100,14 @@
         </div>
         <!-- /.container -->
     </nav>
+
+
+<div id="overlay">
+   <div class="hvb-pitch">
+        <canvas id="hvb-calibrate-analyser" class="hvb-calibration-canvas" width="512" height="768"></canvas>
+        <button id="hvb-calibrate-button" class="btn btn-default btn-record btn-calibrate"><i class="fa fa-microphone fa-fw"></i> <span>Calibrating... </span></button>
+    </div>
+</div>
 
     <section id="recording-studio" class="container content-section text-center">
         <div class="back-wall">
@@ -555,7 +586,7 @@
         <button id="hvb-play-sentence"></button>
         <div class="hvb-volume-wrapper">
             <div class="hvb-volume">
-                <canvas id="hvb-analyser" width="256" height="256"></canvas>
+                <canvas id="hvb-analyser" width="256" height="256" class="hvb-volume-canvas"></canvas>
             </div>
         </div>
 
@@ -568,9 +599,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     <script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
 
+    <!-- Custom JavaScript Files -->
     <script src="static/js/tp/audioDisplay.js"></script>
     <script src="static/js/hvb-websock.js"></script>
     <script src="static/js/hvb-opacity.js"></script>
@@ -578,9 +611,10 @@
     <script src="static/js/hvb-audio.js"></script>
     <script src="static/js/hvb-audio-animation.js"></script>
     <script src="static/js/hvb-audio-record.js"></script>
+    <script src="static/js/hvb-calibrate.js"></script>
     <script src="static/js/hvb-main.js"></script>
 
-    <!-- Custom JavaScript Files -->
+
     <script src="static/js/tp/easing-scrolling.js"></script>
     <script src="static/js/tp/jquery.responsiveVideo.js"></script>
 
