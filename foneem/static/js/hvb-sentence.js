@@ -69,12 +69,14 @@ var hvb_sentence_manager = {};
         return false;
     };
 
-    self.updateSentencesCompletedAndSetNextSentence = function(reloadCallback) {
+    self.updateSentencesCompletedAndSetNextSentence = function(reloadCallback, sessionId, loudness, uri) {
         var ret = false;
-        var message = {'code': 'sentence-update', 'id': self.sentences[(self.iter-1)]['id']};
+        var message = {'code': 'sentence-update', 'id': self.sentences[(self.iter-1)]['id'],
+            'session_id': sessionId, 'loudness': loudness, 'uri': uri};
         if(self.iter == self.sentences.length) {
             self.reloadCallback = reloadCallback;
-            var message = {'code': 'sentence-update-and-get', 'id': self.sentences[(self.iter-1)]['id'], 'count': self.count};
+            message = {'code': 'sentence-update-and-get', 'id': self.sentences[(self.iter-1)]['id'],
+                'session_id': sessionId, 'loudness': loudness, 'uri': uri, 'count': self.count};
             $(self.sentenceClass).html('<p class="hvbsentence-text">....</p>');
             ret = true;
         }
