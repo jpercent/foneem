@@ -276,6 +276,12 @@ section#recording-studio {
 		border-top: 10px solid #c0c0c0;
 		border-right: 10px solid #6c6c6c;
 		border-bottom: 10px solid #6c6c6c;
+		&:hover {
+			cursor: hand;
+		}
+		.fa-volume-up {
+			color: #a1a1a1;
+		}
 		.hvb-sentence-counter {
 			position: absolute;
 			top: 10px;
@@ -382,6 +388,18 @@ section#recording-studio {
 		}
 	}
 
+	.hvb-play-sentence .disabled, #hvb-next-sentence .disabled {
+		color: #a1a1a1;
+		&:hover {
+			background: -webkit-gradient(linear, left top, left bottom, from(#dedede), to(#a9a9a9));
+			background: -webkit-linear-gradient(top, #dedede, #a9a9a9);
+			background: -moz-linear-gradient(top, #dedede, #a9a9a9);
+			background: -ms-linear-gradient(top, #dedede, #a9a9a9);
+			background: -o-linear-gradient(top, #dedede, #a9a9a9);
+			cursor: not-allowed;
+		}
+	}
+
 	.hvb-record {
 		width: 100px;
 		height: 87.5px;
@@ -404,8 +422,6 @@ section#recording-studio {
 		bottom: 97.5px;
 		left: 50%;
 		margin-left:-500px;
-		&:hover {
-		}
 		i {
 			color: $red-damask;
 		}
@@ -418,10 +434,11 @@ section#recording-studio {
 		bottom: 10px;
 		left: 50%;
 		margin-left:-500px;
-		&:hover {
-		}
-		i {
+		i.fa-play {
 			color: $green;
+		}
+		i.disabled {
+			color: #a1a1a1;
 		}
 	}
 	#hvb-next-sentence {
@@ -432,10 +449,11 @@ section#recording-studio {
 		bottom: 10px;
 		right: 50%;
 		margin-right:-500px;
-		&:hover {
-		}
-		i {
+		i.fa-step-forward {
 			color: #3c4879;
+		}
+		i.disabled {
+			color: #a1a1a1;
 		}
 	}
 	#hvb-settings {
@@ -446,8 +464,6 @@ section#recording-studio {
 		bottom: 97.5px;
 		right: 50%;
 		margin-right:-500px;
-		&:hover {
-		}
 		i {
 			color: #818dc1;
 		}
