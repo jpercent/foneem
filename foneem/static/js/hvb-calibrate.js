@@ -32,16 +32,23 @@ var hvb_calibrate = {};
     self.calibrated = function() {
         self.animator.nodeId = "hvb-analyser";
         self.animator.animate = false;
-        var overlay = document.getElementById("overlay");
-        overlay.style.visibility = (overlay.style.visibility == "visible") ? "hidden" : "visible";
+        //var overlay = document.getElementById("overlay");
+        //overlay.style.visibility = (overlay.style.visibility == "visible") ? "hidden" : "visible";
+        $('#hvb-calibrate-modal').modal('hide');
         var noise = self.recorder.computeAverageNoise();
         var message = JSON.stringify({'code': 'session', 'loudness': noise});
+        console.log("noise = ", message);
         self.websock.send(message);
     };
 
     self.newSession = function(message) {
         self.sessionId = message['session_id'];
-        self.callback(self.sessionId);
+        self.completed = parseInt(message['completed']);
+        self.sentencesPerSession = parseInt(message['sentences_per_session']);
+
+        console.log("New session id = ", self.sessionId, " sentences per session ", self.sentencesPerSession);
+        self.callback(self.sessionId, self.completed, self.sentencesPerSession);
+
     };
 
     self.init = function(callback, recorder, animator, websock) {
@@ -49,10 +56,11 @@ var hvb_calibrate = {};
 
         animator.nodeId = "hvb-calibrate-analyser";
         animator.animate = true;
-        var overlay = document.getElementById("overlay");
-        overlay.style.visibility = (overlay.style.visibility == "visible") ? "hidden" : "visible";
+        //var overlay = document.getElementById("overlay");
+        //overlay.style.visibility = (overlay.style.visibility == "visible") ? "hidden" : "visible";
+        $('#hvb-calibrate-modal').modal('show');
         recorder.startRecording();
-        setTimeout(self.calibrated, 500);
+        setTimeout(self.calibrated, 2000);
 
         self.callback = callback;
         self.recorder = recorder;
