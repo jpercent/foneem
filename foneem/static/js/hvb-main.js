@@ -31,8 +31,10 @@ var hvb_main = {};
     self.recordButtonId = 'hvb-record-sentence';
     self.nextButtonId = 'hvb-next-sentence';
     self.playButtonId = 'hvb-play-sentence';
+    self.settingsButtonId = 'hvb-settings';
     self.sentenceConsoleId = 'hvb-sentence-console';
     self.sentenceReload = false;
+    self.modalContinueShown = false;
 //    self.time = new Date();
     self.upload = true;
 
@@ -73,6 +75,11 @@ var hvb_main = {};
         self.upload = true;
     };
 
+    self.handleSettingsClick = function() {
+        var settings = document.getElementById("hvb-settings-modal");
+        settings.style.visibility = (overlay.style.visibility == "visible") ? "hidden" : "visible";
+    };
+
    self.handleNextClick = function(e) {
        if(self.sentenceReload === true) {
            console.log("next disabled while next sentences are loading.. ");
@@ -82,15 +89,25 @@ var hvb_main = {};
        self.unwirePlaybackButton();
        filename = $('.hvbsentence-text').html()+'-'+new Date().toISOString() + '.wav'
        //var upload_size = window.hvb_recorder.upload(filename);
-       if(self.data[1].length > 1024) {
-           // xxx - this should be refactored
+       if(self.data != null && self.data[1].length > 1024) {
            var message = JSON.stringify({'code': 'upload-audio', 'filename': filename, 'rms': self.data[0], 'data': self.data[1], 'sample_rate': window.hvb_recorder.sampleRate, 'length': self.data[1].length});
            window.hvb_websock.send(message);
-           // https://s3.amazonaws.com/human-voice-bank/j1@empty-set.net-Good_morning.-2014-07-03T04_24_12.055Z.wav
            self.sentenceReload = window.hvb_sentence_manager.updateSentencesCompletedAndSetNextSentence(self.clearReload, self.sessionId, self.data[0], 'https://s3.amazonaws.com/human-voice-bank/'+filename);
+           self.data = null;
+           self.completed++;
+           document.getElementById('hvb-session-1').value = self.completed.toString();
+           console.log("session count, per session", window.hvb_sentence_manager.sessionCount, self.sentencesPerSession,self.modalContinueShown);
+
+           if(window.hvb_sentence_manager.sessionCount > self.sentencesPerSession && self.modalContinueShown === false) {
+               $('#hvb-session-continue').modal('show');
+               self.modalContinueShown = true;
+           }
        } else {
-           self.sentenceReload = window.hvb_sentence_manager.setNextSentence(self.clearReload);
+           alert("Not enough data was collected. Please rerecord.");
+           //self.sentenceReload = window.hvb_sentence_manager.setNextSentence(self.clearReload);
        }
+
+
    };
 
    self.clearReload = function() {
@@ -104,22 +121,51 @@ var hvb_main = {};
         playbackButton.onclick = function(e) {
             playbackButton.innerHTML = "<i class='fa fa-play'></i><br>Playback <audio src='"+soundFileUrl+"' autoplay></audio>";
         }
+       document.getElementById(self.nextButtonId).onclick = self.handleNextClick;
+       document.getElementById(self.nextButtonId).innerHTML = '<i class="fa fa-step-forward"></i><br>Next';
    };
 
     self.unwirePlaybackButton = function() {
         var playbackButton = document.getElementById(self.playButtonId);
-        playbackButton.innerHTML = '';
+        playbackButton.innerHTML = "<i class='fa fa-play-disabled'></i><br>Playback";
         playbackButton.onclick = null;
+        document.getElementById(self.nextButtonId).onclick = null;
+        document.getElementById(self.nextButtonId).innerHTML = '<i class="fa fa-step-forward-disabled"></i><br>Next';
     };
 
-   self.afterCalibration = function(sessionId) {
+   self.afterCalibration = function(sessionId, completed, sentencesPerSession) {
        console.log("after calibration");
        window.hvb_sentence_manager.sessionId = sessionId;
-       self.sessionId = sessionId;
 
+       self.sessionId = sessionId;
+       self.completed = completed;
+       self.sentencesPerSession = sentencesPerSession;
+
+       document.getElementById('hvb-session-1').value = +self.completed.toString();
+       document.getElementById('hvb-session-2').value = sentencesPerSession.toString();
+       document.getElementById('hvb-settings').setAttribute('data-target', '#hvb-settings-modal')
+       document.getElementById('hvb-settings-logout').onclick = function(e) {
+           window.location = '/logout';
+       };
        document.getElementById(self.recordButtonId).onclick = self.handleRecordClick;
-       document.getElementById(self.nextButtonId).onclick = self.handleNextClick;
        document.getElementById(self.sentenceConsoleId).onclick = self.handleSentenceConsoleClick;
+
+       document.getElementById('hvb-session-continue-logout').onclick = function(e) {
+           window.location = '/logout';
+       };
+
+       document.getElementById('hvb-settings-save').onclick = function(event) {
+           console.log("clicked save");
+           self.sentencesPerSession = document.getElementById('hvb-session-2').value;
+           message = JSON.stringify({"code": "update-session-count", "count": self.sentencesPerSession})
+           console.log("message = ", message)
+           window.hvb_websock.send(message);
+           self.modalContinueShown = false;
+           if(window.hvb_sentence_manager.sessionCount >= self.sentencesPerSession) {
+               $('#hvb-session-continue').modal('show');
+               self.modalContinueShown = true;
+           }
+       };
    };
 
    self.initCallback = function(hvb_audio) {
@@ -129,6 +175,7 @@ var hvb_main = {};
     };
 
    self.init = function() {
+       document.getElementById('hvb-settings').setAttribute('data-target', 'undefined');
        window.hvb_sentence_manager.init(window.hvb_websock, window.hvb_opacity);
        window.hvb_websock.init();
        window.hvb_audio.registerCallback(self.initCallback);
