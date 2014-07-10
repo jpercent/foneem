@@ -3507,6 +3507,10 @@ html.recording-studio section#recording-studio {
     border-top: 10px solid #c0c0c0;
     border-right: 10px solid #6c6c6c;
     border-bottom: 10px solid #6c6c6c; }
+    html.recording-studio section#recording-studio .hvb-sentence:hover {
+      cursor: hand; }
+    html.recording-studio section#recording-studio .hvb-sentence .fa-volume-up {
+      color: #a1a1a1; }
     html.recording-studio section#recording-studio .hvb-sentence .hvb-sentence-counter {
       position: absolute;
       top: 10px;
@@ -3516,9 +3520,6 @@ html.recording-studio section#recording-studio {
       font-size: 12px;
       font-weight: bold;
       color: #fff; }
-html.recording-studio section#recording-studio .hvb-sentence .hvb-speak-sentence {
-
-  }
   html.recording-studio section#recording-studio .hvbsentence-text {
     white-space: pre-wrap;
     /* CSS3 */
@@ -3528,12 +3529,12 @@ html.recording-studio section#recording-studio .hvb-sentence .hvb-speak-sentence
     /* Opera <7 */
     white-space: -o-pre-wrap;
     /* Opera 7 */
-    width: 500px;
+    width: 800px;
     height: 100px;
     position: absolute;
     bottom: 10px;
     left: 50%;
-    margin-left: -280px;
+    margin-left: -400px;
     font-size: 30px; }
   html.recording-studio section#recording-studio .hvb-volume-wrapper {
     width: 250px;
@@ -3612,6 +3613,15 @@ html.recording-studio section#recording-studio .hvb-sentence .hvb-speak-sentence
       transition: all, ease, 0.3s; }
     html.recording-studio section#recording-studio .hvb-record i, html.recording-studio section#recording-studio .hvb-stop i, html.recording-studio section#recording-studio #hvb-play-sentence i, html.recording-studio section#recording-studio #hvb-next-sentence i, html.recording-studio section#recording-studio #hvb-settings i {
       font-size: 18px; }
+  html.recording-studio section#recording-studio .hvb-play-sentence .disabled, html.recording-studio section#recording-studio #hvb-next-sentence .disabled {
+    color: #a1a1a1; }
+    html.recording-studio section#recording-studio .hvb-play-sentence .disabled:hover, html.recording-studio section#recording-studio #hvb-next-sentence .disabled:hover {
+      background: -webkit-gradient(linear, left top, left bottom, from(#dedede), to(darkgrey));
+      background: -webkit-linear-gradient(top, #dedede, darkgrey);
+      background: -moz-linear-gradient(top, #dedede, darkgrey);
+      background: -ms-linear-gradient(top, #dedede, darkgrey);
+      background: -o-linear-gradient(top, #dedede, darkgrey);
+      cursor: not-allowed; }
   html.recording-studio section#recording-studio .hvb-record {
     width: 100px;
     height: 87.5px;
@@ -3640,8 +3650,10 @@ html.recording-studio section#recording-studio .hvb-sentence .hvb-speak-sentence
     bottom: 10px;
     left: 50%;
     margin-left: -500px; }
-    html.recording-studio section#recording-studio #hvb-play-sentence i {
+    html.recording-studio section#recording-studio #hvb-play-sentence i.fa-play {
       color: #4baa4e; }
+    html.recording-studio section#recording-studio #hvb-play-sentence i.disabled {
+      color: #a1a1a1; }
   html.recording-studio section#recording-studio #hvb-next-sentence {
     width: 100px;
     height: 87.5px;
@@ -3650,8 +3662,10 @@ html.recording-studio section#recording-studio .hvb-sentence .hvb-speak-sentence
     bottom: 10px;
     right: 50%;
     margin-right: -500px; }
-    html.recording-studio section#recording-studio #hvb-next-sentence i {
+    html.recording-studio section#recording-studio #hvb-next-sentence i.fa-step-forward {
       color: #3c4879; }
+    html.recording-studio section#recording-studio #hvb-next-sentence i.disabled {
+      color: #a1a1a1; }
   html.recording-studio section#recording-studio #hvb-settings {
     width: 100px;
     height: 87.5px;
