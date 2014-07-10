@@ -33,7 +33,7 @@ create table if not exists phonemes(
 
 create table if not exists sessions(
    id serial primary key,
-   base_loudness real,
+   calibrated_rms_value real,
    creation_time timestamp default current_timestamp
 );
 
@@ -52,6 +52,7 @@ create table if not exists user_sentence_session(
     sentence_id int references sentences(id),
     session_id int references sessions(id),
     loudness real,
+    rms_value real,
     uri text,
     creation_time timestamp default current_timestamp
 );
