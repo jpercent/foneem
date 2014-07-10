@@ -50,7 +50,6 @@ def record():
     try:
         if not ('email' in session):
             return redirect('/', code=302)
-
         return render_template('record.html')
     except Exception as e:
         print("Exception = ", dir(e), e, e.__doc__)
@@ -62,18 +61,18 @@ def upload_wav_to_s3(conf, sound_file_data, filename):
     bucket_name = "human-voice-bank"
     #sound_file = open(key, 'rb').read()
     response = conn.put(bucket_name, str(filename), S3.S3Object(sound_file_data, {'title': 'title'}), {'Content-Type': 'audio/wav'})
-    response = conn.get_acl(bucket_name, filename)
-    print("S3 put resposne for object ", str(filename), " = ", response.http_response.status)
-    acl_xml = response.object.data
-    root = ET.fromstring(acl_xml)    
-    make_public = '<Grant><Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group"><URI>http://acs.amazonaws.com/groups/global/AllUsers</URI></Grantee><Permission>READ</Permission></Grant>'
-    grant_public = ET.fromstring(make_public)
-    access_control = root.find('{http://s3.amazonaws.com/doc/2006-03-01/}AccessControlList')
-    access_control.append(grant_public)
-    new_acl = ET.tostring(root, encoding='utf8', method='xml')
-    response = conn.put_acl(bucket_name, filename, new_acl)
-    print("ACL update for object ", str(filename), " = ", response.http_response.status)
-    return response.http_response.status
+    #response = conn.get_acl(bucket_name, filename)
+   # print("S3 put resposne for object ", str(filename), " = ", response.http_response.status)
+   # acl_xml = response.object.data
+   # root = ET.fromstring(acl_xml)
+    #make_public = '<Grant><Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="Group"><URI>http://acs.amazonaws.com/groups/global/AllUsers</URI></Grantee><Permission>READ</Permission></Grant>'
+    #grant_public = ET.fromstring(make_public)
+    #access_control = root.find('{http://s3.amazonaws.com/doc/2006-03-01/}AccessControlList')
+    #access_control.append(grant_public)
+    #new_acl = ET.tostring(root, encoding='utf8', method='xml')
+    #response = conn.put_acl(bucket_name, filename, new_acl)
+    #print("ACL update for object ", str(filename), " = ", response.http_response.status)
+    #return response.http_response.status
 
 @app.route('/upload/<filename>', methods=['POST'])
 def upload(filename):
@@ -84,6 +83,11 @@ def upload(filename):
     _file = request.files['test.wav']
     filename = filename.replace(':', '_')
     filename = session['email']+'-'+filename
-    upload_wav_to_s3(conf, _file.stream.read(), filename)
+    data = _file.stream.read()
+    f = open(filename, 'wb+')
+    f.write(data)
+    f.flush()
+    f.close()
+    upload_wav_to_s3(conf, data, filename)
     return 'OK'
 
