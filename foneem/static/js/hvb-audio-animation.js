@@ -1,4 +1,4 @@
-// Copyright (c) James Percent.
+// Copyright (c) James Percent 2014.
 // All rights reserved.
 // Redistribution and use in source and binary forms, with or without modification,
 // are permitted provided that the following conditions are met:
@@ -48,7 +48,7 @@ hvb_audio_animation = {};
             // Draw rectangle for each frequency bin.
             for (var i = 0; i < bars; ++i) {
                 var magnitude = 0;
-                var offset = Math.floor( i * multiplier );
+                var offset = Math.floor(i * multiplier);
 
                 // sum/average the block, or we miss narrow-bandwidth spikes
                 for (var j = 0; j< multiplier; j++) {
@@ -74,6 +74,7 @@ hvb_audio_animation = {};
             var analyserContext = canvas.getContext('2d');
             self.drawAnimation(canvasWidth, canvasHeight, analyserContext);
         } catch (e) {
+            console.log("node id = ", self.nodeId);
             console.log("updateAnalysers Exception: ", e);
         }
     };
