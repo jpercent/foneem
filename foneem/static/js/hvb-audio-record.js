@@ -85,7 +85,7 @@ var hvb_recorder = {};
         }
         console.log("blob length = ",view.byteLength, " sampleRate = ", self.sampleRate);
 		self.currentBlob = new Blob([ view ], { type : 'audio/wav' });
-        self.soundFileUrl = (window.URL || window.webkitURL).createObjectURL(blob);
+        self.soundFileUrl = (window.URL || window.webkitURL).createObjectURL(self.currentBlob);
         return [rms, interleaved];
     };
 
