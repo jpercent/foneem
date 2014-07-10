@@ -27,30 +27,6 @@
 
 	<style>
 
-#overlay {
-     visibility: hidden;
-     position: absolute;
-     left: 0px;
-     top: 0px;
-     width:100%;
-     height:100%;
-     text-align:center;
-     z-index: 1000;
-}
-
-    #overlay div {
-     width:300px;
-     height: 400px;
-     margin: 100px auto;
-     background-color: #000000;
-     border:1px solid #ffffff;
-     padding:15px;
-     text-align:center;
-    }
-
-
-	html { overflow: hidden; }
-
 	canvas {
 		display: inline-block;
 		background: #202020;
@@ -61,6 +37,15 @@
 	@media (orientation: landscape) {
 		body { flex-direction: row;}
 	}
+
+.modal-content_calibrate {
+  modal-content;
+  background-color: #0480be;
+}
+.modal-body_calibrate {
+  modal-body;
+  background-color: #000000;
+}
 	</style>
 
     
@@ -101,13 +86,6 @@
         <!-- /.container -->
     </nav>
 
-
-<div id="overlay">
-   <div class="hvb-pitch">
-        <canvas id="hvb-calibrate-analyser" class="hvb-calibration-canvas" width="512" height="768"></canvas>
-        <button id="hvb-calibrate-button" class="btn btn-default btn-record btn-calibrate"><i class="fa fa-microphone fa-fw"></i> <span>Calibrating... </span></button>
-    </div>
-</div>
 
     <section id="recording-studio" class="container content-section text-center">
         <div class="back-wall">
@@ -583,7 +561,7 @@
             </div>
         </div>
         <button id="hvb-record-sentence" class="hvb-record"><i class="fa fa-circle"></i><br>Record</button>
-        <button id="hvb-play-sentence"></button>
+        <button id="hvb-play-sentence"><i class='fa fa-play-disabled'></i><br>Playback</button>
         <div class="hvb-volume-wrapper">
             <div class="hvb-volume">
                 <canvas id="hvb-analyser" width="256" height="256" class="hvb-volume-canvas"></canvas>
@@ -591,35 +569,92 @@
         </div>
 
         <div id="hvb-sentence-console" class="hvb-sentence">
-            <i class="fa fa-volume-up"></i>
-            <p class="hvb-sentence-counter">1/2000</p>
         </div>
-        <button id="hvb-next-sentence"><i class="fa fa-step-forward"></i><br>Next</button>
-        <button id="hvb-settings"><i class="fa fa-cog"></i><br>Account</button>
+        <button id="hvb-next-sentence"><i class="fa fa-step-forward-disabled"></i><br>Next</button>
+        <button id="hvb-settings" data-toggle="modal" data-target="#hvb-settings-modal"><i class="fa fa-cog"></i><br>Account</button>
     </section>
 
-    <!-- Core JavaScript Files -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<div class="modal fade" id="hvb-calibrate-modal" tabindex="-1" role="dialog" aria-labelledby="hvb-calibrate-modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content_calibrate">
+            <div class="modal-header">
+                <h4 class="modal-title" id="hvb-calibrate-modalLabel"></h4>
+            </div>
+            <div class="modal-body_calibrate">
+                <canvas id="hvb-calibrate-analyser" class="hvb-calibration-canvas" width="512" height="768"></canvas>
+            </div>
+            <div class="modal-footer">
+                <center><button id="hvb-calibrate-button" class="btn btn-default btn-record btn-calibrate"><i class="fa fa-microphone fa-fw"></i> <span>Calibrating... </span></button></center>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+<div class="modal fade" id="hvb-settings-modal" tabindex="-1" role="dialog" aria-labelledby="hvb-settings-modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="hvb-settings-modalLabel">Settings</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <tr>
+                        <td style="padding:0 15px 0 15px;"><div id="hvb-total-complete"><label for="hvb-session-1" class="col-5 control-label"><p>Total sentences completed completed</p></label></div></td>
+                        <td style="padding:0 15px 0 15px;"><div id="hvb-session-setting0" class="col-10"><input readonly="readonly" class="form-control" id="hvb-session-1" placeholder="Session"></div></td>
+                    </tr>
+                    <tr>
+                        <td style="padding:0 15px 0 15px;"><label for="hvb-session-2" class="col-5 control-label"><p>Sentences per session</p></label></td>
+                        <td style="padding:0 15px 0 15px;"><div id="hvb-session-setting" class="col-10">
+                          <input class="form-control" id="hvb-session-2" placeholder="Session">
+                        </div></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button id="hvb-settings-logout" type="button" class="btn btn-default" data-dismiss="modal">Sign out</button>
+                <button id="hvb-settings-save" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <!-- Custom JavaScript Files -->
-    <script src="static/js/tp/audioDisplay.js"></script>
-    <script src="static/js/hvb-websock.js"></script>
-    <script src="static/js/hvb-opacity.js"></script>
-    <script src="static/js/hvb-sentence.js"></script>
-    <script src="static/js/hvb-audio.js"></script>
-    <script src="static/js/hvb-audio-animation.js"></script>
-    <script src="static/js/hvb-audio-record.js"></script>
-    <script src="static/js/hvb-calibrate.js"></script>
-    <script src="static/js/hvb-main.js"></script>
+<div id="hvb-session-continue" class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="hvb-session-continueLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="hvb-session-continueLabel">Your session is complete!</h4>
+            </div>
+            <div class="modal-footer">
+                <button id="hvb-session-continue-logout" type="button" class="btn btn-default" data-dismiss="modal">Sign out</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Continue</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+<!-- Core JavaScript Files -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
-    <script src="static/js/tp/easing-scrolling.js"></script>
-    <script src="static/js/tp/jquery.responsiveVideo.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+
+<!-- Custom JavaScript Files -->
+<script src="static/js/tp/audioDisplay.js"></script>
+<script src="static/js/hvb-websock.js"></script>
+<script src="static/js/hvb-opacity.js"></script>
+<script src="static/js/hvb-sentence.js"></script>
+<script src="static/js/hvb-audio.js"></script>
+<script src="static/js/hvb-audio-animation.js"></script>
+<script src="static/js/hvb-audio-record.js"></script>
+<script src="static/js/hvb-calibrate.js"></script>
+<script src="static/js/hvb-main.js"></script>
+
+<script src="static/js/tp/easing-scrolling.js"></script>
+<script src="static/js/tp/jquery.responsiveVideo.js"></script>
 
     <script>
     $( 'body' ).responsiveVideo();
