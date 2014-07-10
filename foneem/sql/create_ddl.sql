@@ -11,6 +11,7 @@ create table if not exists users(
     country varchar(128),
     password text,
     compendium text,
+    session_count int not null default 10,
     creation_time timestamp default current_timestamp
 );
 
