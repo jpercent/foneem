@@ -70,14 +70,14 @@ var hvb_sentence_manager = {};
         return false;
     };
 
-    self.updateSentencesCompletedAndSetNextSentence = function(reloadCallback, sessionId, loudness, uri) {
+    self.updateSentencesCompletedAndSetNextSentence = function(reloadCallback, sessionId, loudness, rms, uri) {
         var ret = false;
         var message = {'code': 'sentence-update', 'id': self.sentences[(self.iter-1)]['id'],
-            'session_id': sessionId, 'loudness': loudness, 'uri': uri};
+            'session_id': sessionId, 'loudness': loudness, 'rms_value': rms, 'uri': uri};
         if(self.iter == self.sentences.length) {
             self.reloadCallback = reloadCallback;
             message = {'code': 'sentence-update-and-get', 'id': self.sentences[(self.iter-1)]['id'],
-                'session_id': sessionId, 'loudness': loudness, 'uri': uri, 'count': self.count};
+                'session_id': sessionId, 'loudness': loudness, 'rms_value': rms, 'uri': uri, 'count': self.count};
             $(self.sentenceClass).html('<p class="hvbsentence-text">....</p>');
             ret = true;
         }
@@ -85,6 +85,7 @@ var hvb_sentence_manager = {};
         for(var i = 1; i < self.current.length; i++) {
             self.opacity.updateOpacityByIncrement(self.current[i].trim());
         }
+
         self.websock.send(JSON.stringify(message));
         if(ret === false) {
             self.setNextSentence(reloadCallback);

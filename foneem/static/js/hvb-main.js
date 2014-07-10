@@ -75,11 +75,6 @@ var hvb_main = {};
         self.upload = true;
     };
 
-    self.handleSettingsClick = function() {
-        var settings = document.getElementById("hvb-settings-modal");
-        settings.style.visibility = (overlay.style.visibility == "visible") ? "hidden" : "visible";
-    };
-
    self.handleNextClick = function(e) {
        if(self.sentenceReload === true) {
            console.log("next disabled while next sentences are loading.. ");
@@ -90,9 +85,24 @@ var hvb_main = {};
        filename = $('.hvbsentence-text').html()+'-'+new Date().toISOString() + '.wav'
        //var upload_size = window.hvb_recorder.upload(filename);
        if(self.data != null && self.data[1].length > 1024) {
-           var message = JSON.stringify({'code': 'upload-audio', 'filename': filename, 'rms': self.data[0], 'data': self.data[1], 'sample_rate': window.hvb_recorder.sampleRate, 'length': self.data[1].length});
+           var rms = self.data[0]
+           var raw_pcm = self.data[1]
+           var loudness = 10 * Math.log(rms/self.sessionNoiseFloor);
+
+           var message = JSON.stringify({
+               'code': 'upload-audio',
+               'filename': filename,
+               'session_noise_floor': self.sessionNoiseFloor,
+               'rms': rms,
+               'data': raw_pcm,
+               'sample_rate': window.hvb_recorder.sampleRate,
+               'length': self.data[1].length});
+
            window.hvb_websock.send(message);
-           self.sentenceReload = window.hvb_sentence_manager.updateSentencesCompletedAndSetNextSentence(self.clearReload, self.sessionId, self.data[0], 'https://s3.amazonaws.com/human-voice-bank/'+filename);
+
+           self.sentenceReload = window.hvb_sentence_manager.updateSentencesCompletedAndSetNextSentence(self.clearReload,
+               self.sessionId, loudness, rms, 'https://s3.amazonaws.com/human-voice-bank/'+filename);
+
            self.data = null;
            self.completed++;
            document.getElementById('hvb-session-1').value = self.completed.toString();
@@ -106,8 +116,6 @@ var hvb_main = {};
            alert("Not enough data was collected. Please rerecord.");
            //self.sentenceReload = window.hvb_sentence_manager.setNextSentence(self.clearReload);
        }
-
-
    };
 
    self.clearReload = function() {
@@ -133,13 +141,14 @@ var hvb_main = {};
         document.getElementById(self.nextButtonId).innerHTML = '<i class="fa fa-step-forward-disabled"></i><br>Next';
     };
 
-   self.afterCalibration = function(sessionId, completed, sentencesPerSession) {
+   self.afterCalibration = function(sessionId, completed, sentencesPerSession, sessionNoiseFloor) {
        console.log("after calibration");
        window.hvb_sentence_manager.sessionId = sessionId;
 
        self.sessionId = sessionId;
        self.completed = completed;
        self.sentencesPerSession = sentencesPerSession;
+       self.sessionNoiseFloor = sessionNoiseFloor;
 
        document.getElementById('hvb-session-1').value = +self.completed.toString();
        document.getElementById('hvb-session-2').value = sentencesPerSession.toString();

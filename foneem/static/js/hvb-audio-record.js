@@ -34,6 +34,7 @@ var hvb_recorder = {};
     self.recordingLength = 0;
     self.sampleRate = null;
     self.currentBlob = null;
+    self.sessionNoiseFloor = null;
 
     self.startRecording = function() {
 	    self.recording = true;
@@ -107,9 +108,7 @@ var hvb_recorder = {};
         var average = total/interleaved.length;
 
         var rms = Math.sqrt((total/interleaved.length));
-        var decibel = Math.abs((Math.log(rms) / Math.log(10)));
-
-        console.log("average = ", average, " total = ", total, "rms = ", rms, "db = ", decibel);
+        //console.log("average = ", average, " total = ", total, "rms = ", rms, "db = ", decibel);
         return rms;
     };
 

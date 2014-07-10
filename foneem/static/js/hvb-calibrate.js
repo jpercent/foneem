@@ -32,11 +32,9 @@ var hvb_calibrate = {};
     self.calibrated = function() {
         self.animator.nodeId = "hvb-analyser";
         self.animator.animate = false;
-        //var overlay = document.getElementById("overlay");
-        //overlay.style.visibility = (overlay.style.visibility == "visible") ? "hidden" : "visible";
         $('#hvb-calibrate-modal').modal('hide');
-        var noise = self.recorder.computeAverageNoise();
-        var message = JSON.stringify({'code': 'session', 'loudness': noise});
+        self.sessionNoiseFloor = self.recorder.computeAverageNoise();
+        var message = JSON.stringify({'code': 'session', 'loudness': self.sessionNoiseFloor});
         console.log("noise = ", message);
         self.websock.send(message);
     };
@@ -48,8 +46,7 @@ var hvb_calibrate = {};
         self.sentencesPerSession = parseInt(message['sentences_per_session']);
 
         console.log("New session id = ", self.sessionId, " sentences per session ", self.sentencesPerSession);
-        self.callback(self.sessionId, self.completed, self.sentencesPerSession);
-
+        self.callback(self.sessionId, self.completed, self.sentencesPerSession, self.sessionNoiseFloor);
     };
 
     self.init = function(callback, recorder, animator, websock) {

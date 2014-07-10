@@ -179,7 +179,7 @@ def get_next_session(message):
     loudness = message['loudness']
     conf = parse_config()
     conn, cursor = hvb_connect_db(conf['db'])
-    cursor.execute("""insert into sessions(base_loudness) values(%s);""", [loudness])
+    cursor.execute("""insert into sessions(calibrated_rms_value) values(%s);""", [loudness])
     cursor.execute("""select LASTVAL();""")
     # xxx convert to fetchone
     session_id = cursor.fetchall()[0][0]
@@ -251,18 +251,20 @@ def update_sentences_completed_and_get_next_sentence(message):
     count = message['count']
     session_id = message['session_id']
     loudness = message['loudness']
+    rms_value = message['rms_value']
     uri = message['uri']
 
     conf = parse_config()
     conn, cursor = hvb_connect_db(conf['db'])
-    make_sentence_update(cursor, email, sentence_id, session_id, loudness, uri)
+    make_sentence_update(cursor, email, sentence_id, session_id, loudness, rms_value, uri)
     next_block = get_next_block(cursor, email, count)
     hvb_close_db(conn, cursor)
     return next_block
 
 
-def make_sentence_update(cursor, email, sentence_id, session_id, loudness, uri):
-    cursor.execute("""insert into user_sentence_session(user_id, sentence_id, session_id, loudness, uri) values((select u.id from users u where u.email = %s), %s, %s, %s, %s);""", [email, sentence_id, session_id, loudness, uri])
+def make_sentence_update(cursor, email, sentence_id, session_id, loudness, rms_value, uri):
+    print("email =", email, ' loudness = ', loudness, 'rms-value = ', rms_value, " uri = ", uri)
+    cursor.execute("""insert into user_sentence_session(user_id, sentence_id, session_id, loudness, rms_value, uri) values((select u.id from users u where u.email = %s), %s, %s, %s, %s, %s);""", [email, sentence_id, session_id, loudness, rms_value, uri])
 
 
 def update_sentences_completed(message):
@@ -270,10 +272,11 @@ def update_sentences_completed(message):
     sentence_id = message['id']
     session_id = message['session_id']
     loudness = message['loudness']
+    rms_value = message['rms_value']
     uri = message['uri']
     conf = parse_config()
     conn, cursor = hvb_connect_db(conf['db'])
-    make_sentence_update(cursor, email, sentence_id, session_id, loudness, uri)
+    make_sentence_update(cursor, email, sentence_id, session_id, loudness, rms_value, uri)
     hvb_close_db(conn, cursor)
 
 
