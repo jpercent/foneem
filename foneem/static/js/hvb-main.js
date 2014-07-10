@@ -127,10 +127,10 @@ var hvb_main = {};
 
     self.unwirePlaybackButton = function() {
         var playbackButton = document.getElementById(self.playButtonId);
-        playbackButton.innerHTML = "<i class='fa fa-play-disabled'></i><br>Playback";
+        playbackButton.innerHTML = "<i class='fa fa-play disabled'></i><br>Playback";
         playbackButton.onclick = null;
         document.getElementById(self.nextButtonId).onclick = null;
-        document.getElementById(self.nextButtonId).innerHTML = '<i class="fa fa-step-forward-disabled"></i><br>Next';
+        document.getElementById(self.nextButtonId).innerHTML = '<i class="fa fa-step-forward disabled"></i><br>Next';
     };
 
    self.afterCalibration = function(sessionId, completed, sentencesPerSession) {
