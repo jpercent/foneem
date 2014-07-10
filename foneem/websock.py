@@ -156,10 +156,11 @@ class TornadoWebsocketHandler(WebSocketHandler):
 
 
 def get_next_block(cursor, email, count):
-    cursor.execute("""select s.id, s.sentence from sentences as s where s.id NOT IN(select s.id from users u, sentences s, user_sentence_session us  where  s.id = us.sentence_id and u.id = us.user_id and u.email = %s) order by s.display_order limit %s;""", [email, count]);
-    next_sentence_block = dict(cursor.fetchmany(count));
+    cursor.execute("""select s.id, s.sentence from sentences as s where s.id NOT IN(select s.id from users u, sentences s, user_sentence_session us  where  s.id = us.sentence_id and u.id = us.user_id and u.email = %s) order by s.display_order asc limit %s;""", [email, count]);
+    next_sentence_block = cursor.fetchmany(count);
     sentences = []
-    for id, sentence in next_sentence_block.items():
+
+    for id, sentence in next_sentence_block:
         cursor.execute("""select g.css_id from phonemes as p, sentence_phoneme as sp, grid as g, phoneme_grid as pg where p.id = pg.phoneme_id and g.id = pg.grid_id and sp.sentence_id = %s and sp.phoneme_id = p.id;""",
             [id])
         phonemes = cursor.fetchall()
@@ -167,7 +168,6 @@ def get_next_block(cursor, email, count):
         for phoneme in phonemes:
             new_value = new_value + ':' + str(phoneme[0])
 
-        next_sentence_block[id] = new_value
         sentences.append({'id': id, 'sentence': new_value})
 
     next_block = {'code': 'next-sentence', 'sentences': sentences}
