@@ -31,11 +31,12 @@ var hvb_sentence_manager = {};
     self.sentenceClass = '.hvb-sentence';
     self.cursorKey = 'hvb-cursor';
     self.cursorLengthKey = 'hvb-cursor-length';
-    self.count = 2;
+    self.count = 100;
     self.next_sentence_message = JSON.stringify({'code': 'next-sentence', 'count': self.count});
     self.current = '';
     self.requestIncomplete = false;
     self.reloadCallback = null;
+    self.sessionCount = 0;
 
     self.makeSentenceRequest = function() {
         console.log("requesting more sentences ");
@@ -63,8 +64,8 @@ var hvb_sentence_manager = {};
         }
 
         var sentence = self.parseSentence(self.sentences[self.iter]);
-        $(self.sentenceClass).html('<p class="hvbsentence-text">' + sentence + '</p>');
-        //console.log("set next sentence ", self.iter, self.sentences[self.iter], self.sentences.length);
+        $(self.sentenceClass).html('<i class="fa fa-volume-up"></i><p class="hvb-sentence-counter">'+self.sessionCount+'</p><p class="hvbsentence-text">' + sentence + '</p>');
+        self.sessionCount++;
         self.iter++;
         return false;
     };
