@@ -3528,12 +3528,12 @@ html.recording-studio section#recording-studio .hvb-sentence .hvb-speak-sentence
     /* Opera <7 */
     white-space: -o-pre-wrap;
     /* Opera 7 */
-    width: 500px;
+    width: 800px;
     height: 100px;
     position: absolute;
     bottom: 10px;
     left: 50%;
-    margin-left: -280px;
+    margin-left: -400px;
     font-size: 30px; }
   html.recording-studio section#recording-studio .hvb-volume-wrapper {
     width: 250px;
