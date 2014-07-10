@@ -42,6 +42,7 @@ var hvb_calibrate = {};
     };
 
     self.newSession = function(message) {
+        console.log("message = ", message);
         self.sessionId = message['session_id'];
         self.completed = parseInt(message['completed']);
         self.sentencesPerSession = parseInt(message['sentences_per_session']);

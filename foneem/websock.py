@@ -145,6 +145,9 @@ class TornadoWebsocketHandler(WebSocketHandler):
         response = None
         if code_value in self.dispatch_table:
             response = self.dispatch_table[code_value](message)
+        else:
+            print('TornadoWebsocketHandler: ERROR no dispatch method handles the incoming message = %s ' % message)
+
         return response
 
     def on_close(self):
@@ -178,10 +181,28 @@ def get_next_session(message):
     conn, cursor = hvb_connect_db(conf['db'])
     cursor.execute("""insert into sessions(base_loudness) values(%s);""", [loudness])
     cursor.execute("""select LASTVAL();""")
+    # xxx convert to fetchone
     session_id = cursor.fetchall()[0][0]
+    cursor.execute("""select count(*) from users u, sentences s, user_sentence_session us  where s.id = us.sentence_id and u.id = us.user_id and u.email = %s;""", [email]);
+    total_completed = cursor.fetchall()[0][0];
+    cursor.execute("""select u.session_count from users u where u.email = %s;""", [email])
+    sentences_per_session = cursor.fetchall()[0][0]
     hvb_close_db(conn, cursor)
-    return {"code": "session", "session_id": session_id}
+    response =  {"code": "session", "session_id": session_id, "completed": total_completed, "sentences_per_session": sentences_per_session}
+    print("response = ", response)
+    return response
 
+
+def update_session_count(message):
+    email = message['email']
+    count = message['count']
+    conf = parse_config()
+    conn, cursor = hvb_connect_db(conf['db'])
+#    '''update users set password=%(password)s,compendium=%(compendium)s where email=%(email)s''', form_data)
+    print("setting the session count to ", count, " of user email = ", email)
+    cursor.execute("""update users set session_count=%s where email = %s;""", [count, email])
+    hvb_close_db(conn, cursor)
+    return None
 
 def get_next_sentence(message):
     email = message['email']
@@ -314,7 +335,8 @@ class TornadoWebsocketServer(object):
         hvb_handlers = {"next-sentence": get_next_sentence, "sentence-update": update_sentences_completed,
                         "sentence-update-and-get": update_sentences_completed_and_get_next_sentence,
                         "opacity-update": update_opacity, "get-opacity": get_opacity,
-                        "session": get_next_session, "upload-audio": upload_audio}
+                        "session": get_next_session, "upload-audio": upload_audio,
+                        "update-session-count": update_session_count}
 
         self.application_args = [(self.ws_route, self.websock_handler, dict(hvb_handlers=hvb_handlers))]
         if self.wsgi_app:
