@@ -3360,32 +3360,36 @@ html.recording-studio section#recording-studio {
   background: url("../images/room-bg-2.jpg") no-repeat fixed top center; }
   html.recording-studio section#recording-studio .back-wall {
     position: absolute;
-    width: 577.0px;
-    height: 384.66667px;
+    width: 579px;
+    height: 386px;
     top: 74px;
     left: 50%;
     margin-left: -480px; }
     html.recording-studio section#recording-studio .back-wall .wall-cell-container {
       border: 1px solid #000;
-      width: 38.46667px;
-      height: 38.46667px;
+      width: 38.6px;
+      height: 38.6px;
       float: left;
+      overflow: hidden;
       position: relative; }
       html.recording-studio section#recording-studio .back-wall .wall-cell-container .wall-cell {
         border-color: #2b3036 #22252a #1f2326 #282d32;
         border-style: solid;
         border-width: 31px;
-        width: 0;
-        height: 0; }
+        margin-left: -1px;
+        margin-top: -1px;
+        position: absolute;
+        z-index: 2; }
       html.recording-studio section#recording-studio .back-wall .wall-cell-container div[id*="filler-"] {
         position: absolute;
-        top: 0; }
+        top: 0;
+        z-index: 0; }
       html.recording-studio section#recording-studio .back-wall .wall-cell-container p {
         z-index: 999;
         font-family: "Helvetica";
         position: absolute;
-        width: 38.46667px;
-        margin-top: 6.2043px;
+        width: 38.6px;
+        margin-top: 6.22581px;
         text-shadow: 1px 1px 1px #000; }
       html.recording-studio section#recording-studio .back-wall .wall-cell-container .opacity-0 {
         opacity: 0; }
@@ -3721,7 +3725,7 @@ html.calibrate.recording-studio .btn-calibrate {
         html.recording-studio section#recording-studio .back-wall .wall-cell-container .wall-cell, html.recording-studio section#recording-studio .back-wall .wall-cell-container .red, html.recording-studio section#recording-studio .back-wall .wall-cell-container .pink, html.recording-studio section#recording-studio .back-wall .wall-cell-container .purplepink, html.recording-studio section#recording-studio .back-wall .wall-cell-container .purple,
         html.recording-studio section#recording-studio .back-wall .wall-cell-container .yellowgreen, html.recording-studio section#recording-studio .back-wall .wall-cell-container .yellow, html.recording-studio section#recording-studio .back-wall .wall-cell-container .green, html.recording-studio section#recording-studio .back-wall .wall-cell-container .darkblue,
         html.recording-studio section#recording-studio .back-wall .wall-cell-container .lightblue, html.recording-studio section#recording-studio .back-wall .wall-cell-container .blue {
-          border-width: 16.4px; }
+          border-width: 15.4px; }
         html.recording-studio section#recording-studio .back-wall .wall-cell-container p {
           width: 30.8px;
           margin-top: 4.96774px; }
@@ -3756,7 +3760,7 @@ html.calibrate.recording-studio .btn-calibrate {
         html.recording-studio section#recording-studio .back-wall .wall-cell-container .wall-cell, html.recording-studio section#recording-studio .back-wall .wall-cell-container .red, html.recording-studio section#recording-studio .back-wall .wall-cell-container .pink, html.recording-studio section#recording-studio .back-wall .wall-cell-container .purplepink, html.recording-studio section#recording-studio .back-wall .wall-cell-container .purple,
         html.recording-studio section#recording-studio .back-wall .wall-cell-container .yellowgreen, html.recording-studio section#recording-studio .back-wall .wall-cell-container .yellow, html.recording-studio section#recording-studio .back-wall .wall-cell-container .green, html.recording-studio section#recording-studio .back-wall .wall-cell-container .darkblue,
         html.recording-studio section#recording-studio .back-wall .wall-cell-container .lightblue, html.recording-studio section#recording-studio .back-wall .wall-cell-container .blue {
-          border-width: 18.48333px; }
+          border-width: 17.48333px; }
         html.recording-studio section#recording-studio .back-wall .wall-cell-container p {
           width: 34.96667px;
           margin-top: 5.63978px; }
@@ -3781,20 +3785,20 @@ html.calibrate.recording-studio .btn-calibrate {
     background: url("../images/room-bg-2.jpg") no-repeat fixed top center;
     background-size: 1439px; }
     html.recording-studio section#recording-studio .back-wall {
-      width: 577.0px;
-      height: 384.66667px;
-      top: 52px;
-      margin-left: -292px; }
+      width: 579px;
+      height: 386px;
+      top: 54.5px;
+      margin-left: -291px; }
       html.recording-studio section#recording-studio .back-wall .wall-cell-container {
-        width: 38.46667px;
-        height: 38.46667px; }
+        width: 38.6px;
+        height: 38.6px; }
         html.recording-studio section#recording-studio .back-wall .wall-cell-container .wall-cell, html.recording-studio section#recording-studio .back-wall .wall-cell-container .red, html.recording-studio section#recording-studio .back-wall .wall-cell-container .pink, html.recording-studio section#recording-studio .back-wall .wall-cell-container .purplepink, html.recording-studio section#recording-studio .back-wall .wall-cell-container .purple,
         html.recording-studio section#recording-studio .back-wall .wall-cell-container .yellowgreen, html.recording-studio section#recording-studio .back-wall .wall-cell-container .yellow, html.recording-studio section#recording-studio .back-wall .wall-cell-container .green, html.recording-studio section#recording-studio .back-wall .wall-cell-container .darkblue,
         html.recording-studio section#recording-studio .back-wall .wall-cell-container .lightblue, html.recording-studio section#recording-studio .back-wall .wall-cell-container .blue {
-          border-width: 20.23333px; }
+          border-width: 19.3px; }
         html.recording-studio section#recording-studio .back-wall .wall-cell-container p {
-          width: 38.46667px;
-          margin-top: 6.2043px; }
+          width: 38.6px;
+          margin-top: 6.22581px; }
     html.recording-studio section#recording-studio .hvb-pitch {
       bottom: 60px; }
     html.recording-studio section#recording-studio .hvb-record {
@@ -3826,7 +3830,7 @@ html.calibrate.recording-studio .btn-calibrate {
         html.recording-studio section#recording-studio .back-wall .wall-cell-container .wall-cell, html.recording-studio section#recording-studio .back-wall .wall-cell-container .red, html.recording-studio section#recording-studio .back-wall .wall-cell-container .pink, html.recording-studio section#recording-studio .back-wall .wall-cell-container .purplepink, html.recording-studio section#recording-studio .back-wall .wall-cell-container .purple,
         html.recording-studio section#recording-studio .back-wall .wall-cell-container .yellowgreen, html.recording-studio section#recording-studio .back-wall .wall-cell-container .yellow, html.recording-studio section#recording-studio .back-wall .wall-cell-container .green, html.recording-studio section#recording-studio .back-wall .wall-cell-container .darkblue,
         html.recording-studio section#recording-studio .back-wall .wall-cell-container .lightblue, html.recording-studio section#recording-studio .back-wall .wall-cell-container .blue {
-          border-width: 22.31667px; }
+          border-width: 21.31667px; }
         html.recording-studio section#recording-studio .back-wall .wall-cell-container p {
           width: 42.63333px;
           margin-top: 6.87634px; }
@@ -3860,7 +3864,7 @@ html.calibrate.recording-studio .btn-calibrate {
         html.recording-studio section#recording-studio .back-wall .wall-cell-container .wall-cell, html.recording-studio section#recording-studio .back-wall .wall-cell-container .red, html.recording-studio section#recording-studio .back-wall .wall-cell-container .pink, html.recording-studio section#recording-studio .back-wall .wall-cell-container .purplepink, html.recording-studio section#recording-studio .back-wall .wall-cell-container .purple,
         html.recording-studio section#recording-studio .back-wall .wall-cell-container .yellowgreen, html.recording-studio section#recording-studio .back-wall .wall-cell-container .yellow, html.recording-studio section#recording-studio .back-wall .wall-cell-container .green, html.recording-studio section#recording-studio .back-wall .wall-cell-container .darkblue,
         html.recording-studio section#recording-studio .back-wall .wall-cell-container .lightblue, html.recording-studio section#recording-studio .back-wall .wall-cell-container .blue {
-          border-width: 25.43333px; }
+          border-width: 24.43333px; }
         html.recording-studio section#recording-studio .back-wall .wall-cell-container p {
           width: 48.86667px;
           margin-top: 7.88172px; }
@@ -3897,6 +3901,7 @@ html.calibrate.recording-studio .btn-calibrate {
         html.recording-studio section#recording-studio .back-wall .wall-cell-container .lightblue, html.recording-studio section#recording-studio .back-wall .wall-cell-container .blue {
           border-width: 34.93333px; }
         html.recording-studio section#recording-studio .back-wall .wall-cell-container p {
+          font-size: 28px;
           width: 67.86667px;
           margin-top: 10.94624px; }
     html.recording-studio section#recording-studio .hvb-pitch {

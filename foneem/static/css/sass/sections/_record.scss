@@ -130,17 +130,21 @@ section#recording-studio {
 			width: $dimensionNumSmall;
 			height: $dimensionNumSmall;
 			float: left;
+			overflow: hidden;
 			position: relative;
 			.wall-cell {
 				border-color: #2b3036 #22252a #1f2326 #282d32;
 				border-style: solid;
 				border-width: 31px;
-				width: 0;
-				height: 0;
+				margin-left: -1px;
+				margin-top: -1px;
+				position: absolute;
+				z-index: 2;
 			}
 			div[id*="filler-"] {
 				position: absolute;
 				top: 0;
+				z-index: 0;
 			}
 			p {
 				z-index: 999;
@@ -522,7 +526,7 @@ html.calibrate.recording-studio {
 					height: $dimensionNum960;
 					.wall-cell, .red, .pink, .purplepink, .purple, 
 					.yellowgreen, .yellow, .green, .darkblue, 
-					.lightblue, .blue { border-width: ($dimensionNum960/2)+1;}
+					.lightblue, .blue { border-width: ($dimensionNum960/2);}
 					p {
 						width: $dimensionNum960;
 						margin-top: $dimensionNum960/6.2;
@@ -572,7 +576,7 @@ html.calibrate.recording-studio {
 					height: $dimensionNum1152;
 					.wall-cell, .red, .pink, .purplepink, .purple, 
 					.yellowgreen, .yellow, .green, .darkblue, 
-					.lightblue, .blue { border-width: ($dimensionNum1152/2)+1;}
+					.lightblue, .blue { border-width: ($dimensionNum1152/2);}
 					p {
 						width: $dimensionNum1152;
 						margin-top: $dimensionNum1152/6.2;
@@ -615,14 +619,14 @@ html.calibrate.recording-studio {
 			.back-wall {
 				width: $dimensionNumSmall*15;
 				height: $dimensionNumSmall*10;
-				top: 52px;
-				margin-left: -292px;
+				top: 54.5px;
+				margin-left: -291px;
 				.wall-cell-container {
 					width: $dimensionNumSmall;
 					height: $dimensionNumSmall;
 					.wall-cell, .red, .pink, .purplepink, .purple, 
 					.yellowgreen, .yellow, .green, .darkblue, 
-					.lightblue, .blue { border-width: ($dimensionNumSmall/2)+1;}
+					.lightblue, .blue { border-width: ($dimensionNumSmall/2);}
 					p {
 						width: $dimensionNumSmall;
 						margin-top: $dimensionNumSmall/6.2;
@@ -672,7 +676,7 @@ html.calibrate.recording-studio {
 					height: $dimensionNum1440;
 					.wall-cell, .red, .pink, .purplepink, .purple, 
 					.yellowgreen, .yellow, .green, .darkblue, 
-					.lightblue, .blue { border-width: ($dimensionNum1440/2)+1;}
+					.lightblue, .blue { border-width: ($dimensionNum1440/2);}
 					p {
 						width: $dimensionNum1440;
 						margin-top: $dimensionNum1440/6.2;
@@ -721,7 +725,7 @@ html.calibrate.recording-studio {
 					height: $dimensionNumLarge;
 					.wall-cell, .red, .pink, .purplepink, .purple, 
 					.yellowgreen, .yellow, .green, .darkblue, 
-					.lightblue, .blue { border-width: ($dimensionNumLarge/2)+1;}
+					.lightblue, .blue { border-width: ($dimensionNumLarge/2);}
 					p {
 						width: $dimensionNumLarge;
 						margin-top: $dimensionNumLarge/6.2;
@@ -773,6 +777,7 @@ html.calibrate.recording-studio {
 					.yellowgreen, .yellow, .green, .darkblue, 
 					.lightblue, .blue { border-width: ($dimensionNumLarger/2)+1;}
 					p {
+						font-size: 28px;
 						width: $dimensionNumLarger;
 						margin-top: $dimensionNumLarger/6.2;
 					}
