@@ -125,20 +125,26 @@ var hvb_main = {};
    self.wirePlaybackButton = function() {
         var soundFileUrl = window.hvb_recorder.soundFileUrl;
         var playbackButton = document.getElementById(self.playButtonId);
-        playbackButton.innerHTML = "<i class='fa fa-play'></i><br>Playback";
+        //playbackButton.innerHTML = "<i class='fa fa-play'></i><br>Playback";
+       playbackButton.setAttribute('class', '');
         playbackButton.onclick = function(e) {
             playbackButton.innerHTML = "<i class='fa fa-play'></i><br>Playback <audio src='"+soundFileUrl+"' autoplay></audio>";
+
         }
        document.getElementById(self.nextButtonId).onclick = self.handleNextClick;
-       document.getElementById(self.nextButtonId).innerHTML = '<i class="fa fa-step-forward"></i><br>Next';
+       //document.getElementById(self.nextButtonId).innerHTML = '<i class="fa fa-step-forward"></i><br>Next';
+       document.getElementById(self.nextButtonId).setAttribute('class', '');
    };
 
     self.unwirePlaybackButton = function() {
         var playbackButton = document.getElementById(self.playButtonId);
-        playbackButton.innerHTML = "<i class='fa fa-play disabled'></i><br>Playback";
+        //playbackButton.innerHTML = "<i class='fa fa-play'></i><br>Playback";
+        playbackButton.setAttribute('class', 'disabled');
         playbackButton.onclick = null;
-        document.getElementById(self.nextButtonId).onclick = null;
-        document.getElementById(self.nextButtonId).innerHTML = '<i class="fa fa-step-forward disabled"></i><br>Next';
+        var nextButton = document.getElementById(self.nextButtonId);
+        nextButton.onclick = null;
+        //nextButton.innerHTML = '<i class="fa fa-step-forward"></i><br>Next';
+        nextButton.setAttribute('class', 'disabled');
     };
 
    self.afterCalibration = function(sessionId, completed, sentencesPerSession, sessionNoiseFloor) {
