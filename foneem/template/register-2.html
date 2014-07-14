@@ -77,92 +77,135 @@
 
 	<section id="registration">
 	<form action="registration_post" method="post" accept-charset="utf-8">
-	<h1><strong>Tell Us More About Yourself!</strong></h1>
+	<h1><strong>Thank you for joining The Human Voicebank.</strong></h1>
+	<h3><strong>Please take a moment to tell us a little more about yourself. This way, we can ensure your contribution will be accurately matched to someone in need.</strong></h3>
       <p class="mad-libs">
-        My primary language is  
+        I primarily speak 
+	        <label>
+	          	<select name="language" class="dropdown">
+		          	<option value="" disabled selected>Primary Language</option>
+				    <option value="Amharic">Amharic</option>
+				    <option value="Arabic">Arabic</option>
+				    <option value="Armenian">Armenian</option>
+				    <option value="Bengali">Bengali</option>
+				    <option value="Cajun">Cajun</option>
+				    <option value="Cambodian">Cambodian</option>
+				    <option value="Cantonese">Chinese (Cantonese)</option>
+				    <option value="Mandarin">Chinese (Mandarin)</option> 
+				    <option value="Croatian">Croatian</option>
+				    <option value="Czech">Czech</option>
+				    <option value="Danish">Danish</option>
+				    <option value="Dutch">Dutch</option>
+				    <option value="Finnish">Finnish</option>
+				    <option value="Formosan">Formosan</option>
+				    <option value="French Creole">French Creole</option>
+				    <option value="French">French</option>
+				    <option value="German">German</option>
+				    <option value="Greek">Greek</option>
+				    <option value="Gujarathi">Gujarathi</option>
+				    <option value="Hebrew">Hebrew</option>
+				    <option value="Hindi">Hindi</option>
+				    <option value="Hmong">Hmong</option>
+				    <option value="Hungarian">Hungarian</option>
+				    <option value="Ilocano">Ilocano</option>
+				    <option value="Italian">Italian</option>
+				    <option value="Japanese">Japanese</option>
+				    <option value="Korean">Korean</option>
+				    <option value="Kru">Kru</option>
+				    <option value="Lithuanian">Lithuanian</option>
+				    <option value="Malayalam">Malayalam</option>
+				    <option value="Navajo">Navajo</option>
+				    <option value="Norwegian">Norwegian</option>
+				    <option value="Persian">Persian</option>
+				    <option value="Polish">Polish</option>
+				    <option value="Portugese">Portuguese</option>
+				    <option value="Punjabi">Punjabi</option>
+				    <option value="Romanian">Romanian</option>
+				    <option value="Russian">Russian</option>
+				    <option value="Samoan">Samoan</option>
+				    <option value="Serbo-Croatian">Serbo-Croatian</option>
+				    <option value="Slovak">Slovak</option>
+				    <option value="Spanish">Spanish</option>
+				    <option value="Swedish">Swedish</option>
+				    <option value="Syriac">Syriac</option>
+				    <option value="Tagalog">Tagalog</option>
+				    <option value="Thai">Thai</option>
+				    <option value="Turkish">Turkish</option>
+				    <option value="Ukranian">Ukrainian</option>
+				    <option value="Vietnamese">Vietnamese</option>
+				    <option value="Yiddish">Other Language</option>
+				    <option value="Yiddish">Yiddish</option>
+				</select>
+	       </label>
+        , but can also speak
         <label>
-          <select>
-		    <option>Amharic</option>
-		    <option>Arabic</option>
-		    <option>Armenian</option>
-		    <option>Bengali</option>
-		    <option>Cajun</option>
-		    <option>Chinese</option>
-		    <option>Croatian</option>
-		    <option>Czech</option>
-		    <option>Danish</option>
-		    <option>Dutch</option>
-		    <option>Finnish</option>
-		    <option>Formosan</option>
-		    <option>French Creole</option>
-		    <option>French</option>
-		    <option>German</option>
-		    <option>Greek</option>
-		    <option>Gujarathi</option>
-		    <option>Hebrew</option>
-		    <option>Hindi (Urdu)</option>
-		    <option>Hungarian</option>
-		    <option>Ilocano</option>
-		    <option>Italian</option>
-		    <option>Japanese</option>
-		    <option>Korean</option>
-		    <option>Kru</option>
-		    <option>Lithuanian</option>
-		    <option>Malayalam</option>
-		    <option>Miao (Hmong)</option>
-		    <option>Mon-khmer (Cambodian)</option>
-		    <option>Navaho</option>
-		    <option>Norwegian</option>
-		    <option>Panjabi</option>
-		    <option>Pennsylvania Dutch</option>
-		    <option>Persian</option>
-		    <option>Polish</option>
-		    <option>Portuguese</option>
-		    <option>Rumanian</option>
-		    <option>Russian</option>
-		    <option>Samoan</option>
-		    <option>Serbo-croatian</option>
-		    <option>Slovak</option>
-		    <option>Spanish</option>
-		    <option>Swedish</option>
-		    <option>Syriac</option>
-		    <option>Tagalog</option>
-		    <option>Thai (Laotian)</option>
-		    <option>Turkish</option>
-		    <option>Ukrainian</option>
-		    <option>Vietnamese</option>
-		    <option>Yiddish</option>
-		</select>
-       </label>
-        . I can also speak
-        <label>
-          <select name="language-alt-1" class="dropdown">
-			<option value="" disabled selected>Additional Language</option>
-			<option value="Afganistan">Afghanistan</option>
+          <select name="language_alt_1" class="dropdown">
+				<option value="" disabled selected>Secondary Language</option>
+			    <option value="Amharic">Amharic</option>
+			    <option value="Arabic">Arabic</option>
+			    <option value="Armenian">Armenian</option>
+			    <option value="Bengali">Bengali</option>
+			    <option value="Cajun">Cajun</option>
+			    <option value="Cambodian">Cambodian</option>
+			    <option value="Cantonese">Chinese (Cantonese)</option>
+			    <option value="Mandarin">Chinese (Mandarin)</option> 
+			    <option value="Croatian">Croatian</option>
+			    <option value="Czech">Czech</option>
+			    <option value="Danish">Danish</option>
+			    <option value="Dutch">Dutch</option>
+			    <option value="Finnish">Finnish</option>
+			    <option value="Formosan">Formosan</option>
+			    <option value="French Creole">French Creole</option>
+			    <option value="French">French</option>
+			    <option value="German">German</option>
+			    <option value="Greek">Greek</option>
+			    <option value="Gujarathi">Gujarathi</option>
+			    <option value="Hebrew">Hebrew</option>
+			    <option value="Hindi">Hindi</option>
+			    <option value="Hmong">Hmong</option>
+			    <option value="Hungarian">Hungarian</option>
+			    <option value="Ilocano">Ilocano</option>
+			    <option value="Italian">Italian</option>
+			    <option value="Japanese">Japanese</option>
+			    <option value="Korean">Korean</option>
+			    <option value="Kru">Kru</option>
+			    <option value="Lithuanian">Lithuanian</option>
+			    <option value="Malayalam">Malayalam</option>
+			    <option value="Navajo">Navajo</option>
+			    <option value="Norwegian">Norwegian</option>
+			    <option value="Persian">Persian</option>
+			    <option value="Polish">Polish</option>
+			    <option value="Portugese">Portuguese</option>
+			    <option value="Punjabi">Punjabi</option>
+			    <option value="Romanian">Romanian</option>
+			    <option value="Russian">Russian</option>
+			    <option value="Samoan">Samoan</option>
+			    <option value="Serbo-Croatian">Serbo-Croatian</option>
+			    <option value="Slovak">Slovak</option>
+			    <option value="Spanish">Spanish</option>
+			    <option value="Swedish">Swedish</option>
+			    <option value="Syriac">Syriac</option>
+			    <option value="Tagalog">Tagalog</option>
+			    <option value="Thai">Thai</option>
+			    <option value="Turkish">Turkish</option>
+			    <option value="Ukranian">Ukrainian</option>
+			    <option value="Vietnamese">Vietnamese</option>
+			    <option value="Yiddish">Other Language</option>
+			    <option value="Yiddish">Yiddish</option>
 			</select>
         </label>
-        . My birthday is on
+        . Also, I'm
         <label>
-          <input type="text" name="dob" value="" placeholder="MM/DD/YYYY" />
+          <input type="text" name="height_feet" value="" placeholder="Feet" />
         </label>
-        .
-      </p>
-      <p class="mad-libs">
-      My e-mail address is
+        feet and 
         <label>
-          <input type="text" name="email" value="" placeholder="Email Address" />
+          <input type="text" name="height_inches" value="" placeholder="Inches" />
         </label>
-        .
-      	<label>
-          <input name="password" class="password" type="password" placeholder="Password" this_placeholder="Password">
-        </label>
-        <label>
-          <input name="password_confirm" class="password_confirm" type="password" placeholder="Confirm Password" this_placeholder="Confirm Password">
-        </label>
+        inches tall.
       </p>
       <div class="row agreement">
-      	<div class="col-md-6 agreement-links"><input type="checkbox" class="custom-checkbox">&nbsp;</button>I have read and agree to The Human Voicebank Initiative <a target="_blank" href="./terms/">Terms of Use</a> & <a target="_blank" href="./privacy/">Privacy Policy</a>.</div>
-      	<div class="col-md-6 agreement-button"><input type="submit" value="Sign Up" class="btn btn-record mad-libs-submit"></input></div>
+      	<div class="col-md-offset-6 col-md-6 agreement-button"><input type="submit" value="Submit Information" class="btn btn-record mad-libs-submit"></input></div>
       </div>
     </form>
 	</section>

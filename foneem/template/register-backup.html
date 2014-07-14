@@ -79,21 +79,21 @@
 	<form action="registration_post" method="post" accept-charset="utf-8">
 	<h1><strong>Create An Account</strong></h1>
       <p class="mad-libs">
-        My gender is  
+        Hello. I am  
         <label>
-          <select name="gender" class="dropdown" required>
+          <select name="gender" class="dropdown">
           	<option value="" class="default" disabled selected>Gender</option>
 			<option value="male">Male</option>
 			<option value="female">Female</option>
 			<option value="other">Other</option>
 		  </select>
         </label>
-        . I currently reside in
+        and currently residing in
         <label>
-          <input type="text" name="stateprovince" value="" placeholder="Province/State" required />
+          <input type="text" name="stateprovince" value="" placeholder="Province/State" />
         </label>,
         <label>
-          <select name="country" class="dropdown" required >
+          <select name="country" class="dropdown">
 			<option value="" disabled selected>Country</option>
 			<option value="Afganistan">Afghanistan</option>
 			<option value="Albania">Albania</option>
@@ -346,25 +346,21 @@
         </label>
         . My birthday is on
         <label>
-        	<input type="text" name="dob" value="" placeholder="MM/DD/YYYY" />
-        <!--  <input type="text" name="mob" value="" placeholder="MM" maxlength="2" required />
-        </label>
-        <label>
-          <input type="text" name="yob" value="" placeholder="YYYY" maxlength="4" required /> -->
+          <input type="text" name="dob" value="" placeholder="MM/DD/YYYY" />
         </label>
         .
       </p>
       <p class="mad-libs">
       My e-mail address is
         <label>
-          <input type="text" name="email" value="" placeholder="Email Address" required />
+          <input type="text" name="email" value="" placeholder="Email Address" />
         </label>
         .
       	<label>
-          <input name="password" class="password" type="password" placeholder="Password" this_placeholder="Password" required>
+          <input name="password" class="password" type="password" placeholder="Password" this_placeholder="Password">
         </label>
         <label>
-          <input name="password_confirm" class="password_confirm" type="password" placeholder="Confirm Password" this_placeholder="Confirm Password" required>
+          <input name="password_confirm" class="password_confirm" type="password" placeholder="Confirm Password" this_placeholder="Confirm Password">
         </label>
       </p>
       <div class="row agreement">
