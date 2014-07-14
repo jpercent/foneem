@@ -25,13 +25,15 @@
 
 __author__ = 'jpercent'
 
-from flask import request, render_template, url_for, session, redirect, abort
+from flask import request, render_template, url_for, session, redirect, abort, flash, get_flashed_messages
 from foneem import app, hvb_connect_db, hvb_close_db
 import hashlib
 import uuid
 from itsdangerous import TimestampSigner
 import smtplib
 from email.mime.text import MIMEText
+
+from psycopg2 import InterfaceError, DatabaseError, DataError, OperationalError, IntegrityError, InternalError, ProgrammingError, NotSupportedError
 
 def send_mail(subject, body, to_email, from_email):
     print("subject", subject)
@@ -121,7 +123,7 @@ def index():
 
 @app.route('/register', methods=['GET'])
 def register():
-    return render_template('register.html')
+    return render_template('register.html', error=None)
 
 @app.route('/pitch-demo', methods=['GET'])
 def pitch_demo():
@@ -132,15 +134,36 @@ def registration_post():
     # XXX the insert below should fail if the email already exists, but we should note the failure and provide a message
     #     to the user and redirect them to the login/password reset page.
     conn, cursor = hvb_connect_db(app.hvb_conf['db'])
-    form_data = request.form.to_dict()
-    salt = uuid.uuid4().hex
-    form_data['password'] = hashlib.sha512(str(form_data['password']) + str(salt)).hexdigest()
-    form_data['compendium'] = salt
-    cursor.execute('''insert into users (email, firstname, lastname, dob, gender, stateprovince, country, password, compendium) values (%(email)s, %(firstname)s, %(lastname)s, %(dob)s, %(gender)s, %(stateprovince)s, %(country)s, %(password)s, %(compendium)s);''', form_data)
-    session['email'] = form_data['email']
-    cursor.execute('''insert into user_grid_opacity(user_id, grid_id, opacity, increments, instances) select u.id, g.id, 0, 0, (select count(*) from phoneme_grid pg, sentence_phoneme sp where pg.grid_id = g.id and pg.phoneme_id = sp.phoneme_id) from users u, grid g where u.email = %s;''', [session['email']])
+    try:
+        form_data = request.form.to_dict()
+        print ("formdata = ", form_data)
+        salt = uuid.uuid4().hex
+        form_data['password'] = hashlib.sha512(str(form_data['password']) + str(salt)).hexdigest()
+        form_data['compendium'] = salt
+        cursor.execute('''insert into users (email, firstname, lastname, dob, gender, stateprovince, country, password, compendium) values (%(email)s, %(firstname)s, %(lastname)s, %(dob)s, %(gender)s, %(stateprovince)s, %(country)s, %(password)s, %(compendium)s);''', form_data)
+        session['email'] = form_data['email']
+        cursor.execute('''insert into user_grid_opacity(user_id, grid_id, opacity, increments, instances) select u.id, g.id, 0, 0, (select count(*) from phoneme_grid pg, sentence_phoneme sp where pg.grid_id = g.id and pg.phoneme_id = sp.phoneme_id) from users u, grid g where u.email = %s;''', [session['email']])
+
+    except KeyError as key_error:
+        hvb_close_db(conn, cursor)
+        print("Key error = ", key_error)
+        error = 'Invalid credentials'
+        print("Error = ", error)
+        print("Key error: ")
+        return "KeyError", 404
+
+    except IntegrityError as integrityError:
+        hvb_close_db(conn, cursor)
+        print(integrityError)
+        return "IntegrityError", 404
+
+    except Exception as e:
+        print("exection: ", e)
+        return "Exception", 404
+
     hvb_close_db(conn, cursor)
-    return redirect(url_for('record'))
+    print("OKAY");
+    return "OK", 200 #redirect(url_for('record'))
 
 @app.route('/login_post', methods=['POST'])
 def login_post():

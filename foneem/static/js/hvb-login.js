@@ -1,7 +1,7 @@
 
-var loginChecker = {};
-(function(exports) {
-    exports.bindLogin = function(e) {
+var hvb_login_checker = {};
+(function(self) {
+    self.bindLogin = function(e) {
 	$.ajax({ 
 	    url: '/is_teh_user_logged_in', 
 	    async: false,
@@ -22,22 +22,23 @@ var loginChecker = {};
 	});			        			
     };
 
-    exports.intitiatePasswordReset = function(email) {
+    self.intitiatePasswordReset = function(email) {
         var url = '/initiate-reset/'+email;
         $.ajax({
             url: url
         });
     };
 
-    exports.bindClickEvents = function() {
-        $('#hvb-record-link').click(exports.bindLogin);
-        $('#hvb-record-button').click(exports.bindLogin);
-        $('#hvb-record-ways-to-help').click(exports.bindLogin);
+    self.init = function() {
+        sessionStorage.setItem('hvb_password_reset', 'false');
+        $('#hvb-record-link').click(self.bindLogin);
+        $('#hvb-record-button').click(self.bindLogin);
+        $('#hvb-record-ways-to-help').click(self.bindLogin);
         $('#hvb-password-reset').click(function(e) {
             e.preventDefault();
             var email = $("#hvb_login_modal_email").val();
             sessionStorage.setItem('hvb-password-reset', 'true');
-            exports.intitiatePasswordReset(email);
+            self.intitiatePasswordReset(email);
             $('#hvb-login-modal-index').hide();
             $('#hvb-reset-background').show();
         });
@@ -51,15 +52,154 @@ var loginChecker = {};
         });
     };
 
-}(loginChecker));
+}(hvb_login_checker));
 
-$( document ).ready(function() {
-    // W3C spec says sessionStorage should accept booleans, but it is
-    // not supported at this time. The value true gets coerced into
-    // 'true', so, because true/false is readable, we use
-    // 'true'/'false' string literals explicitly. Avoids type
-    // coerision today and bugs tomorrow.
-    sessionStorage.setItem('hvb_password_reset', 'false');
-    loginChecker.bindClickEvents();
+
+hvb_form_fields = {};
+(function(self) {
+    self.hvbSubmitButtonId = 'hvb-register-submit';
+
+    self.keys = ['hvb-first-name', 'hvb-last-name', 'hvb-gender', 'hvb-state', 'hvb-country', 'hvb-mob',
+        'hvb-yob', 'hvb-email', 'hvb-confirm-email', 'hvb-confirm-password', 'hvb-password', 'hvb-consent'];
+
+    self.keyMap = {
+        'hvb-first-name': {'name': 'firstname'},
+        'hvb-last-name': {'name': 'lastname'},
+        'hvb-gender': {'name': 'gender'},
+        'hvb-state': {'name': 'stateprovince'},
+        'hvb-country': {'name': 'country'},
+        'hvb-mob': {'name': 'dob', 'combine': 'hvb-yob', 'monthday': true},
+
+        'hvb-email': {'name': 'email', 'confirmId': 'hvb-confirm-email', 'email': true},
+        'hvb-password': {'name': 'password', 'confirmId': 'hvb-confirm-password'},
+        'hvb-consent' : {'checkbox': true}
+    };
+
+    self.init = function() {
+        document.getElementById(self.hvbSubmitButtonId).onclick = self.makeRegistrationRequest;
+    };
+
+    self.makeFormFieldsPost = function (previous, id, index, keysArray) {
+        var field = self.keyMap[id];
+        if(typeof field !== 'undefined') {
+            if(typeof field.name !== 'undefined') {
+                var currentValue = document.getElementById(id).value;
+                if(typeof field.combine !== 'undefined') {
+                    var combineValue = document.getElementById(field.combine).value;
+                    currentValue = currentValue+'/01/'+combineValue;
+                }
+                previous[field.name] = currentValue;
+            }
+        }
+        return previous;
+    };
+
+    self.validateField = function(id, index, array) {
+        if(!self.valid) {
+            //alert("validate file short circuited... ");
+            return;
+        }
+        var element = document.getElementById(id);
+        self.validateId(element);
+
+        if(typeof self.keyMap[id] !== 'undefined') {
+            var confirmId = self.keyMap[id].confirmId;
+            if(typeof confirmId !== 'undefined') {
+                confirmElement = document.getElementById(confirmId);
+                self.validateConfirmation(element, confirmElement);
+            }
+            var email = self.keyMap[id].email;
+            if(typeof email !== 'undefined') {
+                self.validateEmail(element);
+            }
+
+            var checkbox = self.keyMap[id].checkbox;
+            if(typeof checkbox !== 'undefined') {
+                element.style.background = null;
+                if(!element.checked) {
+                    self.valid = false;
+                    divElement = document.getElementById('hvb-consent-div');
+                    divElement.style.background = 'red';
+                    return;
+                } else {
+                    divElement = document.getElementById('hvb-consent-div');
+                    divElement.style.background = null;
+                }
+            }
+        }
+    };
+
+    self.validateId = function(element) {
+        currentVal = element.value;
+        if (!currentVal) {
+            var background = element.style.background;
+            element.style.background = 'red'
+            self.valid = false;
+            return;
+        }
+        element.style.background = null;
+    };
+
+    self.validateConfirmation = function(element, confirmElement) {
+        var currentVal = element.value;
+        var confirmVal = confirmElement.value;
+
+        if (confirmVal !== currentVal) {
+//            alert("confirm failed, "+element.id);
+            element.style.background = 'red';
+            confirmElement.style.background = 'red';
+            console.log("Confirmation does not match value = ", currentVal, " confirmVal = ", confirmVal);
+            self.valid = false;
+            return;
+        }
+        element.style.background = null;
+        confirmElement.style.background = null;
+    };
+
+    self.validateEmail = function(element) {
+        var currentVal = element.value;
+        var atSym = currentVal.indexOf('@');
+        var dotSym = currentVal.lastIndexOf('.');
+        if(atSym < 1 || (dotSym - atSym < 2)) {
+            self.valid = false;
+            element.style.background = 'red';
+            return;
+        }
+        element.style.background = null;
+    };
+
+    self.makeRegistrationRequest = function() {
+        self.valid = true;
+        self.keys.forEach(self.validateField);
+        if(!self.valid){
+            console.log("validation failed..");
+            return;
+        }
+
+        var registration = self.keys.reduceRight(self.makeFormFieldsPost, {});
+        console.log('registration = ', registration);
+        $.ajax({
+            url: 'registration_post',
+            type: 'POST',
+            async: false,
+            dataType: 'text',
+            data: registration,
+            //PlainObject data, String textStatus, jqXHR jqXHR
+            success: function(data, textStatus, jqXHR){
+                //alert('SUCCESS');
+                window.location = 'record';
+            },
+            //jqXHR jqXHR, String textStatus, String errorThrown
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log("ERROR Jxhrd = ", jqXHR);
+                alert('Registration failed: '+jqXHR.responseText);
+            }
+        });
+    };
+}(hvb_form_fields));
+
+$(document).ready(function() {
+    hvb_login_checker.init();
+    hvb_form_fields.init();
 });
 
