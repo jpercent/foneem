@@ -130,6 +130,7 @@ section#recording-studio {
 			width: $dimensionNumSmall;
 			height: $dimensionNumSmall;
 			float: left;
+			position: relative;
 			.wall-cell {
 				border-color: #2b3036 #22252a #1f2326 #282d32;
 				border-style: solid;
@@ -137,7 +138,12 @@ section#recording-studio {
 				width: 0;
 				height: 0;
 			}
+			div[id*="filler-"] {
+				position: absolute;
+				top: 0;
+			}
 			p {
+				z-index: 999;
 				font-family: "Helvetica";
 				position: absolute;
 				width: $dimensionNumSmall;
@@ -149,6 +155,9 @@ section#recording-studio {
 			.opacity-50 { opacity: 0.5; }
 			.opacity-75 { opacity: 0.75; }
 			.opacity-100 { opacity: 1; }
+			.red, .pink, .purplepink, .purple, .yellowgreen, .yellow, .green, .darkblue, .lightblue, .blue {
+				opacity: 0;
+			}
 			.red {
 				border-color: #fe7349 #fe5a39 #fe5234 #fe6e45;
 				border-style: solid;
@@ -277,10 +286,16 @@ section#recording-studio {
 		border-right: 10px solid #6c6c6c;
 		border-bottom: 10px solid #6c6c6c;
 		&:hover {
-			cursor: hand;
+			cursor: pointer;
+			background-color: darken(#f2fdff,2%);
+			@include transition(background-color,ease-in-out,0.5s);
 		}
 		.fa-volume-up {
 			color: #a1a1a1;
+			position: absolute;
+			bottom: 10px;
+			right: 10px;
+			font-size: 22px;
 		}
 		.hvb-sentence-counter {
 			position: absolute;
@@ -299,12 +314,13 @@ section#recording-studio {
 		white-space: -pre-wrap; /* Opera <7 */
 		white-space: -o-pre-wrap; /* Opera 7 */
 		width: 800px;
-		height: 100px;
+		height: 155px;
 		position: absolute;
-		bottom: 10px;
 		left: 50%;
 		margin-left: -400px;
 		font-size: 30px;
+		vertical-align: middle;
+		line-height: 155px;
 	}
 
 	.hvb-volume-wrapper {
@@ -390,14 +406,6 @@ section#recording-studio {
 
 	.hvb-play-sentence .disabled, #hvb-next-sentence .disabled {
 		color: #a1a1a1;
-		&:hover {
-			background: -webkit-gradient(linear, left top, left bottom, from(#dedede), to(#a9a9a9));
-			background: -webkit-linear-gradient(top, #dedede, #a9a9a9);
-			background: -moz-linear-gradient(top, #dedede, #a9a9a9);
-			background: -ms-linear-gradient(top, #dedede, #a9a9a9);
-			background: -o-linear-gradient(top, #dedede, #a9a9a9);
-			cursor: not-allowed;
-		}
 	}
 
 	.hvb-record {
