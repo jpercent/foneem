@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>The Human Voicebank</title>
+    <meta name="description" content="The Human Voicebank is an initiative dedicated to exploring the frontiers of human voice.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:image" content="http://www.northeastern.edu/humanvoicebank/images/rupal-ted.png"/>
+
+    <!-- Bootstrap CSS -->
+    <link href="static/css/application.css" rel="stylesheet" type="text/css">
+    
+    <!-- Mailchimp CSS -->
+    <link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
+
+    <!-- Fonts -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:700,900' rel='stylesheet' type='text/css'>
+    
+    <!-- IE -->
+    <!--[if lt IE 9]> <script> document.createElement('video'); </script> <![endif]-->
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+<!-- Facebook -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=763373647030403";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="./">
+                <img src="static/images/hvb-icon.svg" width="40px" height="40px">
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#" data-toggle="modal" data-target="#record-modal">Record</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#" data-toggle="modal" data-target="#donate-modal">Donate</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#" data-toggle="modal" data-target="#story-modal">Our Story</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#contact">Stay Informed</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+	<section id="registration">
+	<form action="registration_post" method="post" accept-charset="utf-8">
+	<h1><strong>Tell Us More About Yourself!</strong></h1>
+      <p class="mad-libs">
+        My primary language is  
+        <label>
+          <select>
+		    <option>Amharic</option>
+		    <option>Arabic</option>
+		    <option>Armenian</option>
+		    <option>Bengali</option>
+		    <option>Cajun</option>
+		    <option>Chinese</option>
+		    <option>Croatian</option>
+		    <option>Czech</option>
+		    <option>Danish</option>
+		    <option>Dutch</option>
+		    <option>Finnish</option>
+		    <option>Formosan</option>
+		    <option>French Creole</option>
+		    <option>French</option>
+		    <option>German</option>
+		    <option>Greek</option>
+		    <option>Gujarathi</option>
+		    <option>Hebrew</option>
+		    <option>Hindi (Urdu)</option>
+		    <option>Hungarian</option>
+		    <option>Ilocano</option>
+		    <option>Italian</option>
+		    <option>Japanese</option>
+		    <option>Korean</option>
+		    <option>Kru</option>
+		    <option>Lithuanian</option>
+		    <option>Malayalam</option>
+		    <option>Miao (Hmong)</option>
+		    <option>Mon-khmer (Cambodian)</option>
+		    <option>Navaho</option>
+		    <option>Norwegian</option>
+		    <option>Panjabi</option>
+		    <option>Pennsylvania Dutch</option>
+		    <option>Persian</option>
+		    <option>Polish</option>
+		    <option>Portuguese</option>
+		    <option>Rumanian</option>
+		    <option>Russian</option>
+		    <option>Samoan</option>
+		    <option>Serbo-croatian</option>
+		    <option>Slovak</option>
+		    <option>Spanish</option>
+		    <option>Swedish</option>
+		    <option>Syriac</option>
+		    <option>Tagalog</option>
+		    <option>Thai (Laotian)</option>
+		    <option>Turkish</option>
+		    <option>Ukrainian</option>
+		    <option>Vietnamese</option>
+		    <option>Yiddish</option>
+		</select>
+       </label>
+        . I can also speak
+        <label>
+          <select name="language-alt-1" class="dropdown">
+			<option value="" disabled selected>Additional Language</option>
+			<option value="Afganistan">Afghanistan</option>
+			</select>
+        </label>
+        . My birthday is on
+        <label>
+          <input type="text" name="dob" value="" placeholder="MM/DD/YYYY" />
+        </label>
+        .
+      </p>
+      <p class="mad-libs">
+      My e-mail address is
+        <label>
+          <input type="text" name="email" value="" placeholder="Email Address" />
+        </label>
+        .
+      	<label>
+          <input name="password" class="password" type="password" placeholder="Password" this_placeholder="Password">
+        </label>
+        <label>
+          <input name="password_confirm" class="password_confirm" type="password" placeholder="Confirm Password" this_placeholder="Confirm Password">
+        </label>
+      </p>
+      <div class="row agreement">
+      	<div class="col-md-6 agreement-links"><input type="checkbox" class="custom-checkbox">&nbsp;</button>I have read and agree to The Human Voicebank Initiative <a target="_blank" href="./terms/">Terms of Use</a> & <a target="_blank" href="./privacy/">Privacy Policy</a>.</div>
+      	<div class="col-md-6 agreement-button"><input type="submit" value="Sign Up" class="btn btn-record mad-libs-submit"></input></div>
+      </div>
+    </form>
+	</section>
+    
+    <div class="modal fade" id="donate-modal" tabindex="-1" role="dialog" aria-labelledby="Donate to The Human Voicebank" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+            </div>
+            <div class="modal-body">
+            <center>
+                <h2><strong>Thank you for your support.</strong></h2> <p>Every dollar you give makes a difference in the lives of those without voices, and pushes us forward in the field of voice research and technology.</p>
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+					<input type="hidden" name="cmd" value="_s-xclick">
+					<input type="hidden" name="hosted_button_id" value="UYSLUPBG5YSZN">
+					<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+					<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+					</form>
+            </center>
+            </div>
+    </div>
+  </div>
+  </div>
+  
+    <div class="modal fade" id="story-modal" tabindex="-1" role="dialog" aria-labelledby="Our Story" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+            </div>
+            <div class="modal-body">
+            <center>
+            <iframe src="http://embed.ted.com/talks/lang/en/rupal_patel_synthetic_voices_as_unique_as_fingerprints.html" width="854" height="480" frameborder="0" scrolling="no" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+            </center>
+            </div>
+    </div>
+  </div>
+  </div>
+  
+  <div class="modal fade" id="record-modal" tabindex="-1" role="dialog" aria-labelledby="Record" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+            </div>
+            <div class="modal-body row">
+	            <div class="login account col-md-6"><center>
+	            	<h3 id="hvb_login_modal_header"><strong>Login to Your Account</strong></h3>
+	            	<div class="loginform-container">
+						<form id="hvb_login_modal" action="login_post" class="loginform" method="post" novalidate="">
+							<div id="login-email-container" class="login-field">
+								<input type="email" name="email" placeholder="Your email address" id="hvb_login_modal_email" required="required">
+							</div>
+							<div id="login-password-container" class="login-field">
+								<input type="password" name="password" placeholder="Your password" id="hvb_login_modal_password" required="required">
+							</div>
+							<div id="form-submit" class="login-field clearfix submit">
+								<input type="submit" value="Login">
+							</div>
+						</form>
+					</div>
+	            </center></div>
+	            <div class="create account col-md-6"><center>
+	            	<h3><strong>Create An Account</strong></h3>
+	            	<p>Donate your voice today.</p>
+	            	<a href="register" class="btn btn-signup">Sign Up</a>
+	            </center></div>
+            </div>
+    </div>
+  </div>
+  </div>
+
+    <!-- Core JavaScript Files -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+    
+    <!-- Custom JavaScript Files -->
+    <script src="static/js/hvb-login.js"></script>
+    <script src="static/js/tp/jquery.responsiveVideo.js"></script>
+
+    
+    <script>
+    $( 'body' ).responsiveVideo();
+    </script>
+    <script>
+  $(function() {
+    $( ".modal" ).draggable();
+  });
+  </script>
+
+</body>
+
+</html>
