@@ -82,7 +82,7 @@
       <p class="mad-libs">
         I primarily speak 
 	        <label>
-	          	<select name="language" class="dropdown">
+	          	<select id='hvb-language' name="language" class="dropdown">
 		          	<option value="" disabled selected>Primary Language</option>
 				    <option value="Amharic">Amharic</option>
 				    <option value="Arabic">Arabic</option>
@@ -139,7 +139,7 @@
 	       </label>
         , but can also speak
         <label>
-          <select name="language_alt_1" class="dropdown">
+          <select id='hvb-language1' name="language_alt_1" class="dropdown">
 				<option value="" disabled selected>Secondary Language</option>
 			    <option value="Amharic">Amharic</option>
 			    <option value="Arabic">Arabic</option>
@@ -196,16 +196,16 @@
         </label>
         . Also, I'm
         <label>
-          <input type="text" name="height_feet" value="" placeholder="Feet" />
+          <input id='hvb-height-feet' type="text" name="height_feet" value="" placeholder="Feet" maxlength="1"/>
         </label>
         feet and 
         <label>
-          <input type="text" name="height_inches" value="" placeholder="Inches" />
+          <input id='hvb-height-inches' type="text" name="height_inches" value="" placeholder="Inches" maxlength="2"/>
         </label>
         inches tall.
       </p>
       <div class="row agreement">
-      	<div class="col-md-offset-6 col-md-6 agreement-button"><input type="submit" value="Submit Information" class="btn btn-record mad-libs-submit"></input></div>
+      	<div class="col-md-offset-6 col-md-6 agreement-button"><input id='hvb-register1-submit' value="Submit Information" class="btn btn-record mad-libs-submit"></input></div>
       </div>
     </form>
 	</section>
@@ -287,7 +287,7 @@
     <script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
     
     <!-- Custom JavaScript Files -->
-    <script src="static/js/hvb-login.js"></script>
+    <script src="static/js/hvb-login1.js"></script>
     <script src="static/js/tp/jquery.responsiveVideo.js"></script>
 
     

@@ -83,10 +83,10 @@
       <p class="mad-libs">
         My name is
         <label>
-          <input id="hvb-first-name" type="text" name="firstname" value="" placeholder="First Name" />
+          <input id="hvb-first-name" type="text" name="firstname" value="" placeholder="First Name" maxlength="64" required/>
         </label>
         <label>
-          <input id="hvb-last-name" type="text" name="lastname" value="" placeholder="Last Name" />
+          <input id="hvb-last-name" type="text" name="lastname" value="" placeholder="Last Name" maxlength="64" required/>
         </label>
         . I am  
         <label>
@@ -99,11 +99,11 @@
         </label>
         . I currently reside in
         <label>
-          <input id="hvb-state" type="text" name="stateprovince" value="" placeholder="Province/State" required />
+          <input id="hvb-state" type="text" name="stateprovince" value="" placeholder="Province/State" maxlength="64" required />
         </label>,
         <label>
           <select id="hvb-country" name="country" class="dropdown">
-			<option value="" disabled selected>Country</option>
+			<option value="" disabled>Country</option>
 			<option value="Afganistan">Afghanistan</option>
 			<option value="Albania">Albania</option>
 			<option value="Algeria">Algeria</option>
@@ -336,7 +336,7 @@
 			<option value="Ukraine">Ukraine</option>
 			<option value="United Arab Erimates">United Arab Emirates</option>
 			<option value="United Kingdom">United Kingdom</option>
-			<option value="United States of America">United States of America</option>
+			<option value="United States of America" selected>United States of America</option>
 			<option value="Uraguay">Uruguay</option>
 			<option value="Uzbekistan">Uzbekistan</option>
 			<option value="Vanuatu">Vanuatu</option>
@@ -376,7 +376,7 @@
         <label>
 		<select id="hvb-yob" name="yob" class="dropdown">
 
-			<option value="" disabled selected>Year</option>
+			<option value="" disable>Year</option>
 
 			<option value="1898">1898</option>
 
@@ -580,7 +580,7 @@
 
 			<option value="1998">1998</option>
 
-			<option value="1999">1999</option>
+			<option value="1999" selected>1999</option>
 
 			<option value="2000">2000</option>
 
@@ -619,17 +619,17 @@
       <p class="mad-libs">
       My e-mail address is
         <label>
-          <input id="hvb-email" type="text" name="email" value="" placeholder="Email Address" required />
+          <input id="hvb-email" type="text" name="email" value="" placeholder="Email Address" maxlength="128" required />
         </label>
         <label>
-          <input id="hvb-confirm-email" name="email_confirm" class="email_confirm" type="text" placeholder="Confirm Email" this_placeholder="Confirm Email" required>
+          <input id="hvb-confirm-email" name="email_confirm" class="email_confirm" type="text" placeholder="Confirm Email" this_placeholder="Confirm Email" maxlength="255" required>
         </label>
         .
       	<label>
-          <input id="hvb-password" name="password" class="password" type="password" placeholder="Password" this_placeholder="Password" required>
+          <input id="hvb-password" name="password" class="password" type="password" placeholder="Password" this_placeholder="Password" maxlength="64" required>
         </label>
         <label>
-          <input id="hvb-confirm-password" name="password_confirm" class="password_confirm" type="password" placeholder="Confirm Password" this_placeholder="Confirm Password" required>
+          <input id="hvb-confirm-password" name="password_confirm" class="password_confirm" type="password" placeholder="Confirm Password" maxlength="64" this_placeholder="Confirm Password" required>
         </label>
       </p>
       <div id="hvb-consent-div" class="row agreement">
@@ -687,10 +687,10 @@
 	            	<div class="loginform-container">
 						<form id="hvb_login_modal" action="login_post" class="loginform" method="post" novalidate="">
 							<div id="login-email-container" class="login-field">
-								<input type="email" name="email" placeholder="Your email address" id="hvb_login_modal_email" required="required">
+								<input type="email" name="email" placeholder="Your email address" id="hvb_login_modal_email" maxlength="128" required="required">
 							</div>
 							<div id="login-password-container" class="login-field">
-								<input type="password" name="password" placeholder="Your password" id="hvb_login_modal_password" required="required">
+								<input type="password" name="password" placeholder="Your password" id="hvb_login_modal_password" maxlength="64" required="required">
 							</div>
 							<div id="form-submit" class="login-field clearfix submit">
 								<input id="hvb-login-submit" type="submit" value="Login">

@@ -85,7 +85,7 @@
         </div>
         <!-- /.container -->
     </nav>
-
+    <div id="calibrate" doit="{{calibrate}}" ></div>
 
     <section id="recording-studio" class="container content-section text-center">
         <div class="back-wall">
@@ -606,7 +606,7 @@
             </div>
         </div>
         <button id="hvb-record-sentence" class="hvb-record"><i class="fa fa-circle"></i><br>Record</button>
-        <button id="hvb-play-sentence" class="disabled"><i class='fa fa-play'></i><br>Playback</button>
+        <button id="hvb-play-sentence" class="disabled"><i class='fa fa-play disabled'></i><br>Playback</button>
         <div class="hvb-volume-wrapper">
             <div class="hvb-volume">
                 <canvas id="hvb-analyser" width="256" height="256" class="hvb-volume-canvas"></canvas>
@@ -615,7 +615,7 @@
 
         <div id="hvb-sentence-console" class="hvb-sentence">
         </div>
-        <button id="hvb-next-sentence" class="disabled"><i class="fa fa-step-forward"></i><br>Next</button>
+        <button id="hvb-next-sentence" class="disabled"><i class="fa fa-step-forward disabled"></i><br>Next</button>
         <button id="hvb-settings" data-toggle="modal" data-target="#hvb-settings-modal"><i class="fa fa-cog"></i><br>Account</button>
     </section>
 
@@ -634,6 +634,23 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="hvb-registration1-modal" tabindex="-1" role="dialog" aria-labelledby="hvb-registation1-modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content_calibrate">
+            <div class="modal-header">
+                <h4 class="modal-title" id="hvb-registration1-modalLabel"></h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <center><button id="hvb-calibrate-button" class="btn btn-default btn-record btn-calibrate"><span>Submit</span></button></center>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div class="modal fade" id="hvb-settings-modal" tabindex="-1" role="dialog" aria-labelledby="hvb-settings-modalLabel" aria-hidden="true">
     <div class="modal-dialog">

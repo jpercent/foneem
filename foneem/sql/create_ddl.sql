@@ -2,15 +2,19 @@ begin;
 
 create table if not exists users(
     id serial primary key,
-    email text not null unique,
+    email varchar(255) not null unique,
     firstname varchar(80),
     lastname varchar(80),
     dob date,
     gender varchar(10),
-    stateprovince varchar(128),
+    stateprovince varchar(64),
     country varchar(128),
-    password text,
-    compendium text,
+    password varchar(1024),
+    compendium varchar(1024),
+    first_language varchar(64),
+    second_language varchar(64),
+    height_inches varchar(2),
+    height_feet varchar(1),
     session_count int not null default 10,
     creation_time timestamp default current_timestamp
 );
@@ -19,9 +23,9 @@ create table if not exists sentences(
     id serial primary key,
     display_order int,
     filename varchar(80),
-    sentence text,
-    phonetic text,
-    phonemes text,
+    sentence varchar(512),
+    phonetic varchar(768),
+    phonemes varchar(512),
     flag varchar(80),
     creation timestamp default current_timestamp
 );
@@ -53,7 +57,7 @@ create table if not exists user_sentence_session(
     session_id int references sessions(id),
     loudness real,
     rms_value real,
-    uri text,
+    uri varchar(1024),
     creation_time timestamp default current_timestamp
 );
 

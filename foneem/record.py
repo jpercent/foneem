@@ -50,7 +50,15 @@ def record():
     try:
         if not ('email' in session):
             return redirect('/', code=302)
-        return render_template('record.html')
+        calibrate = 'false'
+        try:
+            if(request.args.get('calibrate')):
+                calibrate = request.args.get('calibrate')
+                print calibrate, type(calibrate)
+        except:
+            pass
+
+        return render_template('record.html', calibrate=calibrate)
     except Exception as e:
         print("Exception = ", dir(e), e, e.__doc__)
 

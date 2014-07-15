@@ -54,11 +54,9 @@ var hvb_calibrate = {};
 
         animator.nodeId = "hvb-calibrate-analyser";
         animator.animate = true;
-        //var overlay = document.getElementById("overlay");
-        //overlay.style.visibility = (overlay.style.visibility == "visible") ? "hidden" : "visible";
         $('#hvb-calibrate-modal').modal('show');
         recorder.startRecording();
-        setTimeout(self.calibrated, 2000);
+        setTimeout(self.calibrated, 6000);
 
         self.callback = callback;
         self.recorder = recorder;

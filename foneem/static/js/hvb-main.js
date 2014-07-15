@@ -61,7 +61,6 @@ var hvb_main = {};
    };
 
    self.startRecording = function(e) {
-//       self.recordingTime = self.time.getTime();
        self.unwirePlaybackButton();
        document.getElementById(self.recordButtonId).innerHTML = "<i class=\"fa fa-square\"></i><br>Stop</button>";
        window.hvb_recorder.startRecording();
@@ -108,10 +107,13 @@ var hvb_main = {};
            document.getElementById('hvb-session-1').value = self.completed.toString();
            console.log("session count, per session", window.hvb_sentence_manager.sessionCount, self.sentencesPerSession,self.modalContinueShown);
 
+           //if(window.hvb_sentence_manager.)
+
            if(window.hvb_sentence_manager.sessionCount > self.sentencesPerSession && self.modalContinueShown === false) {
                $('#hvb-session-continue').modal('show');
                self.modalContinueShown = true;
            }
+
        } else {
            alert("Not enough data was collected. Please rerecord.");
            //self.sentenceReload = window.hvb_sentence_manager.setNextSentence(self.clearReload);
@@ -125,25 +127,25 @@ var hvb_main = {};
    self.wirePlaybackButton = function() {
         var soundFileUrl = window.hvb_recorder.soundFileUrl;
         var playbackButton = document.getElementById(self.playButtonId);
-        //playbackButton.innerHTML = "<i class='fa fa-play'></i><br>Playback";
+       playbackButton.innerHTML = "<i class='fa fa-play'></i><br>Playback";
        playbackButton.setAttribute('class', '');
         playbackButton.onclick = function(e) {
             playbackButton.innerHTML = "<i class='fa fa-play'></i><br>Playback <audio src='"+soundFileUrl+"' autoplay></audio>";
 
         }
        document.getElementById(self.nextButtonId).onclick = self.handleNextClick;
-       //document.getElementById(self.nextButtonId).innerHTML = '<i class="fa fa-step-forward"></i><br>Next';
+       document.getElementById(self.nextButtonId).innerHTML = '<i class="fa fa-step-forward"></i><br>Next';
        document.getElementById(self.nextButtonId).setAttribute('class', '');
    };
 
     self.unwirePlaybackButton = function() {
         var playbackButton = document.getElementById(self.playButtonId);
-        //playbackButton.innerHTML = "<i class='fa fa-play'></i><br>Playback";
+        playbackButton.innerHTML = "<i class='fa fa-play disabled'></i><br>Playback";
         playbackButton.setAttribute('class', 'disabled');
         playbackButton.onclick = null;
         var nextButton = document.getElementById(self.nextButtonId);
         nextButton.onclick = null;
-        //nextButton.innerHTML = '<i class="fa fa-step-forward"></i><br>Next';
+        nextButton.innerHTML = '<i class="fa fa-step-forward disabled"></i><br>Next';
         nextButton.setAttribute('class', 'disabled');
     };
 
@@ -156,7 +158,7 @@ var hvb_main = {};
        self.sentencesPerSession = sentencesPerSession;
        self.sessionNoiseFloor = sessionNoiseFloor;
 
-       document.getElementById('hvb-session-1').value = +self.completed.toString();
+       document.getElementById('hvb-session-1').value = self.completed.toString();
        document.getElementById('hvb-session-2').value = sentencesPerSession.toString();
        document.getElementById('hvb-settings').setAttribute('data-target', '#hvb-settings-modal')
        document.getElementById('hvb-settings-logout').onclick = function(e) {

@@ -102,6 +102,17 @@ def authorize_password_reset(userid, email):
     else:
         abort(400)
 
+
+@app.route('/')
+def index():
+    return render_template('index.html', error=None)
+
+
+@app.route('/pitch-demo', methods=['GET'])
+def pitch_demo():
+    return render_template('ui.html')
+
+
 @app.route('/password_post', methods=['POST'])
 def password_reset():
     form_data = request.form.to_dict()
@@ -117,17 +128,53 @@ def password_reset():
     hvb_close_db(conn, cursor)
     return render_template('record.html')
 
-@app.route('/')
-def index():
-    return render_template('index.html', error=None)
 
 @app.route('/register', methods=['GET'])
 def register():
     return render_template('register.html', error=None)
 
-@app.route('/pitch-demo', methods=['GET'])
-def pitch_demo():
-    return render_template('ui.html')
+
+@app.route('/register1', methods=['GET'])
+def register1():
+    if not ('email' in session):
+        return redirect("/", code=302)
+
+    return render_template('register1.html')
+
+
+@app.route('/registration1_post', methods=['POST'])
+def registration1_post():
+    if not ('email' in session):
+        return redirect("/", code=302)
+
+    conn, cursor = hvb_connect_db(app.hvb_conf['db'])
+
+    try:
+        form_data = request.form.to_dict()
+        form_data['email'] = session['email']
+        print ("HERE... formdata = ", form_data)
+        cursor.execute('''update users set height_inches=%(height_inches)s, height_feet=%(height_feet)s, first_language=%(first_language)s, second_language=%(second_language)s where email=%(email)s''', form_data)
+
+    except KeyError as key_error:
+        hvb_close_db(conn, cursor)
+        print("Key error = ", key_error)
+        error = 'Invalid credentials'
+        print("Error = ", error)
+        print("Key error: ")
+        return "KeyError", 404
+
+    except IntegrityError as integrityError:
+        hvb_close_db(conn, cursor)
+        print(integrityError)
+        return "IntegrityError", 404
+
+    except Exception as e:
+        print("exection: ", e)
+        return "Exception", 404
+
+    hvb_close_db(conn, cursor)
+    print("OKAY");
+    return "OK", 200 #redirect(url_for('record'))
 
 @app.route('/registration_post', methods=['POST'])
 def registration_post():
