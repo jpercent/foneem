@@ -146,17 +146,16 @@
       "outputAbbreviatedPath" : "\/static\/js\/tp\/jquery-2.1.1.min-ck.js",
       "fileType" : 64
     },
-    "\/static\/css\/sass\/vendor\/bootstrap\/_carousel.scss" : {
+    "\/static\/js\/hvb-audio-record.js" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/css\/sass\/vendor\/bootstrap\/_carousel.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/static\/css\/_carousel.css",
-      "fileType" : 4,
-      "debugStyle" : 0
+      "inputAbbreviatedPath" : "\/static\/js\/hvb-audio-record.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/static\/js\/hvb-audio-record-ck.js",
+      "fileType" : 64
     },
     "\/static\/css\/sass\/vendor\/bootstrap\/_print.scss" : {
       "ignoreWasSetByUser" : 0,
@@ -170,17 +169,6 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/static\/js\/hvb-audio-record.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/js\/hvb-audio-record.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/static\/js\/hvb-audio-record-ck.js",
-      "fileType" : 64
-    },
     "\/static\/css\/rickshaw.css" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -189,6 +177,18 @@
       "inputAbbreviatedPath" : "\/static\/css\/rickshaw.css",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
+    },
+    "\/static\/css\/sass\/vendor\/bootstrap\/_carousel.scss" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/css\/sass\/vendor\/bootstrap\/_carousel.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/static\/css\/_carousel.css",
+      "fileType" : 4,
+      "debugStyle" : 0
     },
     "\/static\/js\/hvb-opacity-ck.js" : {
       "ignoreWasSetByUser" : 0,
@@ -369,15 +369,15 @@
       "outputAbbreviatedPath" : "\/No Output Path",
       "fileType" : 16
     },
-    "\/static\/js\/tp\/speakWorker.js" : {
+    "\/static\/js\/hvb-audio-animation-ck.js" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
+      "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/js\/tp\/speakWorker.js",
+      "inputAbbreviatedPath" : "\/static\/js\/hvb-audio-animation-ck.js",
       "outputStyle" : 1,
       "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/static\/js\/tp\/speakWorker-ck.js",
+      "outputAbbreviatedPath" : "\/static\/js\/hvb-audio-animation-ck-ck.js",
       "fileType" : 64
     },
     "\/static\/js\/tp\/audioDisplay.js" : {
@@ -391,15 +391,15 @@
       "outputAbbreviatedPath" : "\/static\/js\/tp\/audioDisplay-ck.js",
       "fileType" : 64
     },
-    "\/static\/js\/hvb-audio-animation-ck.js" : {
+    "\/static\/js\/tp\/speakWorker.js" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/js\/hvb-audio-animation-ck.js",
+      "inputAbbreviatedPath" : "\/static\/js\/tp\/speakWorker.js",
       "outputStyle" : 1,
       "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/static\/js\/hvb-audio-animation-ck-ck.js",
+      "outputAbbreviatedPath" : "\/static\/js\/tp\/speakWorker-ck.js",
       "fileType" : 64
     },
     "\/static\/js\/tp\/easing-scrolling.js" : {
@@ -434,15 +434,6 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/template\/audio-recorder.html" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/template\/audio-recorder.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
     "\/static\/css\/sass\/vendor\/bootstrap\/_buttons.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -454,6 +445,15 @@
       "outputAbbreviatedPath" : "\/static\/css\/_buttons.css",
       "fileType" : 4,
       "debugStyle" : 0
+    },
+    "\/template\/audio-recorder.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/template\/audio-recorder.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/static\/css\/sass\/vendor\/bootstrap\/_modals.scss" : {
       "ignoreWasSetByUser" : 0,
@@ -602,6 +602,15 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
+    "\/static\/css\/libraries\/_variables.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/css\/libraries\/_variables.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
+    },
     "\/static\/images\/room-bg.jpg" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -612,15 +621,6 @@
       "outputAbbreviatedPath" : "\/static\/images\/room-bg.jpg",
       "initialSize" : 341625,
       "fileType" : 4096
-    },
-    "\/static\/css\/libraries\/_variables.css" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/css\/libraries\/_variables.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
     },
     "\/static\/css\/screen.css" : {
       "ignoreWasSetByUser" : 0,
@@ -731,17 +731,6 @@
       "outputAbbreviatedPath" : "\/static\/js\/tp\/speakClient-ck.js",
       "fileType" : 64
     },
-    "\/static\/js\/hvb-audio-ck.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/js\/hvb-audio-ck.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/static\/js\/hvb-audio-ck-ck.js",
-      "fileType" : 64
-    },
     "\/static\/css\/sass\/vendor\/bootstrap\/_glyphicons.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -753,6 +742,17 @@
       "outputAbbreviatedPath" : "\/static\/css\/_glyphicons.css",
       "fileType" : 4,
       "debugStyle" : 0
+    },
+    "\/static\/js\/hvb-audio-ck.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/js\/hvb-audio-ck.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/static\/js\/hvb-audio-ck-ck.js",
+      "fileType" : 64
     },
     "\/static\/images\/intro-bg.jpg" : {
       "ignoreWasSetByUser" : 0,
@@ -897,17 +897,6 @@
       "initialSize" : 105285,
       "fileType" : 8192
     },
-    "\/static\/images\/room-bg-lg.jpg" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/images\/room-bg-lg.jpg",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/static\/images\/room-bg-lg.jpg",
-      "initialSize" : 394337,
-      "fileType" : 4096
-    },
     "\/static\/css\/sass\/vendor\/bootstrap\/_navbar.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -917,30 +906,6 @@
       "outputStyle" : 0,
       "shouldRunBless" : 0,
       "outputAbbreviatedPath" : "\/static\/css\/_navbar.css",
-      "fileType" : 4,
-      "debugStyle" : 0
-    },
-    "\/static\/css\/sass\/libraries\/_variables.scss" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/css\/sass\/libraries\/_variables.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/static\/css\/_variables.css",
-      "fileType" : 4,
-      "debugStyle" : 0
-    },
-    "\/static\/css\/sass\/application.scss" : {
-      "ignoreWasSetByUser" : 1,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/css\/sass\/application.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/static\/css\/application.css",
       "fileType" : 4,
       "debugStyle" : 0
     },
@@ -956,48 +921,17 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/static\/css\/sass\/vendor\/bootstrap\/_media.scss" : {
+    "\/static\/css\/sass\/libraries\/_variables.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/css\/sass\/vendor\/bootstrap\/_media.scss",
+      "inputAbbreviatedPath" : "\/static\/css\/sass\/libraries\/_variables.scss",
       "outputStyle" : 0,
       "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/static\/css\/_media.css",
+      "outputAbbreviatedPath" : "\/static\/css\/_variables.css",
       "fileType" : 4,
       "debugStyle" : 0
-    },
-    "\/static\/images\/press-ted.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/images\/press-ted.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/static\/images\/press-ted.png",
-      "initialSize" : 4107,
-      "fileType" : 8192
-    },
-    "\/template\/password-reset.html" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/template\/password-reset.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
-    "\/static\/images\/press-allthingsd.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/images\/press-allthingsd.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/static\/images\/press-allthingsd.png",
-      "initialSize" : 5812,
-      "fileType" : 8192
     },
     "\/static\/css\/sass\/vendor\/bootstrap\/_panels.scss" : {
       "ignoreWasSetByUser" : 0,
@@ -1011,6 +945,72 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
+    "\/static\/css\/sass\/application.scss" : {
+      "ignoreWasSetByUser" : 1,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/css\/sass\/application.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/static\/css\/application.css",
+      "fileType" : 4,
+      "debugStyle" : 0
+    },
+    "\/static\/images\/press-allthingsd.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/images\/press-allthingsd.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/static\/images\/press-allthingsd.png",
+      "initialSize" : 5812,
+      "fileType" : 8192
+    },
+    "\/static\/images\/press-ted.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/images\/press-ted.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/static\/images\/press-ted.png",
+      "initialSize" : 4107,
+      "fileType" : 8192
+    },
+    "\/static\/css\/sass\/vendor\/bootstrap\/_media.scss" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/css\/sass\/vendor\/bootstrap\/_media.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/static\/css\/_media.css",
+      "fileType" : 4,
+      "debugStyle" : 0
+    },
+    "\/template\/password-reset.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/template\/password-reset.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
+    "\/static\/images\/room-bg-lg.jpg" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/images\/room-bg-lg.jpg",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/static\/images\/room-bg-lg.jpg",
+      "initialSize" : 394337,
+      "fileType" : 4096
+    },
     "\/static\/js\/hvb-audio.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -1021,6 +1021,15 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/static\/js\/hvb-audio-ck.js",
       "fileType" : 64
+    },
+    "\/static\/css\/sections\/animations.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/css\/sections\/animations.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
     },
     "\/static\/css\/sass\/vendor\/bootstrap\/_popovers.scss" : {
       "ignoreWasSetByUser" : 0,
@@ -1033,15 +1042,6 @@
       "outputAbbreviatedPath" : "\/static\/css\/_popovers.css",
       "fileType" : 4,
       "debugStyle" : 0
-    },
-    "\/static\/css\/sections\/animations.css" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/css\/sections\/animations.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
     },
     "\/static\/images\/rupal-ted.png" : {
       "ignoreWasSetByUser" : 0,
@@ -1227,15 +1227,6 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
     },
-    "\/static\/css\/animations.css" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/css\/animations.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
-    },
     "\/static\/js\/tp\/speakGenerator.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -1246,6 +1237,15 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/static\/js\/tp\/speakGenerator-ck.js",
       "fileType" : 64
+    },
+    "\/static\/css\/animations.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/css\/animations.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
     },
     "\/static\/js\/hvb-sentence.js" : {
       "ignoreWasSetByUser" : 0,
@@ -1267,16 +1267,14 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 2048
     },
-    "\/static\/images\/press-huffington.png" : {
+    "\/template\/record.html" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/images\/press-huffington.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/static\/images\/press-huffington.png",
-      "initialSize" : 18550,
-      "fileType" : 8192
+      "inputAbbreviatedPath" : "\/template\/record.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/static\/js\/tp\/complex.js" : {
       "ignoreWasSetByUser" : 0,
@@ -1301,6 +1299,15 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
+    "\/config.rb" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/config.rb",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 32768
+    },
     "\/stuff\/hvb_login-ck.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -1312,23 +1319,16 @@
       "outputAbbreviatedPath" : "\/stuff\/hvb_login-ck-ck.js",
       "fileType" : 64
     },
-    "\/config.rb" : {
+    "\/static\/images\/press-huffington.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/config.rb",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 32768
-    },
-    "\/template\/record.html" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/template\/record.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
+      "inputAbbreviatedPath" : "\/static\/images\/press-huffington.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/static\/images\/press-huffington.png",
+      "initialSize" : 18550,
+      "fileType" : 8192
     },
     "\/static\/css\/resources\/green_arrow.png" : {
       "ignoreWasSetByUser" : 0,
