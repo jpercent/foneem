@@ -3633,8 +3633,14 @@ html.recording-studio section#recording-studio {
       transition: all, ease, 0.3s; }
     html.recording-studio section#recording-studio .hvb-record i, html.recording-studio section#recording-studio .hvb-stop i, html.recording-studio section#recording-studio #hvb-play-sentence i, html.recording-studio section#recording-studio #hvb-next-sentence i, html.recording-studio section#recording-studio #hvb-settings i {
       font-size: 18px; }
-  html.recording-studio section#recording-studio .hvb-play-sentence .disabled, html.recording-studio section#recording-studio #hvb-next-sentence .disabled {
-    color: #a1a1a1; }
+  html.recording-studio section#recording-studio #hvb-play-sentence.disabled, html.recording-studio section#recording-studio #hvb-next-sentence.disabled {
+    background: #8f8f8f;
+    color: #767676; }
+    html.recording-studio section#recording-studio #hvb-play-sentence.disabled i.fa-play, html.recording-studio section#recording-studio #hvb-play-sentence.disabled i.fa-step-forward, html.recording-studio section#recording-studio #hvb-next-sentence.disabled i.fa-play, html.recording-studio section#recording-studio #hvb-next-sentence.disabled i.fa-step-forward {
+      color: #767676; }
+    html.recording-studio section#recording-studio #hvb-play-sentence.disabled:hover, html.recording-studio section#recording-studio #hvb-next-sentence.disabled:hover {
+      background: #8f8f8f;
+      cursor: default; }
   html.recording-studio section#recording-studio .hvb-record {
     width: 100px;
     height: 87.5px;

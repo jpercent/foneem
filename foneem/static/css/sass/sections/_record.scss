@@ -408,8 +408,17 @@ section#recording-studio {
 		}
 	}
 
-	.hvb-play-sentence .disabled, #hvb-next-sentence .disabled {
-		color: #a1a1a1;
+
+	#hvb-play-sentence.disabled, #hvb-next-sentence.disabled {
+		background: darken(#a9a9a9,10%);
+		color: darken(#a9a9a9,20%);
+		i.fa-play, i.fa-step-forward {
+			color: darken(#a9a9a9,20%);
+		}
+		&:hover {
+			background: darken(#a9a9a9,10%);
+			cursor: default;
+		}
 	}
 
 	.hvb-record {
