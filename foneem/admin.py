@@ -105,7 +105,7 @@ def authorize_password_reset(userid, email):
 
 @app.route('/')
 def index():
-    return render_template('hvb-coming-soon-index.html', error=None)
+    return render_template('index.html', error=None)
 
 @app.route('/password_post', methods=['POST'])
 def password_reset():
