@@ -105,13 +105,7 @@ def authorize_password_reset(userid, email):
 
 @app.route('/')
 def index():
-    return render_template('index.html', error=None)
-
-
-@app.route('/pitch-demo', methods=['GET'])
-def pitch_demo():
-    return render_template('ui.html')
-
+    return render_template('hvb-coming-soon-index.html', error=None)
 
 @app.route('/password_post', methods=['POST'])
 def password_reset():
