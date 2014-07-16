@@ -421,6 +421,15 @@ section#recording-studio {
 		}
 	}
 
+	#hvb-play-sentence, #hvb-next-sentence {
+		i.fa-play {
+			color: $green;
+		}
+		i.fa-step-forward {
+			color: #3c4879;
+		}
+	}
+
 	.hvb-record {
 		width: 100px;
 		height: 87.5px;
