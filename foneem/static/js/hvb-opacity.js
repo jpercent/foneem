@@ -1,13 +1,13 @@
 var hvb_opacity = {};
 (function(self) {
 
-    self.defaultIncrement = .25;
+    self.defaultIncrement = .10;
     self.requestOpacityMessage = JSON.stringify({'code': 'get-opacity'});
 
     self.getIncrement = function(instances, increments) {
         if (increments == 0) {
             return self.defaultIncrement;
-        } else if(increments < 10) {
+        } else if(increments < 3) {
             return self.defaultIncrement /(increments * 2);
         } else {
             return 1 / instances;
