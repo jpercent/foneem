@@ -252,7 +252,7 @@ def update_sentences_completed_and_get_next_sentence(message):
     session_id = message['session_id']
     loudness = message['loudness']
     rms_value = message['rms_value']
-    uri = message['uri']
+    uri = 'https://s3.amazonaws.com/human-voice-bank'+'/'+email+'/'+message['uri']
 
     conf = parse_config()
     conn, cursor = hvb_connect_db(conf['db'])
@@ -273,7 +273,8 @@ def update_sentences_completed(message):
     session_id = message['session_id']
     loudness = message['loudness']
     rms_value = message['rms_value']
-    uri = message['uri']
+    uri = 'https://s3.amazonaws.com/human-voice-bank'+'/'+email+'/'+message['uri']
+
     conf = parse_config()
     conn, cursor = hvb_connect_db(conf['db'])
     make_sentence_update(cursor, email, sentence_id, session_id, loudness, rms_value, uri)
@@ -300,7 +301,7 @@ def upload_audio(message):
 #    f.flush()
 #    f.close()
 
-    record.upload_wav_to_s3(parse_config(), data, filename)
+    record.upload_wav_to_s3(parse_config(), data, str(email)+'/'+str(filename))
 
 
 def float32_wav_file(sample_array, sample_rate):

@@ -81,7 +81,7 @@ var hvb_main = {};
        }
 
        self.unwirePlaybackButton();
-       filename = $('.hvbsentence-text').html()+'-'+new Date().toISOString() + '.wav'
+       var filename = $('.hvbsentence-text').html()+'-'+new Date().toISOString() + '.wav'
        //var upload_size = window.hvb_recorder.upload(filename);
        if(self.data != null && self.data[1].length > 1024) {
            var rms = self.data[0]
@@ -100,7 +100,7 @@ var hvb_main = {};
            window.hvb_websock.send(message);
 
            self.sentenceReload = window.hvb_sentence_manager.updateSentencesCompletedAndSetNextSentence(self.clearReload,
-               self.sessionId, loudness, rms, 'https://s3.amazonaws.com/human-voice-bank/'+filename);
+               self.sessionId, loudness, rms, filename);
 
            self.data = null;
            self.completed++;
