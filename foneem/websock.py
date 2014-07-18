@@ -326,7 +326,7 @@ def float32_wav_file(sample_array, sample_rate):
 
 
 class TornadoWebsocketServer(object):
-    def __init__(self, wsgi_app=None, websock_handler=None, host='0.0.0.0', port=80, ws_route=r'/websocket'):
+    def __init__(self, wsgi_app=None, websock_handler=None, host='0.0.0.0', port=5000, ws_route=r'/websocket'):
         self.wsgi_app = wsgi_app
         self.websock_handler = websock_handler
         if not websock_handler:
