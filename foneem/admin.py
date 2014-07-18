@@ -216,7 +216,7 @@ def login_post():
 
     if len(user) == 0:
         print("hvb.login: ERROR: email not known")
-        return abort(400)
+        return render_template('login.html')
 
     elif len(user) > 1:
         print("hvb.login: ERROR: email associated with multiple accounts")
