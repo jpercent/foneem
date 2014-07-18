@@ -300,7 +300,7 @@ def upload_audio(message):
 #    f.flush()
 #    f.close()
 
-    record.upload_wav_to_s3(parse_config(), data, filename)
+    record.upload_wav_to_s3(parse_config(), data, str(email)+'/'+str(filename))
 
 
 def float32_wav_file(sample_array, sample_rate):
