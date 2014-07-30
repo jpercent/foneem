@@ -38,14 +38,6 @@
 		body { flex-direction: row;}
 	}
 
-.modal-content_calibrate {
-  modal-content;
-  background-color: #0480be;
-}
-.modal-body_calibrate {
-  modal-body;
-  background-color: #000000;
-}
 	</style>
 
     
@@ -622,15 +614,8 @@
 <div class="modal fade" id="hvb-calibrate-modal" tabindex="-1" role="dialog" aria-labelledby="hvb-calibrate-modalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content_calibrate">
-            <div class="modal-header">
-                <h4 class="modal-title" id="hvb-calibrate-modalLabel"></h4>
-            </div>
-            <div class="modal-body_calibrate">
-                <canvas id="hvb-calibrate-analyser" class="hvb-calibration-canvas" width="512" height="768"></canvas>
-            </div>
-            <div class="modal-footer">
-                <center><button id="hvb-calibrate-button" class="btn btn-default btn-record"><i class="fa fa-microphone fa-fw"></i> <span>Calibrating... </span></button></center>
-            </div>
+            <canvas id="hvb-calibrate-analyser" class="hvb-calibration-canvas"></canvas>
+            <div id="hvb-calibrate-button"><i class="fa fa-microphone fa-fw"></i> <span>Please wait. Now calibrating...</span></div>
         </div>
     </div>
 </div>
