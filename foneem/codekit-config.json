@@ -14,17 +14,16 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/static\/css\/sass\/vendor\/bootstrap\/_popovers.scss" : {
+    "\/static\/js\/hvb-websock.js" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/css\/sass\/vendor\/bootstrap\/_popovers.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/static\/css\/_popovers.css",
-      "fileType" : 4,
-      "debugStyle" : 0
+      "inputAbbreviatedPath" : "\/static\/js\/hvb-websock.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/static\/js\/hvb-websock-ck.js",
+      "fileType" : 64
     },
     "\/static\/css\/sass\/sections\/_record-lo-fi.scss" : {
       "ignoreWasSetByUser" : 0,
@@ -38,16 +37,17 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/static\/js\/hvb-audio-animation-ck.js" : {
+    "\/static\/css\/sass\/vendor\/bootstrap\/_dropdowns.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/js\/hvb-audio-animation-ck.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/static\/js\/hvb-audio-animation-ck-ck.js",
-      "fileType" : 64
+      "inputAbbreviatedPath" : "\/static\/css\/sass\/vendor\/bootstrap\/_dropdowns.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/static\/css\/_dropdowns.css",
+      "fileType" : 4,
+      "debugStyle" : 0
     },
     "\/static\/css\/sass\/sections\/_grayscale.scss" : {
       "ignoreWasSetByUser" : 0,
@@ -129,6 +129,15 @@
       "outputAbbreviatedPath" : "\/static\/js\/tp\/audioDisplay-ck.js",
       "fileType" : 64
     },
+    "\/template\/login.html" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/template\/login.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
+    },
     "\/static\/css\/sass\/vendor\/bootstrap\/_type.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -140,15 +149,6 @@
       "outputAbbreviatedPath" : "\/static\/css\/_type.css",
       "fileType" : 4,
       "debugStyle" : 0
-    },
-    "\/template\/login.html" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/template\/login.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
     },
     "\/static\/css\/screen.css" : {
       "ignoreWasSetByUser" : 0,
@@ -170,18 +170,6 @@
       "initialSize" : 105285,
       "fileType" : 8192
     },
-    "\/static\/css\/sass\/vendor\/bootstrap\/_wells.scss" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/css\/sass\/vendor\/bootstrap\/_wells.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/static\/css\/_wells.css",
-      "fileType" : 4,
-      "debugStyle" : 0
-    },
     "\/static\/css\/sass\/sections\/_record.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -194,6 +182,15 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
+    "\/static\/css\/print.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/css\/print.css",
+      "outputAbbreviatedPath" : "\/No Output Path",
+      "fileType" : 16
+    },
     "\/static\/images\/press-npr.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -205,13 +202,13 @@
       "initialSize" : 3589,
       "fileType" : 8192
     },
-    "\/static\/css\/print.css" : {
+    "\/static\/css\/bootstrap-theme.css" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/css\/print.css",
-      "outputAbbreviatedPath" : "\/No Output Path",
+      "inputAbbreviatedPath" : "\/static\/css\/bootstrap-theme.css",
+      "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
     },
     "\/static\/css\/sass\/vendor\/bootstrap\/_breadcrumbs.scss" : {
@@ -226,14 +223,17 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/static\/css\/bootstrap-theme.css" : {
+    "\/static\/css\/sass\/vendor\/bootstrap\/_wells.scss" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
+      "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/css\/bootstrap-theme.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
+      "inputAbbreviatedPath" : "\/static\/css\/sass\/vendor\/bootstrap\/_wells.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/static\/css\/_wells.css",
+      "fileType" : 4,
+      "debugStyle" : 0
     },
     "\/static\/css\/sass\/vendor\/bootstrap\/_labels.scss" : {
       "ignoreWasSetByUser" : 0,
@@ -624,6 +624,17 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
+    "\/static\/images\/intro-bg.jpg" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/images\/intro-bg.jpg",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/static\/images\/intro-bg.jpg",
+      "initialSize" : 88321,
+      "fileType" : 4096
+    },
     "\/template\/register1.html" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -643,17 +654,6 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/static\/js\/tp\/easing-scrolling-ck.js",
       "fileType" : 64
-    },
-    "\/static\/images\/intro-bg.jpg" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/images\/intro-bg.jpg",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/static\/images\/intro-bg.jpg",
-      "initialSize" : 88321,
-      "fileType" : 4096
     },
     "\/static\/css\/sass\/vendor\/bootstrap\/_list-group.scss" : {
       "ignoreWasSetByUser" : 0,
@@ -714,16 +714,16 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/static\/videos\/hvb-intro.jpg" : {
+    "\/static\/js\/hvb-audio-ck.js" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
+      "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/videos\/hvb-intro.jpg",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/static\/videos\/hvb-intro.jpg",
-      "initialSize" : 78435,
-      "fileType" : 4096
+      "inputAbbreviatedPath" : "\/static\/js\/hvb-audio-ck.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/static\/js\/hvb-audio-ck-ck.js",
+      "fileType" : 64
     },
     "\/static\/js\/hvb-sentence.js" : {
       "ignoreWasSetByUser" : 0,
@@ -736,16 +736,16 @@
       "outputAbbreviatedPath" : "\/static\/js\/hvb-sentence-ck.js",
       "fileType" : 64
     },
-    "\/static\/js\/hvb-audio-ck.js" : {
+    "\/static\/videos\/hvb-intro.jpg" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/js\/hvb-audio-ck.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/static\/js\/hvb-audio-ck-ck.js",
-      "fileType" : 64
+      "inputAbbreviatedPath" : "\/static\/videos\/hvb-intro.jpg",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/static\/videos\/hvb-intro.jpg",
+      "initialSize" : 78435,
+      "fileType" : 4096
     },
     "\/static\/css\/sass\/libraries\/_mixins.scss" : {
       "ignoreWasSetByUser" : 0,
@@ -977,15 +977,15 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/static\/css\/sass\/vendor\/bootstrap\/_print.scss" : {
+    "\/static\/css\/sass\/vendor\/bootstrap\/_mixins.scss" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/css\/sass\/vendor\/bootstrap\/_print.scss",
+      "inputAbbreviatedPath" : "\/static\/css\/sass\/vendor\/bootstrap\/_mixins.scss",
       "outputStyle" : 0,
       "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/static\/css\/_print.css",
+      "outputAbbreviatedPath" : "\/static\/css\/_mixins.css",
       "fileType" : 4,
       "debugStyle" : 0
     },
@@ -1000,18 +1000,6 @@
       "outputAbbreviatedPath" : "\/static\/js\/hvb-opacity-ck-ck.js",
       "fileType" : 64
     },
-    "\/static\/css\/sass\/vendor\/bootstrap\/_mixins.scss" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/css\/sass\/vendor\/bootstrap\/_mixins.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/static\/css\/_mixins.css",
-      "fileType" : 4,
-      "debugStyle" : 0
-    },
     "\/static\/css\/application.css" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -1020,6 +1008,18 @@
       "inputAbbreviatedPath" : "\/static\/css\/application.css",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
+    },
+    "\/static\/css\/sass\/vendor\/bootstrap\/_print.scss" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/css\/sass\/vendor\/bootstrap\/_print.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/static\/css\/_print.css",
+      "fileType" : 4,
+      "debugStyle" : 0
     },
     "\/static\/css\/sections\/record-lo-fi.css" : {
       "ignoreWasSetByUser" : 0,
@@ -1052,15 +1052,6 @@
       "outputAbbreviatedPath" : "\/static\/js\/hvb-opacity-ck.js",
       "fileType" : 64
     },
-    "\/config.rb" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/config.rb",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 32768
-    },
     "\/template\/hvb-coming-soon-index.html" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -1080,6 +1071,15 @@
       "outputAbbreviatedPath" : "\/static\/images\/room-bg-2.jpg",
       "initialSize" : 388721,
       "fileType" : 4096
+    },
+    "\/config.rb" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/config.rb",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 32768
     },
     "\/static\/css\/sass\/vendor\/bootstrap\/_forms.scss" : {
       "ignoreWasSetByUser" : 0,
@@ -1243,28 +1243,16 @@
       "initialSize" : 110981,
       "fileType" : 4096
     },
-    "\/static\/js\/hvb-websock.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/js\/hvb-websock.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/static\/js\/hvb-websock-ck.js",
-      "fileType" : 64
-    },
-    "\/static\/css\/sass\/vendor\/bootstrap\/_dropdowns.scss" : {
+    "\/static\/js\/hvb-audio-animation-ck.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/css\/sass\/vendor\/bootstrap\/_dropdowns.scss",
-      "outputStyle" : 0,
-      "shouldRunBless" : 0,
-      "outputAbbreviatedPath" : "\/static\/css\/_dropdowns.css",
-      "fileType" : 4,
-      "debugStyle" : 0
+      "inputAbbreviatedPath" : "\/static\/js\/hvb-audio-animation-ck.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/static\/js\/hvb-audio-animation-ck-ck.js",
+      "fileType" : 64
     },
     "\/static\/css\/sass\/vendor\/bootstrap\/_theme.scss" : {
       "ignoreWasSetByUser" : 0,
@@ -1275,6 +1263,18 @@
       "outputStyle" : 0,
       "shouldRunBless" : 0,
       "outputAbbreviatedPath" : "\/static\/css\/_theme.css",
+      "fileType" : 4,
+      "debugStyle" : 0
+    },
+    "\/static\/css\/sass\/vendor\/bootstrap\/_popovers.scss" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/css\/sass\/vendor\/bootstrap\/_popovers.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/static\/css\/_popovers.css",
       "fileType" : 4,
       "debugStyle" : 0
     }
