@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>How It Works | VocaliD</title>
+    <meta name="description" content="Crafting custom synthetic voices that make communication more human. Changing lives one voice at a time.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content=""/>
+    <meta property="og:description" content=""/>
+    <meta property="og:image" content=""/>
+
+    <!-- Bootstrap CSS -->
+    <link href="static/css/application.css" rel="stylesheet" type="text/css">
+    <link href="static/css/animate.css" rel="stylesheet" type="text/css">
+    
+    <!-- Mailchimp CSS -->
+    <link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
+
+    <!-- Fonts -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Karla:400,700,900' rel='stylesheet' type='text/css'>
+    
+    <!-- IE -->
+    <!--[if lt IE 9]> <script> document.createElement('video'); </script> <![endif]-->
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom" class="page-how">
+<!-- Facebook -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=763373647030403";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="./">
+                <img src="static/images/vocalid-icon.svg" width="40px" height="40px">
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="about">About Us</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="how">How It Works</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="voicebank">Voicebank</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#" id="hvb-record-link" data-toggle="modal" data-target="#record-modal">Login</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <section id="us-about" class="content-section">
+        <div class="container-fluid animated fadeIn" id="howVideo" onclick="document.getElementById('howVideo').innerHTML = embedCode;" />
+            <img src="static/images/play-vid.png" id="playVid">
+        </div>
+        </div>
+    </section>
+
+    <section id="us-about-text" class="content-section">
+        <div class="container">
+            <div class="about-text row">
+                <h2 class="text-center">Career Openings</h2>
+
+                <h3>Web Developer</h3>
+                <p>We are currently looking for a full-time engineer with extensive web application development experience using Python and PostgreSQL. You should also be proficient in JavaScript, HTML5, and CSS3. You'll be helping us translate our product vision and requirements into clean, maintainable code.</p>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="ted-talk" class="content-section">
+        <div class="container">
+            <a href="#" data-toggle="modal" data-target="#ted-modal" class="ted-talk"><div class="ted-text row">
+                <h2 class="text-center">See The TED Talk That Started It All</h2>
+            </div>
+            </a>
+        </div>
+    </section>
+
+    <section id="contact" class="content-section text-center">
+        <div class="contact-section">
+            <div class="container-fluid">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h2>Follow VocaliD for the latest updates</h2><br>
+                    <ul class="list-inline banner-social-buttons">
+                        <li><a href="http://twitter.com/intent/tweet?url=http://www.humanvoicebank.org&amp;text=I'm pledging to donate my voice to @HumanVoicebank. Join me and add your voice today:" class="btn btn-twitter btn-lg" data-lang="en" title="Write A Tweet"><span class="network-name hidden-xs"><i class="fa fa-twitter fa-fw"></i> VocaliD on Twitter</span><span class="network-name visible-xs"><i class="fa fa-twitter fa-fw"></i> Twitter</span></a>
+                        </li>
+                        <li><a href="https://www.facebook.com/sharer/sharer.php?u=http://www.northeastern.edu/humanvoicebank/" class="btn btn-facebook btn-lg" title="Post to Facebook"><span class="network-name hidden-xs"><i class="fa fa-facebook fa-fw"></i> VocaliD on Facebook</span><span class="network-name visible-xs"><i class="fa fa-facebook fa-fw"></i> Facebook</span></a>
+                        </li>
+                    </ul>
+                    <br>
+                        <!-- Begin MailChimp Signup Form -->
+                        <div id="mc_embed_signup">
+                        <form action="http://humanvoicebank.us6.list-manage.com/subscribe/post?u=0ea30692c32f083061eac72ab&amp;id=7280f59bb6" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your e-mail address" required>
+                            <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                            <div style="position: absolute; left: -5000px;"><input type="text" name="b_0ea30692c32f083061eac72ab_7280f59bb6" value=""></div>
+                            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-default btn-submit">
+                        </form>
+                        </div>
+                        <!--End mc_embed_signup-->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer" class="content-section text-center">
+        <div class="footer-links">
+            <div class="container-fluid">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <ul class="list-inline">
+                        <li>© 2014 VocaliD, Inc.</li>
+                        <li>Contact</li>
+                        <li>Donate</li>
+                        <li>Careers</li>
+                        <li>Privacy</li>
+                        <li>Terms of Use</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="record-modal" tabindex="-1" role="dialog" aria-labelledby="Record" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button id="hvb-login-close" type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+            </div>
+            <div class="modal-body row" id="hvb-login-modal-index">
+                <div class="login account col-md-6"><center>
+                    <h3 id="hvb_login_modal_header"><strong>Login to Your Account</strong></h3>
+                    <div class="loginform-container">
+                        <form id="hvb_login_modal" action="login_post" class="loginform" method="post" novalidate="">
+                            <div id="login-email-container" class="login-field">
+                                <input type="email" name="email" placeholder="Your email address" id="hvb_login_modal_email" required="required">
+                            </div>
+                            <div id="login-password-container" class="login-field">
+                                <input type="password" name="password" placeholder="Your password" id="hvb_login_modal_password" required="required">
+                            </div>
+                            <div id="form-submit" class="login-field clearfix submit">
+                                <input type="submit" value="Login">
+                            </div>
+                        </form>
+                        <a href="initiate-reset" id="hvb-password-reset">Reset password</a>
+
+                    </div>
+                </center></div>
+                <div class="create account col-md-6"><center>
+                    <h3><strong>Create An Account</strong></h3>
+                    <p>Donate your voice today.</p>
+                    <a href="register" class="btn btn-signup">Sign Up</a>
+                </center></div>
+            </div>
+            <div class="model-content" id="hvb-reset-background" style="display: none;"><a href="/" onclick="event.preventDefault();"><h3><center>A new password was sent to your email</center></h3></p></a></div>
+    </div>
+  </div>
+  </div>
+
+  <div class="modal fade" id="ted-modal" tabindex="-1" role="dialog" aria-labelledby="The TED Talk" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="videoToggleOff">x</button>
+            </div>
+            <div class="modal-body">
+            <center>
+            <iframe src="http://embed.ted.com/talks/lang/en/rupal_patel_synthetic_voices_as_unique_as_fingerprints.html" id="TEDVideo" width="854" height="480" frameborder="0" scrolling="no" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+            </center>
+            </div>
+    </div>
+  </div>
+  </div>
+
+    <!-- Core JavaScript Files -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+    
+    <script src="static/js/hvb-login.js"></script>
+    <script src="static/js/tp/easing-scrolling.js"></script>
+    <script src="static/js/tp/jquery.responsiveVideo.js"></script>
+    <script src="static/js/tp/viewport-units-buggyfill.js"></script>
+    <script>window.viewportUnitsBuggyfill.init();</script>
+    
+    <script>
+    $( 'body' ).responsiveVideo();
+    </script>
+    <script>
+  $('.modal').on('shown', function () {
+    $("body").css("overflow", "hidden");
+    });
+
+    $('.modal').on('hidden', function () {
+      $("body").css("overflow", "visible");
+    });
+  </script>
+
+</body>
+
+</html>
