@@ -124,7 +124,7 @@
 
 /* Modals */
 
-#rupal-modal, #geoff-modal, #michael-modal, #julia-modal, #grace-modal {
+#rupal-modal, #geoff-modal, #michael-modal, #julia-modal, #grace-modal, #coming-soon-modal {
 	a { 
 		color: #fff;
 	}
@@ -166,6 +166,23 @@
 		min-height: 100%;
 	}
 	.modal-body { padding: 15px; }
+}
+
+#coming-soon-modal {
+	text-align: center;
+	h3 {
+		display: block;
+		float: none;
+		margin-bottom: 10px;
+		margin-top: 5px;
+		font-family: $header-font;
+		text-transform: none;
+		font-size: 5em;
+		font-weight: bold;
+	}
+	p {
+		font-size: 24px;
+	}
 }
 
 @media only screen and (min-width: 767px) {

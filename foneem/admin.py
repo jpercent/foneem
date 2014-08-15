@@ -142,6 +142,14 @@ def register():
 def careers():
     return render_template('careers.html', error=None)
 
+@app.route('/privacy', methods=['GET'])
+def privacy():
+    return render_template('privacy.html', error=None)
+
+@app.route('/terms', methods=['GET'])
+def terms():
+    return render_template('terms.html', error=None)
+
 @app.route('/register1', methods=['GET'])
 def register1():
     if not ('email' in session):

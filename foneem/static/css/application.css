@@ -3229,16 +3229,16 @@ body {
     font-size: 16px; }
 
 /* Modals */
-#rupal-modal a, #geoff-modal a, #michael-modal a, #julia-modal a, #grace-modal a {
+#rupal-modal a, #geoff-modal a, #michael-modal a, #julia-modal a, #grace-modal a, #coming-soon-modal a {
   color: #fff; }
-#rupal-modal .close, #geoff-modal .close, #michael-modal .close, #julia-modal .close, #grace-modal .close {
+#rupal-modal .close, #geoff-modal .close, #michael-modal .close, #julia-modal .close, #grace-modal .close, #coming-soon-modal .close {
   font-size: 30px;
   color: #fff;
   opacity: 0.8;
   display: inline-block; }
-  #rupal-modal .close:hover, #geoff-modal .close:hover, #michael-modal .close:hover, #julia-modal .close:hover, #grace-modal .close:hover {
+  #rupal-modal .close:hover, #geoff-modal .close:hover, #michael-modal .close:hover, #julia-modal .close:hover, #grace-modal .close:hover, #coming-soon-modal .close:hover {
     opacity: 1; }
-#rupal-modal span.close-bio, #geoff-modal span.close-bio, #michael-modal span.close-bio, #julia-modal span.close-bio, #grace-modal span.close-bio {
+#rupal-modal span.close-bio, #geoff-modal span.close-bio, #michael-modal span.close-bio, #julia-modal span.close-bio, #grace-modal span.close-bio, #coming-soon-modal span.close-bio {
   text-align: center;
   font-weight: bold;
   text-transform: uppercase;
@@ -3246,28 +3246,42 @@ body {
   font-size: 15px;
   display: block;
   opacity: 0.8; }
-  #rupal-modal span.close-bio:hover, #geoff-modal span.close-bio:hover, #michael-modal span.close-bio:hover, #julia-modal span.close-bio:hover, #grace-modal span.close-bio:hover {
+  #rupal-modal span.close-bio:hover, #geoff-modal span.close-bio:hover, #michael-modal span.close-bio:hover, #julia-modal span.close-bio:hover, #grace-modal span.close-bio:hover, #coming-soon-modal span.close-bio:hover {
     opacity: 1; }
-#rupal-modal .modal-header, #geoff-modal .modal-header, #michael-modal .modal-header, #julia-modal .modal-header, #grace-modal .modal-header {
+#rupal-modal .modal-header, #geoff-modal .modal-header, #michael-modal .modal-header, #julia-modal .modal-header, #grace-modal .modal-header, #coming-soon-modal .modal-header {
   overflow: hidden; }
-#rupal-modal h3, #geoff-modal h3, #michael-modal h3, #julia-modal h3, #grace-modal h3 {
+#rupal-modal h3, #geoff-modal h3, #michael-modal h3, #julia-modal h3, #grace-modal h3, #coming-soon-modal h3 {
   display: inline-block;
   float: left;
   margin-bottom: 0;
   margin-top: 5px;
   font-family: "Karla", "Helvetica Neue", Helvetica, Arial, sans-serif; }
-#rupal-modal .modal-dialog, #geoff-modal .modal-dialog, #michael-modal .modal-dialog, #julia-modal .modal-dialog, #grace-modal .modal-dialog {
+#rupal-modal .modal-dialog, #geoff-modal .modal-dialog, #michael-modal .modal-dialog, #julia-modal .modal-dialog, #grace-modal .modal-dialog, #coming-soon-modal .modal-dialog {
   margin: 0;
   width: 100%;
   height: 100%; }
-#rupal-modal .modal-content, #geoff-modal .modal-content, #michael-modal .modal-content, #julia-modal .modal-content, #grace-modal .modal-content {
+#rupal-modal .modal-content, #geoff-modal .modal-content, #michael-modal .modal-content, #julia-modal .modal-content, #grace-modal .modal-content, #coming-soon-modal .modal-content {
   border-radius: 0;
   background-color: #111;
   color: #fff;
   height: auto;
   min-height: 100%; }
-#rupal-modal .modal-body, #geoff-modal .modal-body, #michael-modal .modal-body, #julia-modal .modal-body, #grace-modal .modal-body {
+#rupal-modal .modal-body, #geoff-modal .modal-body, #michael-modal .modal-body, #julia-modal .modal-body, #grace-modal .modal-body, #coming-soon-modal .modal-body {
   padding: 15px; }
+
+#coming-soon-modal {
+  text-align: center; }
+  #coming-soon-modal h3 {
+    display: block;
+    float: none;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    font-family: "Karla", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: none;
+    font-size: 5em;
+    font-weight: bold; }
+  #coming-soon-modal p {
+    font-size: 24px; }
 
 @media only screen and (min-width: 767px) {
   #us-about .about-text {
