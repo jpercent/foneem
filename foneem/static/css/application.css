@@ -3556,33 +3556,16 @@ input[type="submit"].mad-libs-submit {
   -webkit-box-shadow: none !important;
   -moz-box-shadow: none !important;
   border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  width: 100%;
-  height: 100%; }
+  border-top-right-radius: 0; }
 
 #hvb-calibrate-modal {
-  width: 100%;
-  height: 100vh;
-  overflow: hidden; }
-  #hvb-calibrate-modal .modal-dialog {
-    width: 100%;
-    height: 100%;
-    margin: 0; }
+  top: 15% !important; }
   #hvb-calibrate-modal .modal-content_calibrate {
-    background-color: none;
-    width: 100%;
-    height: 100%; }
+    background-color: rgba(0, 0, 0, 0.8); }
+    #hvb-calibrate-modal .modal-content_calibrate .modal-footer {
+      border-top: 0; }
   #hvb-calibrate-modal #hvb-calibrate-button {
-    position: absolute;
-    color: #fff;
-    font-family: "Karla", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 40px;
-    text-transform: uppercase;
-    font-weight: bold;
-    left: 40px;
-    top: 40px;
-    margin-left: auto;
-    margin-right: auto; }
+    font-size: 12px; }
 
 #hvb-volume1 {
   background-color: #6b0000;
@@ -4058,7 +4041,7 @@ html.calibrate.recording-studio .btn-calibrate {
           border-width: 15.4px; }
         html.recording-studio section#recording-studio .back-wall .wall-cell-container p {
           width: 30.8px;
-          margin-top: 4.96774px; }
+          margin-top: 0; }
     html.recording-studio section#recording-studio .hvb_pitch {
       bottom: 10px; }
     html.recording-studio section#recording-studio .hvb_record {
@@ -4093,7 +4076,7 @@ html.calibrate.recording-studio .btn-calibrate {
           border-width: 17.48333px; }
         html.recording-studio section#recording-studio .back-wall .wall-cell-container p {
           width: 34.96667px;
-          margin-top: 5.63978px; }
+          margin-top: 3.88519px; }
     html.recording-studio section#recording-studio .hvb-pitch {
       bottom: 60px; }
     html.recording-studio section#recording-studio .hvb-record {
