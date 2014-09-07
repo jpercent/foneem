@@ -38,14 +38,6 @@
 		body { flex-direction: row;}
 	}
 
-.modal-content_calibrate {
-  modal-content;
-  background-color: #0480be;
-}
-.modal-body_calibrate {
-  modal-body;
-  background-color: #000000;
-}
 	</style>
 
     
@@ -250,7 +242,7 @@
                     <div id="r3s4" class="wall-cell blue"></div>
                     <div id="filler-r3s4" class="wall-cell"></div>
                 </div>
-                <div class="wall-cell-container"><p>n</p>
+                <div class="wall-cell-container"><p>z</p>
                     <div id="r3s5" class="wall-cell green"></div>
                     <div id="filler-r3s5" class="wall-cell"></div>
                 </div>
@@ -302,7 +294,7 @@
                     <div id="r4s4" class="wall-cell blue"></div>
                     <div id="filler-r4s4" class="wall-cell"></div>
                 </div>
-                <div class="wall-cell-container"><p>z</p>
+                <div class="wall-cell-container"><p>s</p>
                     <div id="r4s5" class="wall-cell green"></div>
                     <div id="filler-r4s5" class="wall-cell"></div>
                 </div>
@@ -355,7 +347,7 @@
                     <div id="r5s4" class="wall-cell darkblue"></div>
                     <div id="filler-r5s4" class="wall-cell"></div>
                 </div>
-                <div class="wall-cell-container"><p>s</p>
+                <div class="wall-cell-container"><p>n</p>
                     <div id="r5s5" class="wall-cell green"></div>
                     <div id="filler-r5s5" class="wall-cell"></div>
                 </div>
@@ -376,7 +368,7 @@
                     <div id="r5s10" class="wall-cell yellowgreen"></div>
                     <div id="filler-r5s10" class="wall-cell"></div>
                 </div>
-                <div class="wall-cell-container"><p>&#x292;</p>
+                <div class="wall-cell-container"><p>&#x2A7;</p>
                     <div id="r5s11" class="wall-cell red"></div>
                     <div id="filler-r5s11" class="wall-cell"></div>
                 </div>
@@ -427,15 +419,15 @@
                     <div id="r6s9" class="wall-cell yellowgreen"></div>
                     <div id="filler-r6s9" class="wall-cell"></div>
                 </div>
-                <div class="wall-cell-container"><p>&#x2A7;</p>
+                <div class="wall-cell-container"><p>&#0596;</p>
                     <div id="r6s10" class="wall-cell yellowgreen"></div>
                     <div id="filler-r6s10" class="wall-cell"></div>
                 </div>
-                <div class="wall-cell-container"><p>&#0596;</p>
+                <div class="wall-cell-container"><p>&#x292;</p>
                     <div id="r6s11" class="wall-cell red"></div>
                     <div id="filler-r6s11" class="wall-cell"></div>
                 </div>
-                <div class="wall-cell-container"><p>h</p>
+                <div class="wall-cell-container"><p>ʔ</p>
                     <div id="r6s12" class="wall-cell purple"></div>
                     <div id="filler-r6s12" class="wall-cell"></div>
                 </div>
@@ -491,7 +483,7 @@
                     <div id="r7s11" class="wall-cell red"></div>
                     <div id="filler-r7s11" class="wall-cell"></div>
                 </div>
-                <div class="wall-cell-container"><p>ʔ<p>
+                <div class="wall-cell-container"><p>h<p>
                     <div id="r7s12" class="wall-cell purple"></div>
                     <div id="filler-r7s12" class="wall-cell"></div>
                 </div>
@@ -626,10 +618,15 @@
                 <h4 class="modal-title" id="hvb-calibrate-modalLabel"></h4>
             </div>
             <div class="modal-body_calibrate">
-                <canvas id="hvb-calibrate-analyser" class="hvb-calibration-canvas" width="512" height="768"></canvas>
+                <canvas id="hvb-calibrate-analyser" class="hvb-calibration-canvas" width="300" height="100"></canvas>
             </div>
             <div class="modal-footer">
-                <center><button id="hvb-calibrate-button" class="btn btn-default btn-record"><i class="fa fa-microphone fa-fw"></i> <span>Calibrating... </span></button></center>
+                <center>
+                    <button id="hvb-calibrate-button" class="btn btn-default btn-record">
+                    <i class="fa fa-microphone fa-fw"></i>
+                    <span>Please wait. Calibrating...</span>
+                    </button>
+                </center>
             </div>
         </div>
     </div>

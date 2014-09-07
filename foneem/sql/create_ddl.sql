@@ -9,10 +9,14 @@ create table if not exists users(
     gender varchar(10),
     stateprovince varchar(64),
     country varchar(128),
+    stateprovince1 varchar(64),
+    country1 varchar(128),
     password varchar(1024),
     compendium varchar(1024),
     first_language varchar(64),
     second_language varchar(64),
+    voice_sound varchar(64),
+    accent varchar(64),
     height_inches varchar(2),
     height_feet varchar(1),
     session_count int not null default 10,
@@ -32,7 +36,7 @@ create table if not exists sentences(
 
 create table if not exists phonemes(
    id serial primary key,
-   symbol char(2)
+   symbol char(2) unique
 );
 
 create table if not exists sessions(
@@ -43,7 +47,7 @@ create table if not exists sessions(
 
 create table if not exists grid (
    id serial primary key,
-   css_id varchar(5)
+   css_id varchar(5) unique
 );
 
 create table if not exists sentence_phoneme(
@@ -58,12 +62,13 @@ create table if not exists user_sentence_session(
     loudness real,
     rms_value real,
     uri varchar(1024),
+    platform varchar(24),
     creation_time timestamp default current_timestamp
 );
 
 create table if not exists phoneme_grid(
-    phoneme_id int references phonemes(id),
-    grid_id int references grid(id)
+    phoneme_id int references phonemes(id) not null,
+    grid_id int references grid(id) not null
 );
 
 create table if not exists user_grid_opacity(

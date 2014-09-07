@@ -2,8 +2,8 @@ hvb_form_fields = {};
 (function(self) {
     self.hvbSubmitButtonId = 'hvb-register-submit';
 
-    self.keys = ['hvb-first-name', 'hvb-last-name', 'hvb-gender', 'hvb-state', 'hvb-country', 'hvb-mob',
-        'hvb-yob', 'hvb-email', 'hvb-confirm-email', 'hvb-confirm-password', 'hvb-password', 'hvb-consent'];
+    self.keys = ['hvb-first-name', 'hvb-gender', 'hvb-mob', 'hvb-yob', 'hvb-email', 'hvb-confirm-email',
+        'hvb-confirm-password', 'hvb-password', 'hvb-consent'];
 
     self.keyMap = {
         'hvb-first-name': {'name': 'firstname'},
@@ -42,6 +42,7 @@ hvb_form_fields = {};
             //alert("validate file short circuited... ");
             return;
         }
+        console.log("Id = ", id);
         var element = document.getElementById(id);
         self.validateId(element);
 
@@ -73,7 +74,7 @@ hvb_form_fields = {};
     };
 
     self.validateId = function(element) {
-        currentVal = element.value;
+        var currentVal = element.value;
         if (!currentVal) {
             var background = element.style.background;
             element.style.background = 'red'

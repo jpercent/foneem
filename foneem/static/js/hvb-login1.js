@@ -3,13 +3,20 @@ hvb_form_fields1 = {};
 (function(self) {
     self.hvbSubmitButtonId = 'hvb-register1-submit';
 
-    self.keys = ['hvb-language', 'hvb-language1', 'hvb-height-inches', 'hvb-height-feet'];
+    self.keys = ['hvb-language', 'hvb-language1', 'hvb-height-inches', 'hvb-height-feet', 'hvb-sounding', 'hvb-accent',
+        'hvb-state', 'hvb-state1', 'hvb-country','hvb-country1'];
 
     self.keyMap = {
         'hvb-language':  {'name': 'first_language'},
         'hvb-language1': {'name': 'second_language'},
         'hvb-height-inches': {'name': 'height_inches'},
-        'hvb-height-feet': {'name': 'height_feet'}
+        'hvb-height-feet': {'name': 'height_feet'},
+        'hvb-sounding': {'name': 'voice_sound'},
+        'hvb-accent': {'name': 'accent'},
+        'hvb-state': {'name': 'stateprovince'},
+        'hvb-state1': {'name': 'stateprovince1'},
+        'hvb-country': {'name': 'country'},
+        'hvb-country1': {'name': 'country1'}
     };
 
     self.init = function() {

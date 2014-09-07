@@ -47,7 +47,7 @@ hvb_audio_animation = {};
 
             // Draw rectangle for each frequency bin.
             for (var i = 0; i < bars; ++i) {
-                var magnitude = 0;
+                var magnitude = 50;
                 var offset = Math.floor(i * multiplier);
 
                 // sum/average the block, or we miss narrow-bandwidth spikes
@@ -57,7 +57,7 @@ hvb_audio_animation = {};
                 magnitude = magnitude / multiplier;
                 var magnitude2 = freqByteData[i * multiplier];
                 analyserContext.fillStyle = "hsl( " + Math.round((i*360)/bars) + ", 100%, 50%)";
-                //console.log("I = ", i, "distribution = ", distribution, " barwidth = ", barWidth, " -magnatudue= ", -magnitude);
+                //console.log("I = ", i, "distribution = ", distribution, " barwidth = ", barWidth, " -magnitude= ", -magnitude);
                 analyserContext.fillRect(i * distribution, canvasHeight, barWidth, -magnitude);
             }
         } else {

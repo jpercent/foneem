@@ -16,7 +16,18 @@
 	-webkit-box-shadow: none !important;
 	-moz-box-shadow: none !important;
 	border-top-left-radius: 0;
-	border-top-right-radius: 0; 
+	border-top-right-radius: 0;
+}
+
+#hvb-calibrate-modal {
+	top: 15% !important;
+	.modal-content_calibrate { 
+		background-color: rgba(0,0,0,0.8);
+		.modal-footer {
+			border-top: 0;
+		}
+	}
+	#hvb-calibrate-button { font-size: 12px; }
 }
 
 #hvb-volume1 {
@@ -547,7 +558,7 @@ html.calibrate.recording-studio {
 					.lightblue, .blue { border-width: ($dimensionNum960/2);}
 					p {
 						width: $dimensionNum960;
-						margin-top: $dimensionNum960/6.2;
+						margin-top: 0;
 					}
 				}
 			}
@@ -597,7 +608,7 @@ html.calibrate.recording-studio {
 					.lightblue, .blue { border-width: ($dimensionNum1152/2);}
 					p {
 						width: $dimensionNum1152;
-						margin-top: $dimensionNum1152/6.2;
+						margin-top: $dimensionNum1152/9;
 					}
 				}
 			}

@@ -122,11 +122,33 @@ def password_reset():
     hvb_close_db(conn, cursor)
     return render_template('record.html')
 
+@app.route('/about', methods=['GET'])
+def about():
+    return render_template('about.html', error=None)
+
+@app.route('/how', methods=['GET'])
+def how():
+    return render_template('how.html', error=None)
+
+@app.route('/voicebank', methods=['GET'])
+def voicebank():
+    return render_template('voicebank.html', error=None)
 
 @app.route('/register', methods=['GET'])
 def register():
     return render_template('register.html', error=None)
 
+@app.route('/careers', methods=['GET'])
+def careers():
+    return render_template('careers.html', error=None)
+
+@app.route('/privacy', methods=['GET'])
+def privacy():
+    return render_template('privacy.html', error=None)
+
+@app.route('/terms', methods=['GET'])
+def terms():
+    return render_template('terms.html', error=None)
 
 @app.route('/register1', methods=['GET'])
 def register1():
@@ -147,7 +169,7 @@ def registration1_post():
         form_data = request.form.to_dict()
         form_data['email'] = session['email']
         print ("HERE... formdata = ", form_data)
-        cursor.execute('''update users set height_inches=%(height_inches)s, height_feet=%(height_feet)s, first_language=%(first_language)s, second_language=%(second_language)s where email=%(email)s''', form_data)
+        cursor.execute('''update users set height_inches=%(height_inches)s, height_feet=%(height_feet)s, accent=%(accent)s, stateprovince=%(stateprovince)s, stateprovince1=%(stateprovince1)s, country=%(country)s, country1=%(country1)s, voice_sound=%(voice_sound)s, first_language=%(first_language)s, second_language=%(second_language)s where email=%(email)s''', form_data)
 
     except KeyError as key_error:
         hvb_close_db(conn, cursor)
@@ -181,7 +203,7 @@ def registration_post():
         salt = uuid.uuid4().hex
         form_data['password'] = hashlib.sha512(str(form_data['password']) + str(salt)).hexdigest()
         form_data['compendium'] = salt
-        cursor.execute('''insert into users (email, firstname, lastname, dob, gender, stateprovince, country, password, compendium) values (%(email)s, %(firstname)s, %(lastname)s, %(dob)s, %(gender)s, %(stateprovince)s, %(country)s, %(password)s, %(compendium)s);''', form_data)
+        cursor.execute('''insert into users (email, firstname, dob, gender, password, compendium) values (%(email)s, %(firstname)s, %(dob)s, %(gender)s, %(password)s, %(compendium)s);''', form_data)
         session['email'] = form_data['email']
         cursor.execute('''insert into user_grid_opacity(user_id, grid_id, opacity, increments, instances) select u.id, g.id, 0, 0, (select count(*) from phoneme_grid pg, sentence_phoneme sp where pg.grid_id = g.id and pg.phoneme_id = sp.phoneme_id) from users u, grid g where u.email = %s;''', [session['email']])
 
@@ -216,7 +238,7 @@ def login_post():
 
     if len(user) == 0:
         print("hvb.login: ERROR: email not known")
-        return abort(400)
+        return render_template('login.html')
 
     elif len(user) > 1:
         print("hvb.login: ERROR: email associated with multiple accounts")

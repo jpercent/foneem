@@ -57,16 +57,19 @@ def insert_sentence_phoneme_join_table(phoneme_map, sentence_meta_list, f):
 # 0B HX II <c3>{H} SS AO <c4>{H} MM EH GG <c3>{H} HK AH MM <c1>{HL-} IX NX 0E<a6>{L%0}
 # 0B HX II SS AO MM EH GG HK AH MM IX NX 0E
 # HX II SS AO MM EH GG HK AH MM IX NX
-def parse_phonemes(meta, phoneme_set):
+def parse_phonemes(index, meta, phoneme_set):
     remove_brackets =  r'{[^}]*}'
     remove_angle_brackets = r'<[^>]*>'
     partial_parse = re.sub(remove_brackets, '', meta.phonetic)
     partial_parse1 = re.sub(remove_angle_brackets, '', partial_parse)
-    assert partial_parse1[0:2] == '0B'
-    partial_parse2 = partial_parse1[2:]
-    assert partial_parse2[(len(partial_parse2)-2):] == '0E'
-    parsed = partial_parse2[:(len(partial_parse2)-2)]
-    assert len(parsed) % 2 == 0
+    #assert partial_parse1[0:2] == '0B'
+    #partial_parse2 = partial_parse1[2:]
+    #assert partial_parse2[(len(partial_parse2)-2):] == '0E'
+    parsed = meta.phonetic.replace(" ","") #partial_parse2[:(len(partial_parse2)-2)]
+    try:
+        assert len(parsed) % 2 == 0
+    except:
+        print('ERROR: index = ', index, ' sentence = ', meta.sentence, ' parsed phonetic = ', parsed)
     i = 0
     while i < len(parsed):
         phoneme = parsed[i:i+2]
@@ -82,10 +85,12 @@ def generate_sentence_metadata(conn, cursor, dml_filepath):
     sentence_tuples = cursor.fetchall()
     sentence_meta_list = []
     phoneme_set = set([])
+    index = 0
     for id, sentence, phonetic in sentence_tuples:
         sentence_meta = SentenceMeta(id, sentence, phonetic)
-        parse_phonemes(sentence_meta, phoneme_set)
+        parse_phonemes(index, sentence_meta, phoneme_set)
         sentence_meta_list.append(sentence_meta)
+        index += 1
 
     phoneme_map = {}
     id = 0
@@ -97,6 +102,24 @@ def generate_sentence_metadata(conn, cursor, dml_filepath):
     insert_phonemes(phoneme_map, f)
     insert_sentence_phoneme_join_table(phoneme_map, sentence_meta_list, f)
 
+
+def generate_phoneme_grid_mapping(conn, cursor, csv_path, dml_filepath):
+    f = open(dml_filepath, "a")
+    with open(csv_path, "rU") as csvfile:
+        reader = csv.reader(csvfile)
+        first_row = True
+        for row in reader:
+            if first_row:
+                schema = row
+                print("schema ", schema)
+                first_row = False
+            else:
+                #print("Row = ", row)
+
+                cursor.execute("""insert into phoneme_grid(grid_id, phoneme_id) values ((select g.id from grid g where g.css_id = %s),(select p.id from phonemes p where p.symbol = %s));""",
+                               [row[1], row[0]])
+                #               (str(id), str(id), row[0], row[1], row[2], "nothing", row[3]))
+        conn.commit()
 
 def execute_sql(filename, cursor, conn):
     cursor.execute(open(filename, "r").read())
@@ -115,6 +138,7 @@ def create_sentences_table(csv_filename, cursor, conn):
                 first_row = False
             else:
                 row[1] = row[1].replace('_', ' ')
+                print("ROW = ", row)
                 cursor.execute("""insert into sentences(id, display_order, filename, sentence, phonetic, phonemes, flag) values (%s, %s, %s, %s, %s, %s, %s);""",
                                (str(id), str(id), row[0], row[1], row[2], "nothing", row[3]))
                 id += 1
@@ -125,12 +149,26 @@ if __name__ == '__main__':
     conf = parse_config()
     conn, cursor = hvb_connect_db(conf['db'])
     filename = conf['csv']
+    print("Database connection established")
     execute_sql(conf['drop'], cursor, conn)
+    print("Database dropped")
     execute_sql(conf['create'], cursor, conn)
-    execute_sql(conf['vocalid'], cursor, conn)
+    print("New schema created")
+    #execute_sql(conf['vocalid'], cursor, conn)
+    #print("")
+    print("Creating sentences table.. ")
     create_sentences_table(filename, cursor, conn)
-    #generate_sentence_metadata(conn, cursor, conf['phoneme_dml'])
+    print("Generating sentences table.. ")
+    generate_sentence_metadata(conn, cursor, conf['phoneme_dml'])
+    print("Executing phoneme dml")
     execute_sql(conf['phoneme_dml'], cursor, conn)
+    print("Executing grid dml")
     execute_sql(conf['grid_dml'], cursor, conn)
+
+    print("Generating phoneme grid table..")
+    # XXX
+    filename1 = 'sql/Phoneme_Unicode_Codes_and_HVB_locations_revised.csv'
+    generate_phoneme_grid_mapping(conn, cursor, filename1, conf['grid_dml'])
+
     hvb_close_db(conn, cursor)
 
