@@ -3641,6 +3641,10 @@ html.recording-studio section#recording-studio {
     html.recording-studio section#recording-studio #hvb-play-sentence.disabled:hover, html.recording-studio section#recording-studio #hvb-next-sentence.disabled:hover {
       background: #8f8f8f;
       cursor: default; }
+  html.recording-studio section#recording-studio #hvb-play-sentence i.fa-play, html.recording-studio section#recording-studio #hvb-next-sentence i.fa-play {
+    color: #4baa4e; }
+  html.recording-studio section#recording-studio #hvb-play-sentence i.fa-step-forward, html.recording-studio section#recording-studio #hvb-next-sentence i.fa-step-forward {
+    color: #3c4879; }
   html.recording-studio section#recording-studio .hvb-record {
     width: 100px;
     height: 87.5px;

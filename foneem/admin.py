@@ -107,12 +107,6 @@ def authorize_password_reset(userid, email):
 def index():
     return render_template('index.html', error=None)
 
-
-@app.route('/pitch-demo', methods=['GET'])
-def pitch_demo():
-    return render_template('ui.html')
-
-
 @app.route('/password_post', methods=['POST'])
 def password_reset():
     form_data = request.form.to_dict()
