@@ -122,11 +122,33 @@ def password_reset():
     hvb_close_db(conn, cursor)
     return render_template('record.html')
 
+@app.route('/about', methods=['GET'])
+def about():
+    return render_template('about.html', error=None)
+
+@app.route('/how', methods=['GET'])
+def how():
+    return render_template('how.html', error=None)
+
+@app.route('/voicebank', methods=['GET'])
+def voicebank():
+    return render_template('voicebank.html', error=None)
 
 @app.route('/register', methods=['GET'])
 def register():
     return render_template('register.html', error=None)
 
+@app.route('/careers', methods=['GET'])
+def careers():
+    return render_template('careers.html', error=None)
+
+@app.route('/privacy', methods=['GET'])
+def privacy():
+    return render_template('privacy.html', error=None)
+
+@app.route('/terms', methods=['GET'])
+def terms():
+    return render_template('terms.html', error=None)
 
 @app.route('/register1', methods=['GET'])
 def register1():

@@ -17,36 +17,17 @@
 	-moz-box-shadow: none !important;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
-	width: 100%;
-	height: 100%;
 }
 
 #hvb-calibrate-modal {
-	width: 100%;
-	height: 100vh;
-	overflow: hidden;
-	.modal-dialog {
-		width: 100%;
-		height: 100%;
-		margin: 0;
+	top: 15% !important;
+	.modal-content_calibrate { 
+		background-color: rgba(0,0,0,0.8);
+		.modal-footer {
+			border-top: 0;
+		}
 	}
-	.modal-content_calibrate {
-		background-color: none;
-		width: 100%;
-		height: 100%;
-	}
-	#hvb-calibrate-button {
-		position: absolute;
-		color: #fff;
-		font-family: $header-font;
-		font-size: 40px;
-		text-transform: uppercase;
-		font-weight: bold;
-	    left: 40px;
-	    top: 40px;
-	    margin-left:auto;
-	    margin-right:auto;
-	}
+	#hvb-calibrate-button { font-size: 12px; }
 }
 
 #hvb-volume1 {
@@ -577,7 +558,7 @@ html.calibrate.recording-studio {
 					.lightblue, .blue { border-width: ($dimensionNum960/2);}
 					p {
 						width: $dimensionNum960;
-						margin-top: $dimensionNum960/6.2;
+						margin-top: 0;
 					}
 				}
 			}
@@ -627,7 +608,7 @@ html.calibrate.recording-studio {
 					.lightblue, .blue { border-width: ($dimensionNum1152/2);}
 					p {
 						width: $dimensionNum1152;
-						margin-top: $dimensionNum1152/6.2;
+						margin-top: $dimensionNum1152/9;
 					}
 				}
 			}
