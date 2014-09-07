@@ -147,7 +147,7 @@ def registration1_post():
         form_data = request.form.to_dict()
         form_data['email'] = session['email']
         print ("HERE... formdata = ", form_data)
-        cursor.execute('''update users set height_inches=%(height_inches)s, height_feet=%(height_feet)s, accent=%(accent), stateprovince=%(stateprovince)s, stateprovince1=%(stateprovince1)s, country=%(country)s, country1=%(country1)s, voice_sound=%(voice_sound)s, first_language=%(first_language)s, second_language=%(second_language)s where email=%(email)s''', form_data)
+        cursor.execute('''update users set height_inches=%(height_inches)s, height_feet=%(height_feet)s, accent=%(accent)s, stateprovince=%(stateprovince)s, stateprovince1=%(stateprovince1)s, country=%(country)s, country1=%(country1)s, voice_sound=%(voice_sound)s, first_language=%(first_language)s, second_language=%(second_language)s where email=%(email)s''', form_data)
 
     except KeyError as key_error:
         hvb_close_db(conn, cursor)

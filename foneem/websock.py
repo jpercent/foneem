@@ -301,7 +301,39 @@ def upload_audio(message):
 #    f.flush()
 #    f.close()
 
-    record.upload_wav_to_s3(parse_config(), data, str(email)+'/'+str(filename))
+    conf = parse_config()
+
+    conn, cursor = hvb_connect_db(conf['db'])
+    userid = ''
+    dob = ''
+    gender = ''
+    platform = 'python-uploader'
+    filename_column_field = ''
+    full_path = str(email)+'/'+str(filename)+'-'+platform
+
+    try:
+        cursor.execute("""select u.id, u.dob, u.gender from users u where u.email = %s;""", [email])
+        userdata = cursor.fetchone()
+        print("u.id u.dob, u.gender = ", userdata)
+        userid = userdata[0]
+        dob = userdata[1]
+        gender = userdata[2]
+        sentence = filename.split('-')[0]
+        cursor.execute("""select filename from sentences where sentence = %s;""", [sentence])
+        filename_column_field = cursor.fetchone()[0]
+        filename = str(email)+'/'+str(userid)+'-'+str(dob)+'-'+str(gender)+'-'+platform+'-'+filename_column_field+'-'+str(filename)
+
+    except  Exception as e:
+            import sys
+            import traceback
+            print('TornadoWebsocketHandler: WARNING upload_audio exception generating wave file name with embedded data')
+            exc_type, exc_value, exc_traceback = sys.exc_info()
+            traceback.print_exception(exc_type, exc_value, exc_traceback, file=sys.stderr)
+
+    full_path = filename
+
+    hvb_close_db(conn, cursor)
+    record.upload_wav_to_s3(parse_config(), data, full_path)
 
 
 def float32_wav_file(sample_array, sample_rate):
