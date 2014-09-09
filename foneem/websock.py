@@ -322,7 +322,7 @@ def upload_audio(message):
             sentence = filename.split('-')[0]
             cursor.execute("""select filename from sentences where sentence = %s;""", [sentence])
             filename_column_field = cursor.fetchone()[0]
-            filename = str(email) + '/' + str(userid) + '-' + str(dob) + '-' + str(
+            filename = str(email) + '/donor' + str(userid) + '-' + str(dob) + '-' + str(
             gender) + '-' + platform + '-' + filename_column_field + '-' + str(filename)
 
         except Exception as e:
