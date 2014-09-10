@@ -119,7 +119,7 @@
       "inputAbbreviatedPath" : "\/static\/images\/contact-bg.jpg",
       "processed" : 0,
       "outputAbbreviatedPath" : "\/static\/images\/contact-bg.jpg",
-      "initialSize" : 59834,
+      "initialSize" : 33989,
       "fileType" : 4096
     },
     "\/static\/css\/sass\/vendor\/bootstrap\/_code.scss" : {
@@ -153,7 +153,7 @@
       "inputAbbreviatedPath" : "\/static\/images\/about-bg.jpg",
       "processed" : 0,
       "outputAbbreviatedPath" : "\/static\/images\/about-bg.jpg",
-      "initialSize" : 302516,
+      "initialSize" : 180365,
       "fileType" : 4096
     },
     "\/static\/css\/sass\/vendor\/bootstrap\/_breadcrumbs.scss" : {
@@ -333,7 +333,7 @@
       "inputAbbreviatedPath" : "\/static\/images\/about-bg-alt.jpg",
       "processed" : 0,
       "outputAbbreviatedPath" : "\/static\/images\/about-bg-alt.jpg",
-      "initialSize" : 60077,
+      "initialSize" : 54835,
       "fileType" : 4096
     },
     "\/static\/css\/sass\/vendor\/bootstrap\/_dropdowns.scss" : {
@@ -532,6 +532,17 @@
       "outputStyle" : 1,
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/static\/js\/tp\/jquery.textfill.min-ck.js",
+      "fileType" : 64
+    },
+    "\/static\/js\/hvb-audio-animation-ck.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/js\/hvb-audio-animation-ck.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/static\/js\/hvb-audio-animation-ck-ck.js",
       "fileType" : 64
     },
     "\/static\/images\/type-anchor.jpg" : {
@@ -787,7 +798,7 @@
       "inputAbbreviatedPath" : "\/static\/images\/press-wired.png",
       "processed" : 0,
       "outputAbbreviatedPath" : "\/static\/images\/press-wired.png",
-      "initialSize" : 7791,
+      "initialSize" : 3488,
       "fileType" : 8192
     },
     "\/static\/css\/sass\/sections\/_register-form.scss" : {
@@ -1266,7 +1277,7 @@
       "inputAbbreviatedPath" : "\/static\/images\/about-text-bg.jpg",
       "processed" : 0,
       "outputAbbreviatedPath" : "\/static\/images\/about-text-bg.jpg",
-      "initialSize" : 26315,
+      "initialSize" : 25892,
       "fileType" : 4096
     },
     "\/static\/js\/hvb-login.js" : {
@@ -1647,16 +1658,14 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/static\/js\/hvb-sentence.js" : {
+    "\/static\/css\/animate.css" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/js\/hvb-sentence.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/static\/js\/hvb-sentence-ck.js",
-      "fileType" : 64
+      "inputAbbreviatedPath" : "\/static\/css\/animate.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
     },
     "\/static\/css\/bootstrap-theme.min.css" : {
       "ignoreWasSetByUser" : 0,
@@ -1678,14 +1687,16 @@
       "initialSize" : 6309,
       "fileType" : 4096
     },
-    "\/static\/css\/animate.css" : {
+    "\/static\/js\/hvb-sentence.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/css\/animate.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
+      "inputAbbreviatedPath" : "\/static\/js\/hvb-sentence.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/static\/js\/hvb-sentence-ck.js",
+      "fileType" : 64
     },
     "\/static\/images\/type-glass.jpg" : {
       "ignoreWasSetByUser" : 0,
