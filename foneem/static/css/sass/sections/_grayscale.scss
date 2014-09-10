@@ -4,12 +4,18 @@ body {
   font-family: $font-family-sans-serif;
   color: $gray-darker;
   background-color: $white;
+  overflow-x: hidden;
 }
 
 .row {
   padding: 0 20px;
 }
 
+.btn {
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  border: none !important;
+}
 
 .page-index.modal-open {
   overflow: auto;
@@ -41,9 +47,6 @@ h1 {
 	  @include square(65%);
 	  @include center-block();
 	  @include img-responsive($display: block);
-  }
-  img.hvb-version {
-    @include square(45%);
   }
 }
 
@@ -196,6 +199,10 @@ h3 {
   padding: 100px 0;
   text-align: center;
   color: #fff;
+  background: url("../videos/hvb-intro.jpg");
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  -o-transform: translateZ(0);
   @include background-size(cover);
 }
 
@@ -292,7 +299,7 @@ video#bgvid {
 
 .press-section {
   width: 100%;
-  padding: 135px 0 215px 0;
+  padding: 135px 0 190px 0;
   color: $black;
   background: url('../images/press-bg.jpg') no-repeat center center scroll;
   background-color: $white;
@@ -311,10 +318,21 @@ video#bgvid {
   color: #333;
   font-weight: bold;
   background: $transparent-white;
+  -webkit-transform: translateZ(0);
+  -o-transform: translateZ(0);
   img {
+    opacity: 0.8;
 	  height: 30px;
 	  width: auto;
+    -moz-backface-visibility: hidden;
 	  @include img-responsive($display: block);
+    &:hover, &:focus {
+      opacity: 1;
+      @include transition (opacity,ease-in-out,0.3s);
+      -webkit-transform: scale(1.1);
+      -o-transform: scale(1.1);
+      -moz-backface-visibility: hidden;
+    }
   }
 }
   .quote {
@@ -325,7 +343,7 @@ video#bgvid {
   .header {
 	  @extend .quote;
 	  max-width: 400px;
-    padding: 15px 0;
+    padding: 15px 50px;
 	  text-transform: uppercase;
 	  border: 5px solid $white;
     margin-bottom: 0px;
@@ -337,16 +355,10 @@ video#bgvid {
   }
 }
 
-a.ted-talk { color: #fff; }
+a.ted-talk { background-color: #e62b1e; color: #fff; }
 #ted-talk {
-  background-color: #e62b1e;
-  color: #fff;
+  background-color: #f6f6f6;
   padding-top: 0;
-  &:hover {
-    background-color: darken(#e62b1e, 10%);
-    @include transition(background-color, ease-in-out, 0.3s);
-
-  }
   .ted-text {
     padding-top: 30px;
   }
@@ -359,12 +371,23 @@ a.ted-talk { color: #fff; }
 }
 
 .contact-section {
+  border-top: #eee solid 1px;
   @extend .press-section;
-  padding:50px;
-  background: #f6f6f6;
+  padding: 40px;
+  background: transparent;
   color: $white;
+  .contact-bg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    img {
+      height: 280px;
+      width: auto;
+    }
+  }
   h2 {
-	  color: $gray-light;
+	  color: $black;
 	  font-weight: bold;
     margin-bottom: 0;
   }
@@ -401,11 +424,15 @@ a.ted-talk { color: #fff; }
 	  margin-right: 2%;
     vertical-align: middle;
 	  height: 42px;
-	  width: 45%;
+	  width: 65%;
 	  font-size: 22px;
 	  color: $black;
     display: inline-block;
     margin: 0 0 20px 0;
+    border: 2px #ccc solid;
+    &:hover, &:focus {
+      border: 2px #ccc solid;
+    }
   }
 
   #mc_embed_signup input {
@@ -422,18 +449,17 @@ a.ted-talk { color: #fff; }
   }
   #mc_embed_signup form {
 	  padding-left: 0;
-    text-align: center;
+    text-align: left;
   }
 }
 
 #footer {
-  background-color: #333;
+  background-color: $black;
   .footer-links {
     padding: 20px 10px 10px 10px;
     ul li {
       color: #fff;
-      font-size: 14px;
-      text-transform: uppercase;
+      font-size: 16px;
       font-family: $header-font;
       padding-left: 15px;
       padding-right: 15px;
@@ -567,23 +593,48 @@ a.ted-talk { color: #fff; }
   }
 	
   .press-section {
-	  padding: 100px 0 235px 0;
+	  padding: 22% 0 235px 0;
+    min-height: 550px;
+    .caption {
+      min-height: 100px;
+      img {
+        height: 30px;
+      }
+    }
   }
 	
   #press div {
-    .col-sm-3, .col-sm-2 {
-	  margin-bottom: 10px;
+    display: inline-block;
+    .col-sm-2 {
   		img {
   			height: 30px;
   			width: auto;
   		}
 	  }
-  }
-  
-  #press div {
     &:last-child {
-	   margin-bottom: 0;
-	  }
+     margin-bottom: 0;
+    }
+  }
+
+  .contact-section {
+    min-height: 0;
+    padding: 25px !important;
+    h2 { text-align:center; color: #fff; }
+    .contact-bg {
+      height: 100%;
+      img {
+        height: 100%;
+        width: auto;
+      }
+      .contact-bg-overlay {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        opacity: 0.5;
+      }
+    }
   }
 
   ul.banner-social-buttons > li {
@@ -642,28 +693,6 @@ a.ted-talk { color: #fff; }
   
 }
 
-::-moz-selection {
-  text-shadow: none;
-  background: #fcfcfc;
-  background: rgba(255, 255, 255, 0.2);
-}
-
-::selection {
-  text-shadow: none;
-  background: #fcfcfc;
-  background: rgba(255, 255, 255, 0.2);
-}
-
-img {
-  &::selection, &::-moz-selection {
-    background: 0 0;
-  }
-}
-
-body {
-  webkit-tap-highlight-color: rgba(255, 255, 255, 0.2);
-}
-
 @media only screen and (min-width: 767px) {
 
   .col-inside p {
@@ -699,7 +728,7 @@ body {
   }
   .intro {
     height: 100%;
-    padding: 0;
+    padding: 0 0 100px 0;
   }
   .intro-text {
     font-size: 38px;
@@ -716,4 +745,67 @@ body {
   }
 }
 
+}
+
+/* Modals */
+
+#rupal-modal, #geoff-modal, #michael-modal, #julia-modal, #grace-modal, #coming-soon-modal {
+  a { 
+    color: #fff;
+  }
+  .close {
+    font-size: 30px;
+    color: #fff;
+    opacity: 0.8;
+    display: inline-block;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  span.close-bio {
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: $header-font;
+    font-size: 15px;
+    display: block;
+    opacity: 0.8;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  .modal-header { overflow: hidden; }
+  h3 { 
+    display: inline-block;
+    float: left;
+    margin-bottom: 0;
+    margin-top: 5px;
+    font-family: $header-font;
+  }
+  .modal-dialog { margin: 0; width: 100%; height: 100%;}
+  .modal-content {
+    border-radius: 0;
+    background-color: #111;
+    color: #fff;
+    height: auto;
+    min-height: 100%;
+  }
+  .modal-body { padding: 15px; }
+}
+
+#coming-soon-modal {
+  text-align: center;
+  h3 {
+    display: block;
+    float: none;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    font-family: $header-font;
+    text-transform: none;
+    font-size: 5em;
+    font-weight: bold;
+  }
+  p {
+    font-size: 24px;
+  }
 }

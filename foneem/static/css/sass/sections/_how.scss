@@ -1,38 +1,63 @@
 body.page-how {
 
 	#us-about {
+		background: #000;
+		position: relative;
 		.container-fluid {
 			padding-left: 0;
 			padding-right: 0;
 			width: 100%;
-			height: 400px;
+			height: 0;
 			overflow: hidden;
 			margin: 0 auto;
-			background-image: url('../images/how-splash.jpg');
-			background-size: cover;
+			background: url("../images/how-splash.jpg") no-repeat;
+			background-size: contain;
 			text-align: center;
+			margin-top: 50px;
 			position: relative;
+			padding-top: 44.44%;
+			filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=85);
+			opacity: 0.85;
+			@include transition(all,linear,0.2s);
+			@media only screen and (min-width: 767px) {
+				margin-top: 0;
+			}
 			&:hover {
 				cursor: pointer;
-			}
-			&:hover img {
+				filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
 				opacity: 1;
-				@include transition(opacity,ease-in-out,0.3s);
 			}
-			img {
-				width: 15%;
-				height: auto;
+			#playVid {
 				position: absolute;
-				opacity: 0.8;
-			  left: 50%;
-			  top: 50%;
-			  transform: translate(-50%, -50%);
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				padding: 15px 50px;
+				background: rgba(0,0,0,0.7);
+				border-radius: 10px;
+				@include transition(all,linear,0.2s);
+				i {
+					color: #fff;
+				}
 			}
-			object {
-				width: 100%;
-				height: 400px;
+			&:hover #playVid {
+				background: rgba(0,0,0,0.9);
 			}
 		}
 	}
-
+	#us-about-text {
+		padding: 50px 0;
+		h1 {
+			font-family: $header-font;
+			text-transform: uppercase;
+			font-weight: bold;
+		}
+		h2 {
+			text-transform: none;
+			font-weight: bold;
+		}
+		p {
+			@media only screen and (min-width: 767px) { padding-left: 20px;}
+		}
+	}
 }

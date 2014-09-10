@@ -47,7 +47,7 @@ hvb_audio_animation = {};
 
             // Draw rectangle for each frequency bin.
             for (var i = 0; i < bars; ++i) {
-                var magnitude = 50;
+                var magnitude = 20;
                 var offset = Math.floor(i * multiplier);
 
                 // sum/average the block, or we miss narrow-bandwidth spikes

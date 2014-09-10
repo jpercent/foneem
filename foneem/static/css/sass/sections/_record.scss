@@ -1,5 +1,12 @@
 // * Virtual Recording Studio * //
 
+.beta-label-sm {
+	font-size: 14px;
+	font-family: 'Quicksand','Helvetica',sans-serif;
+	display: block;
+	margin-top: 5px;
+}
+
 .hvb-volume-canvas {
 	background: none !important;
 	box-shadow: none !important;
@@ -8,6 +15,11 @@
 	border-radius: 50% / 100%;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
+}
+
+.tutorial-modal {
+	z-index: 10000;
+	.modal-content { border: 0; }
 }
 
 .hvb-calibration-canvas {
@@ -300,6 +312,7 @@ section#recording-studio {
 		border-top: 10px solid #c0c0c0;
 		border-right: 10px solid #6c6c6c;
 		border-bottom: 10px solid #6c6c6c;
+		z-index: 3;
 		&:hover {
 			cursor: pointer;
 			background-color: darken(#f2fdff,2%);
@@ -313,6 +326,7 @@ section#recording-studio {
 			font-size: 22px;
 		}
 		.hvb-sentence-counter {
+			z-index: 3;
 			position: absolute;
 			top: 10px;
 			right: 10px;
@@ -390,6 +404,7 @@ section#recording-studio {
 		}
 	}
 	.hvb-record, .hvb-stop, #hvb-play-sentence, #hvb-next-sentence, #hvb-settings {
+		z-index: 3;
 		color: #444;
 		border: 8px outset buttonface;
 		font-size: 12px;

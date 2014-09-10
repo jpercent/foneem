@@ -29,7 +29,7 @@
     <!--[if lt IE 9]> <script> document.createElement('video'); </script> <![endif]-->
 </head>
 
-<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom" class="page-about">
 <!-- Facebook -->
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
@@ -79,8 +79,10 @@
 
     <section id="us-about" class="content-section">
         <div class="container">
-            <div class="about-text row  animated fadeIn">
-                <h1>Voices are not identical. They are our <strong>identities</strong>.</h1>
+            <div class="about-text row">
+                <h2 id="about-slogan">Voices are not identical.<br>They are our <strong>identities</strong>.</h2>
+                <h3 id="about-subslogan">VocaliD is dedicated to making synthetic voices more human. Leveraging years of research and development, we’re designing customized vocal personas that empower our users to be heard.</h3>
+                <a href="#us-about-text"><h1 id="about-h1" class="text-center btn btn-record">About Vocal<i>i</i>D</h1></a>
             </div>
         </div>
     </section>
@@ -88,110 +90,110 @@
     <section id="us-about-text" class="content-section">
         <div class="container">
             <div class="about-text row">
-                <h2 class="text-center">About Vocal<i>i</i>D</h2>
 
-                <h3>VocaliD (for vocal identity) is dedicated to making synthetic voices more human. Leveraging years of research and development, we’re designing customized voices that empower our users to be heard.</h3>
+                <h2 id="about-text-slogan" class="section-header text-center">Synthetic Voices, As Unique As Fingerprints</h2>
+
+                <iframe src="http://embed.ted.com/talks/lang/en/rupal_patel_synthetic_voices_as_unique_as_fingerprints.html" id="TEDVideo" width="854" height="480" frameborder="0" scrolling="no" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 
                 <p>If you're familiar with Stephen Hawking’s iconic voice, you may be shocked to learn that many people around the world — young and old, male and female — speak with the exact same voice.</p>
 
                 <p>There are tens of millions worldwide who rely on computerized voices to express themselves. Yet, many of them speak identically.</p>
 
                 <p>Add to that hundreds of millions who use text-to-speech technology everyday for things like smartphone assistants, GPS navigation, and screen readers — and the possibilities for what a unique VocaliD&#0153; voice can offer become limitless.</p>
+
+                <p class="text-center"> <a class="btn btn-record" href="/how">Learn how it works</a></p>
             </div>
         </div>
     </section>
 
     <section id="us-team"  class="container-fluid content-section text-center">
+        <h2 class="text-center section-header">Meet Our Team</h2>
         <div class="row-fluid">
-            <div class="col-md-3">
+            <div class="col-md-3 col-md-offset-2" id="rupal-col">
+                <a class="us-bio-text" href="#" data-toggle="modal" data-target="#rupal-modal">
                 <img src="static/images/about-rupal.jpg">
                 <span class="us-bio">
-                    <a class="us-bio-text" href="#" data-toggle="modal" data-target="#rupal-modal">
                         <h3>Rupal Patel, Ph.D.</h3>
                         <h4>Founder &amp; President</h4>
                     </a>
-                    <a class="us-bio-role" href="#" data-toggle="modal" data-target="#rupal-modal">
+                    <!--<a class="us-bio-role" href="#" data-toggle="modal" data-target="#rupal-modal">
                         <h5>Read Rupal's Bio</h5>
-                    </a>
+                    </a>-->
                 </span>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 col-md-offset-1" id="geof-col">
+                <a class="us-bio-text" href="#" data-toggle="modal" data-target="#geoff-modal">
                 <img src="static/images/about-geoff.jpg">
                 <span class="us-bio">
-                    <a class="us-bio-text" href="#" data-toggle="modal" data-target="#geoff-modal">
                         <h3>Geoff Meltzner, Ph.D.</h3>
                         <h4>Scientific Advisor</h4>
                     </a>
-                    <a class="us-bio-role" href="#" data-toggle="modal" data-target="#geoff-modal">
+                    <!--<a class="us-bio-role" href="#" data-toggle="modal" data-target="#geoff-modal">
                         <h5>Read Geoff's Bio</h5>
-                    </a>
+                    </a>-->
                 </span>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 col-md-offset-1" id="michael-col">
+                <a class="us-bio-text" href="#" data-toggle="modal" data-target="#michael-modal">
                 <img src="static/images/about-michael.jpg">
                 <span class="us-bio">
-                    <a class="us-bio-text" href="#" data-toggle="modal" data-target="#michael-modal">
                         <h3>Michael Suen</h3>
                         <h4>Design &amp; Strategy</h4>
                     </a>
-                    <a class="us-bio-role" href="#" data-toggle="modal" data-target="#michael-modal">
-                        <h5>Read Michael's Bio</h5>
-                    </a>
+                    <!--<a class="us-bio-role" href="#" data-toggle="modal" data-target="#michael-modal">
+                        <h5>Read Michael's Bio</h5></a>-->
                 </span>
             </div>
-            <div class="col-md-3">
+        </div>
+        <div class="row-fluid">
+            <div class="col-md-3 col-md-offset-2" id="julia-col">
+                 <a class="us-bio-text" href="#" data-toggle="modal" data-target="#julia-modal">
                 <img src="static/images/about-julia.jpg">
                 <span class="us-bio">
-                    <a class="us-bio-text" href="#" data-toggle="modal" data-target="#julia-modal">
+                   
                         <h3>Julia Wilson</h3>
                         <h4>Design</h4>
                     </a>
-                    <a class="us-bio-role" href="#" data-toggle="modal" data-target="#julia-modal">
-                        <h5>Read Julia's Bio</h5>
-                    </a>
+                    <!--<a class="us-bio-role" href="#" data-toggle="modal" data-target="#julia-modal">
+                        <h5>Read Julia's Bio</h5></a>-->
+                    
                 </span>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 col-md-offset-1" id="grace-col">
+                <a class="us-bio-text" href="#" data-toggle="modal" data-target="#grace-modal">
                 <img src="static/images/about-grace.jpg">
                 <span class="us-bio">
-                    <a class="us-bio-text" href="#" data-toggle="modal" data-target="#grace-modal">
                         <h3>Grace Bernicker</h3>
                         <h4>Communications</h4>
                     </a>
-                    <a class="us-bio-role" href="#" data-toggle="modal" data-target="#grace-modal">
+                    <!--<a class="us-bio-role" href="#" data-toggle="modal" data-target="#grace-modal">
                         <h5>Read Grace's Bio</h5>
-                    </a>
+                    </a>-->
                 </span>
             </div>
-            <div class="col-md-3 empty-space">
+            <div class="col-md-3 empty-space col-md-offset-1" id="team-col">
+                <a class="us-bio-text" href="/careers">
                 <img src="static/images/empty-space.jpg">
                 <span class="us-bio">
-                    <a class="us-bio-text" href="">
                         <h3>Your Name Here</h3>
                         <h4>Join Our Team</h4>
                     </a>
-                    <a class="us-bio-role" href="careers">
-                        <h5>View Careers</h5>
-                    </a>
+                    <!--<a class="us-bio-role" href="careers">
+                        <h5>View Careers</h5></a>-->
                 </span>
             </div>
         </div>
     </section>
 
-    <section id="ted-talk" class="content-section">
-        <div class="container">
-            <a href="#" data-toggle="modal" data-target="#ted-modal" class="ted-talk"><div class="ted-text row">
-                <h2 class="text-center">See The TED Talk That Started It All</h2>
-            </div>
-            </a>
-        </div>
-    </section>
-
-        <section id="contact" class="content-section text-center">
+         <section id="contact" class="content-section">
         <div class="contact-section">
+            <div class="contact-bg">
+                <img src="static/images/contact-bg.jpg">
+                <div class="contact-bg-overlay"></div>
+            </div>
             <div class="container-fluid">
-                <div class="col-lg-8 col-lg-offset-2">
-                    <h2>Follow VocaliD for the latest updates</h2><br>
+                <div class="col-lg-8">
+                    <h2>Follow VocaliD for the latest updates.</h2><br>
                     <ul class="list-inline banner-social-buttons">
                         <li><a href="http://www.twitter.com/vocalidinc" class="btn btn-twitter btn-lg" data-lang="en" title="Write A Tweet"><span class="network-name hidden-xs"><i class="fa fa-twitter fa-fw"></i> VocaliD on Twitter</span><span class="network-name visible-xs"><i class="fa fa-twitter fa-fw"></i> Twitter</span></a>
                         </li>
@@ -202,10 +204,10 @@
                         <!-- Begin MailChimp Signup Form -->
                         <div id="mc_embed_signup">
                         <form action="//vocalid.us8.list-manage.com/subscribe/post?u=511373a21bfc0f13863de60a1&amp;id=b2b7f532f8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your e-mail address" required>
+                            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your e-mail address for updates..." required>
                             <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
                             <div style="position: absolute; left: -5000px;"><input type="text" name="b_0ea30692c32f083061eac72ab_7280f59bb6" value=""></div>
-                            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-default btn-submit">
+                            <input type="submit" value="Subscribe >" name="subscribe" id="mc-embedded-subscribe" class="btn btn-default btn-submit">
                         </form>
                         </div>
                         <!--End mc_embed_signup-->
@@ -214,22 +216,21 @@
         </div>
     </section>
 
-      <!--<footer id="footer" class="content-section text-center">
+   <footer id="footer" class="content-section text-center">
         <div class="footer-links">
             <div class="container-fluid">
                 <div class="col-lg-8 col-lg-offset-2">
                     <ul class="list-inline">
                         <li>© 2014 VocaliD, Inc.</li>
-                        <li><a href="mailto:hello@vocalid.co">Contact</a></li>
-                        <li>Donate</li>
-                        <li><a href="/careers">Careers</a></li>
-                        <li>Privacy</li>
-                        <li>Terms of Use</li>
+                        <li><a href="mailto:hello@vocalid.co">Contact Us</a></li>
+                        <li><a href="/careers">We're Hiring!</a></li>
+                        <li><a href="/privacy">Privacy</li>
+                        <li><a href="/terms">Terms of Use</li>
                     </ul>
                 </div>
             </div>
         </div>
-    </footer>-->
+    </footer>
 
     <div class="modal fade" id="record-modal" tabindex="-1" role="dialog" aria-labelledby="Record" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -322,9 +323,9 @@
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
             </div>
             <div class="modal-body">
-            <p>Michael is an interaction designer and strategist who has worked with startups, universities, foundations, and non-profit organizations to create visual identities, branding campaigns, and user interfaces. His interest in designing playful user experiences for the social web led to his current role at VocaliD, where he defines strategy for audience engagement. Michael began his career as a journalist and copywriter, before joining the MIT non-profit spin-off Learning Games Network in 2012 as a digital producer. There, he produced games, websites, and branding initiatives with partners that include the UN Alliance of Civilizations and the Bill &amp; Melinda Gates Foundation. In 2013, Michael's team was recognized for their work on the ethics game Quandary, named Game of the Year at the Games For Change Festival.</p>
+            <p>Michael is an interaction designer and strategist who has worked with startups, universities, foundations, and non-profits to create digital products, visual identities, and user interfaces. His interest in designing playful user experiences for the social web led to his current role at VocaliD, where he defines strategy for audience engagement. Michael began his career as a journalist and copywriter, before joining the MIT spin-off Learning Games Network in 2012 as a digital producer. There, he produced games, websites, and marketing campaigns with partners that include the UN Alliance of Civilizations and the Bill &amp; Melinda Gates Foundation. In 2013, Michael's team was recognized for their work on the ethics game Quandary, named Game of the Year at the Games For Change Festival.</p>
             <p>Michael is also the co-founder of Switch, a platform to search and review alternative educational resources. A passionate advocate of interdisciplinary learning in the liberal arts, he has spoken about preparing humanities graduates for careers at events organized by the Humanities, Arts, Science, and Technology Alliance and Collaboratory (HASTAC) and the National Institute for Technology in Liberal Education (NITLE).</p>
-            <p>Michael’s work has been featured in TIME.com, TechCrunch, Wired, Voice of America, and Kill Screen. He has also presented on digital media and learning at MIT, Brown University, Bryn Mawr College, and the University of Wisconsin-Madison. Michael graduated with highest honors in English &amp; American Literatures from Middlebury College in 2011.</p>
+            <p>Michael’s projects have been featured in TIME.com, TechCrunch, Wired, Fast Company, VentureBeat, Voice of America, and Kill Screen. He has also presented on digital media and learning at MIT, Brown University, Bryn Mawr College, and the University of Wisconsin-Madison. Michael graduated with highest honors in English Literature from Middlebury College in 2011.</p>
             <a href="#" data-dismiss="modal" aria-hidden="true"><span class="close-bio">Close Window</p></a>
             </div>
     </div>
@@ -355,7 +356,7 @@
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
             </div>
             <div class="modal-body">
-            <p>As a singer/songwriter and active voice user Grace understands the importance of having your own unique vocal identity. As a Communications Intern she will be responsible for driving strategic communications, overseeing social media efforts, and working with partnership initiatives.</p>
+            <p>As a singer/songwriter and active voice user Grace understands the importance of having your own unique vocal identity. As Communications Coordinator she will be responsible for driving strategic communications, overseeing social media efforts, and working with partnership initiatives.</p>
 
             <p>Grace is a 2013 graduate of Temple University where she received her B.A. in Communications with a focus in Broadcast, Telecommunications and Mass Media. As a singer/songwriter she released her debut singles in April 2012. All songs were produced and co-written by her co-writer/producer Kenny Lamb (N’SYNC/Justin Timberlake/Rhett Akins) with engineering and mixing by Chris Rowe (Taylor Swift/Jewel). Since her release in April 2012 Grace has played over 80+ shows up &amp; down the east coast, including numerous venues in Nashville, TN. Some of her favorite venues to date include The Bluebird Cafe, World Cafe Live &amp; performing pre-game on the field at the Wilmington Blue Rocks Stadium. As an independent artist she has single handedly been responsible for all marketing, show booking and project planning. Grace went from #37 on the ReverbNation Country chart for Philadelphia to #1 in 9 months. As a vocalist, Grace studies under the tutelage of Badiene Magaziner at Badiene Magaziner Vocal Studio in New York City.</p>
             <a href="#" data-dismiss="modal" aria-hidden="true"><span class="close-bio">Close Window</p></a>

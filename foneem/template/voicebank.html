@@ -23,7 +23,7 @@
 
     <!-- Fonts -->
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Karla:400,700,900' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Karla:400,700,900|Quicksand:400' rel='stylesheet' type='text/css'>
     
     <!-- IE -->
     <!--[if lt IE 9]> <script> document.createElement('video'); </script> <![endif]-->
@@ -84,8 +84,9 @@
                         <h1>
                             <img src="static/images/hvb-logo.svg" alt="The Human Voicebank Initiative" id="logo-splash" class="hvb-version">
                         </h1>
-                        <div class="text-center" style="margin-bottom:50px;">
-                        <a href="#us-about-text" class="btn btn-default btn-learn">Learn More</a>
+                        <div class="beta-label-lg">Beta</div>
+                        <div class="text-center" style="margin-bottom:70px;">
+                        <a href="#us-about-header" class="btn btn-default btn-learn">Learn More</a>
                         <a href="#" data-toggle="modal" data-target="#record-modal" class="btn btn-default btn-record"><i class="fa fa-microphone fa-fw"></i> <span>Record</span></a>
                         </div>
                     </div>
@@ -94,24 +95,29 @@
         </div>
     </section>
 
+    <section id="us-about-header" class="content-section">
+        <div class="container">
+            <div class="about-text row text-center">
+                <h2>Capturing the texture and diversity of the human voice.</h2>
+                <h3>The Human Voicebank is a crowdsourced initiative to gather the world’s largest collection of standardized speech recordings from English speakers of all ages and backgrounds to advance innovation and scientific discovery.</h3>
+                    <div class="container-fluid" id="hvbVideo" onclick="document.getElementById('hvbVideo').innerHTML = embedCode;" />
+                        <div class="play-video" id="playVid"><i class="fa fa-play fa-4x"></i></div>
+                    </div>
+            </div>
+        </div>
+    </section>
+
     <section id="us-about-text" class="content-section">
         <div class="container">
             <div class="about-text row">
-                <h2 class="text-center">Capturing the texture and diversity of the human voice</h2>
-                <h3>The Human Voicebank is a crowdsourced initiative to gather the world’s largest collection of standardized speech recordings from English speakers of all ages and backgrounds to advance innovation and scientific discovery.</h3>
-
                 <h3>Why should I do this?</h3>
                 <p>There are so many reasons! First of all, you can help give someone a voice — that’s powerful. A banked voice would make it possible to re-create your voice should you ever lose it in the future. Your voice may also spark new discoveries and innovations in speech technologies, biometrics and health diagnostics. Together we can change lives!</p>
 
                 <h3>What do I need to do to donate my voice?</h3>
-                <p>Becoming a speech donor is simple, rewarding and even educational! All you need to record is an Internet connection, a microphone, a quiet place, and a computer or smartphone running the Chrome browser.</p>
-
-                <p>You will be asked to read or repeat short sentences that, together, cover all the combinations of sounds that occur in the language (we are starting with English but the concept can be extended to other languages). The more of your speech we have and the higher your recording quality is, the clearer and more natural a voice we can create.</p>
+                <p>Becoming a speech donor is simple, rewarding and even educational! All you need to record is an Internet connection, a microphone, a quiet place, and a computer or smartphone running the Chrome browser. You will be asked to read or repeat short sentences that, together, cover all the combinations of sounds that occur in the language (we are starting with English but the concept can be extended to other languages). The more of your speech we have and the higher your recording quality is, the clearer and more natural a voice we can create.</p>
 
                 <h3>How long does it take?</h3>
-                <p>We need about three to four hours of speech from each donor — though even an hour of speech can go a long way!</p>
-
-                <p>You don’t have to do this all at once. You can take your time and break it up into small sessions of around 15-20 minutes, so that you can record your best voice.</p>
+                <p>We need about three to four hours of speech from each donor — though even an hour of speech can go a long way! You don’t have to do this all at once. You can take your time and break it up into small sessions of around 15-20 minutes, so that you can record your best voice.</p>
 
                 <h3>Do I need to sound like a radio announcer?</h3>
                 <p>No. We want and need all types of voices! We want to capture all the textures and variations of human speech to create truly unique voices.</p>
@@ -134,20 +140,15 @@
         </div>
     </section>
 
-    <section id="ted-talk" class="content-section">
-        <div class="container">
-            <a href="#" data-toggle="modal" data-target="#ted-modal" class="ted-talk"><div class="ted-text row">
-                <h2 class="text-center">See The TED Talk That Started It All</h2>
-            </div>
-            </a>
-        </div>
-    </section>
-
-        <section id="contact" class="content-section text-center">
+         <section id="contact" class="content-section">
         <div class="contact-section">
+            <div class="contact-bg">
+                <img src="static/images/contact-bg.jpg">
+                <div class="contact-bg-overlay"></div>
+            </div>
             <div class="container-fluid">
-                <div class="col-lg-8 col-lg-offset-2">
-                    <h2>Follow VocaliD for the latest updates</h2><br>
+                <div class="col-lg-8">
+                    <h2>Follow VocaliD for the latest updates.</h2><br>
                     <ul class="list-inline banner-social-buttons">
                         <li><a href="http://www.twitter.com/vocalidinc" class="btn btn-twitter btn-lg" data-lang="en" title="Write A Tweet"><span class="network-name hidden-xs"><i class="fa fa-twitter fa-fw"></i> VocaliD on Twitter</span><span class="network-name visible-xs"><i class="fa fa-twitter fa-fw"></i> Twitter</span></a>
                         </li>
@@ -158,10 +159,10 @@
                         <!-- Begin MailChimp Signup Form -->
                         <div id="mc_embed_signup">
                         <form action="//vocalid.us8.list-manage.com/subscribe/post?u=511373a21bfc0f13863de60a1&amp;id=b2b7f532f8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your e-mail address" required>
+                            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your e-mail address for updates..." required>
                             <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
                             <div style="position: absolute; left: -5000px;"><input type="text" name="b_0ea30692c32f083061eac72ab_7280f59bb6" value=""></div>
-                            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-default btn-submit">
+                            <input type="submit" value="Subscribe >" name="subscribe" id="mc-embedded-subscribe" class="btn btn-default btn-submit">
                         </form>
                         </div>
                         <!--End mc_embed_signup-->
@@ -170,22 +171,21 @@
         </div>
     </section>
 
-   <!--<footer id="footer" class="content-section text-center">
+   <footer id="footer" class="content-section text-center">
         <div class="footer-links">
             <div class="container-fluid">
                 <div class="col-lg-8 col-lg-offset-2">
                     <ul class="list-inline">
                         <li>© 2014 VocaliD, Inc.</li>
-                        <li><a href="mailto:hello@vocalid.co">Contact</a></li>
-                        <li>Donate</li>
-                        <li><a href="/careers">Careers</a></li>
-                        <li>Privacy</li>
-                        <li>Terms of Use</li>
+                        <li><a href="mailto:hello@vocalid.co">Contact Us</a></li>
+                        <li><a href="/careers">We're Hiring!</a></li>
+                        <li><a href="/privacy">Privacy</a></li>
+                        <li><a href="/terms">Terms of Use</a></li>
                     </ul>
                 </div>
             </div>
         </div>
-    </footer>-->
+    </footer>
 
     <div class="modal fade" id="record-modal" tabindex="-1" role="dialog" aria-labelledby="Record" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -205,7 +205,7 @@
                                 <input type="password" name="password" placeholder="Your password" id="hvb_login_modal_password" required="required">
                             </div>
                             <div id="form-submit" class="login-field clearfix submit">
-                                <input type="submit" value="Login">
+                                <input type="submit" value="Login" class="btn">
                             </div>
                         </form>
                         <a href="initiate-reset" id="hvb-password-reset">Reset password</a>
@@ -233,21 +233,6 @@
             <h3>Coming Soon.</h3>
             <p>We're working day and night to bring you VocaliD. Stay tuned.</p>
             <a href="#" data-dismiss="modal" aria-hidden="true"><span class="close-bio">Close Window</p></a>
-            </div>
-    </div>
-  </div>
-  </div>
-
-  <div class="modal fade" id="ted-modal" tabindex="-1" role="dialog" aria-labelledby="The TED Talk" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="videoToggleOff">x</button>
-            </div>
-            <div class="modal-body">
-            <center>
-            <iframe src="http://embed.ted.com/talks/lang/en/rupal_patel_synthetic_voices_as_unique_as_fingerprints.html" id="TEDVideo" width="854" height="480" frameborder="0" scrolling="no" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-            </center>
             </div>
     </div>
   </div>
@@ -281,6 +266,9 @@
     $('iframe#TEDVideo').attr('src',''); 
     $('iframe#TEDVideo').attr('src','http://embed.ted.com/talks/lang/en/rupal_patel_synthetic_voices_as_unique_as_fingerprints.html');
     });
+  </script>
+  <script type="text/javascript">
+    var embedCode = "<div class='videoWrapper'><iframe src='https://docs.google.com/file/d/0B7UYHBaaS-2WRzN1Ni1td2tjZVU/preview' width='640' height='480' ></iframe></div>"
   </script>
 
 </body>

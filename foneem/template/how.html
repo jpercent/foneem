@@ -78,8 +78,8 @@
     </nav>
 
     <section id="us-about" class="content-section">
-        <div class="container-fluid animated fadeIn" id="howVideo" onclick="document.getElementById('howVideo').innerHTML = embedCode;" />
-            <img src="static/images/play-vid.png" id="playVid">
+        <div class="container-fluid" id="howVideo" onclick="document.getElementById('howVideo').innerHTML = embedCode;" />
+            <div class="play-video" id="playVid"><i class="fa fa-play fa-4x"></i></div>
         </div>
         </div>
     </section>
@@ -87,12 +87,10 @@
     <section id="us-about-text" class="content-section">
         <div class="container">
             <div class="about-text row">
-                <h2 class="text-center">How Our Technology Works</h2>
+                <h2>How do you create custom synthetic voices?</h2>
+                <p>The creation of a custom vocal persona is a two-part process which involves the recording and blending of voices. We leverage the power of social collaboration to gather recordings from speech donors who are passionate about giving the gift of voice. Using our cutting-edge voice blending technology, we craft a vocal identity that is both authentic and understandable.</p>
 
-                <h3>How do you create custom synthetic voices?</h3>
-                <p>The creation of a custom synthetic voice is a two-part process which involves the recording and blending of voices. We leverage the power of social collaboration to gather recordings from speech donors who are passionate about giving the gift of voice. Using our cutting-edge voice blending technology, we craft a vocal identity that is both authentic and understandable.</p>
-
-                <h3>Just what is this “cutting-edge technology” that blends the voices?</h3>
+                <h2>Just what is this “cutting-edge technology” that blends the voices?</h2>
                 <p>This work began as a means to provide unique voices for those who rely on computerized devices because they are unable to speak. Our patent pending technology builds on speech science theory to combine the recipient's voice characteristics with a database of speech recordings from a matched donor. The result is a hybrid voice that preserves the clarity of the donor’s recordings but conveys as much of the recipient’s vocal identity as possible.</p>
 
                 <iframe width="100%" height="166" scrolling="no" frameborder="no"src="http://w.soundcloud.com/player/?url=https://soundcloud.com/nprscience/personalized-voices#t=0:00" style="margin-top:15px"></iframe>
@@ -101,20 +99,15 @@
         </div>
     </section>
 
-    <section id="ted-talk" class="content-section">
-        <div class="container">
-            <a href="#" data-toggle="modal" data-target="#ted-modal" class="ted-talk"><div class="ted-text row">
-                <h2 class="text-center">See The TED Talk That Started It All</h2>
-            </div>
-            </a>
-        </div>
-    </section>
-
-        <section id="contact" class="content-section text-center">
+         <section id="contact" class="content-section">
         <div class="contact-section">
+            <div class="contact-bg">
+                <img src="static/images/contact-bg.jpg">
+                <div class="contact-bg-overlay"></div>
+            </div>
             <div class="container-fluid">
-                <div class="col-lg-8 col-lg-offset-2">
-                    <h2>Follow VocaliD for the latest updates</h2><br>
+                <div class="col-lg-8">
+                    <h2>Follow VocaliD for the latest updates.</h2><br>
                     <ul class="list-inline banner-social-buttons">
                         <li><a href="http://www.twitter.com/vocalidinc" class="btn btn-twitter btn-lg" data-lang="en" title="Write A Tweet"><span class="network-name hidden-xs"><i class="fa fa-twitter fa-fw"></i> VocaliD on Twitter</span><span class="network-name visible-xs"><i class="fa fa-twitter fa-fw"></i> Twitter</span></a>
                         </li>
@@ -125,10 +118,10 @@
                         <!-- Begin MailChimp Signup Form -->
                         <div id="mc_embed_signup">
                         <form action="//vocalid.us8.list-manage.com/subscribe/post?u=511373a21bfc0f13863de60a1&amp;id=b2b7f532f8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your e-mail address" required>
+                            <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your e-mail address for updates..." required>
                             <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
                             <div style="position: absolute; left: -5000px;"><input type="text" name="b_0ea30692c32f083061eac72ab_7280f59bb6" value=""></div>
-                            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn btn-default btn-submit">
+                            <input type="submit" value="Subscribe >" name="subscribe" id="mc-embedded-subscribe" class="btn btn-default btn-submit">
                         </form>
                         </div>
                         <!--End mc_embed_signup-->
@@ -137,22 +130,21 @@
         </div>
     </section>
 
-   <!--<footer id="footer" class="content-section text-center">
+   <footer id="footer" class="content-section text-center">
         <div class="footer-links">
             <div class="container-fluid">
                 <div class="col-lg-8 col-lg-offset-2">
                     <ul class="list-inline">
                         <li>© 2014 VocaliD, Inc.</li>
-                        <li><a href="mailto:hello@vocalid.co">Contact</a></li>
-                        <li>Donate</li>
-                        <li><a href="/careers">Careers</a></li>
-                        <li>Privacy</li>
-                        <li>Terms of Use</li>
+                        <li><a href="mailto:hello@vocalid.co">Contact Us</a></li>
+                        <li><a href="/careers">We're Hiring!</a></li>
+                        <li><a href="/privacy">Privacy</a></li>
+                        <li><a href="/terms">Terms of Use</a></li>
                     </ul>
                 </div>
             </div>
         </div>
-    </footer>-->
+    </footer>
 
     <div class="modal fade" id="record-modal" tabindex="-1" role="dialog" aria-labelledby="Record" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -172,7 +164,7 @@
                                 <input type="password" name="password" placeholder="Your password" id="hvb_login_modal_password" required="required">
                             </div>
                             <div id="form-submit" class="login-field clearfix submit">
-                                <input type="submit" value="Login">
+                                <input type="submit" value="Login" class="btn">
                             </div>
                         </form>
                         <a href="initiate-reset" id="hvb-password-reset">Reset password</a>
@@ -315,25 +307,7 @@
     });
   </script>
   <script type="text/javascript">
-    function detectmob() { 
-     if( navigator.userAgent.match(/Android/i)
-     || navigator.userAgent.match(/webOS/i)
-     || navigator.userAgent.match(/iPhone|iPad|iPod/i)
-     || navigator.userAgent.match(/Opera Mini/i)
-     || navigator.userAgent.match(/BlackBerry/i)
-     || navigator.userAgent.match(/Windows Phone/i)
-     || navigator.userAgent.match(/IEMobile/i) || navigator.userAgent.match(/WPDesktop/i)
-     ){
-        var playVid = document.getElementById('playVid');
-        playVid.parentNode.removeChild(playVid);
-      }
-     else {
-      }
-    }
-
-  </script>
-  <script type="text/javascript">
-    var embedCode = "<div style='text-align:center;margin-top:0;height:400px;'><object type='application/x-shockwave-flash' id=FiveMinPlayer311831242031021' name='FiveMinPlayer311831242031021' data='http://cfiles.5min.com/FlexPlayers/SmartPlayer_266.swf' ><param name='allowfullscreen' value='true'><param name='allowScriptAccess' value='always'><param name='wmode' value='opaque'><param name='bgcolor' value='#000000'><param name='flashvars' value='filesPath=http://cfiles.5min.com/&amp;playerVersion=266&amp;sid=281&amp;skey=0&amp;skeyName=&amp;synName=FiveminEmbed&amp;nielsenCaId=cmp106201&amp;nielsenCaIdDm=cmp106199&amp;csc3=AOL&amp;videoID=517926824&amp;category=Tech/Tech News&amp;categoryId=266&amp;vChan=8&amp;vChanName=tech&amp;isEmbed=True&amp;productType=PlayerSeed&amp;isAutoStart=False&amp;vcdBgColor=%23000000&amp;playerSkinType=3&amp;colorPallet=%23FFCC00&amp;partnerNetworkID=41194&amp;isTopTitle=False&amp;exposureType=PlayerSeed&amp;inappropriate=0&amp;videoTitle=Influencers+and+Innovation%3a+VocaliD&amp;duration=250&amp;keywords=influencers%20and%20innovation,rupal%20patel,synthetic%20voice,tech,tech%20news,vocalid&amp;videoUrl=http%3a%2f%2favideos.5min.com%2f%2f269%2f5179269%2f517926824.mp4&amp;activeRenditions=255&amp;defaultRendition=2&amp;aolOnSite=http://on.aol.com/&amp;embedSite=http://embed.5min.com/&amp;pageUrl=http%3a%2f%2fon.aol.com%2fvideo%2finfluencers-and-innovation--vocalid-517926824&amp;previewPic=http%3a%2f%2fpthumbnails.5min.com%2f10358537%2f517926824_3_embedStandard.jpg&amp;userId=517697849&amp;geoRights=ALL&amp;isSola=false&amp;studio=Influencers+and+Innovation&amp;shrOpts=1&amp;vSynName=AOL&amp;embedCode=%3cdiv+style%3d%27text-align%3acenter%27%3e%3cscript+type%3d%27text%2fjavascript%27+src%3d%27http%3a%2f%2fpshared.5min.com%2fScripts%2fPlayerSeed.js%3fsid%3d281%26width%3d480%26height%3d401%26playList%3d517926824%27%3e%3c%2fscript%3e%3cbr%2f%3e%3ca+href%3d%27http%3a%2f%2fon.aol.com%2fvideo%2finfluencers-and-innovation--vocalid-517926824%27+style%3d%27font-family%3a+Verdana%3bfont-size%3a+10px%3b%27+target%3d%27_blank%27%3eInfluencers+and+Innovation%3a+VocaliD%3c%2fa%3e%3c%2fdiv%3e&amp;referrerURL=http%3a%2f%2flocalhost%2fhow%3fcodekitCB%3d429606956.686256&amp;shareAsReferrer=false&amp;vcdLogoUrl=http%3a%2f%2fafiles.5min.com%2fimages%2fvcdlogos%2faolon.swf&amp;vcdLogoClickUrl=http%3a%2f%2fon.aol.com&amp;playerActions=49183&amp;func=GetResults&amp;isPlayerSeed=true&amp;playlist=517926824&amp;videoCount=1&amp;shortAnalysisText=How%2bIt%2bWorks%2b%257c%2bVocaliD&amp;url=http%253a%252f%252flocalhost%252fhow%253fcodekitCB%253d429606956.686256&amp;filterString=&amp;cbCount=3&amp;cbWidth=300&amp;cbHeight=250&amp;cbHtmlID1=fiveMinCB_1_fb&amp;cbWidth1=300&amp;cbHeight1=151&amp;cbIsFairBalance1=true&amp;cbHtmlID2=fiveMinCB_1_bt&amp;cbWidth2=728&amp;cbHeight2=98&amp;counter=0&amp;callback=FIVEMIN.RequestManager.callbacks%255b43468%255d&amp;endUrl=1&amp;logvCQ=5&amp;logmId=517697849&amp;logvGeo=0&amp;logsKey=0&amp;endUrlLog=1&amp;ccSubsAvailable=False&amp;regularSubsAvailable=False&amp;cbCount=3&amp;cbHtmlID=fiveMinCB_1_cb&amp;cbWidth=300&amp;cbHeight=250&amp;cbHtmlID1=fiveMinCB_1_fb&amp;cbWidth1=300&amp;cbHeight1=151&amp;cbIsFairBalance1=true&amp;cbHtmlID2=fiveMinCB_1_bt&amp;cbWidth2=728&amp;cbHeight2=98&amp;productType=PlayerSeed&amp;cbCheckTime=200&amp;videosList=http%3a%2f%2fembed.5min.com%2fhandlers%2fsmart3handler.ashx%3ffunc%3dRelatedVideos%26videoid%3d517926824%26sid%3d281%26skey%3d0%26categories%3d266%26contentQuality%3d2%26relatedVersion%3d3%26uuid%3d145104194253214&amp;&amp;relatedOnVideoChanged=FIVEMIN.OnePlayer.Data.get().Players[0].trigger('fireRelated')&amp;extEventsFunc=FIVEMIN.OnePlayer.Data.get().Players[0].genericFlashEvents&amp;extEventsEnabledCode=2147483647&amp;jsLogData=FIVEMIN.OnePlayer.Data.get().Players[0].logFlashData&amp;bwLogger=2147417071&amp;jsATP=FIVEMIN.ATP.getSegmentsData&amp;isSeq=false&amp;isAP=0&amp;isFL=0'></object>"
+    var embedCode = "<div style='padding-bottom:56.25%;padding-top:25px;height:0;'><iframe src='//www.youtube.com/embed/9GN6b4vaO8U?autoplay=1&rel=0;3&amp;autohide=1&amp;showinfo=0' frameborder='0' style='position:absolute;top:0;left:0;width:100%;height:100%' allowfullscreen></iframe>"
   </script>
 
 </body>

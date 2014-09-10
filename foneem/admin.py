@@ -126,6 +126,10 @@ def password_reset():
 def about():
     return render_template('about.html', error=None)
 
+@app.route('/type', methods=['GET'])
+def type():
+    return render_template('type.html', error=None)
+
 @app.route('/how', methods=['GET'])
 def how():
     return render_template('how.html', error=None)
