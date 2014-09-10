@@ -472,17 +472,6 @@
       "fileType" : 4,
       "debugStyle" : 0
     },
-    "\/static\/images\/type-feather.jpg" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/images\/type-feather.jpg",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/static\/images\/type-feather.jpg",
-      "initialSize" : 5475,
-      "fileType" : 4096
-    },
     "\/static\/css\/resources\/background.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -493,6 +482,17 @@
       "outputAbbreviatedPath" : "\/static\/css\/resources\/background.png",
       "initialSize" : 105285,
       "fileType" : 8192
+    },
+    "\/static\/images\/type-feather.jpg" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/images\/type-feather.jpg",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/static\/images\/type-feather.jpg",
+      "initialSize" : 5475,
+      "fileType" : 4096
     },
     "\/static\/css\/libraries\/_variables.css" : {
       "ignoreWasSetByUser" : 0,
