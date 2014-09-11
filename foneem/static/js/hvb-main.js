@@ -108,6 +108,12 @@ var hvb_main = {};
            console.log("session count, per session", window.hvb_sentence_manager.sessionCount, self.sentencesPerSession,self.modalContinueShown);
 
            //if(window.hvb_sentence_manager.)
+           // XXX - egregious h4x0r.
+           var millis = 1000;
+           var date = new Date();
+           var curDate = null;
+           do { curDate = new Date(); } while(curDate-date < millis);
+
 
            if(window.hvb_sentence_manager.sessionCount > self.sentencesPerSession && self.modalContinueShown === false) {
                $('#hvb-session-continue').modal('show');
